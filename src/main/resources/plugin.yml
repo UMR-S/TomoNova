@@ -1,0 +1,9 @@
+name: TomoNova
+version: '${project.version}'
+load: STARTUP
+main: umaru.tomonova.tomonova.core.TomoNova
+api-version: 1.18
+authors : [ UmaruDohachan ]
+description : Plugin pour le TomoNova
+
+
