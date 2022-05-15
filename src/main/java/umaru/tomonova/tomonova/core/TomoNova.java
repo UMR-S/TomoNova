@@ -3,8 +3,9 @@ package umaru.tomonova.tomonova.core;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
-import umaru.tomonova.tomonova.listeners.players.onJoin;
-import umaru.tomonova.tomonova.listeners.players.onQuit;
+import umaru.tomonova.tomonova.listeners.players.InteractEvent;
+import umaru.tomonova.tomonova.listeners.players.Join;
+import umaru.tomonova.tomonova.listeners.players.Quit;
 import umaru.tomonova.tomonova.listeners.world.onWorldLoaded;
 
 
@@ -39,8 +40,9 @@ public final class TomoNova extends JavaPlugin {
 
     public void listenersRegister(){
         getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
-        getServer().getPluginManager().registerEvents(new onJoin(), plugin);
-        getServer().getPluginManager().registerEvents(new onQuit(), plugin);
+        getServer().getPluginManager().registerEvents(new Join(), plugin);
+        getServer().getPluginManager().registerEvents(new Quit(), plugin);
+        getServer().getPluginManager().registerEvents(new InteractEvent(), plugin);
 
     }
     public void setupUtils(){
