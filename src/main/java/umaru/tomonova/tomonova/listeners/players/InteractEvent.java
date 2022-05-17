@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import umaru.tomonova.tomonova.core.game.GameStates;
+import umaru.tomonova.tomonova.gui.MainGui;
 
-import static umaru.tomonova.tomonova.gui.opGUI.MainOpGUI.*;
 
 public class InteractEvent implements Listener {
 
@@ -20,8 +20,7 @@ public class InteractEvent implements Listener {
 
         }
         if((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK ||event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.PAPER && GameStates.isState(GameStates.LOBBY)){
-            openMainGUI(event.getPlayer());
-
+            new MainGui(player).show();
         }
 
     }
