@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class NetherEndTimeGui extends TimerGui {
     public NetherEndTimeGui(Player player) {
-        super(player, 9, Lang.GUIS_MAIN_NETHER.toString());
+        super(player, 9,ChatColor.DARK_PURPLE + Lang.GUIS_MAIN_NETHER.toString());
         final ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NET_NAME.toString() + TomoNova.getPlugin().gameManager.getNetherEndTime(), Arrays.asList(Lang.GUIS_NET_LORE.toString()));
         NetherEndTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
     }

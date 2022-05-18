@@ -24,51 +24,62 @@ import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
 public class MainGui extends Gui {
     public MainGui(final Player player) {
-        super(player, 45, Lang.GUIS_MAIN_NAME.toString());
+        super(player, 54, Lang.GUIS_MAIN_NAME.toString());
 
-        ItemsCreator ic = new ItemsCreator(Material.MINECART, Lang.GUIS_MAIN_MAX_PLAYERS.toString(), Arrays.asList(Lang.GUIS_MAIN_MAX_PLAYERS_LORE.toString()));
+        //Relatifs aux configurations de base
+
+        ItemsCreator ic = new ItemsCreator(Material.MINECART,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_MAX_PLAYERS.toString(), Arrays.asList(Lang.GUIS_MAIN_MAX_PLAYERS_LORE.toString()));
         MainGui.inventory.setItem(0,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.OAK_BOAT, Lang.GUIS_MAIN_MIN_PLAYERS.toString(), Arrays.asList(Lang.GUIS_MAIN_MIN_PLAYERS_LORE.toString(),Lang.GUIS_MAIN_MIN_PLAYERS_LORE1.toString()));
+        ic = new ItemsCreator(Material.OAK_BOAT,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_MIN_PLAYERS.toString(), Arrays.asList(Lang.GUIS_MAIN_MIN_PLAYERS_LORE.toString(),Lang.GUIS_MAIN_MIN_PLAYERS_LORE1.toString()));
         MainGui.inventory.setItem(1,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.DIAMOND_SWORD,Lang.GUIS_MAIN_PVP.toString(), Arrays.asList(Lang.GUIS_MAIN_PVP_LORE.toString()));
+        ic = new ItemsCreator(Material.DIAMOND_SWORD,ChatColor.LIGHT_PURPLE  +Lang.GUIS_MAIN_PVP.toString(), Arrays.asList(Lang.GUIS_MAIN_PVP_LORE.toString()));
         MainGui.inventory.setItem(2,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.WHITE_STAINED_GLASS_PANE, Lang.GUIS_MAIN_BORDER.toString(), Arrays.asList(Lang.GUIS_MAIN_BORDER_LORE.toString()));
+        ic = new ItemsCreator(Material.BONE,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_SUDDEN_DEATH.toString(), Arrays.asList(Lang.GUIS_MAIN_SUDDEN_DEATH_LORE.toString()));
         MainGui.inventory.setItem(3,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.CHEST, Lang.GUIS_MAIN_START_STUFF.toString(), Arrays.asList(Lang.GUIS_MAIN_START_STUFF_LORE.toString()));
+        ic = new ItemsCreator(Material.WHITE_STAINED_GLASS_PANE,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_BORDER.toString(), Arrays.asList(Lang.GUIS_MAIN_BORDER_LORE.toString()));
         MainGui.inventory.setItem(4,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.WRITABLE_BOOK, Lang.GUIS_MAIN_LITTLE_RULES.toString(), Arrays.asList(Lang.GUIS_MAIN_LITTLE_RULES_LORE.toString()));
+        ic = new ItemsCreator(Material.WRITABLE_BOOK,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_LITTLE_RULES.toString(), Arrays.asList(Lang.GUIS_MAIN_LITTLE_RULES_LORE.toString()));
         MainGui.inventory.setItem(5,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.BLAZE_ROD, Lang.GUIS_MAIN_TEAMS.toString(), Arrays.asList(Lang.GUIS_MAIN_TEAMS_LORE.toString()));
+        ic = new ItemsCreator(Material.CHEST,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAIN_START_STUFF.toString(), Arrays.asList(Lang.GUIS_MAIN_START_STUFF_LORE.toString()));
         MainGui.inventory.setItem(6,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.BONE, Lang.GUIS_MAIN_SUDDEN_DEATH.toString(), Arrays.asList(Lang.GUIS_MAIN_SUDDEN_DEATH_LORE.toString()));
-        MainGui.inventory.setItem(7,ItemsCreator.create(ic));
+        //Relatifs au monde
 
-        ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_MAIN_NETHER.toString(), Arrays.asList(Lang.GUIS_MAIN_NETHER_LORE.toString()));
-        MainGui.inventory.setItem(8,ItemsCreator.create(ic));
-
-        ic = new ItemsCreator(Material.REDSTONE, Lang.GUIS_MAIN_GAMEMODE.toString(), Arrays.asList(Lang.GUIS_MAIN_GAMEMODE_LORE.toString()));
+        ic = new ItemsCreator(Material.OBSIDIAN,ChatColor.DARK_PURPLE + Lang.GUIS_MAIN_NETHER.toString(), Arrays.asList(Lang.GUIS_MAIN_NETHER_LORE.toString()));
         MainGui.inventory.setItem(9,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.PAPER, Lang.GUIS_MAIN_LOAD.toString(), Arrays.asList(Lang.GUIS_MAIN_LOAD_LORE.toString()));
-        MainGui.inventory.setItem(10,ItemsCreator.create(ic));
+        //Relatifs aux teams
 
-        ic = new ItemsCreator(Material.ANVIL, Lang.GUIS_MAIN_SAVE.toString(), Arrays.asList(Lang.GUIS_MAIN_SAVE_LORE.toString()));
-        MainGui.inventory.setItem(11,ItemsCreator.create(ic));
+        ic = new ItemsCreator(Material.BLAZE_ROD,ChatColor.GOLD + Lang.GUIS_MAIN_TEAMS.toString(), Arrays.asList(Lang.GUIS_MAIN_TEAMS_LORE.toString()));
+        MainGui.inventory.setItem(18,ItemsCreator.create(ic));
 
-        ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_MAIN_CLOSE.toString(), Arrays.asList(""));
-        MainGui.inventory.setItem(12,ItemsCreator.create(ic));
+        //Configuration du gamemode
 
-        //Spécifiques aux gamemodes
+        ic = new ItemsCreator(Material.REDSTONE,ChatColor.RED + Lang.GUIS_MAIN_GAMEMODE.toString(), Arrays.asList(Lang.GUIS_MAIN_GAMEMODE_LORE.toString()));
+        MainGui.inventory.setItem(27,ItemsCreator.create(ic));
+
+        //Configs
+
+        ic = new ItemsCreator(Material.PAPER,ChatColor.GRAY + Lang.GUIS_MAIN_LOAD.toString(), Arrays.asList(Lang.GUIS_MAIN_LOAD_LORE.toString()));
+        MainGui.inventory.setItem(36,ItemsCreator.create(ic));
+
+        ic = new ItemsCreator(Material.ANVIL,ChatColor.GRAY + Lang.GUIS_MAIN_SAVE.toString(), Arrays.asList(Lang.GUIS_MAIN_SAVE_LORE.toString()));
+        MainGui.inventory.setItem(37,ItemsCreator.create(ic));
+
+        //Lancer ou fermer
 
         ic = new ItemsCreator(Material.BEACON, Lang.GUIS_MAIN_START.toString(), Arrays.asList(Lang.GUIS_MAIN_START_LORE.toString()));
-        MainGui.inventory.setItem(13,ItemsCreator.create(ic));
+        MainGui.inventory.setItem(45,ItemsCreator.create(ic));
+
+        ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_MAIN_CLOSE.toString(), Arrays.asList(""));
+        MainGui.inventory.setItem(53,ItemsCreator.create(ic));
+
     }
 
     @EventHandler

@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.gui.netherGui;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
@@ -20,7 +21,7 @@ import java.util.Arrays;
 
 public class NetherGui extends Gui {
     public NetherGui(Player player) {
-        super(player, 9, Lang.GUIS_NETHER_NAME.toString());
+        super(player, 9, ChatColor.DARK_PURPLE + Lang.GUIS_NETHER_NAME.toString());
         ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NETHER_TIME.toString(), Arrays.asList(Lang.GUIS_NETHER_TIME_LORE.toString()));
         NetherGui.inventory.setItem(3, ic.create(ic));
         if (TomoNova.getPlugin().gameManager.isNether()) {

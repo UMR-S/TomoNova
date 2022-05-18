@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.gui.teamsgui;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,11 +22,11 @@ public class ToGui extends Gui {
     private static int select;
 
     public ToGui(Player player) {
-        super(player, 9, Lang.GUIS_TEAMSOF_NAME.toString());
+        super(player, 9, ChatColor.RED + Lang.GUIS_TEAMSOF_NAME.toString());
         this.possibilities = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20, 25, 50};
         Integer i = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
         String ppt = i.toString();
-        final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
+        final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD,ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
         ToGui.inventory.setItem(4, ItemsCreator.create(ic));
         ItemsCreator ic2 = new ItemsCreator(Material.RED_BANNER, Lang.GUIS_TIMER_PREVIOUS.toString(), Arrays.asList(""));
         ToGui.inventory.setItem(0, ItemsCreator.create(ic2));
@@ -67,7 +68,7 @@ public class ToGui extends Gui {
                     }
                     Integer i1 = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
                     String ppt = i1.toString();
-                    final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD,ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
                     ToGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -87,7 +88,7 @@ public class ToGui extends Gui {
                     }
                     Integer i2 = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
                     String ppt = i2.toString();
-                    final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD,ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
                     ToGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }

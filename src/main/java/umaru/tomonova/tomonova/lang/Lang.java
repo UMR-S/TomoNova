@@ -75,7 +75,7 @@ public enum Lang
     GUIS_BDSS_LORE("guis.startBorderSize.lore","Choisis la taille initiale de la bordure"),
     GUIS_BDSS_LORE1("guis.startBorderSize.lore1","Ce choix concerne la longueur de la bordure"),
     GUIS_BDSS_LORE2("guis.startBorderSize.lore2","Donc pour une taille de 1000, la map fera 1000x1000 au début"),
-    GUIS_CUST_INV_NAME("guis.customInventory","Inventaire de départ"),
+    GUIS_CUST_INV_NAME("guis.customInventory.name","Inventaire de départ"),
     GUIS_CUST_INV_ADD_ITEM("guis.customInventory.addItem","Ajouter des items"),
     GUIS_CUST_INV_ADD_ITEM_LORE("guis.customInventory.addItemLore","Cliquer pour ajouter des items"),
     GUIS_CUST_INV_ITEMSTACK_LORE("guis.customInventory.itemStackLore","Clique gauche pour éditer"),

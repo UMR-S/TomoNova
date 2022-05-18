@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.gui.bordergui;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,12 +18,12 @@ import java.util.Arrays;
 
 public class BorderGui extends Gui {
     public BorderGui(Player player) {
-        super(player, 18, Lang.GUIS_BD_NAME.toString());
-        ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, Lang.GUIS_BD_INITIAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_INITIAL_SIZE_LORE.toString()));
+        super(player, 18, ChatColor.LIGHT_PURPLE  + Lang.GUIS_BD_NAME.toString());
+        ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, ChatColor.GREEN +  Lang.GUIS_BD_INITIAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_INITIAL_SIZE_LORE.toString()));
         BorderGui.inventory.setItem(3, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.NETHER_STAR, Lang.GUIS_BD_SPEED.toString(), Arrays.asList(Lang.GUIS_BD_SPEED_LORE.toString()));
         BorderGui.inventory.setItem(4, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_BD_FINAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_FINAL_SIZE_LORE.toString()));
+        ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE,ChatColor.RED + Lang.GUIS_BD_FINAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_FINAL_SIZE_LORE.toString()));
         BorderGui.inventory.setItem(5, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BD_TIME.toString(), Arrays.asList(Lang.GUIS_BD_TIME_LORE.toString()));
         BorderGui.inventory.setItem(13, ItemsCreator.create(ic));

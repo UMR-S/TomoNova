@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 public class FinalBorderSizeGui extends TimerGui {
     public FinalBorderSizeGui(Player player) {
-        super(player, 9, Lang.GUIS_BD_FINAL_SIZE.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_BDFS_NAME.toString() + WorldBorderUtils.getFinalSize(), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
+        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_FINAL_SIZE.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(WorldBorderUtils.getFinalSize()), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
         FinalBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -47,7 +47,7 @@ public class FinalBorderSizeGui extends TimerGui {
                         break;
                     }
                     WorldBorderUtils.setFinalSize(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_BDFS_NAME.toString() + WorldBorderUtils.getFinalSize(), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(WorldBorderUtils.getFinalSize()), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
                     FinalBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -55,7 +55,7 @@ public class FinalBorderSizeGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = WorldBorderUtils.getFinalSize() + Integer.parseInt(name);
                     WorldBorderUtils.setFinalSize(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_BDFS_NAME.toString() + WorldBorderUtils.getFinalSize(), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(WorldBorderUtils.getFinalSize()), Arrays.asList(Lang.GUIS_BDFS_LORE.toString(), Lang.GUIS_BDFS_LORE1.toString(), Lang.GUIS_BDFS_LORE2.toString()));
                     FinalBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }

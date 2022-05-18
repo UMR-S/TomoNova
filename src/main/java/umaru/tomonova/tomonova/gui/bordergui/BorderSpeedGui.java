@@ -19,8 +19,8 @@ import java.util.Arrays;
 
 public class BorderSpeedGui extends TimerGui {
     public BorderSpeedGui(Player player) {
-        super(player, 9, Lang.GUIS_BD_SPEED.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, Lang.GUIS_BDS_NAME.toString() + WorldBorderUtils.getSpeed(), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+        super(player, 9,ChatColor.LIGHT_PURPLE  + Lang.GUIS_BD_SPEED.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
         BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -48,7 +48,7 @@ public class BorderSpeedGui extends TimerGui {
                         break;
                     }
                     WorldBorderUtils.setSpeed(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, Lang.GUIS_BDS_NAME.toString() + WorldBorderUtils.getSpeed(), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
                     BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -56,7 +56,7 @@ public class BorderSpeedGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = WorldBorderUtils.getSpeed() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, Lang.GUIS_BDS_NAME.toString() + WorldBorderUtils.getSpeed(), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
                     BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }

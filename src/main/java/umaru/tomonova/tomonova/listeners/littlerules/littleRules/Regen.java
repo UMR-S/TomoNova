@@ -9,7 +9,6 @@ import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.utils.world.WorldUtils;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Regen extends LittleRule {
     public Regen() {

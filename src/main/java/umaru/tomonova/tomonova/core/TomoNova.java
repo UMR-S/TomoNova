@@ -12,7 +12,8 @@ import umaru.tomonova.tomonova.listeners.players.InteractEvent;
 import umaru.tomonova.tomonova.listeners.players.Join;
 import umaru.tomonova.tomonova.listeners.players.Quit;
 import umaru.tomonova.tomonova.listeners.world.onWorldLoaded;
-import umaru.tomonova.tomonova.utils.world.WorldUtils;
+import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardUtils;
+import umaru.tomonova.tomonova.utils.teams.TeamUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +25,8 @@ public final class TomoNova extends JavaPlugin {
     private Logger log;
     private static TomoNova plugin;
     public static GameManager gameManager;
-
+    public  static ScoreboardUtils scoreboardUtils;
+    public static TeamUtils teamUtils;
     @Override
     public void onLoad() {
         //Génération du monde
@@ -60,6 +62,8 @@ public final class TomoNova extends JavaPlugin {
     }
     public void setupUtils(){
         gameManager = new GameManager();
+        scoreboardUtils = new ScoreboardUtils();
+        teamUtils = new TeamUtils();
     }
 
     public static TomoNova getPlugin() {

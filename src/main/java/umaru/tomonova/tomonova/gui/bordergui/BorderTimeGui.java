@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 public class BorderTimeGui extends TimerGui {
     public BorderTimeGui(Player player) {
-        super(player, 9 , Lang.GUIS_BD_TIME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BDT_NAME.toString() + TomoNova.getPlugin().gameManager.getTimeBorder(), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+        super(player, 9 ,ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_TIME.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
         BorderTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -47,7 +47,7 @@ public class BorderTimeGui extends TimerGui {
                         break;
                     }
                     TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BDT_NAME.toString() + TomoNova.getPlugin().gameManager.getTimeBorder(), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
                     BorderTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -55,7 +55,7 @@ public class BorderTimeGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = TomoNova.getPlugin().gameManager.getTimeBorder() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BDT_NAME.toString() + TomoNova.getPlugin().gameManager.getTimeBorder(), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
                     BorderTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }

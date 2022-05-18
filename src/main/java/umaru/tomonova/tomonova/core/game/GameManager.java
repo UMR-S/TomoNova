@@ -3,15 +3,15 @@ package umaru.tomonova.tomonova.core.game;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.utils.scoreboard.Teams;
+import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.*;
 
 public class GameManager {
     private TomoNova plugin = TomoNova.getPlugin();
-    private static List<Player> players;
-    private static List<Player> deadPlayers;
-    private static List<Teams> teams;
+    private List<Player> players;
+    private List<Player> deadPlayers;
+    private List<Teams> teams;
     private int playersPerTeam = 3;
     private Inventory gameInventory;
 
@@ -33,24 +33,25 @@ public class GameManager {
     public GameManager() {
         TomoNova.getPlugin();
         players = new ArrayList<Player>();
+        System.out.println("hap");
 
     }
 
-    public static void addPlayer(Player player) {
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
-    public static void removePlayer(Player player) {
+    public void removePlayer(Player player) {
         if (players.contains(player)) {
             players.remove(player);
         }
     }
 
-    public static List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public static List<String> getPlayersName() {
+    public List<String> getPlayersName() {
         List<String> names = new ArrayList<>();
         for (Player p : players) {
             names.add(p.getName());
@@ -58,28 +59,28 @@ public class GameManager {
         return names;
     }
 
-    public static int getNumberPlayer() {
+    public int getNumberPlayer() {
         return players.size();
     }
 
-    public static void setPlayers(List<Player> players) {
-        GameManager.players = players;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
-    public static List<Player> getDeadPlayers() {
+    public List<Player> getDeadPlayers() {
         return deadPlayers;
     }
 
-    public static void setDeadPlayers(List<Player> deadPlayers) {
-        GameManager.deadPlayers = deadPlayers;
+    public void setDeadPlayers(List<Player> deadPlayers) {
+        this.deadPlayers = deadPlayers;
     }
 
-    public static List<Teams> getTeams() {
+    public List<Teams> getTeams() {
         return teams;
     }
 
-    public static void setTeams(List<Teams> teams) {
-        GameManager.teams = teams;
+    public void setTeams(List<Teams> teams) {
+        this.teams = teams;
     }
 
     public int getPlayersPerTeam() {
