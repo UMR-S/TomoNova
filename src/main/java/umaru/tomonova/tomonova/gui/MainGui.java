@@ -10,6 +10,7 @@ import org.bukkit.inventory.*;
 
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.*;
+import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.bordergui.BorderGui;
 import umaru.tomonova.tomonova.gui.gamemodegui.GamemodeGui;
 import umaru.tomonova.tomonova.gui.itemsgui.CustomInventoryGui;
@@ -146,6 +147,7 @@ public class MainGui extends Gui {
                 }
                 case BEACON: {
                     this.player.closeInventory(); //Lancer le jeu
+                    GameStates.setCurrentState(GameStates.PREGAME);
                     break;
                 }
                 case PAPER: {

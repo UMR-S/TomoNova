@@ -11,7 +11,6 @@ import umaru.tomonova.tomonova.lang.Lang;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TeamUtils {
 
@@ -100,4 +99,21 @@ public class TeamUtils {
     public void addCustomName(String name, Player player){
         Teams team = listTeams.get(name);
     }
+    public HashMap<String,Teams> getHashMap() {
+        return this.listTeams;
+    }
+    public String getTeamNameFromPlayer(Player player){
+            String teamName= null;
+            for(String name : this.listTeams.keySet()){
+            Teams team = this.listTeams.get(name);
+                if(team.getTeamPlayers() == null){
+                    return null;
+                } else if (team.getTeamPlayers().contains(player)) {
+                    teamName = team.getName();
+                }
+
+            }
+        return teamName;
+    }
 }
+

@@ -10,7 +10,7 @@ public enum Lang
     SB_PREFIX("scoreboard.prefix", "Tomo Nova"),
     SB_STARIN(  "scoreboard.startIn", "Démarrage dans : "),
     SB_PLAYERS(  "scoreboard.players", "Joueurs : "),
-    SB_TIMES(  "scoreboard.time", "Joueurs : "),
+    SB_TIME(  "scoreboard.time", "Joueurs : "),
     SB_BORDER("scoreboard.border", "Bordure : "),
     SB_SPAWN("scoreboard.spawn", "Spawn : "),
     SB_PVP(  "scoreboard.pvp", "PvP : "),

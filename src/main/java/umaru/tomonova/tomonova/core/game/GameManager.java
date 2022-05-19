@@ -59,6 +59,7 @@ public class GameManager {
         return names;
     }
 
+    //Getter et setter
     public int getNumberPlayer() {
         return players.size();
     }

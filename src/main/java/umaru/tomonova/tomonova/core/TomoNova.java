@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.core;
 
 
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
@@ -46,6 +47,7 @@ public final class TomoNova extends JavaPlugin {
         loadLang();
         listenersRegister();
         setupUtils();
+
     }
 
     @Override

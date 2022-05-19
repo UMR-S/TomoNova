@@ -1,15 +1,16 @@
 package umaru.tomonova.tomonova.listeners.players;
 
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scoreboard.Criterias;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
+import org.bukkit.scoreboard.Scoreboard;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
@@ -42,19 +43,11 @@ public class Join implements Listener {
             ItemStack banner;
             banner = CustomItems.createCustomItem(Material.BLACK_BANNER, ChatColor.AQUA,"Choissisez votre équipe",loreBanner);
             player.getInventory().setItem(0,banner);
-            //Scoreboard
-            String teamName;
-            for(Teams team : Teams.values()){
-                if(team.getTeamPlayers() == null){
+            //Team
 
-                } else if (team.getTeamPlayers().contains(player)) {
-                    teamName = team.getName();
-                    System.out.println(teamName);
-                    TomoNova.getPlugin().teamUtils.playerQuitTeam(teamName, player);
-                }
-            }
+            //Rajoute l'item pour la config
             if(player.isOp()){
-                //Rajoute l'item pour la config
+
                 ItemStack config;
                 List<String> loreConfig = new ArrayList<>();
                 loreConfig.add("Tkt c'est débutant friendly Kud faut juste cliquer");
