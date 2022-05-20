@@ -130,6 +130,7 @@ public enum Lang
     GUIS_MAIN_NETHER_LORE("guis.main.netherLore","Celui de la 1.18 pour bien faire chier Kud"),
     GUIS_MAIN_START("guis.main.start","Commencer"),
     GUIS_MAIN_START_LORE("guis.main.startLore","Avec 30 min de retard comme d'hab"),
+    GUIS_MAIN_STOP("guis.main.stop","On arrête tout"),
     GUIS_MAIN_LOAD("guis.main.load","Charger"),
     GUIS_MAIN_LOAD_LORE("guis.main.loadLore","Charge une config"),
     GUIS_MAIN_SAVE("guis.main.save","Sauvegarder"),

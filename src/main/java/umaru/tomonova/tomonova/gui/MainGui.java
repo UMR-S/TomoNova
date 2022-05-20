@@ -10,6 +10,7 @@ import org.bukkit.inventory.*;
 
 import org.bukkit.event.inventory.*;
 import org.bukkit.event.*;
+import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.bordergui.BorderGui;
 import umaru.tomonova.tomonova.gui.gamemodegui.GamemodeGui;
@@ -73,13 +74,20 @@ public class MainGui extends Gui {
         ic = new ItemsCreator(Material.ANVIL,ChatColor.GRAY + Lang.GUIS_MAIN_SAVE.toString(), Arrays.asList(Lang.GUIS_MAIN_SAVE_LORE.toString()));
         MainGui.inventory.setItem(37,ItemsCreator.create(ic));
 
-        //Lancer ou fermer
+        //Lancer/annuler ou fermer
 
-        ic = new ItemsCreator(Material.BEACON, Lang.GUIS_MAIN_START.toString(), Arrays.asList(Lang.GUIS_MAIN_START_LORE.toString()));
-        MainGui.inventory.setItem(45,ItemsCreator.create(ic));
-
+        if(GameStates.isState(GameStates.LOBBY)){
+            ic = new ItemsCreator(Material.BEACON, Lang.GUIS_MAIN_START.toString(), Arrays.asList(Lang.GUIS_MAIN_START_LORE.toString()));
+            MainGui.inventory.setItem(45,ItemsCreator.create(ic));
+        }
+        if(GameStates.isState(GameStates.PREGAME)){
+            ic = new ItemsCreator(Material.RED_TERRACOTTA, Lang.GUIS_MAIN_STOP.toString(), Arrays.asList(""));
+            MainGui.inventory.setItem(45,ItemsCreator.create(ic));
+        }
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_MAIN_CLOSE.toString(), Arrays.asList(""));
         MainGui.inventory.setItem(53,ItemsCreator.create(ic));
+
+
 
     }
 
@@ -147,8 +155,12 @@ public class MainGui extends Gui {
                 }
                 case BEACON: {
                     this.player.closeInventory(); //Lancer le jeu
-                    GameStates.setCurrentState(GameStates.PREGAME);
+                    TomoNova.getPlugin().gameManager.preStart();
                     break;
+                }
+                case RED_TERRACOTTA:{
+                    this.player.closeInventory();
+                    TomoNova.getPlugin().gameManager.stop();
                 }
                 case PAPER: {
                     this.player.closeInventory();

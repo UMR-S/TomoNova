@@ -8,9 +8,7 @@ import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class TeamUtils {
 
@@ -114,6 +112,77 @@ public class TeamUtils {
 
             }
         return teamName;
+    }
+
+    public void getTeamToTeamlessPlayers(List<Player> players){
+        //On cherche les joueurs qui n'ont pas de team
+        for(Player player : players){
+            for(String teamName : listTeams.keySet()){
+                if(listTeams.get(teamName).getTeamPlayers().contains(player)){
+                    players.remove(player);
+                }
+            }
+        }
+        //Si tous les joueurs ont une team rien besoin de faire
+        if(players.size() == 0){
+            return;
+        }
+        //On regarde les équipes non pleines et non vides et on les place dans une liste
+        //On met également dans une autre liste les équipes vides
+        //On définit la capacité de ces deux listes
+        List<Teams> teamsNonPleines = new ArrayList<Teams>();
+        List<Teams> teamsVides = new ArrayList<Teams>();
+        Integer capaciteNonPleines = 0;
+        Integer capacitéVides = 0;
+        Integer playerPerTeam = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
+        for(Player playerSansTeam : players){
+            for(String teamName : listTeams.keySet()){
+                Teams team = listTeams.get(teamName);
+                if(team.getNumberPlayers() < playerPerTeam){
+                    if(team.getNumberPlayers() == 0 ){
+                        teamsVides.add(team);
+                        capacitéVides = capacitéVides + playerPerTeam;
+                    }
+                    else{
+                        teamsNonPleines.add(team);
+                        capaciteNonPleines = capaciteNonPleines + (playerPerTeam - team.getNumberPlayers());
+                    }
+                }
+            }
+        }
+        //Création d'une liste avec assez de place pour placer tous les joueurs
+        Collections.shuffle(teamsNonPleines);
+        Collections.shuffle(teamsVides);
+        if(players.size() > capaciteNonPleines + capacitéVides){
+            TomoNova.getPlugin().gameManager.stop();
+            return;
+        }
+        while(capaciteNonPleines < players.size()){
+            teamsNonPleines.add(teamsVides.get(0));
+            teamsVides.remove(0);
+            capaciteNonPleines = capaciteNonPleines + playerPerTeam;
+        }
+        //Attribution des joueurs
+        while(players.size() > 0){
+            //On recherche la team la moins pleine
+            Teams teamWithLessPlayer = null;
+            Integer lessPlayer = playerPerTeam;
+            for (Teams team : teamsNonPleines){
+                if(team.getNumberPlayers() < lessPlayer){
+                    teamWithLessPlayer = team;
+                }
+            }
+            //On y ajoute un joueur aléatoire
+            Random rand = new Random();
+            Player player = players.get(rand.nextInt(players.size()));
+            playerJoinTeam(teamWithLessPlayer.getName(),player);
+            //On supprime la team de la liste si elle est pleine
+            if(teamWithLessPlayer.getNumberPlayers() == playerPerTeam){
+                teamsNonPleines.remove(teamWithLessPlayer);
+            }
+            Collections.shuffle(teamsNonPleines);
+        }
+        return;
     }
 }
 

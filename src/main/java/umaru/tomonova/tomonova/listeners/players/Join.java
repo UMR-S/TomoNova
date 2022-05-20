@@ -45,6 +45,7 @@ public class Join implements Listener {
             player.getInventory().setItem(0,banner);
             //Team
 
+
             //Rajoute l'item pour la config
             if(player.isOp()){
 

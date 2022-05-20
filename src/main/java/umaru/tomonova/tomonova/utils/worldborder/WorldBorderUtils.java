@@ -1,19 +1,29 @@
 package umaru.tomonova.tomonova.utils.worldborder;
 
 import org.bukkit.WorldBorder;
+import org.bukkit.plugin.Plugin;
+import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.utils.world.WorldUtils;
 
 public class WorldBorderUtils {
-    private static int startSize = 1000;
-    private static int speed = 4;
-    private static int finalSize = 100;
+    private int startSize;
+    private int speed;
+    private int finalSize;
+    private Plugin tomoNova = TomoNova.getPlugin();
 
-    public static void WorldBorderUtils() {
-        WorldUtils.getWorld().getWorldBorder();
-        WorldUtils.getNether().getWorldBorder().reset();
-        WorldUtils.getEnd().getWorldBorder().reset();
+    public WorldBorderUtils() {
+        this.startSize = 2000;
+        this.speed = 4;
+        this.finalSize = 50;
+        WorldBorder wb = WorldUtils.getWorld().getWorldBorder();
+        wb.reset();
+        wb = WorldUtils.getNether().getWorldBorder();
+        wb.reset();
+        wb = WorldUtils.getEnd().getWorldBorder();
+        wb.reset();
     }
-    public static void changeBorder(int size){
+
+    public void change(final int size) {
         WorldBorder wb = WorldUtils.getWorld().getWorldBorder();
         wb.setCenter(0.0, 0.0);
         wb.setSize((double)size);
@@ -34,27 +44,48 @@ public class WorldBorderUtils {
         wb.setWarningDistance(20);
     }
 
-    public static int getStartSize() {
-        return startSize;
+    public void change(final int size, final long time) {
+        WorldBorder wb = WorldUtils.getWorld().getWorldBorder();
+        wb.setCenter(0.0, 0.0);
+        wb.setSize((double)size, time);
+        wb.setDamageAmount(2.0);
+        wb.setDamageBuffer(5.0);
+        wb.setWarningDistance(20);
+        wb = WorldUtils.getNether().getWorldBorder();
+        wb.setCenter(0.0, 0.0);
+        wb.setSize((double)size, time);
+        wb.setDamageAmount(2.0);
+        wb.setDamageBuffer(5.0);
+        wb.setWarningDistance(20);
+        wb = WorldUtils.getEnd().getWorldBorder();
+        wb.setCenter(0.0, 0.0);
+        wb.setSize((double)size, time);
+        wb.setDamageAmount(2.0);
+        wb.setDamageBuffer(5.0);
+        wb.setWarningDistance(20);
     }
 
-    public static void setStartSize(int startSize) {
-        WorldBorderUtils.startSize = startSize;
+    public int getFinalSize() {
+        return this.finalSize;
     }
 
-    public static int getSpeed() {
-        return speed;
+    public void setFinalSize(final int finalSize) {
+        this.finalSize = finalSize;
     }
 
-    public static void setSpeed(int speed) {
-        WorldBorderUtils.speed = speed;
+    public int getSpeed() {
+        return this.speed;
     }
 
-    public static int getFinalSize() {
-        return finalSize;
+    public void setSpeed(final int speed) {
+        this.speed = speed;
     }
 
-    public static void setFinalSize(int finalSize) {
-        WorldBorderUtils.finalSize = finalSize;
+    public int getStartSize() {
+        return this.startSize;
+    }
+
+    public void setStartSize(final int startSize) {
+        this.startSize = startSize;
     }
 }

@@ -8,7 +8,7 @@ import org.bukkit.scoreboard.Team;
 import java.util.List;
 
 public enum Teams {
-RED("Red", "§c", ChatColor.RED, Material.RED_BANNER, null, null, null, 0),
+    RED("Red", "§c", ChatColor.RED, Material.RED_BANNER, null, null, null, 0),
     YELLOW("Yellow", "§e",ChatColor.YELLOW , Material.YELLOW_BANNER, null, null, null, 0),
     ORANGE("Orange", "§6",ChatColor.GOLD , Material.ORANGE_BANNER, null, null, null, 0), //Gold
     DARK_GREEN("Green", "§2",ChatColor.DARK_GREEN , Material.GREEN_BANNER, null, null, null, 0),

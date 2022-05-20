@@ -20,7 +20,7 @@ import java.util.Arrays;
 public class BorderSpeedGui extends TimerGui {
     public BorderSpeedGui(Player player) {
         super(player, 9,ChatColor.LIGHT_PURPLE  + Lang.GUIS_BD_SPEED.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+        final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
         BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -43,20 +43,20 @@ public class BorderSpeedGui extends TimerGui {
                 }
                 case RED_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = WorldBorderUtils.getSpeed() + Integer.parseInt(name);
+                    final int value = TomoNova.getPlugin().worldBorderUtils.getSpeed() + Integer.parseInt(name);
                     if (value < 1) {
                         break;
                     }
-                    WorldBorderUtils.setSpeed(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+                    TomoNova.getPlugin().worldBorderUtils.setSpeed(value);
+                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
                     BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER:{
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = WorldBorderUtils.getSpeed() + Integer.parseInt(name);
+                    final int value = TomoNova.getPlugin().worldBorderUtils.getSpeed() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(WorldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(),Lang.GUIS_BDS_LORE1.toString()));
                     BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
