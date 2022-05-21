@@ -1,18 +1,17 @@
 package umaru.tomonova.tomonova.core;
 
 
-
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
-
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.players.InteractEvent;
 import umaru.tomonova.tomonova.listeners.players.Join;
 import umaru.tomonova.tomonova.listeners.players.Quit;
 import umaru.tomonova.tomonova.listeners.world.onWorldLoaded;
+import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardUtils;
 import umaru.tomonova.tomonova.utils.teams.TeamUtils;
 import umaru.tomonova.tomonova.utils.world.WorldUtils;
@@ -28,9 +27,11 @@ public final class TomoNova extends JavaPlugin {
     private Logger log;
     private static TomoNova plugin;
     public static GameManager gameManager;
-    public  static ScoreboardUtils scoreboardUtils;
+    public static ScoreboardUtils scoreboardUtils;
     public static TeamUtils teamUtils;
+    public static WorldUtils worldUtils;
     public static WorldBorderUtils worldBorderUtils;
+
     @Override
     public void onLoad() {
         //Génération du monde
@@ -48,8 +49,9 @@ public final class TomoNova extends JavaPlugin {
         plugin = this;
         log = getLogger();
         loadLang();
-        listenersRegister();
         setupUtils();
+        listenersRegister();
+        LobbyUtils.spawnLobby();
 
     }
 
@@ -58,17 +60,19 @@ public final class TomoNova extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public void listenersRegister(){
+    public void listenersRegister() {
         getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
         getServer().getPluginManager().registerEvents(new Join(), plugin);
         getServer().getPluginManager().registerEvents(new Quit(), plugin);
         getServer().getPluginManager().registerEvents(new InteractEvent(), plugin);
 
     }
-    public void setupUtils(){
+
+    public void setupUtils() {
         gameManager = new GameManager();
         scoreboardUtils = new ScoreboardUtils();
         teamUtils = new TeamUtils();
+        worldUtils = new WorldUtils(Bukkit.getWorld("world"), Bukkit.getWorld("world_nether"), Bukkit.getWorld("world_the_end"));
         worldBorderUtils = new WorldBorderUtils();
     }
 
@@ -77,36 +81,28 @@ public final class TomoNova extends JavaPlugin {
     }
 
     //Lang
-    public void loadLang()
-    {
+    public void loadLang() {
         File lang = new File(getDataFolder(), "lang.yml");
         YamlConfiguration langConfig = YamlConfiguration.loadConfiguration(lang);
-        if (!lang.exists())
-        {
-            try
-            {
+        if (!lang.exists()) {
+            try {
                 langConfig.save(lang);
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
                 log.info("Could not create language file.");
                 log.info("Disabling plugin.");
                 getServer().getPluginManager().disablePlugin(this);
             }
         }
-        for (Lang item : Lang.values())
-        {
-            if (langConfig.getString(item.getPath()) == null)
-            {
+        for (Lang item : Lang.values()) {
+            if (langConfig.getString(item.getPath()) == null) {
                 langConfig.set(item.getPath(), item.getDefault());
             }
         }
         Lang.setFile(langConfig);
-        try
-        {
+        try {
             langConfig.save(lang);
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             log.info("Could not save language file.");
             log.info("Disabling plugin.");
             getServer().getPluginManager().disablePlugin(this);

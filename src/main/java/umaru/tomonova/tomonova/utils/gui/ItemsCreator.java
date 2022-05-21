@@ -1,12 +1,12 @@
 package umaru.tomonova.tomonova.utils.gui;
 
-import org.bukkit.enchantments.*;
-import org.bukkit.inventory.*;
-import org.bukkit.inventory.meta.*;
+import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.*;
-
-import org.bukkit.*;
+import java.util.List;
+import java.util.Map;
 
 public class ItemsCreator {
     private Material m;
@@ -22,7 +22,8 @@ public class ItemsCreator {
         this.lores = lores;
         this.amount = 1;
     }
-    public static ItemStack create(ItemsCreator ic){
+
+    public static ItemStack create(ItemsCreator ic) {
         ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ic.getName());
@@ -30,6 +31,7 @@ public class ItemsCreator {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
     public Material getMaterial() {
         return this.m;
     }

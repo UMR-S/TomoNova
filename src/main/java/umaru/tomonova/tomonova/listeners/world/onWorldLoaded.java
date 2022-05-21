@@ -9,7 +9,7 @@ import umaru.tomonova.tomonova.utils.rules.SettingRulesUtils;
 
 public class onWorldLoaded implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
-    public void onWorldLoaded (WorldLoadEvent event){
+    public void onWorldLoaded(WorldLoadEvent event) {
         SettingRulesUtils.setGamerules();
         LobbyUtils.spawnLobby();
     }

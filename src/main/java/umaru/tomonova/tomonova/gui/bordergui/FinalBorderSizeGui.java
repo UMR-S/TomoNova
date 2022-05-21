@@ -13,7 +13,6 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.timergui.TimerGui;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
-import umaru.tomonova.tomonova.utils.worldborder.WorldBorderUtils;
 
 import java.util.Arrays;
 

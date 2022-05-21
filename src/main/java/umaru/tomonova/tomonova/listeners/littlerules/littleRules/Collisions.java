@@ -5,7 +5,6 @@ import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class Collisions extends LittleRule {
     public Collisions() {

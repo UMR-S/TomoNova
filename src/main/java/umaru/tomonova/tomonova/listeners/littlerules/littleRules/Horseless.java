@@ -14,6 +14,7 @@ public class Horseless extends LittleRule {
     public Horseless() {
         super("Horseless", Arrays.asList(Lang.GUIS_PETITES_REGLES_HORSELESS.toString()), Material.SADDLE);
     }
+
     @EventHandler
     public void onEntityMount(final EntityMountEvent event) {
         if (event.getEntity() != null && event.getEntity() instanceof Player && event.getMount() != null && event.getMount() instanceof Horse) {

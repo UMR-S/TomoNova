@@ -6,7 +6,7 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 
 public class TaskFinalCountdown extends BukkitRunnable {
-    private int preStartTime = 10; //En sec
+    private static int preStartTime = 10; //En sec
 
     TomoNova tomoNova;
 
@@ -15,14 +15,17 @@ public class TaskFinalCountdown extends BukkitRunnable {
     }
 
     @Override
-    public void run(){
+    public void run() {
         Bukkit.broadcastMessage(String.valueOf(preStartTime));
         preStartTime--;
-        if (preStartTime == 0){
-            preStartTime = 10;
+        if (preStartTime == 0) {
             TomoNova.getPlugin().gameManager.deletePreGameLobby();
             LobbyUtils.deleteLobby();
             this.cancel();
         }
+    }
+
+    public static void setPreStartTime(int preStartTime) {
+        TaskFinalCountdown.preStartTime = preStartTime;
     }
 }

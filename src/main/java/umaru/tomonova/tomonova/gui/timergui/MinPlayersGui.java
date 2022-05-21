@@ -15,10 +15,11 @@ import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
 import java.util.Arrays;
+
 public class MinPlayersGui extends TimerGui {
     public MinPlayersGui(Player player) {
-        super(player, 9,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MIN_PLAYERS_NAME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(),Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
+        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_MIN_PLAYERS_NAME.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(), Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
         MinPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -47,7 +48,7 @@ public class MinPlayersGui extends TimerGui {
                         break;
                     }
                     TomoNova.getPlugin().gameManager.setMinPlayers(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(),Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(), Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
                     MinPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -55,7 +56,7 @@ public class MinPlayersGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = TomoNova.getPlugin().gameManager.getMinPlayers() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setMinPlayers(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(),Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.OAK_BOAT, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMinPlayers()), Arrays.asList(Lang.GUIS_MIN_PLAYERS_LORE.toString(), Lang.GUIS_MIN_PLAYERS_LORE1.toString()));
                     MinPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -66,7 +67,7 @@ public class MinPlayersGui extends TimerGui {
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
         if (event.getInventory().equals(MinPlayersGui.inventory)) {
-            HandlerList.unregisterAll((Listener)this);
+            HandlerList.unregisterAll((Listener) this);
         }
     }
 }

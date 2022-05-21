@@ -8,6 +8,6 @@ import umaru.tomonova.tomonova.lang.Lang;
 
 public class CustomInventoryGui extends Gui {
     public CustomInventoryGui(Player player) {
-        super(player, 54, ChatColor.LIGHT_PURPLE +  Lang.GUIS_CUST_INV_NAME.toString());
+        super(player, 54, ChatColor.LIGHT_PURPLE + Lang.GUIS_CUST_INV_NAME.toString());
     }
 }

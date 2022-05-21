@@ -3,13 +3,13 @@ package umaru.tomonova.tomonova.utils.rules;
 import org.bukkit.Difficulty;
 import org.bukkit.GameRule;
 import org.bukkit.World;
-import umaru.tomonova.tomonova.utils.world.WorldUtils;
+import umaru.tomonova.tomonova.core.TomoNova;
 
 public class SettingRulesUtils {
     public static void setGamerules() {
-        World overworld = WorldUtils.getWorld();
-        World nether = WorldUtils.getNether();
-        World end = WorldUtils.getEnd();
+        World overworld = TomoNova.getPlugin().worldUtils.getWorld();
+        World nether = TomoNova.getPlugin().worldUtils.getNether();
+        World end = TomoNova.getPlugin().worldUtils.getEnd();
 
         overworld.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         overworld.setGameRule(GameRule.NATURAL_REGENERATION, false);

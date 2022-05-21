@@ -46,7 +46,7 @@ public class Autosmell extends LittleRule {
     @EventHandler
     public void onEntityDeath(final EntityDeathEvent event) {
         final EntityType entity = event.getEntityType();
-        final List<ItemStack> loots = (List<ItemStack>)event.getDrops();
+        final List<ItemStack> loots = (List<ItemStack>) event.getDrops();
         for (int i = loots.size() - 1; i >= 0; --i) {
             final ItemStack is = loots.get(i);
             if (is == null) {

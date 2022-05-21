@@ -12,7 +12,7 @@ import java.util.List;
 public class ScoreboardSign {
 
 
-    public static Scoreboard create(Player player){
+    public static Scoreboard create(Player player) {
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
@@ -21,26 +21,27 @@ public class ScoreboardSign {
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] lines = setLines(player);
         Integer i = -1;
-        for(String s : lines){
+        for (String s : lines) {
             Score score = objective.getScore(s);
             score.setScore(i);
             i--;
         }
         return scoreboard;
     }
-    public static String[] setLines(Player player){
+
+    public static String[] setLines(Player player) {
         final String[] lines = new String[16];
         lines[0] = ""; //Gamemode?
         lines[2] = Lang.SB_SPAWN.toString(); //Flèche vers le 0/0 à faire
         lines[3] = Lang.SB_KILLS.toString(); //Nb kills à faire
         lines[4] = Lang.SB_PLAYERS.toString() + TomoNova.getPlugin().gameManager.getNumberPlayer(); //Nombre de joueurs encore en vie
-        if(TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1){
+        if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
             String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(player);
-            lines[5] = TomoNova.getPlugin().teamUtils.getHashMap().get(teamName).getBaseColor() + teamName;
+            lines[5] = TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getBaseColor() + teamName;
             String listJoueurs = " ";
-            List<Player> listPlayers = TomoNova.getPlugin().teamUtils.getHashMap().get(teamName).getTeamPlayers();
-            for(Player p : listPlayers){
-                if(p.getName()!=player.getName()){
+            List<Player> listPlayers = TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getTeamPlayers();
+            for (Player p : listPlayers) {
+                if (p.getName() != player.getName()) {
                     listJoueurs = listPlayers + p.getName() + " ";
                 }
             }

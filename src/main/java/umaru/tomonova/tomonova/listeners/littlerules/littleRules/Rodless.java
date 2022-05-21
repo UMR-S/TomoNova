@@ -10,10 +10,12 @@ import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
 import java.util.Arrays;
+
 public class Rodless extends LittleRule {
     public Rodless() {
         super("Rodless", Arrays.asList(Lang.GUIS_PETITES_REGLES_RODLESS.toString()), Material.FISHING_ROD);
     }
+
     @EventHandler
     public void onPrepareItemCraft(final PrepareItemCraftEvent event) {
         if (event.getInventory().getResult().getType() == Material.FISHING_ROD) {

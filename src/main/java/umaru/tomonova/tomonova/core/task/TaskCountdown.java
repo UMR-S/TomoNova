@@ -6,7 +6,7 @@ import umaru.tomonova.tomonova.core.TomoNova;
 
 public class TaskCountdown extends BukkitRunnable {
 
-    private int preStartTime = 10; //En sec
+    private static int preStartTime; //En sec
 
     TomoNova tomoNova;
 
@@ -15,13 +15,16 @@ public class TaskCountdown extends BukkitRunnable {
     }
 
     @Override
-    public void run(){
+    public void run() {
         Bukkit.broadcastMessage(String.valueOf(preStartTime));
         preStartTime--;
-        if (preStartTime == 0){
-            preStartTime = 10;
-            TomoNova.getPlugin().gameManager.start();
+        if (preStartTime == 1) {
             this.cancel();
+            TomoNova.getPlugin().gameManager.start();
         }
+    }
+
+    public static void setPreStartTime(int preStartTime) {
+        TaskCountdown.preStartTime = preStartTime;
     }
 }

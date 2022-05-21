@@ -1,26 +1,27 @@
 package umaru.tomonova.tomonova.utils.world;
 
-import org.bukkit.*;
-import org.bukkit.block.Block;
-import umaru.tomonova.tomonova.core.TomoNova;
-
-import java.io.File;
-import java.util.List;
+import org.bukkit.World;
 
 public class WorldUtils {
-    private static World overworld = Bukkit.getWorlds().get(0);
-    private static World nether = Bukkit.getWorlds().get(1);
-    private static World end = Bukkit.getWorlds().get(2);
-
-    public static World getWorld() {
-        return overworld;
+    private World overworld;
+    private World nether;
+    private World end;
+    public WorldUtils(World overworld, World nether, World end) {
+        this.overworld = overworld;
+        this.nether = nether;
+        this.end = end;
     }
 
-    public static World getNether() {
-        return nether;
+
+    public World getWorld() {
+        return this.overworld;
     }
 
-    public static World getEnd() {
-        return end;
+    public World getNether() {
+        return this.nether;
+    }
+
+    public World getEnd() {
+        return this.end;
     }
 }

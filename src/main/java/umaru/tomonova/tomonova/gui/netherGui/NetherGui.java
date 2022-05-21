@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.gui.netherGui;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.HandlerList;
@@ -16,7 +15,6 @@ import umaru.tomonova.tomonova.gui.MainGui;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
-import java.awt.*;
 import java.util.Arrays;
 
 public class NetherGui extends Gui {

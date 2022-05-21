@@ -1,13 +1,16 @@
 package umaru.tomonova.tomonova.listeners.custom;
 
-import org.bukkit.entity.*;
-import org.bukkit.inventory.*;
-import org.bukkit.event.*;
-import java.util.*;
-import org.bukkit.*;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
+import org.bukkit.event.Event;
+import org.bukkit.event.HandlerList;
+import org.bukkit.inventory.Inventory;
 
-public class GameStartEvent extends Event implements Cancellable
-{
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameStartEvent extends Event implements Cancellable {
     private List<Player> players;
     private Inventory inventory;
     private World world;

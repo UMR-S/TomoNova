@@ -1,15 +1,15 @@
 package umaru.tomonova.tomonova.gui;
 
-import org.bukkit.event.*;
-import org.bukkit.entity.*;
-import org.bukkit.event.inventory.*;
-import org.bukkit.*;
-import org.bukkit.inventory.*;
-import org.bukkit.plugin.*;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.plugin.Plugin;
 import umaru.tomonova.tomonova.core.TomoNova;
 
-public abstract class Gui implements Listener
-{
+public abstract class Gui implements Listener {
     Plugin tomoNova = TomoNova.getPlugin();
     public Player player;
     public int size;
@@ -21,16 +21,16 @@ public abstract class Gui implements Listener
         this.player = player;
         this.size = size;
         this.name = name;
-        Gui.inventory = Bukkit.createInventory((InventoryHolder)null, size, name);
-        Bukkit.getPluginManager().registerEvents((Listener)this, tomoNova);
+        Gui.inventory = Bukkit.createInventory((InventoryHolder) null, size, name);
+        Bukkit.getPluginManager().registerEvents((Listener) this, tomoNova);
     }
 
     public Gui(final Player player, final InventoryType type, final String name) {
         this.player = player;
         this.type = type;
         this.name = name;
-        Gui.inventory = Bukkit.createInventory((InventoryHolder)null, type, name);
-        Bukkit.getPluginManager().registerEvents((Listener)this, tomoNova);
+        Gui.inventory = Bukkit.createInventory((InventoryHolder) null, type, name);
+        Bukkit.getPluginManager().registerEvents((Listener) this, tomoNova);
     }
 
     public void show() {

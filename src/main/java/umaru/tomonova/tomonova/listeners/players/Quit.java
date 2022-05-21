@@ -5,14 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
-import umaru.tomonova.tomonova.utils.teams.TeamUtils;
 import umaru.tomonova.tomonova.utils.teams.Teams;
-
-import java.util.Arrays;
 
 public class Quit implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
@@ -21,8 +16,8 @@ public class Quit implements Listener {
             Player player = event.getPlayer();
             TomoNova.getPlugin().gameManager.removePlayer(player);
             String teamName;
-            for(Teams team : Teams.values()){
-                if(team.getTeamPlayers() == null){
+            for (Teams team : Teams.values()) {
+                if (team.getTeamPlayers() == null) {
 
                 } else if (team.getTeamPlayers().contains(player)) {
                     teamName = team.getName();

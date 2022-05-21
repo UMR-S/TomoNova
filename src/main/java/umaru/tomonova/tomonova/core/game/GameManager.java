@@ -15,7 +15,6 @@ import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRules;
 import umaru.tomonova.tomonova.utils.teams.Teams;
-import umaru.tomonova.tomonova.utils.world.WorldUtils;
 
 import java.util.*;
 
@@ -44,7 +43,7 @@ public class GameManager {
     private int suddenDeathTime = 150; //En min
     private HashMap<Teams, Location> locationTeams;
     BukkitTask preGame;
-    public List<LittleRule> littleRulesList;
+    public List<LittleRule> littleRulesList = new ArrayList<LittleRule>();
 
     public GameManager() {
         TomoNova.getPlugin();
@@ -74,100 +73,110 @@ public class GameManager {
         }
         return names;
     }
+
     //Start game
-    public void preStart(){
-        GameStates.setCurrentState(GameStates.PREGAME);
-        //Liste des location et des teams
+    public void preStart() {
+        //Remplissage des teams automatique
         tomoNova.teamUtils.getTeamToTeamlessPlayers(getPlayers());
-        HashMap<String,Teams> teams =  tomoNova.teamUtils.getHashMap();
-        double r = 0.5*tomoNova.worldBorderUtils.getStartSize()/sqrt(teams.size());
-        locationTeams = new HashMap<Teams,Location>();
-        boolean validLocation = true;
+        //Liste des location et des teams
+        HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
+        double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
+        locationTeams = new HashMap<Teams, Location>();
+
         for(String teamName : teams.keySet()){
             Teams team = teams.get(teamName);
-            Integer i = 0;
-            Location nextLoc = getRandomLocation();
-            while(!validLocation){
-                validLocation = true;
-                for(Teams actualTeam : locationTeams.keySet()){
-                    Location teamLoc = locationTeams.get(actualTeam);
-                    if(teamLoc.distance(nextLoc) < 2*r){
-                        validLocation = false;
+            Location teamLoc = getRandomLocation();
+            if (locationTeams.size() >0 ){
+                List<Double> dist = new ArrayList<Double>();
+                for(Teams otherTeam : locationTeams.keySet()){
+                    dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
+                }
+                Integer i = 0;
+                while(Collections.max(dist) > 2 * r){
+                    teamLoc = getRandomLocation();
+                    dist = new ArrayList<Double>();
+                    for(Teams otherTeam : locationTeams.keySet()){
+                        dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
+                    }
+                    if(i==10){
+                        i = 0;
+                        r = r*0.95;
                     }
                 }
-                i++;
-                if (i == 10){
-                    r = r*0.95;
-                    i=0;
-                }
             }
-            validLocation = false;
-            locationTeams.put(team, nextLoc);
         }
+
         //Bordure
         tomoNova.worldBorderUtils.change(tomoNova.worldBorderUtils.getStartSize());
         //Timer
-        preGame = new TaskCountdown(tomoNova).runTaskTimer(tomoNova,0,20);
+        TaskCountdown.setPreStartTime(10);
+        preGame = new TaskCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
 
     }
 
-    public void start(){
-        WorldUtils.getWorld().setPVP(false);
+    public void start() {
+        System.out.println("start");
+        GameStates.setCurrentState(GameStates.PREGAME);
+        tomoNova.worldUtils.getWorld().setPVP(false);
         for (final LittleRules littleRule : LittleRules.values()) {
             if (!hasLittleRule(littleRule.getLittleRule())) {
-                HandlerList.unregisterAll((Listener)littleRule.getLittleRule());
+                HandlerList.unregisterAll((Listener) littleRule.getLittleRule());
             }
         }
         //Tp les joueurs
-        for(Teams team : locationTeams.keySet()){
+        for (Teams team : locationTeams.keySet()) {
             spawnPreGameLobby(locationTeams.get(team));
-            if(team.getTeamPlayers() != null){
-                for(Player player : team.getTeamPlayers()){
+            if (team.getTeamPlayers() != null) {
+                for (Player player : team.getTeamPlayers()) {
                     Location loc = locationTeams.get(team);
                     loc.setY(loc.getY() + 2);
                     player.teleport(loc);
                 }
             }
         }
-        BukkitRunnable countdown = (BukkitRunnable) new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova,0,20);
-        BukkitRunnable TaskManager = (BukkitRunnable) new TaskManager(tomoNova).runTaskTimer(tomoNova,200,20);
+        TaskFinalCountdown.setPreStartTime(10);
+        BukkitRunnable countdown = (BukkitRunnable) new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+        BukkitRunnable TaskManager = (BukkitRunnable) new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
     }
-    public void stop(){
+
+    public void stop() {
         preGame.cancel();
     }
+
     //Location
-    public Location getRandomLocation(){
+    public Location getRandomLocation() {
         final Random r = new Random();
         double x = r.nextInt(tomoNova.worldBorderUtils.getStartSize() / 2);
         double z = r.nextInt(tomoNova.worldBorderUtils.getStartSize() / 2);
-        Location loc = new Location(WorldUtils.getWorld(), x, 250.0, z);
+        Location loc = new Location(tomoNova.worldUtils.getWorld(), x, 250.0, z);
         return loc;
     }
 
     //Création des petites plateformes
-    public void spawnPreGameLobby(Location loc){
+    public void spawnPreGameLobby(Location loc) {
         loc.getChunk().load(true);
         double x = loc.getX();
         double z = loc.getZ();
-        for (int i = -1; i<2;i++){
-            for(int j=-1;j<2;j++){
-                loc.setX(x+i);
-                loc.setZ(z+j);
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                loc.setX(x + i);
+                loc.setZ(z + j);
                 loc.getWorld().getBlockAt(loc).setType(Material.WHITE_STAINED_GLASS);
             }
         }
     }
-    public void deletePreGameLobby(){
-        for(Teams team : locationTeams.keySet()){
+
+    public void deletePreGameLobby() {
+        for (Teams team : locationTeams.keySet()) {
             Location loc = locationTeams.get(team);
             loc.getChunk().load(true);
             double x = loc.getX();
             double z = loc.getZ();
-            for (int i = -1; i<2;i++){
-                for(int j=-1;j<2;j++){
-                    loc.setX(x+i);
-                    loc.setZ(z+j);
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    loc.setX(x + i);
+                    loc.setZ(z + j);
                     loc.getWorld().getBlockAt(loc).setType(Material.WHITE_STAINED_GLASS);
                 }
             }
@@ -183,6 +192,7 @@ public class GameManager {
     public void setLittleRulesList(List<LittleRule> littleRulesList) {
         this.littleRulesList = littleRulesList;
     }
+
     public void addLittleRule(final LittleRule littleRule) {
         if (!this.littleRulesList.contains(littleRule)) {
             this.littleRulesList.add(littleRule);
@@ -194,6 +204,7 @@ public class GameManager {
             this.littleRulesList.remove(littleRule);
         }
     }
+
     public boolean hasLittleRule(LittleRule littleRule) {
         return this.littleRulesList.contains(littleRule);
     }

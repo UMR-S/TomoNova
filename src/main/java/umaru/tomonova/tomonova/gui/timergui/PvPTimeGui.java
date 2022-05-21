@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 public class PvPTimeGui extends TimerGui {
     public PvPTimeGui(Player player) {
-        super(player, 9,ChatColor.LIGHT_PURPLE  + Lang.GUIS_PVP_TIME_NAME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
+        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_PVP_TIME_NAME.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
         PvPTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -47,7 +47,7 @@ public class PvPTimeGui extends TimerGui {
                         break;
                     }
                     TomoNova.getPlugin().gameManager.setPvpTime(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
                     PvPTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -55,7 +55,7 @@ public class PvPTimeGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = TomoNova.getPlugin().gameManager.getPvpTime() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setPvpTime(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.DIAMOND_SWORD, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getPvpTime()), Arrays.asList(Lang.GUIS_PVP_TIME_LORE.toString()));
                     PvPTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -66,7 +66,7 @@ public class PvPTimeGui extends TimerGui {
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
         if (event.getInventory().equals(PvPTimeGui.inventory)) {
-            HandlerList.unregisterAll((Listener)this);
+            HandlerList.unregisterAll((Listener) this);
         }
     }
 }

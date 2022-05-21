@@ -3,7 +3,6 @@ package umaru.tomonova.tomonova.listeners.littlerules;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
-
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.Gui;
 
@@ -19,7 +18,7 @@ public abstract class LittleRule implements Listener {
         this.name = name;
         this.descritpion = descritpion;
         this.type = type;
-        Bukkit.getPluginManager().registerEvents((Listener)this, TomoNova.getPlugin());
+        Bukkit.getPluginManager().registerEvents((Listener) this, TomoNova.getPlugin());
     }
 
     public LittleRule(final String name, final List<String> descritpion, final Material type, final Class<? extends Gui> gui) {
@@ -27,7 +26,7 @@ public abstract class LittleRule implements Listener {
         this.descritpion = descritpion;
         this.type = type;
         this.gui = gui;
-        Bukkit.getPluginManager().registerEvents((Listener)this, TomoNova.getPlugin());
+        Bukkit.getPluginManager().registerEvents((Listener) this, TomoNova.getPlugin());
     }
 
     public String getName() {

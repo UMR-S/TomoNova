@@ -18,12 +18,13 @@ import java.util.List;
 public class TeamsGui extends Gui {
     public TeamsGui(Player player) {
         super(player, 54, ChatColor.RED + Lang.GUIS_TEAMS_NAME.toString());
-        for(Teams team : Teams.values()){
-            ItemsCreator ic = new ItemsCreator(team.getBanner(),team.getBaseColor() + team.getName(), null);
+        for (Teams team : Teams.values()) {
+            ItemsCreator ic = new ItemsCreator(team.getBanner(), team.getBaseColor() + team.getName(), null);
             TeamsGui.inventory.addItem(ItemsCreator.create(ic));
         }
         player.openInventory(inventory);
     }
+
     @EventHandler
     public void onClick(final InventoryClickEvent event) {
         if (event.getClickedInventory() == null) {
@@ -33,19 +34,18 @@ public class TeamsGui extends Gui {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
-            }
-            else {
+            } else {
                 final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                for(Teams team : Teams.values()){
+                for (Teams team : Teams.values()) {
                     List<Player> listPlayers = team.getTeamPlayers();
-                    if (listPlayers != null){
-                        if(listPlayers.contains(player)){
+                    if (listPlayers != null) {
+                        if (listPlayers.contains(player)) {
                             TomoNova.getPlugin().teamUtils.playerQuitTeam(team.getName(), player);
 
                         }
                     }
                 }
-                TomoNova.getPlugin().teamUtils.playerJoinTeam(name,(Player) event.getWhoClicked());
+                TomoNova.getPlugin().teamUtils.playerJoinTeam(name, (Player) event.getWhoClicked());
                 player.closeInventory();
             }
         }

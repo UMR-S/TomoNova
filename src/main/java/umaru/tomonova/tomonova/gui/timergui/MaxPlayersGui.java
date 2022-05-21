@@ -18,8 +18,8 @@ import java.util.Arrays;
 
 public class MaxPlayersGui extends TimerGui {
     public MaxPlayersGui(Player player) {
-        super(player,9,ChatColor.LIGHT_PURPLE  + Lang.GUIS_MAX_PLAYERS_NAME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.MINECART,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
+        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_MAX_PLAYERS_NAME.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.MINECART, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
         MaxPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -48,7 +48,7 @@ public class MaxPlayersGui extends TimerGui {
                         break;
                     }
                     TomoNova.getPlugin().gameManager.setMaxPlayers(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.MINECART,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.MINECART, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
                     MaxPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -56,7 +56,7 @@ public class MaxPlayersGui extends TimerGui {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = TomoNova.getPlugin().gameManager.getMaxPlayers() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setMaxPlayers(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.MINECART,ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.MINECART, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getMaxPlayers()), Arrays.asList(Lang.GUIS_MAX_PLAYERS_LORE.toString()));
                     MaxPlayersGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -67,7 +67,7 @@ public class MaxPlayersGui extends TimerGui {
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
         if (event.getInventory().equals(MaxPlayersGui.inventory)) {
-            HandlerList.unregisterAll((Listener)this);
+            HandlerList.unregisterAll((Listener) this);
         }
     }
 }

@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.gui.timergui;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.gui.Gui;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
@@ -10,7 +9,7 @@ import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 import java.util.Arrays;
 
 public class TimerGui extends Gui {
-    public TimerGui(Player player,Integer size, String name) {
+    public TimerGui(Player player, Integer size, String name) {
         super(player, size, name);
         ItemsCreator ic = new ItemsCreator(Material.RED_BANNER, ChatColor.RED + "-10", Arrays.asList(""));
         TimerGui.inventory.setItem(0, ItemsCreator.create(ic));
