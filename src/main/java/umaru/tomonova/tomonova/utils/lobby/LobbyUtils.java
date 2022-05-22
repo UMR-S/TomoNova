@@ -9,7 +9,6 @@ import umaru.tomonova.tomonova.core.game.GameStates;
 public class LobbyUtils {
     public static void spawnLobby() {
         World world = TomoNova.getPlugin().worldUtils.getWorld();
-        System.out.println(world);
         Location location = new Location(world, 0.0, 200.0, 0);
         for (int i = -15; i < 16; i++) {
             for (int j = -15; j < 16; j++) {

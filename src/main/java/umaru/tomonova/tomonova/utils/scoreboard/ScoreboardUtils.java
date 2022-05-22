@@ -19,7 +19,8 @@ public class ScoreboardUtils {
         this.scoreboardMap = new HashMap<Player, Scoreboard>();
     }
 
-    public void updateGame(final Player player) {
+    public void updateGame(Player player, int count) {
+
 
     }
 

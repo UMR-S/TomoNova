@@ -18,7 +18,7 @@ public class TaskCountdown extends BukkitRunnable {
     public void run() {
         Bukkit.broadcastMessage(String.valueOf(preStartTime));
         preStartTime--;
-        if (preStartTime == 1) {
+        if (preStartTime == 0) {
             this.cancel();
             TomoNova.getPlugin().gameManager.start();
         }

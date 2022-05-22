@@ -6,6 +6,7 @@ public class WorldUtils {
     private World overworld;
     private World nether;
     private World end;
+
     public WorldUtils(World overworld, World nether, World end) {
         this.overworld = overworld;
         this.nether = nether;

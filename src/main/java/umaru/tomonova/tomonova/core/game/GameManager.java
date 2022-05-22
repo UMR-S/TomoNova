@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.TaskCountdown;
@@ -24,7 +23,6 @@ public class GameManager {
     private TomoNova tomoNova = TomoNova.getPlugin();
     private List<Player> players;
     private List<Player> deadPlayers;
-    private List<Teams> teams;
     private int playersPerTeam = 3;
     private Inventory gameInventory;
 
@@ -44,11 +42,11 @@ public class GameManager {
     private HashMap<Teams, Location> locationTeams;
     BukkitTask preGame;
     public List<LittleRule> littleRulesList = new ArrayList<LittleRule>();
+    private boolean isDamage;
 
     public GameManager() {
         TomoNova.getPlugin();
         players = new ArrayList<Player>();
-        System.out.println("hap");
 
     }
 
@@ -77,33 +75,36 @@ public class GameManager {
     //Start game
     public void preStart() {
         //Remplissage des teams automatique
-        tomoNova.teamUtils.getTeamToTeamlessPlayers(getPlayers());
+        //tomoNova.teamUtils.getTeamToTeamlessPlayers(getPlayers());
         //Liste des location et des teams
+        GameStates.setCurrentState(GameStates.LOBBY_END);
         HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
+        teams.keySet().forEach(t -> System.out.println(teams.get(t).getName() + teams.get(t).getNumberPlayers()));
         double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
         locationTeams = new HashMap<Teams, Location>();
 
-        for(String teamName : teams.keySet()){
+        for (String teamName : teams.keySet()) {
             Teams team = teams.get(teamName);
             Location teamLoc = getRandomLocation();
-            if (locationTeams.size() >0 ){
+            if (locationTeams.size() > 0) {
                 List<Double> dist = new ArrayList<Double>();
-                for(Teams otherTeam : locationTeams.keySet()){
+                for (Teams otherTeam : locationTeams.keySet()) {
                     dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
                 }
                 Integer i = 0;
-                while(Collections.max(dist) > 2 * r){
+                while (Collections.max(dist) > 2 * r) {
                     teamLoc = getRandomLocation();
                     dist = new ArrayList<Double>();
-                    for(Teams otherTeam : locationTeams.keySet()){
+                    for (Teams otherTeam : locationTeams.keySet()) {
                         dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
                     }
-                    if(i==10){
+                    if (i == 10) {
                         i = 0;
-                        r = r*0.95;
+                        r = r * 0.95;
                     }
                 }
             }
+            locationTeams.put(team, teamLoc);
         }
 
         //Bordure
@@ -115,7 +116,6 @@ public class GameManager {
     }
 
     public void start() {
-        System.out.println("start");
         GameStates.setCurrentState(GameStates.PREGAME);
         tomoNova.worldUtils.getWorld().setPVP(false);
         for (final LittleRules littleRule : LittleRules.values()) {
@@ -126,7 +126,7 @@ public class GameManager {
         //Tp les joueurs
         for (Teams team : locationTeams.keySet()) {
             spawnPreGameLobby(locationTeams.get(team));
-            if (team.getTeamPlayers() != null) {
+            if (team.getNumberPlayers() != 0) {
                 for (Player player : team.getTeamPlayers()) {
                     Location loc = locationTeams.get(team);
                     loc.setY(loc.getY() + 2);
@@ -134,13 +134,16 @@ public class GameManager {
                 }
             }
         }
+        setDamage(false);
         TaskFinalCountdown.setPreStartTime(10);
-        BukkitRunnable countdown = (BukkitRunnable) new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
-        BukkitRunnable TaskManager = (BukkitRunnable) new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
+        tomoNova.taskManager.TaskManagerInitialisation();
+        BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+        BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
     }
 
     public void stop() {
+        GameStates.setCurrentState(GameStates.LOBBY);
         preGame.cancel();
     }
 
@@ -173,17 +176,27 @@ public class GameManager {
             loc.getChunk().load(true);
             double x = loc.getX();
             double z = loc.getZ();
+            loc.setY(200.0);
             for (int i = -1; i < 2; i++) {
                 for (int j = -1; j < 2; j++) {
                     loc.setX(x + i);
                     loc.setZ(z + j);
-                    loc.getWorld().getBlockAt(loc).setType(Material.WHITE_STAINED_GLASS);
+                    loc.getWorld().getBlockAt(loc).setType(Material.AIR);
                 }
             }
 
         }
     }
     //Getter et setter
+
+
+    public boolean isDamage() {
+        return isDamage;
+    }
+
+    public void setDamage(boolean damage) {
+        isDamage = damage;
+    }
 
     public List<LittleRule> getLittleRulesList() {
         return littleRulesList;
@@ -223,14 +236,6 @@ public class GameManager {
 
     public void setDeadPlayers(List<Player> deadPlayers) {
         this.deadPlayers = deadPlayers;
-    }
-
-    public List<Teams> getTeams() {
-        return teams;
-    }
-
-    public void setTeams(List<Teams> teams) {
-        this.teams = teams;
     }
 
     public int getPlayersPerTeam() {

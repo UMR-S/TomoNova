@@ -1,5 +1,5 @@
 #World génération setup
-isCustomMap : false #Une seule de ces 3 choses peut être active à la fois
-worldGenLength : 2000
-isPreGen : True #Changer à False si on en veut pas
-biomesToReplace : [[ocean,forest],[deep ocean,plains],[frozen ocean,taiga cold],[ice flats,taiga cold],[ice mountains,taiga hills]]
+isCustomMap: false #Une seule de ces 3 choses peut être active à la fois
+worldGenLength: 2000
+isPreGen: True #Changer à False si on en veut pas
+biomesToReplace: [ [ ocean,forest ],[ deep ocean,plains ],[ frozen ocean,taiga cold ],[ ice flats,taiga cold ],[ ice mountains,taiga hills ] ]

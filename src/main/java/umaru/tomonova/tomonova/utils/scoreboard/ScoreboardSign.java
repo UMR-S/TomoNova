@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.utils.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -12,14 +13,14 @@ import java.util.List;
 public class ScoreboardSign {
 
 
-    public static Scoreboard create(Player player) {
+    public static Scoreboard create(Player player,int count) {
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
 
         Objective objective = scoreboard.registerNewObjective("sidebar", "dummy", ChatColor.LIGHT_PURPLE + Lang.SB_PREFIX.toString());
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        String[] lines = setLines(player);
+        String[] lines = setLines(player, count);
         Integer i = -1;
         for (String s : lines) {
             Score score = objective.getScore(s);
@@ -29,7 +30,7 @@ public class ScoreboardSign {
         return scoreboard;
     }
 
-    public static String[] setLines(Player player) {
+    public static String[] setLines(Player player, int count) {
         final String[] lines = new String[16];
         lines[0] = ""; //Gamemode?
         lines[2] = Lang.SB_SPAWN.toString(); //Flèche vers le 0/0 à faire

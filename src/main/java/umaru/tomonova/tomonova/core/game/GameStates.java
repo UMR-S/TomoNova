@@ -4,6 +4,7 @@ public enum GameStates {
     GEN,
     PREGEN,
     LOBBY,
+    LOBBY_END,
     PREGAME,
     GAME,
     END;

@@ -81,7 +81,7 @@ public class MainGui extends Gui {
             ic = new ItemsCreator(Material.BEACON, Lang.GUIS_MAIN_START.toString(), Arrays.asList(Lang.GUIS_MAIN_START_LORE.toString()));
             MainGui.inventory.setItem(45, ItemsCreator.create(ic));
         }
-        if (GameStates.isState(GameStates.PREGAME)) {
+        if (GameStates.isState(GameStates.LOBBY_END)) {
             ic = new ItemsCreator(Material.RED_TERRACOTTA, Lang.GUIS_MAIN_STOP.toString(), Arrays.asList(""));
             MainGui.inventory.setItem(45, ItemsCreator.create(ic));
         }

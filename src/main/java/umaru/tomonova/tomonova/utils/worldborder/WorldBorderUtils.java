@@ -1,7 +1,6 @@
 package umaru.tomonova.tomonova.utils.worldborder;
 
 import org.bukkit.WorldBorder;
-import org.bukkit.plugin.Plugin;
 import umaru.tomonova.tomonova.core.TomoNova;
 
 public class WorldBorderUtils {

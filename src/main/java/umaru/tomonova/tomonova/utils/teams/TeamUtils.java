@@ -15,61 +15,51 @@ public class TeamUtils {
     private HashMap<String, Teams> listTeams = new HashMap<String, Teams>();
 
     public TeamUtils() {
+        Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
         for (Teams team : Teams.values()) {
+            team = registerTeam(team);
             listTeams.put(team.getName(), team);
         }
     }
 
-    public Team registerTeam(String name) {
-        Teams team = Teams.getTeamFromName(name);
-        Team t = team.getTeam();
+    public Teams registerTeam(Teams team) {
+        Team t = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(team.getName());
         t.setPrefix(team.getPrefix());
         t.setColor(team.getBaseColor());
         t.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.FOR_OTHER_TEAMS);
-        t.setColor(team.getBaseColor());
         team.setTeam(t);
         team.setTeamPlayers(new ArrayList<Player>());
-        return t;
-
-    }
-
-    public Teams unRegisterTeam(String name) {
-        Teams team = listTeams.get(name);
-        team.setTeamPlayers(null);
-        team.setCustomName(null);
-        team.setNumberPlayers(0);
         return team;
-
     }
 
     public void playerJoinTeam(String name, Player player) {
         Teams team = listTeams.get(name);
         List<Player> teamPlayers = new ArrayList<>();
-        if (team.getTeam() == null) {
-            team.setTeam(registerTeam(name));
-        }
-        if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() == team.getNumberPlayers()) {
+        if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() <= team.getNumberPlayers()) {
             player.sendMessage(ChatColor.RED + Lang.TEAM_FULL.toString());
+            return;
         }
-        if (team.getNumberPlayers() != 0) {
-            teamPlayers = team.getTeamPlayers();
-        }
-        Team t = team.getTeam();
+        teamPlayers = team.getTeamPlayers();
         teamPlayers.add(player);
+
+        Team t = team.getTeam();
         t.addEntry(player.getName());
+
         team.setTeam(t);
         team.setTeamPlayers(teamPlayers);
         team.setNumberPlayers(team.getNumberPlayers() + 1);
+
         Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
         player.setScoreboard(scoreboard);
-        listTeams.put(name,team);
+        listTeams.put(name, team);
     }
 
-    public void playerQuitTeam(String name, Player player) {
-        Teams team = listTeams.get(name);
-        if (team == null) {
+    public void playerQuitTeam(Player player) {
+        if (getTeamNameFromPlayer(player) == "None") {
             return;
         }
+        String name = getTeamNameFromPlayer(player);
+        Teams team = listTeams.get(name);
         List<Player> teamPlayers = team.getTeamPlayers();
         Team t = team.getTeam();
         if (teamPlayers.contains(player)) {
@@ -78,13 +68,9 @@ public class TeamUtils {
             team.setTeamPlayers(teamPlayers);
             team.setNumberPlayers(team.getNumberPlayers() - 1);
         }
-        if (team.getNumberPlayers() == 0) {
-            team = unRegisterTeam(name);
 
-        } else {
-            team.setTeam(t);
-        }
-        listTeams.put(name,team);
+        team.setTeam(t);
+        listTeams.put(name, team);
     }
 
 
@@ -96,24 +82,17 @@ public class TeamUtils {
         team.getTeam().setAllowFriendlyFire(ff);
     }
 
-    public void addCustomName(String name, Player player) {
-        Teams team = listTeams.get(name);
-    }
-
     public HashMap<String, Teams> getTeamHashMap() {
-        return this.listTeams;
+        return listTeams;
     }
 
     public String getTeamNameFromPlayer(Player player) {
-        String teamName = null;
+        String teamName = "None";
         for (String name : this.listTeams.keySet()) {
             Teams team = this.listTeams.get(name);
-            if (team.getTeamPlayers() == null) {
-                return null;
-            } else if (team.getTeamPlayers().contains(player)) {
+            if (team.getTeamPlayers().contains(player)) {
                 teamName = team.getName();
             }
-
         }
         return teamName;
     }
@@ -123,7 +102,7 @@ public class TeamUtils {
 
         for (Player player : players) {
             for (String teamName : this.listTeams.keySet()) {
-                if(listTeams.get(teamName).getTeamPlayers() != null){
+                if (listTeams.get(teamName).getTeamPlayers() != null) {
                     System.out.println(this.listTeams.get(teamName).getTeamPlayers());
                     if (listTeams.get(teamName).getTeamPlayers().contains(player)) {
                         players.remove(player);

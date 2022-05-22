@@ -6,6 +6,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
+import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.players.InteractEvent;
 import umaru.tomonova.tomonova.listeners.players.Join;
@@ -31,6 +32,8 @@ public final class TomoNova extends JavaPlugin {
     public static TeamUtils teamUtils;
     public static WorldUtils worldUtils;
     public static WorldBorderUtils worldBorderUtils;
+    public static TaskManager taskManager;
+
 
     @Override
     public void onLoad() {
@@ -74,6 +77,7 @@ public final class TomoNova extends JavaPlugin {
         teamUtils = new TeamUtils();
         worldUtils = new WorldUtils(Bukkit.getWorld("world"), Bukkit.getWorld("world_nether"), Bukkit.getWorld("world_the_end"));
         worldBorderUtils = new WorldBorderUtils();
+        taskManager = new TaskManager(this);
     }
 
     public static TomoNova getPlugin() {
