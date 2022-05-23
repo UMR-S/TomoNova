@@ -69,5 +69,4 @@ public class FinalBorderSizeGui extends TimerGui {
             HandlerList.unregisterAll((Listener) this);
         }
     }
-
 }

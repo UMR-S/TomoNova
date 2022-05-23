@@ -26,8 +26,8 @@ public class TaskManager extends BukkitRunnable {
     public void TaskManagerInitialisation() {
         this.pvpTime = tomoNova.gameManager.getPvpTime() * 60;
         this.borderTime = tomoNova.gameManager.getTimeBorder() * 60;
-        this.suddenDeathTime = tomoNova.gameManager.getSuddenDeathTime()*60;
-        this.netherEndTime = tomoNova.gameManager.getNetherEndTime()*60;
+        this.suddenDeathTime = tomoNova.gameManager.getSuddenDeathTime() * 60;
+        this.netherEndTime = tomoNova.gameManager.getNetherEndTime() * 60;
         this.count = 0;
         this.NetherDamage = 0;
         this.BetweenNetherDamage = 30;
@@ -56,13 +56,24 @@ public class TaskManager extends BukkitRunnable {
         if (count == borderTime) {
             tomoNova.worldBorderUtils.change(tomoNova.worldBorderUtils.getFinalSize(), (tomoNova.worldBorderUtils.getStartSize() - tomoNova.worldBorderUtils.getFinalSize()) / tomoNova.worldBorderUtils.getSpeed());
         }
-        if (count == TaskManager.this.suddenDeathTime || (count > suddenDeathTime && count % 5 == 0)) {
-                Bukkit.broadcastMessage(Lang.SUDDEN_DEATH.toString());
-                Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.0f));
-                tomoNova.worldBorderUtils.change(10, (tomoNova.worldBorderUtils.getFinalSize() - 10) / tomoNova.worldBorderUtils.getSpeed());
-            }
         for (final Player player : Bukkit.getOnlinePlayers()) {
-            tomoNova.scoreboardUtils.updateGame(player, count);
+            tomoNova.scoreboardUtils.updateGame(player.getName(), count);
         }
+    }
+
+    public int getPvpTime() {
+        return pvpTime;
+    }
+
+    public int getBorderTime() {
+        return borderTime;
+    }
+
+    public int getSuddenDeathTime() {
+        return suddenDeathTime;
+    }
+
+    public int getNetherEndTime() {
+        return netherEndTime;
     }
 }

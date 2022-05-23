@@ -31,7 +31,6 @@ public class Join implements Listener {
             player.setExp(0.0f);
             player.setLevel(0);
             player.setHealth(20.0);
-            System.out.println(TomoNova.getPlugin().worldUtils.getWorld());
             player.teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 202.0, 0.0, 0, 0));
 
             List<String> loreBanner = new ArrayList<>();
@@ -39,7 +38,7 @@ public class Join implements Listener {
             ItemStack banner;
             banner = CustomItems.createCustomItem(Material.BLACK_BANNER, ChatColor.AQUA, "Choissisez votre équipe", loreBanner);
             player.getInventory().setItem(0, banner);
-            //Team
+            player.setFoodLevel(20);
 
             //Rajoute l'item pour la config
             if (player.isOp()) {

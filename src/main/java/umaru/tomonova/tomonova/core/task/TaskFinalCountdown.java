@@ -3,6 +3,7 @@ package umaru.tomonova.tomonova.core.task;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 
 public class TaskFinalCountdown extends BukkitRunnable {
@@ -21,6 +22,7 @@ public class TaskFinalCountdown extends BukkitRunnable {
         if (preStartTime == 0) {
             TomoNova.getPlugin().gameManager.deletePreGameLobby();
             LobbyUtils.deleteLobby();
+            GameStates.setCurrentState(GameStates.GAME);
             this.cancel();
         }
     }

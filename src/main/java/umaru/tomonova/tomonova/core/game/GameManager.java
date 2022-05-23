@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.core.game;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -79,7 +80,6 @@ public class GameManager {
         //Liste des location et des teams
         GameStates.setCurrentState(GameStates.LOBBY_END);
         HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
-        teams.keySet().forEach(t -> System.out.println(teams.get(t).getName() + teams.get(t).getNumberPlayers()));
         double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
         locationTeams = new HashMap<Teams, Location>();
 
@@ -127,16 +127,25 @@ public class GameManager {
         for (Teams team : locationTeams.keySet()) {
             spawnPreGameLobby(locationTeams.get(team));
             if (team.getNumberPlayers() != 0) {
-                for (Player player : team.getTeamPlayers()) {
+                for (String playerName : team.getTeamPlayers()) {
+                    Player player = Bukkit.getPlayer(playerName);
                     Location loc = locationTeams.get(team);
-                    loc.setY(loc.getY() + 2);
-                    player.teleport(loc);
+                    try{
+                        loc.setY(loc.getY() + 1);
+                        loc.setX(loc.getX() - 0.5);
+                        loc.setZ(loc.getZ() - 0.5);
+                        player.teleport(loc);
+                    }
+                    catch (NullPointerException nullPointerException){
+                        break;
+                    }
                 }
             }
         }
         setDamage(false);
         TaskFinalCountdown.setPreStartTime(10);
         tomoNova.taskManager.TaskManagerInitialisation();
+        Bukkit.getOnlinePlayers().forEach(p ->p.getInventory().clear());
         BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
         BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
@@ -161,6 +170,7 @@ public class GameManager {
         loc.getChunk().load(true);
         double x = loc.getX();
         double z = loc.getZ();
+        loc.setY(200.0);
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 loc.setX(x + i);

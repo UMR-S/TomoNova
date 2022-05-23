@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.utils.scoreboard;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -19,13 +20,15 @@ public class ScoreboardUtils {
         this.scoreboardMap = new HashMap<Player, Scoreboard>();
     }
 
-    public void updateGame(Player player, int count) {
-
+    public void updateGame(String playerName, int count) {
+        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+        scoreboard = ScoreboardSign.create(playerName, count);
+        Bukkit.getPlayer(playerName).setScoreboard(scoreboard);
 
     }
 
     //Flèches et distance
-    public String getDirectionTo(final Player p, final Location point) {
+    public String getDirectionTo(Player p, Location point) {
         final Location ploc = p.getLocation();
         ploc.setY(0.0);
         point.setY(0.0);
@@ -40,7 +43,7 @@ public class ScoreboardUtils {
         return new StringBuilder().append("\u2b06\u2b08\u27a1\u2b0a\u2b07\u2b0b\u2b05\u2b09".charAt((int) a / 45)).toString();
     }
 
-    public String getColoredDirectionTo(final Player p, final Location point) {
+    public String getColoredDirectionTo(Player p, Location point) {
         final Location ploc = p.getLocation();
         ploc.setY(0.0);
         point.setY(0.0);

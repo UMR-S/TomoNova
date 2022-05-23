@@ -24,11 +24,11 @@ public enum Teams {
     private final ChatColor baseColor;
     private final Material banner;
     private Team team;
-    private List<Player> teamPlayers;
+    private List<String> teamPlayers;
     private Integer numberPlayers;
 
 
-    Teams(String name, String prefix, ChatColor baseColor, Material banner, Team team, List<Player> teamPlayers, Integer numberPlayers) {
+    Teams(String name, String prefix, ChatColor baseColor, Material banner, Team team, List<String> teamPlayers, Integer numberPlayers) {
         this.name = name;
         this.prefix = prefix;
         this.baseColor = baseColor;
@@ -58,7 +58,7 @@ public enum Teams {
         return team;
     }
 
-    public List<Player> getTeamPlayers() {
+    public List<String> getTeamPlayers() {
         return teamPlayers;
     }
 
@@ -67,7 +67,7 @@ public enum Teams {
         this.team = team;
     }
 
-    public void setTeamPlayers(List<Player> teamPlayers) {
+    public void setTeamPlayers(List<String> teamPlayers) {
         this.teamPlayers = teamPlayers;
     }
 

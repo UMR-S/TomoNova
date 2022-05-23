@@ -9,7 +9,7 @@ public enum Lang {
     SB_PREFIX("scoreboard.prefix", "Tomo Nova"),
     SB_STARIN("scoreboard.startIn", "Démarrage dans : "),
     SB_PLAYERS("scoreboard.players", "Joueurs : "),
-    SB_TIME("scoreboard.time", "Joueurs : "),
+    SB_TIME("scoreboard.time", "Temps : "),
     SB_BORDER("scoreboard.border", "Bordure : "),
     SB_SPAWN("scoreboard.spawn", "Spawn : "),
     SB_PVP("scoreboard.pvp", "PvP : "),
@@ -61,6 +61,9 @@ public enum Lang {
     GUIS_BD_FINAL_SIZE_LORE("guis.border.finalSizeLore", "Chosis la taille finale de la bordure"),
     GUIS_BD_TIME("guis.border.time", "Temps "),
     GUIS_BD_TIME_LORE("guis.border.timeLore", "Au bout de combien de temps la bordure commence à se réduire"),
+    GUIS_BD_SUBBORDER_NAME("guis.border.subborder","Nombre de sous-bordure"),
+    GUIS_BD_SUBBORDER_LORE("guis.border.subborderLore","Nombre de fois où la bordure va se rétrécir"),
+
     GUIS_BDS_NAME("guis.borderSpeed.name", "Vitesse : "),
     GUIS_BDS_LORE("guis.borderSpeed.lore", "Choisis la vitesse de la bordure"),
     GUIS_BDS_LORE1("guis.borderSpeed.lore1", "La vitesse est en block/seconde"),

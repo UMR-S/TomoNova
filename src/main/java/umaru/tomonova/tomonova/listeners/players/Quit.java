@@ -14,7 +14,7 @@ public class Quit implements Listener {
         if (GameStates.isState(GameStates.LOBBY)) {
             Player player = event.getPlayer();
             TomoNova.getPlugin().gameManager.removePlayer(player);
-            TomoNova.getPlugin().teamUtils.playerQuitTeam(player);
+            TomoNova.getPlugin().teamUtils.playerQuitTeam(player.getName());
         }
     }
 }

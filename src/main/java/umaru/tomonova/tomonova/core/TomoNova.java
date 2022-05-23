@@ -3,14 +3,18 @@ package umaru.tomonova.tomonova.core;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.Horse;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
+import umaru.tomonova.tomonova.gui.LittleRules;
 import umaru.tomonova.tomonova.lang.Lang;
-import umaru.tomonova.tomonova.listeners.players.InteractEvent;
-import umaru.tomonova.tomonova.listeners.players.Join;
-import umaru.tomonova.tomonova.listeners.players.Quit;
+import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
+import umaru.tomonova.tomonova.listeners.littlerules.littleRules.*;
+import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
+import umaru.tomonova.tomonova.listeners.others.PortalCreate;
+import umaru.tomonova.tomonova.listeners.players.*;
 import umaru.tomonova.tomonova.listeners.world.onWorldLoaded;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardUtils;
@@ -64,10 +68,28 @@ public final class TomoNova extends JavaPlugin {
     }
 
     public void listenersRegister() {
-        getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
-        getServer().getPluginManager().registerEvents(new Join(), plugin);
-        getServer().getPluginManager().registerEvents(new Quit(), plugin);
+
+
         getServer().getPluginManager().registerEvents(new InteractEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new Join(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerMove(), plugin);
+        getServer().getPluginManager().registerEvents(new Quit(), plugin);
+
+        getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
+        getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);
+        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
+        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
+        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
+        getServer().getPluginManager().registerEvents(new Fireless(), plugin);
+        getServer().getPluginManager().registerEvents(new FriendlyFire(), plugin);
+        getServer().getPluginManager().registerEvents(new Horseless(), plugin);
+        getServer().getPluginManager().registerEvents(new Regen(), plugin);
+        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
+        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
+        getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
+        getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
 
     }
 

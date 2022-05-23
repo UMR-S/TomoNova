@@ -37,11 +37,11 @@ public class TeamsGui extends Gui {
             if (is == null || is.getType() == Material.AIR) {
                 return;
             } else {
-                TomoNova.getPlugin().teamUtils.playerQuitTeam((Player) event.getWhoClicked());
+                TomoNova.getPlugin().teamUtils.playerQuitTeam(event.getWhoClicked().getName());
                 HashMap<String, Teams> listeTeams = TomoNova.getPlugin().teamUtils.getTeamHashMap();
                 for (String teamName : listeTeams.keySet()) {
                     if (teamName.equals(ChatColor.stripColor(event.getCurrentItem().getItemMeta().getDisplayName()))) {
-                        TomoNova.getPlugin().teamUtils.playerJoinTeam(teamName, ((Player) event.getWhoClicked()));
+                        TomoNova.getPlugin().teamUtils.playerJoinTeam(teamName, (event.getWhoClicked().getName()));
                     }
                 }
                 event.getWhoClicked().closeInventory();
