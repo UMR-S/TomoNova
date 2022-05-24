@@ -9,12 +9,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
-import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.Gui;
 import umaru.tomonova.tomonova.gui.MainGui;
-import umaru.tomonova.tomonova.gui.bordergui.subborders.SubborderFinalSize;
-import umaru.tomonova.tomonova.gui.bordergui.subborders.SubborderInitialSize;
-import umaru.tomonova.tomonova.gui.bordergui.subborders.SubborderTime;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
@@ -29,12 +25,12 @@ public class BorderGui extends Gui {
         BorderGui.inventory.setItem(4, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, ChatColor.RED + Lang.GUIS_BD_FINAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_FINAL_SIZE_LORE.toString()));
         BorderGui.inventory.setItem(5, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.STICK, Lang.GUIS_BD_SUBBORDER_NAME.toString(), Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+        ic = new ItemsCreator(Material.STICK, Lang.GUIS_BD_SUBBD_ADD_NAME.toString(), Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
         BorderGui.inventory.setItem(8, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BD_TIME.toString(), Arrays.asList(Lang.GUIS_BD_TIME_LORE.toString()));
         BorderGui.inventory.setItem(13, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), null);
-//        BorderGui.inventory.setItem(17, ItemsCreator.create(ic));
+        BorderGui.inventory.setItem(17, ItemsCreator.create(ic));
 //        ic = new ItemsCreator(Material.BLUE_STAINED_GLASS_PANE, ChatColor.BLUE + Lang.GUIS_BD_INITIAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_INITIAL_SIZE_LORE.toString()));
 //        BorderGui.inventory.setItem(21, ItemsCreator.create(ic));
 //        ic = new ItemsCreator(Material.BLACKSTONE_WALL, ChatColor.BLUE + Lang.GUIS_BD_TIME.toString(), Arrays.asList(Lang.GUIS_BD_TIME_LORE.toString()));

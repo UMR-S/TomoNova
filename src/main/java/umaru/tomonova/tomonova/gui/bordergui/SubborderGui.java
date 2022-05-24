@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
-import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.timergui.MaxPlayersGui;
 import umaru.tomonova.tomonova.gui.timergui.MinPlayersGui;
 import umaru.tomonova.tomonova.gui.timergui.TimerGui;
@@ -21,8 +20,8 @@ import java.util.Arrays;
 public class SubborderGui extends TimerGui {
 
     public SubborderGui(Player player) {
-        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_SUBBORDER_NAME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+        super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_SUBBD_ADD_NAME.toString());
+        final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
         SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -50,7 +49,7 @@ public class SubborderGui extends TimerGui {
                         break;
                     }
 
-                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
                     SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
@@ -60,7 +59,7 @@ public class SubborderGui extends TimerGui {
                     if (value > 2){
                         break;
                     }
-                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
                     SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }

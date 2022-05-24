@@ -28,7 +28,11 @@ public class PlayerMove implements Listener {
                     final StringBuilder builder = new StringBuilder();
                     for (String targetName : team.getTeamPlayers()) {
                         Player target = Bukkit.getPlayer(targetName);
-                        builder.append(String.valueOf(String.valueOf(team.getPrefix())) + target.getName() + " §7: " + TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(player, target.getLocation()) + " §7(" + (int)player.getLocation().distance(target.getLocation()) + ")   ");
+                        if(!player.getName().equals(targetName)){
+                            if(Bukkit.getPlayer(targetName) != null){
+                                builder.append(String.valueOf(String.valueOf(team.getPrefix())) + target.getName() + " §7: " + TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(player, target.getLocation()) + " §7(" + (int)player.getLocation().distance(target.getLocation()) + ")   ");
+                            }
+                        }
                     }
                     player.spigot().sendMessage(net.md_5.bungee.api.ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(builder.toString()));
                 }

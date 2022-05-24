@@ -43,19 +43,11 @@ public class ScoreboardSign {
         lines[3] = Lang.SB_KILLS.toString(); //Nb kills (à faire)
         lines[4] = Lang.SB_PLAYERS.toString() + TomoNova.getPlugin().gameManager.getNumberPlayer(); //Nombre de joueurs encore en vie
         lines[5] = " ";
-        lines[6] =Lang.SB_TEAM.toString() + " - ";
         if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
             String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(playerName);
             lines[5] =Lang.SB_TEAM.toString() + TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getBaseColor() + teamName;
-            String listJoueurs = " ";
-            List<String> listPlayers = TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getTeamPlayers();
-            for (String pName : listPlayers) {
-                if (!playerName.equals(pName)) {
-                    listJoueurs = listPlayers + pName + " ";
-                }
-            }
-            lines[6] = listJoueurs.toString();
         }
+        lines[6] ="  ";
         lines[7] = "   ";
         lines[8] = Lang.SB_TIME.toString() + (count-(count%60)) /60 + ":" + String.format("%02d", count%60); //Task manager
         lines[9] = "    ";

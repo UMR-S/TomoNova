@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.utils.teams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -26,7 +25,7 @@ public class TeamUtils {
         Team t = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(team.getName());
         t.setPrefix(team.getPrefix());
         t.setColor(team.getBaseColor());
-        t.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.FOR_OTHER_TEAMS);
+        t.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
         team.setTeam(t);
         team.setTeamPlayers(new ArrayList<String>());
         return team;
