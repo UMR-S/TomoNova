@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.core.game;
 
+import jdk.internal.net.http.common.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -36,7 +37,6 @@ public class GameManager {
     private boolean taupe = false;
     private int timeBorder = 120; //En min
 
-    private int subBorders = 0;
     private int netherEndTime = 120; //En min
     private int pvpTime = 20; //En min
     private int suddenDeathTime = 150; //En min
@@ -44,6 +44,11 @@ public class GameManager {
     BukkitTask preGame;
     public List<LittleRule> littleRulesList = new ArrayList<LittleRule>();
     private boolean isDamage;
+
+    private int actualSubborderFinalSize;
+    private int actualSubborderTime;
+    private List<Integer> listSubborderFinalSize = new ArrayList<>();
+    private List<Integer> listSubborderTime = new ArrayList<>();
 
     public GameManager() {
         TomoNova.getPlugin();
@@ -200,6 +205,43 @@ public class GameManager {
     //Getter et setter
 
 
+    public int getActualSubborderFinalSize() {
+        return actualSubborderFinalSize;
+    }
+
+    public void setActualSubborderFinalSize(int actualSubborderFinalSize) {
+        this.actualSubborderFinalSize = actualSubborderFinalSize;
+    }
+
+    public int getActualSubborderTime() {
+        return actualSubborderTime;
+    }
+
+    public void setActualSubborderTime(int actualSubborderTime) {
+        this.actualSubborderTime = actualSubborderTime;
+    }
+
+    public List<Integer> getListSubborderFinalSize() {
+        return listSubborderFinalSize;
+    }
+
+    public void addListSubborderFinalSize(Integer SubborderFinalSize) {
+        this.listSubborderFinalSize.add(SubborderFinalSize);
+    }
+    public void removeLastListSubborderFinalSize() {
+        this.listSubborderFinalSize.remove(this.listSubborderFinalSize.size()-1);
+    }
+    public List<Integer> getListSubborderTime() {
+        return listSubborderTime;
+    }
+
+    public void addListSubborderTime(Integer SubborderTime) {
+        this.listSubborderTime.add(SubborderTime);
+    }
+    public void removeLastListSubborderTime() {
+        this.listSubborderFinalSize.remove(this.listSubborderTime.size()-1);
+    }
+
     public boolean isDamage() {
         return isDamage;
     }
@@ -318,14 +360,6 @@ public class GameManager {
 
     public void setTimeBorder(int timeBorder) {
         this.timeBorder = timeBorder;
-    }
-
-    public int getSubBorders() {
-        return subBorders;
-    }
-
-    public void setSubBorders(int subBorders) {
-        this.subBorders = subBorders;
     }
 
     public int getNetherEndTime() {

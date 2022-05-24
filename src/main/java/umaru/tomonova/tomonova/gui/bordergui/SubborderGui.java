@@ -10,7 +10,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.gui.MainGui;
 import umaru.tomonova.tomonova.gui.timergui.MaxPlayersGui;
 import umaru.tomonova.tomonova.gui.timergui.MinPlayersGui;
 import umaru.tomonova.tomonova.gui.timergui.TimerGui;
@@ -23,7 +22,7 @@ public class SubborderGui extends TimerGui {
 
     public SubborderGui(Player player) {
         super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_SUBBORDER_NAME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getSubBorders()), Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+        final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
         SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -37,7 +36,6 @@ public class SubborderGui extends TimerGui {
             if (is == null || is.getType() == Material.AIR) {
                 return;
             }
-            System.out.println(is.getType());
             event.setCancelled(true);
             switch (is.getType()) {
                 case STICK: {
@@ -47,23 +45,22 @@ public class SubborderGui extends TimerGui {
                 }
                 case RED_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = TomoNova.getPlugin().gameManager.getSubBorders() + Integer.parseInt(name);
+                    Integer value = 0;
                     if (value < 0) {
                         break;
                     }
-                    TomoNova.getPlugin().gameManager.setSubBorders(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getSubBorders()), Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+
+                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
                     SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = TomoNova.getPlugin().gameManager.getSubBorders() + Integer.parseInt(name);
-                    if (value > 4){
+                    final int value = 0;
+                    if (value > 2){
                         break;
                     }
-                    TomoNova.getPlugin().gameManager.setSubBorders(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getSubBorders()), Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
+                    final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBORDER_LORE.toString()));
                     SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
