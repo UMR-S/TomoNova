@@ -47,8 +47,8 @@ public class GameManager {
 
     private int actualSubborderFinalSize;
     private int actualSubborderTime;
-    private List<Integer> listSubborderFinalSize = new ArrayList<>();
-    private List<Integer> listSubborderTime = new ArrayList<>();
+    private List<Integer> listSubborderFinalSize = new ArrayList<Integer>();
+    private List<Integer> listSubborderTime = new ArrayList<Integer>();
 
     public GameManager() {
         TomoNova.getPlugin();
@@ -149,7 +149,6 @@ public class GameManager {
         }
         setDamage(false);
         TaskFinalCountdown.setPreStartTime(10);
-        tomoNova.taskManager.TaskManagerInitialisation();
         Bukkit.getOnlinePlayers().forEach(p ->p.getInventory().clear());
         BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
         BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
@@ -222,24 +221,41 @@ public class GameManager {
     }
 
     public List<Integer> getListSubborderFinalSize() {
-        return listSubborderFinalSize;
+        return this.listSubborderFinalSize;
     }
 
     public void addListSubborderFinalSize(Integer SubborderFinalSize) {
         this.listSubborderFinalSize.add(SubborderFinalSize);
     }
     public void removeLastListSubborderFinalSize() {
-        this.listSubborderFinalSize.remove(this.listSubborderFinalSize.size()-1);
+        if(!this.listSubborderFinalSize.isEmpty()){
+            this.listSubborderFinalSize.remove(this.listSubborderFinalSize.size()-1);
+        }
+
     }
     public List<Integer> getListSubborderTime() {
-        return listSubborderTime;
+        return this.listSubborderTime;
     }
 
     public void addListSubborderTime(Integer SubborderTime) {
         this.listSubborderTime.add(SubborderTime);
     }
     public void removeLastListSubborderTime() {
-        this.listSubborderFinalSize.remove(this.listSubborderTime.size()-1);
+        if(!this.listSubborderTime.isEmpty()){
+            this.listSubborderTime.remove(this.listSubborderTime.size()-1);
+        }
+    }
+    public int getActualBorderTime(int count){
+        int borderTime = getTimeBorder();
+        if(!(listSubborderTime.isEmpty() || listSubborderTime.get(listSubborderTime.size() - 1)*60 < count)){
+            for(int time : listSubborderTime){
+                if(time*60>count){
+                    borderTime = time;
+                    return borderTime;
+                }
+            }
+        }
+        return borderTime;
     }
 
     public boolean isDamage() {

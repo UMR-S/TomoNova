@@ -51,7 +51,13 @@ public class ScoreboardSign {
         lines[7] = "   ";
         lines[8] = Lang.SB_TIME.toString() + (count-(count%60)) /60 + ":" + String.format("%02d", count%60); //Task manager
         lines[9] = "    ";
-        lines[10] = Lang.SB_BORDER.toString() + ((TomoNova.getPlugin().taskManager.getBorderTime()-count)-((TomoNova.getPlugin().taskManager.getBorderTime()-count)%60))/60 + ":" + String.format("%02d",(TomoNova.getPlugin().taskManager.getBorderTime()-count)%60) ;
+        if(TomoNova.getPlugin().gameManager.getTimeBorder()*60 < count){
+            lines[10] = Lang.SB_BORDER.toString() + "--:--";
+        }
+        else {
+            int borderTime = TomoNova.getPlugin().gameManager.getActualBorderTime(count);
+            lines[10] = Lang.SB_BORDER.toString() + (int) ((borderTime*60 - count)/60) + ":" + String.format("%02d", (borderTime*60 - count)%60);
+        }
         lines[11] = Lang.SB_BORDER.toString() + (int) -TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize()/2 + "/" + (int) TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize()/2;
         return lines;
     }

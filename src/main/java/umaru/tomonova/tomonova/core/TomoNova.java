@@ -11,6 +11,7 @@ import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.gui.LittleRules;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
+import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
 import umaru.tomonova.tomonova.listeners.littlerules.littleRules.*;
 import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
 import umaru.tomonova.tomonova.listeners.others.PortalCreate;
@@ -89,6 +90,7 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Rodless(), plugin);
         getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
+        getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
         getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
 
     }

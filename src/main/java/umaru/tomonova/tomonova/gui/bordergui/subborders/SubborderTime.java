@@ -11,8 +11,6 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.bordergui.BorderGui;
-import umaru.tomonova.tomonova.gui.bordergui.BorderSpeedGui;
-import umaru.tomonova.tomonova.gui.bordergui.BorderTimeGui;
 import umaru.tomonova.tomonova.gui.timergui.TimerGui;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
@@ -22,7 +20,7 @@ import java.util.Arrays;
 public class SubborderTime extends TimerGui {
     public SubborderTime(Player player) {
         super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_TIME.toString());
-        final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+        final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getActualSubborderTime()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
         this.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
@@ -45,20 +43,20 @@ public class SubborderTime extends TimerGui {
                 }
                 case RED_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = TomoNova.getPlugin().gameManager.getTimeBorder() + Integer.parseInt(name);
+                    final int value = TomoNova.getPlugin().gameManager.getActualSubborderTime() + Integer.parseInt(name);
                     if (value < 1) {
                         break;
                     }
-                    TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+                    TomoNova.getPlugin().gameManager.setActualSubborderTime(value);
+                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getActualSubborderTime()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
                     this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
-                    final int value = TomoNova.getPlugin().gameManager.getTimeBorder() + Integer.parseInt(name);
-                    TomoNova.getPlugin().gameManager.setTimeBorder(value);
-                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getTimeBorder()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
+                    final int value = TomoNova.getPlugin().gameManager.getActualSubborderTime() + Integer.parseInt(name);
+                    TomoNova.getPlugin().gameManager.setActualSubborderTime(value);
+                    final ItemsCreator ic = new ItemsCreator(Material.COBBLESTONE_WALL, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().gameManager.getActualSubborderTime()), Arrays.asList(Lang.GUIS_BDT_LORE.toString()));
                     this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
