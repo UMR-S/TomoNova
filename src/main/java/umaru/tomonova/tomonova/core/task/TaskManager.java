@@ -1,6 +1,7 @@
 package umaru.tomonova.tomonova.core.task;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -39,7 +40,7 @@ public class TaskManager extends BukkitRunnable {
 
     @Override
     public void run() {
-        if(count == 0){
+        if (count == 0) {
             TaskManagerInitialisation();
         }
         count++;
@@ -50,6 +51,7 @@ public class TaskManager extends BukkitRunnable {
         if (count == netherEndTime + BetweenNetherDamage * NetherDamage) {
             if (NetherDamage == 0) {
                 Bukkit.broadcastMessage(Lang.NETHER_END.toString());
+                Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.0f));
             }
             tomoNova.gameManager.setNether(false);
             NetherDamage++;
@@ -59,16 +61,23 @@ public class TaskManager extends BukkitRunnable {
             tomoNova.worldUtils.getWorld().setPVP(true);
             tomoNova.worldUtils.getNether().setPVP(true);
             tomoNova.worldUtils.getEnd().setPVP(true);
+            Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ITEM_SHIELD_BREAK, 1.0f, 1.0f));
         }
-        if(listSubborderTime.size() > 0){
-            if(count == listSubborderTime.get(0)*60){
-                tomoNova.worldBorderUtils.change(listSubborderFinalSize.get(0),((int)tomoNova.worldUtils.getWorld().getWorldBorder().getSize() - listSubborderFinalSize.get(0)) / tomoNova.worldBorderUtils.getSpeed());
+        if (listSubborderTime.size() > 0) {
+            if (count == listSubborderTime.get(0) * 60) {
+                tomoNova.worldBorderUtils.change(listSubborderFinalSize.get(0), ((int) tomoNova.worldUtils.getWorld().getWorldBorder().getSize() - listSubborderFinalSize.get(0)) / tomoNova.worldBorderUtils.getSpeed());
                 listSubborderTime.remove(0);
                 listSubborderFinalSize.remove(0);
+                Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f));
             }
         }
         if (count == borderTime) {
             tomoNova.worldBorderUtils.change(tomoNova.worldBorderUtils.getFinalSize(), (tomoNova.worldBorderUtils.getStartSize() - tomoNova.worldBorderUtils.getFinalSize()) / tomoNova.worldBorderUtils.getSpeed());
+            Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f));
+        }
+        if (count == suddenDeathTime){
+            tomoNova.worldBorderUtils.change(20, 20);
+            Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.0f));
         }
         for (final Player player : Bukkit.getOnlinePlayers()) {
             tomoNova.scoreboardUtils.updateGame(player.getName(), count);

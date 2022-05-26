@@ -1,6 +1,5 @@
 package umaru.tomonova.tomonova.core.game;
 
-import jdk.internal.net.http.common.Pair;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -35,11 +34,16 @@ public class GameManager {
     private boolean uhc = true;
     private boolean Switch = false;
     private boolean taupe = false;
+    private boolean scarletMansion = false;
+    private boolean tomoLostVillage = false;
     private int timeBorder = 120; //En min
 
     private int netherEndTime = 120; //En min
     private int pvpTime = 20; //En min
     private int suddenDeathTime = 150; //En min
+    private int betweenSwitches = 20;
+    private int numberSwitches = 3;
+    private int beforeTaupe = 20;
     private HashMap<Teams, Location> locationTeams;
     BukkitTask preGame;
     public List<LittleRule> littleRulesList = new ArrayList<LittleRule>();
@@ -135,13 +139,12 @@ public class GameManager {
                 for (String playerName : team.getTeamPlayers()) {
                     Player player = Bukkit.getPlayer(playerName);
                     Location loc = locationTeams.get(team);
-                    try{
+                    try {
                         loc.setY(loc.getY() + 1);
                         loc.setX(loc.getX() - 0.5);
                         loc.setZ(loc.getZ() - 0.5);
                         player.teleport(loc);
-                    }
-                    catch (NullPointerException nullPointerException){
+                    } catch (NullPointerException nullPointerException) {
                         break;
                     }
                 }
@@ -149,7 +152,7 @@ public class GameManager {
         }
         setDamage(false);
         TaskFinalCountdown.setPreStartTime(10);
-        Bukkit.getOnlinePlayers().forEach(p ->p.getInventory().clear());
+        Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().clear());
         BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
         BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
@@ -227,12 +230,14 @@ public class GameManager {
     public void addListSubborderFinalSize(Integer SubborderFinalSize) {
         this.listSubborderFinalSize.add(SubborderFinalSize);
     }
+
     public void removeLastListSubborderFinalSize() {
-        if(!this.listSubborderFinalSize.isEmpty()){
-            this.listSubborderFinalSize.remove(this.listSubborderFinalSize.size()-1);
+        if (!this.listSubborderFinalSize.isEmpty()) {
+            this.listSubborderFinalSize.remove(this.listSubborderFinalSize.size() - 1);
         }
 
     }
+
     public List<Integer> getListSubborderTime() {
         return this.listSubborderTime;
     }
@@ -240,16 +245,18 @@ public class GameManager {
     public void addListSubborderTime(Integer SubborderTime) {
         this.listSubborderTime.add(SubborderTime);
     }
+
     public void removeLastListSubborderTime() {
-        if(!this.listSubborderTime.isEmpty()){
-            this.listSubborderTime.remove(this.listSubborderTime.size()-1);
+        if (!this.listSubborderTime.isEmpty()) {
+            this.listSubborderTime.remove(this.listSubborderTime.size() - 1);
         }
     }
-    public int getActualBorderTime(int count){
+
+    public int getActualBorderTime(int count) {
         int borderTime = getTimeBorder();
-        if(!(listSubborderTime.isEmpty() || listSubborderTime.get(listSubborderTime.size() - 1)*60 < count)){
-            for(int time : listSubborderTime){
-                if(time*60>count){
+        if (!(listSubborderTime.isEmpty() || listSubborderTime.get(listSubborderTime.size() - 1) * 60 < count)) {
+            for (int time : listSubborderTime) {
+                if (time * 60 > count) {
                     borderTime = time;
                     return borderTime;
                 }
@@ -368,6 +375,46 @@ public class GameManager {
 
     public void setTaupe(boolean taupe) {
         this.taupe = taupe;
+    }
+
+    public boolean isScarletMansion() {
+        return scarletMansion;
+    }
+
+    public void setScarletMansion(boolean scarletMansion) {
+        this.scarletMansion = scarletMansion;
+    }
+
+    public boolean isTomoLostVillage() {
+        return tomoLostVillage;
+    }
+
+    public void setTomoLostVillage(boolean tomoLostVillage) {
+        this.tomoLostVillage = tomoLostVillage;
+    }
+
+    public int getBetweenSwitches() {
+        return betweenSwitches;
+    }
+
+    public void setBetweenSwitches(int betweenSwitches) {
+        this.betweenSwitches = betweenSwitches;
+    }
+
+    public int getNumberSwitches() {
+        return numberSwitches;
+    }
+
+    public void setNumberSwitches(int numberSwitches) {
+        this.numberSwitches = numberSwitches;
+    }
+
+    public int getBeforeTaupe() {
+        return beforeTaupe;
+    }
+
+    public void setBeforeTaupe(int beforeTaupe) {
+        this.beforeTaupe = beforeTaupe;
     }
 
     public int getTimeBorder() {

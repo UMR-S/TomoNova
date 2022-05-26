@@ -10,7 +10,7 @@ public class SettingRulesUtils {
         World overworld = TomoNova.getPlugin().worldUtils.getWorld();
         World nether = TomoNova.getPlugin().worldUtils.getNether();
         World end = TomoNova.getPlugin().worldUtils.getEnd();
-
+        overworld.setTime(6000);
         overworld.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         overworld.setGameRule(GameRule.NATURAL_REGENERATION, false);
         nether.setGameRule(GameRule.NATURAL_REGENERATION, false);

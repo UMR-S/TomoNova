@@ -61,8 +61,8 @@ public enum Lang {
     GUIS_BD_FINAL_SIZE_LORE("guis.border.finalSizeLore", "Chosis la taille finale de la bordure"),
     GUIS_BD_TIME("guis.border.time", "Temps "),
     GUIS_BD_TIME_LORE("guis.border.timeLore", "Au bout de combien de temps la bordure commence à se réduire"),
-    GUIS_BD_SUBBD_ADD_NAME("guis.border.subborderAdd","Ajouter cette sous bordure"),
-    GUIS_BD_SUBBD_REMOVE_NAME("guis.border.subborderRemove","Retirer dernière sous bordure"),
+    GUIS_BD_SUBBD_ADD_NAME("guis.border.subborderAdd", "Ajouter cette sous bordure"),
+    GUIS_BD_SUBBD_REMOVE_NAME("guis.border.subborderRemove", "Retirer dernière sous bordure"),
 
     GUIS_BDS_NAME("guis.borderSpeed.name", "Vitesse : "),
     GUIS_BDS_LORE("guis.borderSpeed.lore", "Choisis la vitesse de la bordure"),
@@ -152,6 +152,16 @@ public enum Lang {
     GUIS_PETITES_REGLES_FIRELESS("guis.littleRules.fireless", "Désactive les dégâts de feu"),
     GUIS_PETITES_REGLES_REGEN("guis.littleRules.regen", "Active la régen de coeurs"),
     //Gamemodes
+    GUIS_GM_UHC_NAME("guis.gamemode.uhcName","UHC classique"),
+    GUIS_GM_UHC_LORE("guis.gamemode.uhcLore",""),
+    GUIS_GM_SWITCH_NAME("guis.gamemode.switchName","Swtich"),
+    GUIS_GM_SWITCH_LORE("guis.gamemode.switchLore",""),
+    GUIS_GM_TAUPE_NAME("guis.gamemode.taupeName","Taupe"),
+    GUIS_GM_TAUPE_LORE("guis.gamemode.taupeLore",""),
+    GUIS_GM_SWITCH_TIME_NAME("guis.gamemode.switchTimeName","Temps entre switch"),
+    GUIS_GM_SWITCH_TIME_LORE("guis.gamemode.switchTimeLore",""),
+    GUIS_GM_SWITCH_NUMBER_NAME("guis.gamemode.switchNumberName","Nombre de switch"),
+    GUIS_GM_SWITCH_NUMBER_LORE("guis.gamemode.switchNumberLore",""),
     ;
 
     private String path;

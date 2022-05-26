@@ -4,6 +4,9 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
+import org.bukkit.potion.PotionData;
+import org.bukkit.potion.PotionType;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +31,17 @@ public class ItemsCreator {
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ic.getName());
         itemMeta.setLore(ic.getLores());
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
+    //Version potion
+    public static ItemStack create(ItemsCreator ic, PotionType potionType) {
+        ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ic.getName());
+        itemMeta.setLore(ic.getLores());
+        PotionMeta potionMeta =(PotionMeta) itemStack.getItemMeta();
+        potionMeta.setBasePotionData(new PotionData(potionType));
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

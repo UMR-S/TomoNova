@@ -3,12 +3,10 @@ package umaru.tomonova.tomonova.core;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Horse;
 import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
-import umaru.tomonova.tomonova.gui.LittleRules;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
 import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
@@ -16,8 +14,8 @@ import umaru.tomonova.tomonova.listeners.littlerules.littleRules.*;
 import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
 import umaru.tomonova.tomonova.listeners.others.PortalCreate;
 import umaru.tomonova.tomonova.listeners.players.*;
-import umaru.tomonova.tomonova.listeners.world.onWorldLoaded;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
+import umaru.tomonova.tomonova.utils.rules.SettingRulesUtils;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardUtils;
 import umaru.tomonova.tomonova.utils.teams.TeamUtils;
 import umaru.tomonova.tomonova.utils.world.WorldUtils;
@@ -60,6 +58,7 @@ public final class TomoNova extends JavaPlugin {
         setupUtils();
         listenersRegister();
         LobbyUtils.spawnLobby();
+        SettingRulesUtils.setGamerules();
 
     }
 
@@ -91,7 +90,6 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
-        getServer().getPluginManager().registerEvents(new onWorldLoaded(), plugin);
 
     }
 

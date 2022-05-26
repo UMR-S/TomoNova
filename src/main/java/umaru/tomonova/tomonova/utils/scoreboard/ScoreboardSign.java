@@ -2,18 +2,14 @@ package umaru.tomonova.tomonova.utils.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
-import java.util.List;
-
 public class ScoreboardSign {
 
 
-    public static Scoreboard create(String playerName,int count) {
+    public static Scoreboard create(String playerName, int count) {
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
         Scoreboard scoreboard = manager.getNewScoreboard();
@@ -39,26 +35,25 @@ public class ScoreboardSign {
         StringBuilder builder = new StringBuilder();
         builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()));
 
-        lines[2] = Lang.SB_SPAWN.toString() + builder + " §7(" + (int)Bukkit.getPlayer(playerName).getLocation().distance(TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()) +")   " ; //Flèche vers le 0/0 à faire
+        lines[2] = Lang.SB_SPAWN.toString() + builder + " §7(" + (int) Bukkit.getPlayer(playerName).getLocation().distance(TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()) + ")   "; //Flèche vers le 0/0 à faire
         lines[3] = Lang.SB_KILLS.toString(); //Nb kills (à faire)
         lines[4] = Lang.SB_PLAYERS.toString() + TomoNova.getPlugin().gameManager.getNumberPlayer(); //Nombre de joueurs encore en vie
         lines[5] = " ";
         if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
             String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(playerName);
-            lines[5] =Lang.SB_TEAM.toString() + TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getBaseColor() + teamName;
+            lines[5] = Lang.SB_TEAM.toString() + TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getBaseColor() + teamName;
         }
-        lines[6] ="  ";
+        lines[6] = "  ";
         lines[7] = "   ";
-        lines[8] = Lang.SB_TIME.toString() + (count-(count%60)) /60 + ":" + String.format("%02d", count%60); //Task manager
+        lines[8] = Lang.SB_TIME.toString() + (count - (count % 60)) / 60 + ":" + String.format("%02d", count % 60); //Task manager
         lines[9] = "    ";
-        if(TomoNova.getPlugin().gameManager.getTimeBorder()*60 < count){
+        if (TomoNova.getPlugin().gameManager.getTimeBorder() * 60 < count) {
             lines[10] = Lang.SB_BORDER.toString() + "--:--";
-        }
-        else {
+        } else {
             int borderTime = TomoNova.getPlugin().gameManager.getActualBorderTime(count);
-            lines[10] = Lang.SB_BORDER.toString() + (int) ((borderTime*60 - count)/60) + ":" + String.format("%02d", (borderTime*60 - count)%60);
+            lines[10] = Lang.SB_BORDER.toString() + (int) ((borderTime * 60 - count) / 60) + ":" + String.format("%02d", (borderTime * 60 - count) % 60);
         }
-        lines[11] = Lang.SB_BORDER.toString() + (int) -TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize()/2 + "/" + (int) TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize()/2;
+        lines[11] = Lang.SB_BORDER.toString() + (int) -TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize() / 2 + "/" + (int) TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize() / 2;
         return lines;
     }
 }

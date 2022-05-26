@@ -70,15 +70,14 @@ public class BorderGui extends Gui {
             } else if (is.getType() == Material.BARRIER) {
                 event.getWhoClicked().closeInventory();
                 new MainGui(this.player).show();
-            //Subborders
+                //Subborders
             } else if (is.getType() == Material.BLACKSTONE_WALL) {
                 event.getWhoClicked().closeInventory();
                 new SubborderTime(this.player).show();
             } else if (is.getType() == Material.LIGHT_BLUE_STAINED_GLASS_PANE) {
                 event.getWhoClicked().closeInventory();
                 new SubborderFinalSize(this.player).show();
-            }
-            else if(is.getType() == Material.GREEN_BANNER){
+            } else if (is.getType() == Material.GREEN_BANNER) {
                 TomoNova.getPlugin().gameManager.addListSubborderFinalSize(TomoNova.getPlugin().gameManager.getActualSubborderFinalSize());
                 TomoNova.getPlugin().gameManager.addListSubborderTime(TomoNova.getPlugin().gameManager.getActualSubborderTime());
                 event.getWhoClicked().closeInventory();
