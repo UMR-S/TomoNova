@@ -15,13 +15,13 @@ public abstract class Gui implements Listener {
     public int size;
     public InventoryType type;
     public String name;
-    public static Inventory inventory;
+    public Inventory inventory;
 
     public Gui(final Player player, final int size, final String name) {
         this.player = player;
         this.size = size;
         this.name = name;
-        Gui.inventory = Bukkit.createInventory((InventoryHolder) null, size, name);
+        this.inventory = Bukkit.createInventory(player, size, name);
         Bukkit.getPluginManager().registerEvents((Listener) this, tomoNova);
     }
 
@@ -29,12 +29,12 @@ public abstract class Gui implements Listener {
         this.player = player;
         this.type = type;
         this.name = name;
-        Gui.inventory = Bukkit.createInventory((InventoryHolder) null, type, name);
+        this.inventory = Bukkit.createInventory(player, type, name);
         Bukkit.getPluginManager().registerEvents((Listener) this, tomoNova);
     }
 
     public void show() {
-        this.player.openInventory(Gui.inventory);
+        this.player.openInventory(this.inventory);
     }
 
     public Player getPlayer() {
@@ -70,10 +70,10 @@ public abstract class Gui implements Listener {
     }
 
     public Inventory getInventory() {
-        return Gui.inventory;
+        return this.inventory;
     }
 
     public void setInventory(final Inventory inventory) {
-        Gui.inventory = inventory;
+        this.inventory = inventory;
     }
 }

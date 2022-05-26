@@ -27,11 +27,11 @@ public class ToGui extends Gui {
         Integer i = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
         String ppt = i.toString();
         final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
-        ToGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
         ItemsCreator ic2 = new ItemsCreator(Material.RED_BANNER, Lang.GUIS_TIMER_PREVIOUS.toString(), Arrays.asList(""));
-        ToGui.inventory.setItem(0, ItemsCreator.create(ic2));
+        this.inventory.setItem(0, ItemsCreator.create(ic2));
         ic2 = new ItemsCreator(Material.GREEN_BANNER, Lang.GUIS_TIMER_NEXT.toString(), Arrays.asList(""));
-        ToGui.inventory.setItem(8, ItemsCreator.create(ic2));
+        this.inventory.setItem(8, ItemsCreator.create(ic2));
     }
 
     @EventHandler
@@ -39,7 +39,7 @@ public class ToGui extends Gui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(ToGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -69,7 +69,7 @@ public class ToGui extends Gui {
                     Integer i1 = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
                     String ppt = i1.toString();
                     final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
-                    ToGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
@@ -89,7 +89,7 @@ public class ToGui extends Gui {
                     Integer i2 = TomoNova.getPlugin().gameManager.getPlayersPerTeam();
                     String ppt = i2.toString();
                     final ItemsCreator ic = new ItemsCreator(Material.BLAZE_ROD, ChatColor.AQUA + ppt, Arrays.asList(Lang.GUIS_TEAMSOF_LORE.toString()));
-                    ToGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
             }
@@ -99,7 +99,7 @@ public class ToGui extends Gui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(ToGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

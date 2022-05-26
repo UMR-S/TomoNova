@@ -20,7 +20,7 @@ public class StartBorderSizeGui extends LargeTimerGui {
     public StartBorderSizeGui(Player player) {
         super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_INITIAL_SIZE.toString());
         final ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getStartSize()), Arrays.asList(Lang.GUIS_BDSS_LORE.toString(), Lang.GUIS_BDSS_LORE1.toString(), Lang.GUIS_BDSS_LORE2.toString()));
-        StartBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
     @EventHandler
@@ -28,7 +28,7 @@ public class StartBorderSizeGui extends LargeTimerGui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(StartBorderSizeGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -48,7 +48,7 @@ public class StartBorderSizeGui extends LargeTimerGui {
                     }
                     TomoNova.getPlugin().worldBorderUtils.setStartSize(value);
                     final ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getStartSize()), Arrays.asList(Lang.GUIS_BDSS_LORE.toString(), Lang.GUIS_BDSS_LORE1.toString(), Lang.GUIS_BDSS_LORE2.toString()));
-                    StartBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
@@ -56,7 +56,7 @@ public class StartBorderSizeGui extends LargeTimerGui {
                     final int value = TomoNova.getPlugin().worldBorderUtils.getStartSize() + Integer.parseInt(name);
                     TomoNova.getPlugin().worldBorderUtils.setStartSize(value);
                     final ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getStartSize()), Arrays.asList(Lang.GUIS_BDSS_LORE.toString(), Lang.GUIS_BDSS_LORE1.toString(), Lang.GUIS_BDSS_LORE2.toString()));
-                    StartBorderSizeGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
             }
@@ -65,7 +65,7 @@ public class StartBorderSizeGui extends LargeTimerGui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(StartBorderSizeGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

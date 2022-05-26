@@ -20,7 +20,7 @@ public class BorderSpeedGui extends TimerGui {
     public BorderSpeedGui(Player player) {
         super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_SPEED.toString());
         final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(), Lang.GUIS_BDS_LORE1.toString()));
-        BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
     @EventHandler
@@ -28,7 +28,7 @@ public class BorderSpeedGui extends TimerGui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(BorderSpeedGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -48,7 +48,7 @@ public class BorderSpeedGui extends TimerGui {
                     }
                     TomoNova.getPlugin().worldBorderUtils.setSpeed(value);
                     final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(), Lang.GUIS_BDS_LORE1.toString()));
-                    BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
@@ -56,7 +56,7 @@ public class BorderSpeedGui extends TimerGui {
                     final int value = TomoNova.getPlugin().worldBorderUtils.getSpeed() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setTimeBorder(value);
                     final ItemsCreator ic = new ItemsCreator(Material.NETHER_STAR, ChatColor.AQUA + Integer.toString(TomoNova.getPlugin().worldBorderUtils.getSpeed()), Arrays.asList(Lang.GUIS_BDS_LORE.toString(), Lang.GUIS_BDS_LORE1.toString()));
-                    BorderSpeedGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
             }
@@ -65,7 +65,7 @@ public class BorderSpeedGui extends TimerGui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(BorderSpeedGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

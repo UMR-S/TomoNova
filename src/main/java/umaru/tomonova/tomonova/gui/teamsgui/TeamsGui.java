@@ -23,7 +23,7 @@ public class TeamsGui extends Gui {
         super(player, 54, ChatColor.RED + Lang.GUIS_TEAMS_NAME.toString());
         for (Teams team : Teams.values()) {
             ItemsCreator ic = new ItemsCreator(team.getBanner(), team.getBaseColor() + team.getName(), null);
-            TeamsGui.inventory.addItem(ItemsCreator.create(ic));
+            this.inventory.addItem(ItemsCreator.create(ic));
         }
     }
 
@@ -32,7 +32,7 @@ public class TeamsGui extends Gui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(TeamsGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -52,7 +52,7 @@ public class TeamsGui extends Gui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(TeamsGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

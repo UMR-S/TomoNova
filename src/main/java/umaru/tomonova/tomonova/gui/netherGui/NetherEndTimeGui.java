@@ -20,7 +20,7 @@ public class NetherEndTimeGui extends TimerGui {
     public NetherEndTimeGui(Player player) {
         super(player, 9, ChatColor.DARK_PURPLE + Lang.GUIS_MAIN_NETHER.toString());
         final ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NET_NAME.toString() + TomoNova.getPlugin().gameManager.getNetherEndTime(), Arrays.asList(Lang.GUIS_NET_LORE.toString()));
-        NetherEndTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
     @EventHandler
@@ -28,7 +28,7 @@ public class NetherEndTimeGui extends TimerGui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(NetherEndTimeGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -48,7 +48,7 @@ public class NetherEndTimeGui extends TimerGui {
                     }
                     TomoNova.getPlugin().gameManager.setNetherEndTime(value);
                     final ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NET_NAME.toString() + TomoNova.getPlugin().gameManager.getNetherEndTime(), Arrays.asList(Lang.GUIS_NET_LORE.toString()));
-                    NetherEndTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
@@ -56,7 +56,7 @@ public class NetherEndTimeGui extends TimerGui {
                     final int value = TomoNova.getPlugin().gameManager.getNetherEndTime() + Integer.parseInt(name);
                     TomoNova.getPlugin().gameManager.setNetherEndTime(value);
                     final ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NET_NAME.toString() + TomoNova.getPlugin().gameManager.getNetherEndTime(), Arrays.asList(Lang.GUIS_NET_LORE.toString()));
-                    NetherEndTimeGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
             }
@@ -65,7 +65,7 @@ public class NetherEndTimeGui extends TimerGui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(NetherEndTimeGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

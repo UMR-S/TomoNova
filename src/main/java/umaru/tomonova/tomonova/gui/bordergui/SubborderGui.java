@@ -22,7 +22,7 @@ public class SubborderGui extends TimerGui {
     public SubborderGui(Player player) {
         super(player, 9, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_SUBBD_ADD_NAME.toString());
         final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
-        SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
     }
 
     @EventHandler
@@ -30,7 +30,7 @@ public class SubborderGui extends TimerGui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(MaxPlayersGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -50,7 +50,7 @@ public class SubborderGui extends TimerGui {
                     }
 
                     final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
-                    SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
                 case GREEN_BANNER: {
@@ -60,7 +60,7 @@ public class SubborderGui extends TimerGui {
                         break;
                     }
                     final ItemsCreator ic = new ItemsCreator(Material.STICK, ChatColor.AQUA + "", Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
-                    SubborderGui.inventory.setItem(4, ItemsCreator.create(ic));
+                    this.inventory.setItem(4, ItemsCreator.create(ic));
                     break;
                 }
             }
@@ -69,7 +69,7 @@ public class SubborderGui extends TimerGui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(MinPlayersGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

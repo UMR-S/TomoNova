@@ -21,15 +21,15 @@ public class NetherGui extends Gui {
     public NetherGui(Player player) {
         super(player, 9, ChatColor.DARK_PURPLE + Lang.GUIS_NETHER_NAME.toString());
         ItemsCreator ic = new ItemsCreator(Material.OBSIDIAN, Lang.GUIS_NETHER_TIME.toString(), Arrays.asList(Lang.GUIS_NETHER_TIME_LORE.toString()));
-        NetherGui.inventory.setItem(3, ic.create(ic));
+        this.inventory.setItem(3, ic.create(ic));
         if (TomoNova.getPlugin().gameManager.isNether()) {
             ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, Lang.GUIS_NETHER_STATE_ON.toString(), Arrays.asList(Lang.GUIS_NETHER_STATE_ON_LORE.toString()));
         } else {
             ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_NETHER_OFF.toString(), Arrays.asList(Lang.GUIS_NETHER_OFF_LORE.toString()));
         }
-        NetherGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), Arrays.asList(""));
-        NetherGui.inventory.setItem(5, ItemsCreator.create(ic));
+        this.inventory.setItem(5, ItemsCreator.create(ic));
     }
 
     @EventHandler
@@ -37,7 +37,7 @@ public class NetherGui extends Gui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(NetherGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -59,11 +59,11 @@ public class NetherGui extends Gui {
             if (is.getType() == Material.LIME_STAINED_GLASS_PANE) {
                 TomoNova.getPlugin().gameManager.setNether(!TomoNova.getPlugin().gameManager.isNether());
                 ItemsCreator ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, Lang.GUIS_NETHER_OFF.toString(), Arrays.asList(Lang.GUIS_NETHER_OFF_LORE.toString()));
-                NetherGui.inventory.setItem(4, ItemsCreator.create(ic));
+                this.inventory.setItem(4, ItemsCreator.create(ic));
             } else if (is.getType() == Material.RED_STAINED_GLASS_PANE) {
                 TomoNova.getPlugin().gameManager.setNether(!TomoNova.getPlugin().gameManager.isNether());
                 ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, Lang.GUIS_NETHER_STATE_ON.toString(), Arrays.asList(Lang.GUIS_NETHER_STATE_ON_LORE.toString()));
-                NetherGui.inventory.setItem(4, ItemsCreator.create(ic));
+                this.inventory.setItem(4, ItemsCreator.create(ic));
             }
         }
     }
@@ -71,7 +71,7 @@ public class NetherGui extends Gui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(NetherGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }

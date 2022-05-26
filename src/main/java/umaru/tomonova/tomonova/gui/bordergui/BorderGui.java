@@ -20,23 +20,23 @@ public class BorderGui extends Gui {
     public BorderGui(Player player) {
         super(player, 18, ChatColor.LIGHT_PURPLE + Lang.GUIS_BD_NAME.toString());
         ItemsCreator ic = new ItemsCreator(Material.LIME_STAINED_GLASS_PANE, ChatColor.GREEN + Lang.GUIS_BD_INITIAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_INITIAL_SIZE_LORE.toString()));
-        BorderGui.inventory.setItem(3, ItemsCreator.create(ic));
+        this.inventory.setItem(3, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.NETHER_STAR, Lang.GUIS_BD_SPEED.toString(), Arrays.asList(Lang.GUIS_BD_SPEED_LORE.toString()));
-        BorderGui.inventory.setItem(4, ItemsCreator.create(ic));
+        this.inventory.setItem(4, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.RED_STAINED_GLASS_PANE, ChatColor.RED + Lang.GUIS_BD_FINAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_FINAL_SIZE_LORE.toString()));
-        BorderGui.inventory.setItem(5, ItemsCreator.create(ic));
+        this.inventory.setItem(5, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.STICK, Lang.GUIS_BD_SUBBD_ADD_NAME.toString(), Arrays.asList(Lang.GUIS_BD_SUBBD_ADD_LORE.toString()));
-        BorderGui.inventory.setItem(8, ItemsCreator.create(ic));
+        this.inventory.setItem(8, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.COBBLESTONE_WALL, Lang.GUIS_BD_TIME.toString(), Arrays.asList(Lang.GUIS_BD_TIME_LORE.toString()));
-        BorderGui.inventory.setItem(13, ItemsCreator.create(ic));
+        this.inventory.setItem(13, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), null);
-        BorderGui.inventory.setItem(17, ItemsCreator.create(ic));
+        this.inventory.setItem(17, ItemsCreator.create(ic));
 //        ic = new ItemsCreator(Material.BLUE_STAINED_GLASS_PANE, ChatColor.BLUE + Lang.GUIS_BD_INITIAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_INITIAL_SIZE_LORE.toString()));
-//        BorderGui.inventory.setItem(21, ItemsCreator.create(ic));
+//        this.inventory.setItem(21, ItemsCreator.create(ic));
 //        ic = new ItemsCreator(Material.BLACKSTONE_WALL, ChatColor.BLUE + Lang.GUIS_BD_TIME.toString(), Arrays.asList(Lang.GUIS_BD_TIME_LORE.toString()));
-//        BorderGui.inventory.setItem(22, ItemsCreator.create(ic));
+//        this.inventory.setItem(22, ItemsCreator.create(ic));
 //        ic = new ItemsCreator(Material.LIGHT_BLUE_STAINED_GLASS_PANE, ChatColor.BLUE + Lang.GUIS_BD_FINAL_SIZE.toString(), Arrays.asList(Lang.GUIS_BD_FINAL_SIZE_LORE.toString()));
-//        BorderGui.inventory.setItem(23, ItemsCreator.create(ic));
+//        this.inventory.setItem(23, ItemsCreator.create(ic));
 
     }
 
@@ -45,7 +45,7 @@ public class BorderGui extends Gui {
         if (event.getClickedInventory() == null) {
             return;
         }
-        if (event.getClickedInventory().equals(BorderGui.inventory)) {
+        if (event.getClickedInventory().equals(this.inventory)) {
             final ItemStack is = event.getCurrentItem();
             if (is == null || is.getType() == Material.AIR) {
                 return;
@@ -85,7 +85,7 @@ public class BorderGui extends Gui {
 
     @EventHandler
     public void onClick(final InventoryCloseEvent event) {
-        if (event.getInventory().equals(BorderGui.inventory)) {
+        if (event.getInventory().equals(this.inventory)) {
             HandlerList.unregisterAll((Listener) this);
         }
     }
