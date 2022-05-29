@@ -22,8 +22,8 @@ import static java.lang.Math.sqrt;
 
 public class GameManager {
     private TomoNova tomoNova = TomoNova.getPlugin();
-    private List<Player> players;
-    private List<Player> deadPlayers;
+    private List<String> players;
+    private List<String> deadPlayers;
     private int playersPerTeam = 3;
     private Inventory gameInventory;
 
@@ -44,53 +44,34 @@ public class GameManager {
     private int betweenSwitches = 20;
     private int numberSwitches = 3;
     private int beforeTaupe = 20;
-    private HashMap<Teams, Location> locationTeams;
+    private int numberTaupes = 1;
     BukkitTask preGame;
-    public List<LittleRule> littleRulesList = new ArrayList<LittleRule>();
+    public List<LittleRule> littleRulesList;
     private boolean isDamage;
 
     private int actualSubborderFinalSize;
     private int actualSubborderTime;
     private List<Integer> listSubborderFinalSize = new ArrayList<Integer>();
     private List<Integer> listSubborderTime = new ArrayList<Integer>();
-
+    private HashMap<Teams, Location> locationTeams;
+    private HashMap<String, Location> playerNetherSpawn;
     public GameManager() {
-        TomoNova.getPlugin();
-        players = new ArrayList<Player>();
+        players = new ArrayList<String>();
+        deadPlayers = new ArrayList<String>();
+        littleRulesList = new ArrayList<LittleRule>();
+        locationTeams = new HashMap<Teams,Location>();
+        playerNetherSpawn = new HashMap<String, Location>();
 
-    }
-
-    public void addPlayer(Player player) {
-        players.add(player);
-    }
-
-    public void removePlayer(Player player) {
-        if (players.contains(player)) {
-            players.remove(player);
-        }
-    }
-
-    public List<Player> getPlayers() {
-        return players;
-    }
-
-    public List<String> getPlayersName() {
-        List<String> names = new ArrayList<>();
-        for (Player p : players) {
-            names.add(p.getName());
-        }
-        return names;
     }
 
     //Start game
     public void preStart() {
         //Remplissage des teams automatique
-        //tomoNova.teamUtils.getTeamToTeamlessPlayers(getPlayers());
+        tomoNova.teamUtils.getTeamToTeamlessPlayers(players);
         //Liste des location et des teams
         GameStates.setCurrentState(GameStates.LOBBY_END);
         HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
         double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
-        locationTeams = new HashMap<Teams, Location>();
 
         for (String teamName : teams.keySet()) {
             Teams team = teams.get(teamName);
@@ -140,7 +121,7 @@ public class GameManager {
                     Player player = Bukkit.getPlayer(playerName);
                     Location loc = locationTeams.get(team);
                     try {
-                        loc.setY(loc.getY() + 1);
+                        loc.setY(201.0);
                         loc.setX(loc.getX() - 0.5);
                         loc.setZ(loc.getZ() - 0.5);
                         player.teleport(loc);
@@ -194,8 +175,8 @@ public class GameManager {
             double x = loc.getX();
             double z = loc.getZ();
             loc.setY(200.0);
-            for (int i = -1; i < 2; i++) {
-                for (int j = -1; j < 2; j++) {
+            for (int i = -2; i < 3; i++) {
+                for (int j = -2; j < 3; j++) {
                     loc.setX(x + i);
                     loc.setZ(z + j);
                     loc.getWorld().getBlockAt(loc).setType(Material.AIR);
@@ -205,8 +186,38 @@ public class GameManager {
         }
     }
     //Getter et setter
+    public void addNetherSpawn(String pName){
+        Player player = Bukkit.getPlayer(pName);
+        Location locNether = new Location(player.getWorld(), player.getLocation().getX(),player.getLocation().getY(), player.getLocation().getZ());
+        playerNetherSpawn.put(pName, locNether);
+    }
+    public Location getNetherSpawn(String pName){
+        return playerNetherSpawn.get(pName);
+    }
+    public void addPlayer(String player) {
+        players.add(player);
+    }
 
+    public void removePlayer(String player) {
+        if (players.contains(player)) {
+            players.remove(player);
+        }
+    }
 
+    public List<String> getPlayers() {
+        return players;
+    }
+    public void addDeadPlayer(String player){
+        deadPlayers.add(player);
+    }
+    public void removeDeadPlayer(String player){
+        if(deadPlayers.contains(player)){
+            deadPlayers.remove(player);
+        }
+    }
+    public List<String> getDeadPlayers(){
+        return deadPlayers;
+    }
     public int getActualSubborderFinalSize() {
         return actualSubborderFinalSize;
     }
@@ -301,17 +312,7 @@ public class GameManager {
         return players.size();
     }
 
-    public void setPlayers(List<Player> players) {
-        this.players = players;
-    }
 
-    public List<Player> getDeadPlayers() {
-        return deadPlayers;
-    }
-
-    public void setDeadPlayers(List<Player> deadPlayers) {
-        this.deadPlayers = deadPlayers;
-    }
 
     public int getPlayersPerTeam() {
         return playersPerTeam;
@@ -415,6 +416,14 @@ public class GameManager {
 
     public void setBeforeTaupe(int beforeTaupe) {
         this.beforeTaupe = beforeTaupe;
+    }
+
+    public int getNumberTaupes() {
+        return numberTaupes;
+    }
+
+    public void setNumberTaupes(int numberTaupes) {
+        this.numberTaupes = numberTaupes;
     }
 
     public int getTimeBorder() {

@@ -23,7 +23,7 @@ public class Join implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         if (GameStates.isState(GameStates.LOBBY)) {
             Player player = event.getPlayer();
-            TomoNova.getPlugin().gameManager.addPlayer(player);
+            TomoNova.getPlugin().gameManager.addPlayer(player.getName());
 
             player.setGameMode(GameMode.ADVENTURE);
             player.getInventory().clear();
@@ -49,6 +49,14 @@ public class Join implements Listener {
                 config = CustomItems.createCustomItem(Material.PAPER, ChatColor.DARK_PURPLE, "Config", loreConfig);
                 player.getInventory().setItem(8, config);
 
+            }
+        }
+        else{
+            String playerName = event.getPlayer().getName();
+            List<String> players = TomoNova.getPlugin().gameManager.getPlayers();
+            if(!players.contains(playerName)){
+                event.getPlayer().setGameMode(GameMode.SPECTATOR);
+                event.getPlayer().teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 200.0, 0.0));
             }
         }
     }

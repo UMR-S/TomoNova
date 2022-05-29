@@ -10,15 +10,15 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.gui.Gui;
-import umaru.tomonova.tomonova.gui.bordergui.BorderGui;
+import umaru.tomonova.tomonova.gui.MainGui;
+import umaru.tomonova.tomonova.gui.timergui.TimerGui;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
 
 import java.util.Arrays;
 
-public class SwitchTimeGui extends Gui {
-    public SwitchTimeGui(Player player, int size, String name) {
+public class SwitchTimeGui extends TimerGui {
+    public SwitchTimeGui(Player player) {
         super(player, 9, Lang.GUIS_GM_SWITCH_TIME_NAME.toString());
         final ItemsCreator ic = new ItemsCreator(Material.CLOCK, ChatColor.RED + Integer.toString(TomoNova.getPlugin().gameManager.getBetweenSwitches()), Arrays.asList(Lang.GUIS_GM_SWITCH_TIME_LORE.toString()));
         this.inventory.setItem(4, ItemsCreator.create(ic));
@@ -38,7 +38,7 @@ public class SwitchTimeGui extends Gui {
             switch (is.getType()) {
                 case CLOCK: {
                     this.player.closeInventory();
-                    new BorderGui(this.player).show();
+                    new MainGui(this.player).show();
                     break;
                 }
                 case RED_BANNER: {

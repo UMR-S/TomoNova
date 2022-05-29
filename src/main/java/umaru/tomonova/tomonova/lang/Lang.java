@@ -162,6 +162,10 @@ public enum Lang {
     GUIS_GM_SWITCH_TIME_LORE("guis.gamemode.switchTimeLore",""),
     GUIS_GM_SWITCH_NUMBER_NAME("guis.gamemode.switchNumberName","Nombre de switch"),
     GUIS_GM_SWITCH_NUMBER_LORE("guis.gamemode.switchNumberLore",""),
+    GUIS_GM_TAUPE_TIME_NAME("guis.gamemode.taupeTimeName","Temps avant taupes"),
+    GUIS_GM_TAUPE_TIME_LORE("guis.gamemode.taupeTimeLore",""),
+    GUIS_GM_TAUPE_NUMBER_NAME("guis.gamemode.taupeNumberName","Nombre de taupes par team"),
+    GUIS_GM_TAUPE_NUMBER_LORE("guis.gamemode.taupeNumberLore",""),
     ;
 
     private String path;

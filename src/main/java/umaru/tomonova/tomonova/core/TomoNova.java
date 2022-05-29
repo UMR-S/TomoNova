@@ -76,6 +76,7 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerMove(), plugin);
         getServer().getPluginManager().registerEvents(new Quit(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerChangeWorld(), plugin);
 
         getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);

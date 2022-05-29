@@ -17,6 +17,10 @@ public class PlayerDeath implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerDeath(PlayerDeathEvent event) {
         Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f));
+        String playerName = event.getEntity().getPlayer().getName();
+        TomoNova.getPlugin().teamUtils.playerQuitTeam(playerName);
+        TomoNova.getPlugin().gameManager.removePlayer(playerName);
+        TomoNova.getPlugin().gameManager.addDeadPlayer(playerName);
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

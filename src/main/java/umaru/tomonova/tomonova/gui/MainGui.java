@@ -13,6 +13,10 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.bordergui.BorderGui;
 import umaru.tomonova.tomonova.gui.gamemodegui.GamemodeGui;
+import umaru.tomonova.tomonova.gui.gamemodegui.switchGM.SwitchNumberGui;
+import umaru.tomonova.tomonova.gui.gamemodegui.switchGM.SwitchTimeGui;
+import umaru.tomonova.tomonova.gui.gamemodegui.taupe.TaupeNumberGui;
+import umaru.tomonova.tomonova.gui.gamemodegui.taupe.TaupeTimeGui;
 import umaru.tomonova.tomonova.gui.itemsgui.CustomInventoryGui;
 import umaru.tomonova.tomonova.gui.netherGui.NetherGui;
 import umaru.tomonova.tomonova.gui.teamsgui.ToGui;
@@ -66,6 +70,18 @@ public class MainGui extends Gui {
 
         ic = new ItemsCreator(Material.REDSTONE, ChatColor.RED + Lang.GUIS_MAIN_GAMEMODE.toString(), Arrays.asList(Lang.GUIS_MAIN_GAMEMODE_LORE.toString()));
         this.inventory.setItem(27, ItemsCreator.create(ic));
+        if(TomoNova.getPlugin().gameManager.isSwitch()){
+            ic = new ItemsCreator(Material.CLOCK, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_TIME_LORE.toString()));
+            this.inventory.setItem(28, ItemsCreator.create(ic));
+            ic = new ItemsCreator(Material.LEVER, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_NUMBER_LORE.toString()));
+            this.inventory.setItem(29, ItemsCreator.create(ic));
+        }
+        if(TomoNova.getPlugin().gameManager.isTaupe()){
+            ic = new ItemsCreator(Material.REPEATER, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_TIME_LORE.toString()));
+            this.inventory.setItem(28, ItemsCreator.create(ic));
+            ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_NUMBER_LORE.toString()));
+            this.inventory.setItem(29, ItemsCreator.create(ic));
+        }
 
         //Configs
 
@@ -174,6 +190,26 @@ public class MainGui extends Gui {
                 }
                 case BARRIER: {
                     event.getWhoClicked().closeInventory();
+                    break;
+                }
+                case LEVER:{
+                    this.player.closeInventory();
+                    new SwitchNumberGui(this.player).show();
+                    break;
+                }
+                case CLOCK:{
+                    this.player.closeInventory();
+                    new SwitchTimeGui(this.player).show();
+                    break;
+                }
+                case DIAMOND_SHOVEL:{
+                    this.player.closeInventory();
+                    new TaupeNumberGui(this.player).show();
+                    break;
+                }
+                case REPEATER:{
+                    this.player.closeInventory();
+                    new TaupeTimeGui(this.player).show();
                     break;
                 }
             }

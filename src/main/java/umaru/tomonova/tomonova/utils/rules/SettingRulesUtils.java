@@ -18,6 +18,9 @@ public class SettingRulesUtils {
         overworld.setDifficulty(Difficulty.HARD);
         overworld.setSpawnLocation(0, 202, 0, 0);
         overworld.setPVP(false);
+        nether.setPVP(false);
+        end.setPVP(false);
+        overworld.setClearWeatherDuration(1000000);
 
     }
 }
