@@ -63,20 +63,22 @@ public class MainGui extends Gui {
 
         //Relatifs aux teams
 
-        ic = new ItemsCreator(Material.BLAZE_ROD, ChatColor.GOLD + Lang.GUIS_MAIN_TEAMS.toString(), Arrays.asList(Lang.GUIS_MAIN_TEAMS_LORE.toString()));
-        this.inventory.setItem(18, ItemsCreator.create(ic));
+        if (!TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
+            ic = new ItemsCreator(Material.BLAZE_ROD, ChatColor.GOLD + Lang.GUIS_MAIN_TEAMS.toString(), Arrays.asList(Lang.GUIS_MAIN_TEAMS_LORE.toString()));
+            this.inventory.setItem(18, ItemsCreator.create(ic));
+        }
 
         //Configuration du gamemode
 
         ic = new ItemsCreator(Material.REDSTONE, ChatColor.RED + Lang.GUIS_MAIN_GAMEMODE.toString(), Arrays.asList(Lang.GUIS_MAIN_GAMEMODE_LORE.toString()));
         this.inventory.setItem(27, ItemsCreator.create(ic));
-        if(TomoNova.getPlugin().gameManager.isSwitch()){
+        if (TomoNova.getPlugin().gameManager.isSwitch()) {
             ic = new ItemsCreator(Material.CLOCK, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_TIME_LORE.toString()));
             this.inventory.setItem(28, ItemsCreator.create(ic));
             ic = new ItemsCreator(Material.LEVER, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_NUMBER_LORE.toString()));
             this.inventory.setItem(29, ItemsCreator.create(ic));
         }
-        if(TomoNova.getPlugin().gameManager.isTaupe()){
+        if (TomoNova.getPlugin().gameManager.isTaupe()) {
             ic = new ItemsCreator(Material.REPEATER, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_TIME_LORE.toString()));
             this.inventory.setItem(28, ItemsCreator.create(ic));
             ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_NUMBER_LORE.toString()));
@@ -151,7 +153,11 @@ public class MainGui extends Gui {
                 }
                 case BLAZE_ROD: {
                     this.player.closeInventory();
-                    new ToGui(this.player).show();
+                    if (TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
+                        new MainGui(this.player).show();
+                    } else {
+                        new ToGui(this.player).show();
+                    }
                     break;
                 }
                 case BONE: {
@@ -192,22 +198,22 @@ public class MainGui extends Gui {
                     event.getWhoClicked().closeInventory();
                     break;
                 }
-                case LEVER:{
+                case LEVER: {
                     this.player.closeInventory();
                     new SwitchNumberGui(this.player).show();
                     break;
                 }
-                case CLOCK:{
+                case CLOCK: {
                     this.player.closeInventory();
                     new SwitchTimeGui(this.player).show();
                     break;
                 }
-                case DIAMOND_SHOVEL:{
+                case DIAMOND_SHOVEL: {
                     this.player.closeInventory();
                     new TaupeNumberGui(this.player).show();
                     break;
                 }
-                case REPEATER:{
+                case REPEATER: {
                     this.player.closeInventory();
                     new TaupeTimeGui(this.player).show();
                     break;

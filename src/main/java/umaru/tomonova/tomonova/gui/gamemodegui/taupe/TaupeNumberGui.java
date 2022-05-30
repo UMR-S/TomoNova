@@ -36,7 +36,7 @@ public class TaupeNumberGui extends TimerGui {
             }
             event.setCancelled(true);
             switch (is.getType()) {
-                case DIAMOND_SHOVEL:{
+                case DIAMOND_SHOVEL: {
                     this.player.closeInventory();
                     new MainGui(this.player).show();
                     break;
@@ -55,7 +55,7 @@ public class TaupeNumberGui extends TimerGui {
                 case GREEN_BANNER: {
                     final String name = ChatColor.stripColor(is.getItemMeta().getDisplayName());
                     final int value = TomoNova.getPlugin().gameManager.getNumberTaupes() + Integer.parseInt(name);
-                    if(value > TomoNova.getPlugin().gameManager.getPlayersPerTeam()){
+                    if (value > TomoNova.getPlugin().gameManager.getPlayersPerTeam()) {
                         break;
                     }
                     TomoNova.getPlugin().gameManager.setNumberTaupes(value);

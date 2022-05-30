@@ -34,13 +34,14 @@ public class ItemsCreator {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
     //Version potion
     public static ItemStack create(ItemsCreator ic, PotionType potionType) {
         ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ic.getName());
         itemMeta.setLore(ic.getLores());
-        PotionMeta potionMeta =(PotionMeta) itemStack.getItemMeta();
+        PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
         potionMeta.setBasePotionData(new PotionData(potionType));
         itemStack.setItemMeta(itemMeta);
         return itemStack;

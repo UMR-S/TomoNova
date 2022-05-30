@@ -1,6 +1,7 @@
 package umaru.tomonova.tomonova.core.game;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -54,47 +55,78 @@ public class GameManager {
     private List<Integer> listSubborderFinalSize = new ArrayList<Integer>();
     private List<Integer> listSubborderTime = new ArrayList<Integer>();
     private HashMap<Teams, Location> locationTeams;
+    private HashMap<String, Location> locationSolo;
     private HashMap<String, Location> playerNetherSpawn;
+
     public GameManager() {
         players = new ArrayList<String>();
         deadPlayers = new ArrayList<String>();
         littleRulesList = new ArrayList<LittleRule>();
-        locationTeams = new HashMap<Teams,Location>();
+        locationTeams = new HashMap<Teams, Location>();
+        locationSolo = new HashMap<String, Location>();
         playerNetherSpawn = new HashMap<String, Location>();
 
     }
 
     //Start game
     public void preStart() {
-        //Remplissage des teams automatique
-        tomoNova.teamUtils.getTeamToTeamlessPlayers(players);
-        //Liste des location et des teams
         GameStates.setCurrentState(GameStates.LOBBY_END);
-        HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
-        double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
+        //Cas en team
+        if (getPlayersPerTeam() > 1) {
+            //Remplissage des teams automatique
+            tomoNova.teamUtils.getTeamToTeamlessPlayers(players);
+            //Liste des location et des teams si on est pas en solo
+            HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
+            double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
 
-        for (String teamName : teams.keySet()) {
-            Teams team = teams.get(teamName);
-            Location teamLoc = getRandomLocation();
-            if (locationTeams.size() > 0) {
-                List<Double> dist = new ArrayList<Double>();
-                for (Teams otherTeam : locationTeams.keySet()) {
-                    dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
-                }
-                Integer i = 0;
-                while (Collections.max(dist) > 2 * r) {
-                    teamLoc = getRandomLocation();
-                    dist = new ArrayList<Double>();
+            for (String teamName : teams.keySet()) {
+                Teams team = teams.get(teamName);
+                Location teamLoc = getRandomLocation();
+                if (locationTeams.size() > 0) {
+                    List<Double> dist = new ArrayList<Double>();
                     for (Teams otherTeam : locationTeams.keySet()) {
                         dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
                     }
-                    if (i == 10) {
-                        i = 0;
-                        r = r * 0.95;
+                    Integer i = 0;
+                    while (Collections.max(dist) > 2 * r) {
+                        teamLoc = getRandomLocation();
+                        dist = new ArrayList<Double>();
+                        for (Teams otherTeam : locationTeams.keySet()) {
+                            dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
+                        }
+                        if (i == 10) {
+                            i = 0;
+                            r = r * 0.95;
+                        }
+                    }
+                }
+                locationTeams.put(team, teamLoc);
+            }
+        }
+        //Cas solo
+        if (playersPerTeam == 1) {
+            double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(getPlayers().size());
+            for (String player : getPlayers()) {
+                Location teamLoc = getRandomLocation();
+                if (locationSolo.size() > 0) {
+                    List<Double> dist = new ArrayList<Double>();
+                    for (String otherPlayerName : locationSolo.keySet()) {
+                        dist.add(teamLoc.distance(locationSolo.get(otherPlayerName)));
+                    }
+                    Integer i = 0;
+                    while (Collections.max(dist) > 2 * r) {
+                        teamLoc = getRandomLocation();
+                        dist = new ArrayList<Double>();
+                        for (Teams otherTeam : locationTeams.keySet()) {
+                            dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
+                        }
+                        if (i == 10) {
+                            i = 0;
+                            r = r * 0.95;
+                        }
                     }
                 }
             }
-            locationTeams.put(team, teamLoc);
         }
 
         //Bordure
@@ -114,26 +146,54 @@ public class GameManager {
             }
         }
         //Tp les joueurs
-        for (Teams team : locationTeams.keySet()) {
-            spawnPreGameLobby(locationTeams.get(team));
-            if (team.getNumberPlayers() != 0) {
-                for (String playerName : team.getTeamPlayers()) {
-                    Player player = Bukkit.getPlayer(playerName);
-                    Location loc = locationTeams.get(team);
-                    try {
-                        loc.setY(201.0);
-                        loc.setX(loc.getX() - 0.5);
-                        loc.setZ(loc.getZ() - 0.5);
-                        player.teleport(loc);
-                    } catch (NullPointerException nullPointerException) {
-                        break;
+        //En équipe
+        if (playersPerTeam > 1) {
+            for (Teams team : locationTeams.keySet()) {
+                spawnPreGameLobby(locationTeams.get(team));
+                if (team.getNumberPlayers() != 0) {
+                    for (String playerName : team.getTeamPlayers()) {
+                        Player player = Bukkit.getPlayer(playerName);
+                        Location locPlateform = locationTeams.get(team);
+                        Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
+                        try {
+                            loc.setY(201.0);
+                            loc.setX(loc.getX() + 0.5);
+                            loc.setZ(loc.getZ() + 0.5);
+                            player.teleport(loc);
+                        } catch (NullPointerException nullPointerException) {
+                            break;
+                        }
                     }
                 }
             }
         }
+        //En solo
+        if (playersPerTeam == 1) {
+            for (String playerName : locationSolo.keySet()) {
+                spawnPreGameLobby(locationSolo.get(playerName));
+                Location locPlateform = locationTeams.get(playerName);
+                Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
+                try {
+                    loc.setY(201.0);
+                    loc.setX(loc.getX() + 0.5);
+                    loc.setZ(loc.getZ() + 0.5);
+                    Bukkit.getPlayer(playerName).teleport(loc);
+                } catch (NullPointerException nullPointerException) {
+                    break;
+                }
+            }
+        }
+        //Dégâts et countdown
         setDamage(false);
         TaskFinalCountdown.setPreStartTime(10);
         Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().clear());
+        if (isTomoLostVillage()) {
+            Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
+            tomoNova.tomoLostVillage.nightVisionOn(getPlayers());
+            tomoNova.tomoLostVillage.bonusHearthOn(getPlayers());
+            getPlayers().forEach(p -> Bukkit.getPlayer(p).setHealth(24.0));
+        }
+        getPlayers().forEach(p -> Bukkit.getPlayer(p).setGameMode(GameMode.SURVIVAL));
         BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
         BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
@@ -154,7 +214,8 @@ public class GameManager {
     }
 
     //Création des petites plateformes
-    public void spawnPreGameLobby(Location loc) {
+    public void spawnPreGameLobby(Location locPlateform) {
+        Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
         loc.getChunk().load(true);
         double x = loc.getX();
         double z = loc.getZ();
@@ -170,13 +231,14 @@ public class GameManager {
 
     public void deletePreGameLobby() {
         for (Teams team : locationTeams.keySet()) {
-            Location loc = locationTeams.get(team);
+            Location locPlateform = locationTeams.get(team);
+            Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
             loc.getChunk().load(true);
             double x = loc.getX();
             double z = loc.getZ();
             loc.setY(200.0);
-            for (int i = -2; i < 3; i++) {
-                for (int j = -2; j < 3; j++) {
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
                     loc.setX(x + i);
                     loc.setZ(z + j);
                     loc.getWorld().getBlockAt(loc).setType(Material.AIR);
@@ -185,15 +247,18 @@ public class GameManager {
 
         }
     }
+
     //Getter et setter
-    public void addNetherSpawn(String pName){
+    public void addNetherSpawn(String pName) {
         Player player = Bukkit.getPlayer(pName);
-        Location locNether = new Location(player.getWorld(), player.getLocation().getX(),player.getLocation().getY(), player.getLocation().getZ());
+        Location locNether = new Location(player.getWorld(), player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
         playerNetherSpawn.put(pName, locNether);
     }
-    public Location getNetherSpawn(String pName){
+
+    public Location getNetherSpawn(String pName) {
         return playerNetherSpawn.get(pName);
     }
+
     public void addPlayer(String player) {
         players.add(player);
     }
@@ -207,17 +272,21 @@ public class GameManager {
     public List<String> getPlayers() {
         return players;
     }
-    public void addDeadPlayer(String player){
+
+    public void addDeadPlayer(String player) {
         deadPlayers.add(player);
     }
-    public void removeDeadPlayer(String player){
-        if(deadPlayers.contains(player)){
+
+    public void removeDeadPlayer(String player) {
+        if (deadPlayers.contains(player)) {
             deadPlayers.remove(player);
         }
     }
-    public List<String> getDeadPlayers(){
+
+    public List<String> getDeadPlayers() {
         return deadPlayers;
     }
+
     public int getActualSubborderFinalSize() {
         return actualSubborderFinalSize;
     }
@@ -313,12 +382,12 @@ public class GameManager {
     }
 
 
-
     public int getPlayersPerTeam() {
         return playersPerTeam;
     }
 
     public void setPlayersPerTeam(int playersPerTeam) {
+        tomoNova.teamUtils.resetTeams();
         this.playersPerTeam = playersPerTeam;
     }
 

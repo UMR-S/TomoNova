@@ -4,16 +4,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scoreboard.Criterias;
-import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 import org.bukkit.util.Vector;
 import umaru.tomonova.tomonova.core.TomoNova;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 public class ScoreboardUtils {
 
@@ -26,14 +23,18 @@ public class ScoreboardUtils {
     }
 
     public void updateGame(String playerName, int count) {
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
-        scoreboard = ScoreboardSign.create(playerName, count);
-        Bukkit.getPlayer(playerName).setScoreboard(scoreboard);
+
+        if(count == 0){
+
+            Bukkit.getPlayer(playerName).setScoreboard(ScoreboardSign.create(playerName, count));
+        }
+        Objective sidebar = Bukkit.getPlayer(playerName).getScoreboard().getObjective("sidebar");
+        String[] lines = ScoreboardSign.setLines(playerName, count);
 
     }
 
-    public String getColoredDirectionTo(Player p,final Location locToPoint) {
-        final Location point = new Location(locToPoint.getWorld(),locToPoint.getX(),locToPoint.getY(),locToPoint.getZ());
+    public String getColoredDirectionTo(Player p, final Location locToPoint) {
+        final Location point = new Location(locToPoint.getWorld(), locToPoint.getX(), locToPoint.getY(), locToPoint.getZ());
         final Location ploc = p.getLocation();
         ploc.setY(0.0);
         point.setY(0.0);

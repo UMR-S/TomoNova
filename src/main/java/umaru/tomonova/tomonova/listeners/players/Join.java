@@ -50,11 +50,10 @@ public class Join implements Listener {
                 player.getInventory().setItem(8, config);
 
             }
-        }
-        else{
+        } else {
             String playerName = event.getPlayer().getName();
             List<String> players = TomoNova.getPlugin().gameManager.getPlayers();
-            if(!players.contains(playerName)){
+            if (!players.contains(playerName)) {
                 event.getPlayer().setGameMode(GameMode.SPECTATOR);
                 event.getPlayer().teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 200.0, 0.0));
             }

@@ -36,7 +36,7 @@ public class SwitchNumberGui extends Gui {
             }
             event.setCancelled(true);
             switch (is.getType()) {
-                case LEVER:{
+                case LEVER: {
                     this.player.closeInventory();
                     new MainGui(this.player).show();
                     break;

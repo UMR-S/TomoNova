@@ -2,11 +2,9 @@ package umaru.tomonova.tomonova.utils.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
-import umaru.tomonova.tomonova.utils.world.WorldUtils;
 
 public class ScoreboardSign {
 
@@ -14,7 +12,8 @@ public class ScoreboardSign {
     public static Scoreboard create(String playerName, int count) {
 
         ScoreboardManager manager = Bukkit.getScoreboardManager();
-        Scoreboard scoreboard = manager.getNewScoreboard();
+        Scoreboard scoreboard = manager.getMainScoreboard();
+        scoreboard.getObjectivesByCriteria("dummy").forEach(s -> s.unregister());
         Objective objective = scoreboard.registerNewObjective("sidebar", "dummy", ChatColor.LIGHT_PURPLE + Lang.SB_PREFIX.toString());
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] lines = setLines(playerName, count);
@@ -24,6 +23,7 @@ public class ScoreboardSign {
             score.setScore(i);
             i--;
         }
+
         return scoreboard;
     }
 
@@ -34,11 +34,11 @@ public class ScoreboardSign {
         lines[2] = " ";
         //Flèche vers le spawn
         StringBuilder builder = new StringBuilder();
-        if(Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()){
+        if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()) {
             builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()));
             lines[2] = Lang.SB_SPAWN.toString() + builder + " §7(" + (int) Bukkit.getPlayer(playerName).getLocation().distance(TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()) + ")   ";
         }
-        if(Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getNether()){
+        if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getNether()) {
             builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().gameManager.getNetherSpawn(playerName)));
             lines[2] = Lang.SB_SPAWN.toString() + builder + " §7(" + (int) Bukkit.getPlayer(playerName).getLocation().distance(TomoNova.getPlugin().gameManager.getNetherSpawn(playerName)) + ")   ";
 

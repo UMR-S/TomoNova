@@ -19,21 +19,37 @@ public class PlayerMove implements Listener {
             event.setCancelled(true);
         }
         if (GameStates.isState(GameStates.GAME)) {
-            String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getPlayer().getName());
             Player player = event.getPlayer();
-            if (teamName != "None") {
-                Teams team = TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName);
-                if (team.getNumberPlayers() != 1) {
+            if (!TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
+                String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getPlayer().getName());
+                if (teamName != "None") {
+                    Teams team = TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName);
+                    if (team.getNumberPlayers() != 1) {
+                        final StringBuilder builder = new StringBuilder();
+                        for (String targetName : team.getTeamPlayers()) {
+                            Player target = Bukkit.getPlayer(targetName);
+                            if (!player.getName().equals(targetName)) {
+                                if (Bukkit.getPlayer(targetName) != null) {
+                                    builder.append(String.valueOf(String.valueOf(team.getPrefix())) + target.getName() + " §7: " + TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(player, target.getLocation()) + " §7(" + (int) player.getLocation().distance(target.getLocation()) + ")   ");
+                                }
+                            }
+                        }
+                        player.spigot().sendMessage(net.md_5.bungee.api.ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(builder.toString()));
+                    }
+                }
+            } else {
+                if (TomoNova.getPlugin().tomoLostVillage.killerTeamNumberPlayer(player.getName()) > 1) {
                     final StringBuilder builder = new StringBuilder();
-                    for (String targetName : team.getTeamPlayers()) {
+                    for (String targetName : TomoNova.getPlugin().tomoLostVillage.playersInTeamOfPlayer(player.getName())) {
                         Player target = Bukkit.getPlayer(targetName);
                         if (!player.getName().equals(targetName)) {
                             if (Bukkit.getPlayer(targetName) != null) {
-                                builder.append(String.valueOf(String.valueOf(team.getPrefix())) + target.getName() + " §7: " + TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(player, target.getLocation()) + " §7(" + (int) player.getLocation().distance(target.getLocation()) + ")   ");
+                                builder.append(String.valueOf(String.valueOf(TomoNova.getPlugin().tomoLostVillage.getChatColor(player.getName())) + target.getName() + " §7: " + TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(player, target.getLocation()) + " §7(" + (int) player.getLocation().distance(target.getLocation()) + ")   "));
                             }
                         }
                     }
-                    player.spigot().sendMessage(net.md_5.bungee.api.ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(builder.toString()));
+
+
                 }
             }
         }

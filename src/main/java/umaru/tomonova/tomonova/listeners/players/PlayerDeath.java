@@ -18,9 +18,14 @@ public class PlayerDeath implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f));
         String playerName = event.getEntity().getPlayer().getName();
-        TomoNova.getPlugin().teamUtils.playerQuitTeam(playerName);
         TomoNova.getPlugin().gameManager.removePlayer(playerName);
         TomoNova.getPlugin().gameManager.addDeadPlayer(playerName);
+        if (TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
+            TomoNova.getPlugin().tomoLostVillage.removePlayerToTeam(playerName);
+        }
+        if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
+            TomoNova.getPlugin().teamUtils.playerQuitTeam(playerName);
+        }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)

@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.utils.teams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -82,6 +81,15 @@ public class TeamUtils {
         team.getTeam().setAllowFriendlyFire(ff);
     }
 
+    public void resetTeams() {
+        for (String teamName : listTeams.keySet()) {
+            Teams team = listTeams.get(teamName);
+            for (String playerName : team.getTeamPlayers()) {
+                playerQuitTeam(playerName);
+            }
+        }
+    }
+
     public HashMap<String, Teams> getTeamHashMap() {
         return listTeams;
     }
@@ -103,7 +111,6 @@ public class TeamUtils {
         for (String player : players) {
             for (String teamName : this.listTeams.keySet()) {
                 if (listTeams.get(teamName).getTeamPlayers() != null) {
-                    System.out.println(this.listTeams.get(teamName).getTeamPlayers().toString());
                     if (listTeams.get(teamName).getTeamPlayers().contains(player)) {
                         teamlessPlayers.add(player);
                     }

@@ -7,8 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
+import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
+import umaru.tomonova.tomonova.listeners.entities.EntityDamageByEntity;
 import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
 import umaru.tomonova.tomonova.listeners.littlerules.littleRules.*;
 import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
@@ -36,7 +38,7 @@ public final class TomoNova extends JavaPlugin {
     public static WorldUtils worldUtils;
     public static WorldBorderUtils worldBorderUtils;
     public static TaskManager taskManager;
-
+    public static TomoLostVillage tomoLostVillage;
 
     @Override
     public void onLoad() {
@@ -91,6 +93,7 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
+        getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
 
     }
 
@@ -101,6 +104,7 @@ public final class TomoNova extends JavaPlugin {
         worldUtils = new WorldUtils(Bukkit.getWorld("world"), Bukkit.getWorld("world_nether"), Bukkit.getWorld("world_the_end"));
         worldBorderUtils = new WorldBorderUtils();
         taskManager = new TaskManager(this);
+        tomoLostVillage = new TomoLostVillage();
     }
 
     public static TomoNova getPlugin() {

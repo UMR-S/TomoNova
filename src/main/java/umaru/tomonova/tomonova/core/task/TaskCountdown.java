@@ -19,12 +19,12 @@ public class TaskCountdown extends BukkitRunnable {
 
     @Override
     public void run() {
-        Bukkit.getOnlinePlayers().forEach(p-> p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 1.0f));
-        Bukkit.getOnlinePlayers().forEach(p -> p.sendTitle(color + Integer.toString(preStartTime),"",1,18,1));
-        if(preStartTime <= 5){
+        Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1.0f, 1.0f));
+        Bukkit.getOnlinePlayers().forEach(p -> p.sendTitle(color + Integer.toString(preStartTime), "", 1, 18, 1));
+        if (preStartTime <= 5) {
             color = ChatColor.YELLOW;
         }
-        if(preStartTime <= 2){
+        if (preStartTime <= 2) {
             color = ChatColor.RED;
         }
         preStartTime--;

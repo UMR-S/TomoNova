@@ -4,8 +4,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
@@ -46,7 +44,6 @@ public class TaskManager extends BukkitRunnable {
         if (count == 0) {
             TaskManagerInitialisation();
         }
-        count++;
         if (count == 60) {
             Bukkit.broadcastMessage(Lang.DAMAGE_ACTIVATED.toString());
             tomoNova.gameManager.setDamage(true);
@@ -78,7 +75,7 @@ public class TaskManager extends BukkitRunnable {
             tomoNova.worldBorderUtils.change(tomoNova.worldBorderUtils.getFinalSize(), (tomoNova.worldBorderUtils.getStartSize() - tomoNova.worldBorderUtils.getFinalSize()) / tomoNova.worldBorderUtils.getSpeed());
             Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f));
         }
-        if (count == suddenDeathTime){
+        if (count == suddenDeathTime) {
             tomoNova.worldBorderUtils.change(20, 20);
             Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.0f));
             Bukkit.getOnlinePlayers().forEach(p -> p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2.0));
@@ -86,5 +83,6 @@ public class TaskManager extends BukkitRunnable {
         for (final Player player : Bukkit.getOnlinePlayers()) {
             tomoNova.scoreboardUtils.updateGame(player.getName(), count);
         }
+        count++;
     }
 }
