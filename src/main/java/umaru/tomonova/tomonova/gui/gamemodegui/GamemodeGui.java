@@ -26,22 +26,22 @@ public class GamemodeGui extends Gui {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(0, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.LEVER, ChatColor.RED + Lang.GUIS_GM_UHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_UHC_LORE.toString()));
+        ic = new ItemsCreator(Material.LEVER, ChatColor.RED + Lang.GUIS_GM_SWITCH_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_LORE.toString()));
         if (TomoNova.getPlugin().gameManager.isSwitch()) {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(1, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_UHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_UHC_LORE.toString()));
+        ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_TAUPE_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_LORE.toString()));
         if (TomoNova.getPlugin().gameManager.isTaupe()) {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(2, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.POTION, ChatColor.RED + Lang.GUIS_GM_UHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_UHC_LORE.toString()));
+        ic = new ItemsCreator(Material.POTION, ChatColor.RED + Lang.GUIS_GM_FSM_NAME.toString(), Arrays.asList(Lang.GUIS_GM_FSM_LORE.toString()));
         if (TomoNova.getPlugin().gameManager.isScarletMansion()) {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(3, ItemsCreator.create(ic, PotionType.INSTANT_HEAL));
-        ic = new ItemsCreator(Material.MOSSY_COBBLESTONE, ChatColor.RED + Lang.GUIS_GM_UHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_UHC_LORE.toString()));
+        ic = new ItemsCreator(Material.MOSSY_COBBLESTONE, ChatColor.RED + Lang.GUIS_GM_TLV_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TLV_LORE.toString()));
         if (TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }

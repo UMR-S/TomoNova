@@ -12,9 +12,11 @@ import java.util.*;
 public class TeamUtils {
 
     private HashMap<String, Teams> listTeams = new HashMap<String, Teams>();
+    private Scoreboard scoreBoardTeams;
 
     public TeamUtils() {
         Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
+        this.scoreBoardTeams = Bukkit.getScoreboardManager().getMainScoreboard();
         for (Teams team : Teams.values()) {
             team = registerTeam(team);
             listTeams.put(team.getName(), team);
@@ -22,11 +24,6 @@ public class TeamUtils {
     }
 
     public Teams registerTeam(Teams team) {
-        Team t = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(team.getName());
-        t.setPrefix(team.getPrefix());
-        t.setColor(team.getBaseColor());
-        t.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
-        team.setTeam(t);
         team.setTeamPlayers(new ArrayList<String>());
         return team;
     }
@@ -48,8 +45,9 @@ public class TeamUtils {
         team.setTeamPlayers(teamPlayers);
         team.setNumberPlayers(team.getNumberPlayers() + 1);
 
-        Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-        Bukkit.getPlayer(playerName).setScoreboard(scoreboard);
+        Bukkit.getOnlinePlayers().forEach(p -> p.setScoreboard(this.scoreBoardTeams));
+        Bukkit.getPlayer(playerName).setDisplayName(team.getBaseColor() + playerName);
+        Bukkit.getPlayer(playerName).setPlayerListName(team.getBaseColor() + playerName);
         listTeams.put(name, team);
     }
 
@@ -177,6 +175,10 @@ public class TeamUtils {
             teamlessPlayers.remove(player);
         }
         return;
+    }
+
+    public Scoreboard getScoreBoardTeams() {
+        return scoreBoardTeams;
     }
 }
 

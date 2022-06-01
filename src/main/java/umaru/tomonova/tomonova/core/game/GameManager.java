@@ -74,7 +74,7 @@ public class GameManager {
         //Cas en team
         if (getPlayersPerTeam() > 1) {
             //Remplissage des teams automatique
-            tomoNova.teamUtils.getTeamToTeamlessPlayers(players);
+            //tomoNova.teamUtils.getTeamToTeamlessPlayers(players);
             //Liste des location et des teams si on est pas en solo
             HashMap<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
             double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
@@ -107,18 +107,18 @@ public class GameManager {
         if (playersPerTeam == 1) {
             double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(getPlayers().size());
             for (String player : getPlayers()) {
-                Location teamLoc = getRandomLocation();
+                Location playerLoc = getRandomLocation();
                 if (locationSolo.size() > 0) {
                     List<Double> dist = new ArrayList<Double>();
                     for (String otherPlayerName : locationSolo.keySet()) {
-                        dist.add(teamLoc.distance(locationSolo.get(otherPlayerName)));
+                        dist.add(playerLoc.distance(locationSolo.get(otherPlayerName)));
                     }
                     Integer i = 0;
                     while (Collections.max(dist) > 2 * r) {
-                        teamLoc = getRandomLocation();
+                        playerLoc = getRandomLocation();
                         dist = new ArrayList<Double>();
-                        for (Teams otherTeam : locationTeams.keySet()) {
-                            dist.add(teamLoc.distance(locationTeams.get(otherTeam)));
+                        for (String otherPlayer : locationSolo.keySet()) {
+                            dist.add(playerLoc.distance(locationSolo.get(otherPlayer)));
                         }
                         if (i == 10) {
                             i = 0;
@@ -126,6 +126,7 @@ public class GameManager {
                         }
                     }
                 }
+                locationSolo.put(player,playerLoc);
             }
         }
 
@@ -171,7 +172,7 @@ public class GameManager {
         if (playersPerTeam == 1) {
             for (String playerName : locationSolo.keySet()) {
                 spawnPreGameLobby(locationSolo.get(playerName));
-                Location locPlateform = locationTeams.get(playerName);
+                Location locPlateform = locationSolo.get(playerName);
                 Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
                 try {
                     loc.setY(201.0);
@@ -232,6 +233,22 @@ public class GameManager {
     public void deletePreGameLobby() {
         for (Teams team : locationTeams.keySet()) {
             Location locPlateform = locationTeams.get(team);
+            Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
+            loc.getChunk().load(true);
+            double x = loc.getX();
+            double z = loc.getZ();
+            loc.setY(200.0);
+            for (int i = -1; i < 2; i++) {
+                for (int j = -1; j < 2; j++) {
+                    loc.setX(x + i);
+                    loc.setZ(z + j);
+                    loc.getWorld().getBlockAt(loc).setType(Material.AIR);
+                }
+            }
+
+        }
+        for (String playerName : locationSolo.keySet()) {
+            Location locPlateform = locationSolo.get(playerName);
             Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
             loc.getChunk().load(true);
             double x = loc.getX();

@@ -4,10 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
-import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
+import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardSign;
 
 public class TaskFinalCountdown extends BukkitRunnable {
     private static int preStartTime = 10; //En sec
@@ -32,11 +32,7 @@ public class TaskFinalCountdown extends BukkitRunnable {
             TomoNova.getPlugin().gameManager.deletePreGameLobby();
             LobbyUtils.deleteLobby();
             GameStates.setCurrentState(GameStates.GAME);
-            Scoreboard scoreboard = Bukkit.getScoreboardManager().getMainScoreboard();
-            scoreboard.getObjectivesByCriteria(Criterias.HEALTH).forEach(o -> o.unregister());
-            Objective health = Bukkit.getScoreboardManager().getMainScoreboard().registerNewObjective("health", Criterias.HEALTH, "");
-            health.setRenderType(RenderType.HEARTS);
-            health.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+            TomoNova.getPlugin().gameManager.getPlayers().forEach(p-> ScoreboardSign.create(p));
             this.cancel();
         }
         preStartTime--;

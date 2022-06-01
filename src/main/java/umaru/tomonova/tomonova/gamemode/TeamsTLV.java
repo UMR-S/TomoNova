@@ -11,7 +11,6 @@ public class TeamsTLV {
     private final String prefix;
     private final ChatColor baseColor;
     private final Material banner;
-    private Team team;
     private List<String> teamPlayers;
     private Integer numberPlayers;
 
@@ -21,17 +20,8 @@ public class TeamsTLV {
         this.prefix = prefix;
         this.baseColor = baseColor;
         this.banner = banner;
-        this.team = team;
         this.teamPlayers = teamPlayers;
         this.numberPlayers = numberPlayers;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 
     public List<String> getTeamPlayers() {

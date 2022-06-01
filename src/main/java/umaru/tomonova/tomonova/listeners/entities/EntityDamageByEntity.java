@@ -15,7 +15,16 @@ public class EntityDamageByEntity implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+
+
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
+            //PVP
+            if(TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1){
+                if(TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getEntity().getName()).equals(TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getDamager().getName()))){
+                    event.setCancelled(true);
+                }
+            }
+            //Pour le TLV
             if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
                 Player player = (Player) event.getEntity();
                 Player damager = (Player) event.getDamager();
@@ -39,6 +48,10 @@ public class EntityDamageByEntity implements Listener {
                             Bukkit.broadcastMessage(player.getName() + " rejoint " + damager.getName());
                         }
                     }
+                }
+                //PVP TLV
+                if(TomoNova.getPlugin().tomoLostVillage.playersInSameTeam(event.getEntity().getName(),event.getDamager().getName())){
+                    event.setCancelled(true);
                 }
             }
         }

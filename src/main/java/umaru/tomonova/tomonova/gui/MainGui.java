@@ -183,6 +183,7 @@ public class MainGui extends Gui {
                 case RED_TERRACOTTA: {
                     this.player.closeInventory();
                     TomoNova.getPlugin().gameManager.stop();
+                    new MainGui(this.player).show();
                 }
                 case PAPER: {
                     this.player.closeInventory();

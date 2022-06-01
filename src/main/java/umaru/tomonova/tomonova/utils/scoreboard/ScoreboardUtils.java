@@ -4,11 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import org.bukkit.scoreboard.Objective;
-import org.bukkit.scoreboard.Score;
-import org.bukkit.scoreboard.Scoreboard;
+import org.bukkit.scoreboard.*;
 import org.bukkit.util.Vector;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.HashMap;
 
@@ -16,22 +15,12 @@ public class ScoreboardUtils {
 
     private Plugin tomoNova = TomoNova.getPlugin();
 
-    private HashMap<Player, Scoreboard> scoreboardMap;
+    private HashMap<String, Scoreboard> scoreboardMap;
 
     public ScoreboardUtils() {
-        this.scoreboardMap = new HashMap<Player, Scoreboard>();
+        this.scoreboardMap = new HashMap<String, Scoreboard>();
     }
 
-    public void updateGame(String playerName, int count) {
-
-        if(count == 0){
-
-            Bukkit.getPlayer(playerName).setScoreboard(ScoreboardSign.create(playerName, count));
-        }
-        Objective sidebar = Bukkit.getPlayer(playerName).getScoreboard().getObjective("sidebar");
-        String[] lines = ScoreboardSign.setLines(playerName, count);
-
-    }
 
     public String getColoredDirectionTo(Player p, final Location locToPoint) {
         final Location point = new Location(locToPoint.getWorld(), locToPoint.getX(), locToPoint.getY(), locToPoint.getZ());
@@ -63,4 +52,15 @@ public class ScoreboardUtils {
         return "§a" + s;
     }
 
+    public int getSpawnDistance(String playerName){
+        Player player =  Bukkit.getPlayer(playerName);
+        final Location locPlayer = new Location(player.getWorld(), player.getLocation().getX(),0.0,player.getLocation().getZ());
+        final Location locSpawn = TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter();
+        locSpawn.setY(0.0);
+        return (int)locPlayer.distance(locSpawn);
+    }
+
+    public HashMap<String, Scoreboard> getScoreboardMap() {
+        return scoreboardMap;
+    }
 }

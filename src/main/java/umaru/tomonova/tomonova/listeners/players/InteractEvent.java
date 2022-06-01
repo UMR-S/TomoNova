@@ -54,7 +54,7 @@ public class InteractEvent implements Listener {
                                                 distance = (int) dist;
                                                 nearestPlayer = otherPlayer;
                                             }
-                                            if (dist < distance) {
+                                            if (dist <= distance) {
                                                 distance = (int) dist;
                                                 nearestPlayer = otherPlayer;
                                             }

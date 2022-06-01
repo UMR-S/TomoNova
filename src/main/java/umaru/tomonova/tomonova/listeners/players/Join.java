@@ -1,9 +1,7 @@
 package umaru.tomonova.tomonova.listeners.players;
 
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -31,7 +29,12 @@ public class Join implements Listener {
             player.setExp(0.0f);
             player.setLevel(0);
             player.setHealth(20.0);
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+            player.setFoodLevel(20);
+            player.getActivePotionEffects().forEach(p -> player.removePotionEffect(p.getType()));
+            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
             player.teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 202.0, 0.0, 0, 0));
+            player.setCollidable(false);
 
             List<String> loreBanner = new ArrayList<>();
             loreBanner.add("(sauf toi Shanto)");

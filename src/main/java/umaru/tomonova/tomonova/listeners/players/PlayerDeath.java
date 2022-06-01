@@ -21,7 +21,9 @@ public class PlayerDeath implements Listener {
         TomoNova.getPlugin().gameManager.removePlayer(playerName);
         TomoNova.getPlugin().gameManager.addDeadPlayer(playerName);
         if (TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
-            TomoNova.getPlugin().tomoLostVillage.removePlayerToTeam(playerName);
+            if(TomoNova.getPlugin().tomoLostVillage.isKilledInTeam(playerName)){
+                TomoNova.getPlugin().tomoLostVillage.removePlayerToTeam(playerName);
+            }
         }
         if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
             TomoNova.getPlugin().teamUtils.playerQuitTeam(playerName);

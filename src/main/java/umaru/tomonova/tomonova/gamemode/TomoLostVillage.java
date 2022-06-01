@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.gamemode;
 
+import jdk.tools.jlink.internal.plugins.StripNativeCommandsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -34,10 +35,11 @@ public class TomoLostVillage {
 
         TeamsTLV teamTLV = new TeamsTLV(killerName, "[" + numeroTeam + "]", listColors.get(rand.nextInt(listColors.size())), null, team, playerList, 2);
 
-        team.setPrefix(teamTLV.getPrefix());
-        team.setColor(teamTLV.getBaseColor());
-        team.setOption(Team.Option.COLLISION_RULE, Team.OptionStatus.NEVER);
-        team.setAllowFriendlyFire(false);
+        Bukkit.getPlayer(killedName).setDisplayName(teamTLV.getBaseColor() + killedName);
+        Bukkit.getPlayer(killedName).setPlayerListName(teamTLV.getBaseColor() + killedName);
+
+        Bukkit.getPlayer(killerName).setDisplayName(teamTLV.getBaseColor() + killerName);
+        Bukkit.getPlayer(killerName).setPlayerListName(teamTLV.getBaseColor() + killerName);
 
         mapPlayerTeam.put(killerName, teamTLV);
         mapPlayerTeam.put(killedName, teamTLV);
@@ -46,7 +48,6 @@ public class TomoLostVillage {
 
     public void addPlayerToTeam(String killerName, String killedName) {
         TeamsTLV team = mapPlayerTeam.get(killerName);
-        team.getTeam().addEntry(killedName);
 
         List<String> listPlayers = team.getTeamPlayers();
         listPlayers.add(killedName);
@@ -59,12 +60,12 @@ public class TomoLostVillage {
         if (team.getNumberPlayers() == 5) {
             bonusHearthOff(listPlayers);
         }
-
+        Bukkit.getPlayer(killedName).setDisplayName(team.getBaseColor() + killedName);
+        Bukkit.getPlayer(killedName).setPlayerListName(team.getBaseColor() + killedName);
     }
 
     public void removePlayerToTeam(String killedName) {
         TeamsTLV team = mapPlayerTeam.get(killedName);
-        team.getTeam().removeEntry(killedName);
 
         List<String> listPlayers = team.getTeamPlayers();
         listPlayers.remove(killedName);
@@ -148,6 +149,14 @@ public class TomoLostVillage {
 
     public ChatColor getChatColor(String playerName) {
         return mapPlayerTeam.get(playerName).getBaseColor();
+    }
+    public boolean playersInSameTeam(String playerName1, String playerName2){
+        if(mapPlayerTeam.containsKey(playerName1) && mapPlayerTeam.containsKey(playerName2)){
+            if(mapPlayerTeam.get(playerName1) == mapPlayerTeam.get(playerName2)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void tomoLostVillageSettings() {

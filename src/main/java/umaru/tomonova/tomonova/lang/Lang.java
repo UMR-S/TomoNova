@@ -167,7 +167,10 @@ public enum Lang {
     GUIS_GM_TAUPE_TIME_LORE("guis.gamemode.taupeTimeLore", ""),
     GUIS_GM_TAUPE_NUMBER_NAME("guis.gamemode.taupeNumberName", "Nombre de taupes par team"),
     GUIS_GM_TAUPE_NUMBER_LORE("guis.gamemode.taupeNumberLore", ""),
-
+    GUIS_GM_FSM_NAME("guis.gamemode.fsmName", "Find Scarlet's mansion"),
+    GUIS_GM_FSM_LORE("guis.gamemode.fsmLore", "On pille ton manoir Remimi"),
+    GUIS_GM_TLV_NAME("guis.gamemode.tlvName", "Tomo lost village"),
+    GUIS_GM_TLV_LORE("guis.gamemode.tlvLore", "Les pancartes du malaise le retour"),
     ;
 
     private String path;
