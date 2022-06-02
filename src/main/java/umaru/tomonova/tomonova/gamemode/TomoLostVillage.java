@@ -1,6 +1,5 @@
 package umaru.tomonova.tomonova.gamemode;
 
-import jdk.tools.jlink.internal.plugins.StripNativeCommandsPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -26,14 +25,10 @@ public class TomoLostVillage {
         Random rand = new Random();
 
         List<String> playerList = new ArrayList<>();
-        playerList.add(killedName);
+        playerList.add(killerName);
         playerList.add(killedName);
 
-        Team team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(killerName);
-        team.addEntry(killerName);
-        team.addEntry(killedName);
-
-        TeamsTLV teamTLV = new TeamsTLV(killerName, "[" + numeroTeam + "]", listColors.get(rand.nextInt(listColors.size())), null, team, playerList, 2);
+        TeamsTLV teamTLV = new TeamsTLV(killerName, "[" + numeroTeam + "]", listColors.get(rand.nextInt(listColors.size())), null, playerList, 2);
 
         Bukkit.getPlayer(killedName).setDisplayName(teamTLV.getBaseColor() + killedName);
         Bukkit.getPlayer(killedName).setPlayerListName(teamTLV.getBaseColor() + killedName);
@@ -134,7 +129,7 @@ public class TomoLostVillage {
         }
     }
 
-    public int killerTeamNumberPlayer(String killerName) {
+    public int playerTeamNumberPlayer(String killerName) {
         for (String pName : mapPlayerTeam.keySet()) {
             if (killerName.equals(pName)) {
                 return mapPlayerTeam.get(killerName).getNumberPlayers();

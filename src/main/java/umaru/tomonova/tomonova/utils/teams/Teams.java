@@ -22,7 +22,6 @@ public enum Teams {
     private final String prefix;
     private final ChatColor baseColor;
     private final Material banner;
-    private Team team;
     private List<String> teamPlayers;
     private Integer numberPlayers;
 
@@ -52,18 +51,10 @@ public enum Teams {
         return baseColor;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
     public List<String> getTeamPlayers() {
         return teamPlayers;
     }
 
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
 
     public void setTeamPlayers(List<String> teamPlayers) {
         this.teamPlayers = teamPlayers;

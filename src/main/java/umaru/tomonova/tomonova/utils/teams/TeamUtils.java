@@ -38,10 +38,6 @@ public class TeamUtils {
         teamPlayers = team.getTeamPlayers();
         teamPlayers.add(playerName);
 
-        Team t = team.getTeam();
-        t.addEntry(playerName);
-
-        team.setTeam(t);
         team.setTeamPlayers(teamPlayers);
         team.setNumberPlayers(team.getNumberPlayers() + 1);
 
@@ -58,25 +54,13 @@ public class TeamUtils {
         String name = getTeamNameFromPlayer(playerName);
         Teams team = listTeams.get(name);
         List<String> teamPlayers = team.getTeamPlayers();
-        Team t = team.getTeam();
         if (teamPlayers.contains(playerName)) {
             teamPlayers.remove(playerName);
-            t.removeEntry(playerName);
             team.setTeamPlayers(teamPlayers);
             team.setNumberPlayers(team.getNumberPlayers() - 1);
         }
 
-        team.setTeam(t);
         listTeams.put(name, team);
-    }
-
-
-    public void setFriendlyFire(String name, Boolean ff) {
-        Teams team = listTeams.get(name);
-        if (team == null) {
-            return;
-        }
-        team.getTeam().setAllowFriendlyFire(ff);
     }
 
     public void resetTeams() {

@@ -31,7 +31,13 @@ public class EntityDamageByEntity implements Listener {
                 if (!TomoNova.getPlugin().tomoLostVillage.isKilledInTeam(player.getName())) {
                     //Si le joueur meurt
                     if (player.getHealth() - event.getFinalDamage() < 1) {
-                        int numberPlayerInTeamKiller = TomoNova.getPlugin().tomoLostVillage.killerTeamNumberPlayer(event.getDamager().getName());
+                        int numberPlayerInTeamKiller = TomoNova.getPlugin().tomoLostVillage.playerTeamNumberPlayer(event.getDamager().getName());
+                        if (0 < numberPlayerInTeamKiller && numberPlayerInTeamKiller < 5) {
+                            event.setCancelled(true);
+                            Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f));
+                            TomoNova.getPlugin().tomoLostVillage.addPlayerToTeam(damager.getName(), player.getName());
+                            Bukkit.broadcastMessage(player.getName() + " rejoint " + damager.getName());
+                        }
                         //Si les joueurs n'ont jamais été dans une team
                         if (numberPlayerInTeamKiller == 0) {
                             event.setCancelled(true);
@@ -39,12 +45,6 @@ public class EntityDamageByEntity implements Listener {
                             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                             damager.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                             TomoNova.getPlugin().tomoLostVillage.createNewTeam(damager.getName(), player.getName());
-                            Bukkit.broadcastMessage(player.getName() + " rejoint " + damager.getName());
-                        }
-                        if (0 < numberPlayerInTeamKiller && numberPlayerInTeamKiller < 5) {
-                            event.setCancelled(true);
-                            Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f));
-                            TomoNova.getPlugin().tomoLostVillage.addPlayerToTeam(damager.getName(), player.getName());
                             Bukkit.broadcastMessage(player.getName() + " rejoint " + damager.getName());
                         }
                     }

@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.gamemode;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.scoreboard.Team;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class TeamsTLV {
     private Integer numberPlayers;
 
 
-    TeamsTLV(String name, String prefix, ChatColor baseColor, Material banner, Team team, List<String> teamPlayers, Integer numberPlayers) {
+    TeamsTLV(String name, String prefix, ChatColor baseColor, Material banner, List<String> teamPlayers, Integer numberPlayers) {
         this.name = name;
         this.prefix = prefix;
         this.baseColor = baseColor;

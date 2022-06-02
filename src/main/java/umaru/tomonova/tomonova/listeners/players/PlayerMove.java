@@ -38,7 +38,7 @@ public class PlayerMove implements Listener {
                     }
                 }
             } else {
-                if (TomoNova.getPlugin().tomoLostVillage.killerTeamNumberPlayer(player.getName()) > 1) {
+                if (TomoNova.getPlugin().tomoLostVillage.playerTeamNumberPlayer(player.getName()) > 1) {
                     final StringBuilder builder = new StringBuilder();
                     for (String targetName : TomoNova.getPlugin().tomoLostVillage.playersInTeamOfPlayer(player.getName())) {
                         Player target = Bukkit.getPlayer(targetName);
@@ -48,8 +48,7 @@ public class PlayerMove implements Listener {
                             }
                         }
                     }
-
-
+                    player.spigot().sendMessage(net.md_5.bungee.api.ChatMessageType.ACTION_BAR, TextComponent.fromLegacyText(builder.toString()));
                 }
             }
         }
