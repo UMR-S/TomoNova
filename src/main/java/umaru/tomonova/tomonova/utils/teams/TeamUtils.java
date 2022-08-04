@@ -3,11 +3,11 @@ package umaru.tomonova.tomonova.utils.teams;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Scoreboard;
-import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
 import java.util.*;
+
 
 public class TeamUtils {
 
@@ -64,12 +64,11 @@ public class TeamUtils {
     }
 
     public void resetTeams() {
-        for (String teamName : listTeams.keySet()) {
-            Teams team = listTeams.get(teamName);
-            for (String playerName : team.getTeamPlayers()) {
-                playerQuitTeam(playerName);
-            }
+
+        for (String playerName : TomoNova.getPlugin().gameManager.getPlayers()) {
+            playerQuitTeam(playerName);
         }
+
     }
 
     public HashMap<String, Teams> getTeamHashMap() {

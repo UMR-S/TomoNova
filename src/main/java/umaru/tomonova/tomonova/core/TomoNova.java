@@ -82,15 +82,15 @@ public final class TomoNova extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);
-        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
-        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
-        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
-        getServer().getPluginManager().registerEvents(new Fireless(), plugin);
-        getServer().getPluginManager().registerEvents(new FriendlyFire(), plugin);
-        getServer().getPluginManager().registerEvents(new Horseless(), plugin);
-        getServer().getPluginManager().registerEvents(new Regen(), plugin);
-        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
-        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
+//        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
+//        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
+//        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
+//        getServer().getPluginManager().registerEvents(new Fireless(), plugin);
+//        getServer().getPluginManager().registerEvents(new FriendlyFire(), plugin);
+//        getServer().getPluginManager().registerEvents(new Horseless(), plugin);
+//        getServer().getPluginManager().registerEvents(new Regen(), plugin);
+//        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
+//        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);

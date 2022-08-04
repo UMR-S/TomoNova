@@ -36,6 +36,7 @@ public class EntityDamageByEntity implements Listener {
                             event.setCancelled(true);
                             Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f));
                             TomoNova.getPlugin().tomoLostVillage.addPlayerToTeam(damager.getName(), player.getName());
+                            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
                             Bukkit.broadcastMessage(player.getName() + " rejoint " + damager.getName());
                         }
                         //Si les joueurs n'ont jamais été dans une team

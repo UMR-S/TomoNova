@@ -9,16 +9,14 @@ public class TeamsTLV {
     private final String name;
     private final String prefix;
     private final ChatColor baseColor;
-    private final Material banner;
     private List<String> teamPlayers;
     private Integer numberPlayers;
 
 
-    TeamsTLV(String name, String prefix, ChatColor baseColor, Material banner, List<String> teamPlayers, Integer numberPlayers) {
+    TeamsTLV(String name, String prefix, ChatColor baseColor, List<String> teamPlayers, Integer numberPlayers) {
         this.name = name;
         this.prefix = prefix;
         this.baseColor = baseColor;
-        this.banner = banner;
         this.teamPlayers = teamPlayers;
         this.numberPlayers = numberPlayers;
     }

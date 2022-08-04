@@ -1,8 +1,10 @@
 package umaru.tomonova.tomonova.listeners.players;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +36,7 @@ public class InteractEvent implements Listener {
             new MainGui(player).show();
         }
         if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
-            if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.COMPASS) {
+            if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.COMPASS && player.getCooldown(Material.COMPASS) == 0) {
                 if (TomoNova.getPlugin().tomoLostVillage.isCompass(event.getPlayer().getName())) {
                     if (event.getPlayer().getInventory().contains(Material.IRON_INGOT)) {
                         //On cherche le fer
@@ -44,23 +46,11 @@ public class InteractEvent implements Listener {
                                     item.setAmount(item.getAmount() - 1);
 
                                     //On pointe
-                                    String nearestPlayer = player.getName();
-                                    int distance = 0;
-                                    World playerWorld = player.getWorld();
-                                    for (String otherPlayer : TomoNova.getPlugin().gameManager.getPlayers()) {
-                                        if (Bukkit.getPlayer(otherPlayer).getWorld() == playerWorld) {
-                                            double dist = player.getLocation().distance(Bukkit.getPlayer(otherPlayer).getLocation());
-                                            if (distance == 0) {
-                                                distance = (int) dist;
-                                                nearestPlayer = otherPlayer;
-                                            }
-                                            if (dist <= distance) {
-                                                distance = (int) dist;
-                                                nearestPlayer = otherPlayer;
-                                            }
-                                        }
+                                    Player nearestPlayer = getNearest(player,10000.0);
+                                    if (nearestPlayer != null) {
+                                        event.getPlayer().setCompassTarget(nearestPlayer.getLocation());
+                                        player.setCooldown(Material.COMPASS,100);
                                     }
-                                    player.setCompassTarget(Bukkit.getPlayer(nearestPlayer).getLocation());
                                 }
                             }
                         }
@@ -68,5 +58,27 @@ public class InteractEvent implements Listener {
                 }
             }
         }
+    }
+    public Player getNearest(Player p, Double range) {
+        double distance = Double.POSITIVE_INFINITY;
+        Player target = null;
+        for (final Entity e : p.getNearbyEntities((double)range, (double)range, (double)range)) {
+            if (!(e instanceof Player)) {
+                continue;
+            }
+            if (((Player)e).getGameMode() == GameMode.SPECTATOR) {
+                continue;
+            }
+            if (TomoNova.getPlugin().tomoLostVillage.playersInSameTeam(e.getName(),p.getName())) {
+                continue;
+            }
+            final double distanceto = p.getLocation().distance(e.getLocation());
+            if (distanceto > distance) {
+                continue;
+            }
+            distance = distanceto;
+            target = (Player)e;
+        }
+        return target;
     }
 }

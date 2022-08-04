@@ -5,7 +5,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scoreboard.Team;
 import umaru.tomonova.tomonova.core.TomoNova;
 
 import java.util.*;
@@ -28,7 +27,7 @@ public class TomoLostVillage {
         playerList.add(killerName);
         playerList.add(killedName);
 
-        TeamsTLV teamTLV = new TeamsTLV(killerName, "[" + numeroTeam + "]", listColors.get(rand.nextInt(listColors.size())), null, playerList, 2);
+        TeamsTLV teamTLV = new TeamsTLV(killerName, "[" + numeroTeam + "]", listColors.get(rand.nextInt(listColors.size())), playerList, 2);
 
         Bukkit.getPlayer(killedName).setDisplayName(teamTLV.getBaseColor() + killedName);
         Bukkit.getPlayer(killedName).setPlayerListName(teamTLV.getBaseColor() + killedName);
