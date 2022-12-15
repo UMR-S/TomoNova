@@ -7,7 +7,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scoreboard.*;
 import org.bukkit.util.Vector;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.HashMap;
 

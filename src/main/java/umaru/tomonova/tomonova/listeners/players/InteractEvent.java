@@ -36,7 +36,12 @@ public class InteractEvent implements Listener {
             new MainGui(player).show();
         }
         if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
-            if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.COMPASS && player.getCooldown(Material.COMPASS) == 0) {
+            if ((event.getAction() == Action.LEFT_CLICK_AIR
+                    || event.getAction() == Action.LEFT_CLICK_BLOCK
+                    || event.getAction() == Action.RIGHT_CLICK_AIR
+                    || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                    && player.getInventory().getItemInMainHand().getType() == Material.COMPASS
+                    && player.getCooldown(Material.COMPASS) == 0) {
                 if (TomoNova.getPlugin().tomoLostVillage.isCompass(event.getPlayer().getName())) {
                     if (event.getPlayer().getInventory().contains(Material.IRON_INGOT)) {
                         //On cherche le fer

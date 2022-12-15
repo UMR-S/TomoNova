@@ -7,8 +7,6 @@ import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
-import java.util.HashMap;
-
 public class ScoreboardSign {
 
     public static Scoreboard create(String playerName) {
