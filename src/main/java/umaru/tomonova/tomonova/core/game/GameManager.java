@@ -1,13 +1,11 @@
 package umaru.tomonova.tomonova.core.game;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.TaskCountdown;
@@ -15,6 +13,7 @@ import umaru.tomonova.tomonova.core.task.TaskFinalCountdown;
 import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRules;
+import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.*;
@@ -37,6 +36,7 @@ public class GameManager {
     private boolean taupe = false;
     private boolean scarletMansion = false;
     private boolean tomoLostVillage = false;
+    private boolean bleachUhc = false;
     private int timeBorder = 120; //En min
 
     private int netherEndTime = 120; //En min
@@ -478,6 +478,24 @@ public class GameManager {
 
     public void setTomoLostVillage(boolean tomoLostVillage) {
         this.tomoLostVillage = tomoLostVillage;
+    }
+
+    public boolean isBleachUhc() {
+        return bleachUhc;
+    }
+
+    public void setBleachUhc(boolean bleachUhc) {
+        if(bleachUhc){
+            List<String> loreClasses = new ArrayList<>();
+            loreClasses.add("Sasageyo");
+            ItemStack choixClasses;
+            choixClasses = CustomItems.createCustomItem(Material.NETHERITE_SCRAP, ChatColor.AQUA, "Choissisez votre classe", loreClasses);
+            Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().addItem(choixClasses));
+        }
+        else {
+            Bukkit.getOnlinePlayers().forEach(p-> p.getInventory().remove(Material.NETHERITE_SCRAP));
+        }
+        this.bleachUhc = bleachUhc;
     }
 
     public int getBetweenSwitches() {

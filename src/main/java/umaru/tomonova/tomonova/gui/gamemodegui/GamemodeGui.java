@@ -46,6 +46,11 @@ public class GamemodeGui extends Gui {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(4, ItemsCreator.create(ic));
+        ic = new ItemsCreator(Material.HEART_OF_THE_SEA, ChatColor.RED + Lang.GUIS_GM_BLEACHUHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_BLEACH_LORE.toString()));
+        if (TomoNova.getPlugin().gameManager.isBleachUhc()) {
+            this.inventory.setItem(7, ItemsCreator.create(ic));
+        }
+        this.inventory.setItem(5, ItemsCreator.create(ic));
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), null);
         this.inventory.setItem(8, ItemsCreator.create(ic));
     }
@@ -69,6 +74,7 @@ public class GamemodeGui extends Gui {
                     TomoNova.getPlugin().gameManager.setTaupe(false);
                     TomoNova.getPlugin().gameManager.setScarletMansion(false);
                     TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
+                    TomoNova.getPlugin().gameManager.setBleachUhc(false);
                     event.getWhoClicked().closeInventory();
                     new GamemodeGui(this.player).show();
                     break;
@@ -80,6 +86,7 @@ public class GamemodeGui extends Gui {
                     TomoNova.getPlugin().gameManager.setTaupe(false);
                     TomoNova.getPlugin().gameManager.setScarletMansion(false);
                     TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
+                    TomoNova.getPlugin().gameManager.setBleachUhc(false);
                     event.getWhoClicked().closeInventory();
                     new GamemodeGui(this.player).show();
                     break;
@@ -91,6 +98,7 @@ public class GamemodeGui extends Gui {
                     TomoNova.getPlugin().gameManager.setTaupe(true);
                     TomoNova.getPlugin().gameManager.setScarletMansion(false);
                     TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
+                    TomoNova.getPlugin().gameManager.setBleachUhc(false);
                     event.getWhoClicked().closeInventory();
                     new GamemodeGui(this.player).show();
                     break;
@@ -102,6 +110,7 @@ public class GamemodeGui extends Gui {
                     TomoNova.getPlugin().gameManager.setTaupe(false);
                     TomoNova.getPlugin().gameManager.setScarletMansion(true);
                     TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
+                    TomoNova.getPlugin().gameManager.setBleachUhc(false);
                     event.getWhoClicked().closeInventory();
                     new GamemodeGui(this.player).show();
                     break;
@@ -109,6 +118,13 @@ public class GamemodeGui extends Gui {
                 //Tomo lost village
                 case MOSSY_COBBLESTONE: {
                     TomoNova.getPlugin().tomoLostVillage.tomoLostVillageSettings();
+                    event.getWhoClicked().closeInventory();
+                    new GamemodeGui(this.player).show();
+                    break;
+                }
+                //BleachUHC
+                case HEART_OF_THE_SEA: {
+                    TomoNova.getPlugin().bleachUHC.bleachUhcSettings();
                     event.getWhoClicked().closeInventory();
                     new GamemodeGui(this.player).show();
                     break;

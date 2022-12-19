@@ -7,15 +7,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
+import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamageByEntity;
 import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
-import umaru.tomonova.tomonova.listeners.littlerules.littleRules.*;
 import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
 import umaru.tomonova.tomonova.listeners.others.PortalCreate;
 import umaru.tomonova.tomonova.listeners.players.*;
+import umaru.tomonova.tomonova.utils.classes.ClassesUtils;
+import umaru.tomonova.tomonova.utils.combatZone.CombatZoneUtils;
+import umaru.tomonova.tomonova.utils.config.CombatZoneConfigManager;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 import umaru.tomonova.tomonova.utils.rules.SettingRulesUtils;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardUtils;
@@ -39,6 +43,11 @@ public final class TomoNova extends JavaPlugin {
     public static WorldBorderUtils worldBorderUtils;
     public static TaskManager taskManager;
     public static TomoLostVillage tomoLostVillage;
+    public static BleachUHC bleachUHC;
+    public static ClassesSpells classesSpells;
+    public static CombatZoneUtils combatzoneUtils;
+    public static CombatZoneConfigManager combatZoneComfigManager;
+    public static ClassesUtils classesUtils;
 
     @Override
     public void onLoad() {
@@ -61,7 +70,8 @@ public final class TomoNova extends JavaPlugin {
         listenersRegister();
         LobbyUtils.spawnLobby();
         SettingRulesUtils.setGamerules();
-
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
     }
 
     @Override
@@ -105,6 +115,11 @@ public final class TomoNova extends JavaPlugin {
         worldBorderUtils = new WorldBorderUtils();
         taskManager = new TaskManager(this);
         tomoLostVillage = new TomoLostVillage();
+        bleachUHC = new BleachUHC();
+        classesSpells =new ClassesSpells();
+        combatzoneUtils = new CombatZoneUtils();
+        combatZoneComfigManager = new CombatZoneConfigManager(this);
+        classesUtils = new ClassesUtils();
     }
 
     public static TomoNova getPlugin() {

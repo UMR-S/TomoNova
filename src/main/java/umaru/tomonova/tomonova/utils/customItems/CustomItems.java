@@ -24,7 +24,21 @@ public class CustomItems {
 
         return item;
     }
+    // Même fonction mais avec le custom model data
+    public static ItemStack createCustomItem(Material material, ChatColor color, String name, List<String> lore, int customModelData) {
+        ItemStack item = new ItemStack(material);
+        ItemMeta itemMeta = item.getItemMeta();
+        if (name != null) {
+            itemMeta.setDisplayName(color + name);
+        }
+        if (lore != null) {
+            itemMeta.setLore(lore);
+        }
+        itemMeta.setCustomModelData(customModelData);
+        item.setItemMeta(itemMeta);
 
+        return item;
+    }
     public static ItemStack addEnchants(ItemStack item, Map<Enchantment, Integer> enchants) {
         if (enchants != null) {
             enchants.forEach((enchant, level) -> item.addEnchantment(enchant, level));

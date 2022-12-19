@@ -69,16 +69,25 @@ public class MainGui extends Gui {
         }
 
         //Configuration du gamemode
-
+        //Général
         ic = new ItemsCreator(Material.REDSTONE, ChatColor.RED + Lang.GUIS_MAIN_GAMEMODE.toString(), Arrays.asList(Lang.GUIS_MAIN_GAMEMODE_LORE.toString()));
         this.inventory.setItem(27, ItemsCreator.create(ic));
+        //Switch options
         if (TomoNova.getPlugin().gameManager.isSwitch()) {
             ic = new ItemsCreator(Material.CLOCK, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_TIME_LORE.toString()));
             this.inventory.setItem(28, ItemsCreator.create(ic));
             ic = new ItemsCreator(Material.LEVER, ChatColor.RED + Lang.GUIS_GM_SWITCH_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_SWITCH_NUMBER_LORE.toString()));
             this.inventory.setItem(29, ItemsCreator.create(ic));
         }
+        //Taupe Gun options
         if (TomoNova.getPlugin().gameManager.isTaupe()) {
+            ic = new ItemsCreator(Material.REPEATER, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_TIME_LORE.toString()));
+            this.inventory.setItem(28, ItemsCreator.create(ic));
+            ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_NUMBER_LORE.toString()));
+            this.inventory.setItem(29, ItemsCreator.create(ic));
+        }
+        //Bleach UHC
+        if (TomoNova.getPlugin().gameManager.isBleachUhc()) {
             ic = new ItemsCreator(Material.REPEATER, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_TIME_LORE.toString()));
             this.inventory.setItem(28, ItemsCreator.create(ic));
             ic = new ItemsCreator(Material.DIAMOND_SHOVEL, ChatColor.RED + Lang.GUIS_GM_TAUPE_TIME_NAME.toString(), Arrays.asList(Lang.GUIS_GM_TAUPE_NUMBER_LORE.toString()));

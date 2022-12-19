@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.utils.teams;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.scoreboard.Scoreboard;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
@@ -12,11 +11,8 @@ import java.util.*;
 public class TeamUtils {
 
     private HashMap<String, Teams> listTeams = new HashMap<String, Teams>();
-    private Scoreboard scoreBoardTeams;
 
     public TeamUtils() {
-        Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
-        this.scoreBoardTeams = Bukkit.getScoreboardManager().getMainScoreboard();
         for (Teams team : Teams.values()) {
             team = registerTeam(team);
             listTeams.put(team.getName(), team);
@@ -41,7 +37,6 @@ public class TeamUtils {
         team.setTeamPlayers(teamPlayers);
         team.setNumberPlayers(team.getNumberPlayers() + 1);
 
-        Bukkit.getOnlinePlayers().forEach(p -> p.setScoreboard(this.scoreBoardTeams));
         Bukkit.getPlayer(playerName).setDisplayName(team.getBaseColor() + playerName);
         Bukkit.getPlayer(playerName).setPlayerListName(team.getBaseColor() + playerName);
         listTeams.put(name, team);
@@ -85,7 +80,12 @@ public class TeamUtils {
         }
         return teamName;
     }
-
+    public Boolean arePlayersOnSameTeam(String firstPlayer,String secondPlayer) {
+        if(getTeamNameFromPlayer(firstPlayer).equals(getTeamNameFromPlayer(secondPlayer))){
+            return true;
+        }
+        return false;
+    }
     public void getTeamToTeamlessPlayers(List<String> players) {
         //On cherche les joueurs qui n'ont pas de team
         List<String> teamlessPlayers = new ArrayList<>();
@@ -158,10 +158,6 @@ public class TeamUtils {
             teamlessPlayers.remove(player);
         }
         return;
-    }
-
-    public Scoreboard getScoreBoardTeams() {
-        return scoreBoardTeams;
     }
 }
 

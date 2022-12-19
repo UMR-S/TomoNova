@@ -53,7 +53,17 @@ public class Join implements Listener {
                 player.getInventory().setItem(8, config);
 
             }
-        } else {
+            // Rajout du choix de classe pour le bleach uhc
+            if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+                List<String> loreClasses = new ArrayList<>();
+                loreClasses.add("Sasageyo");
+                ItemStack choixClasses;
+                choixClasses = CustomItems.createCustomItem(Material.NETHERITE_SCRAP, ChatColor.AQUA, "Choissisez votre classe", loreClasses);
+                Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().addItem(choixClasses));
+            }
+        }
+        //Si on est plus dans la phase de lobby et que le joueur n'était pas là
+        else {
             String playerName = event.getPlayer().getName();
             List<String> players = TomoNova.getPlugin().gameManager.getPlayers();
             if (!players.contains(playerName)) {

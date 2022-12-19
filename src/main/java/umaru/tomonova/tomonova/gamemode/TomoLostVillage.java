@@ -159,6 +159,7 @@ public class TomoLostVillage {
         TomoNova.getPlugin().gameManager.setTaupe(false);
         TomoNova.getPlugin().gameManager.setScarletMansion(false);
         TomoNova.getPlugin().gameManager.setTomoLostVillage(true);
+        TomoNova.getPlugin().gameManager.setBleachUhc(false);
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(1);
     }
 }

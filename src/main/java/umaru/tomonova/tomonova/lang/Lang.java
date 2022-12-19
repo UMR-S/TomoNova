@@ -171,7 +171,31 @@ public enum Lang {
     GUIS_GM_FSM_LORE("guis.gamemode.fsmLore", "On pille ton manoir Remimi"),
     GUIS_GM_TLV_NAME("guis.gamemode.tlvName", "Tomo lost village"),
     GUIS_GM_TLV_LORE("guis.gamemode.tlvLore", "Les pancartes du malaise le retour"),
-    ;
+    GUIS_CLASSES_NAME("guis.bleachuhc.classes.name", "Choisissez votre classe"),
+    GUIS_CLASSES_SHINIGAMI_NAME("guis.bleachuhc.classes.shinigamName","Shinigami"),
+    GUIS_CLASSES_QUINCY_NAME("guis.bleachuhc.classes.quincName", "Quincy"),
+    GUIS_CLASSES_SSR_NAME("guis.bleachuhc.classes.ssrName", "Shun shun rika"),
+    GUIS_BRAZO_NAME("guis.bleachuhc.classes.brazoName", "Brazo Derecha de Gigante"),
+    GUIS_GM_BLEACHUHC_NAME("guis.gamemode.bleachUhcName", "Bleach UHC"),
+    GUIS_GM_BLEACH_LORE("guis.gamemode.bleachUhcLore", "On aurait dû faire un event snk"),
+    GUIS_CLASSES_SHINIGAMI_LORE("guis.bleachuhc.classes.shinigamiLore", "Pour ceux qui aiment les grosses épées"),
+    GUIS_CLASSES_QUINCY_LORE("guis.bleachuhc.classes.quincyLore", "Aka les livreurs Amazon Prime de Bleach"),
+    GUIS_CLASSES_QUINCY_LORE_TWO("guis.bleachuhc.classes.quincyLoreTwo", "(parce qu'ils tirent des flèches bleues et qu'ils sont rapides ...)"),
+    GUIS_CLASSES_SSR_LORE("guis.bleachuhc.classes.ssrLore", "Collection de Batons d'Infinité incluse"),
+    GUIS_CLASSES_BRAZO_LORE("guis.bleachuhc.classes.brazoLore", "Son bouclier solide en fait la classe préférée de M.Macron"),
+    BUHC_ITEM_HOGYOKU_FRAG_ACTIF_NAME("bleachuhc.items.hogyokuFragActifName", "Fragment Hogyoku actif"),
+    BUHC_ITEM_HOGYOKU_FRAG_ACTIF_LORE("bleachuhc.items.hogyokuFragActifLore", "Sachez qu'à la base ça coûtait 10 coeurs"),
+    BUHC_ITEM_HOGYOKU_FRAG_INACTIF_NAME("bleachuhc.items.hogyokuFragInactifName", "Fragment Hogyoku inatif"),
+    BUHC_ITEM_HOGYOKU_FRAG_INACTIF_LORE("bleachuhc.items.hogyokuFragInactifLore", "Activation : vous retire 5 coeurs définitivement"),
+    BUHC_ITEM_HOGYOKU_COEUR_NAME("bleachuhc.items.hogyokuCoeurName", "Coeur du Hogyoku"),
+    BUHC_ITEM_HOGYOKU_COEUR_LORE("bleachuhc.items.hogyokuCoeurLore", "La main sur le coeur !"),
+    BUHC_ITEM_HOGYOKU_ACTIF_NAME("bleachuhc.items.hogyokuActifName", "Hogyoku actif"),
+    BUHC_ITEM_HOGYOKU_ACTIF_LORE("bleachuhc.items.hogyokuActifLore", "Donne : Resistance 1, Force 1, Saturation et Surbrillance"),
+    BUHC_ITEM_HOGYOKU_ACTIF_LORE_TWO("bleachuhc.items.hogyokuActifLoreTwo", "Régénère un coeur toutes les minutes"),
+    BUHC_ITEM_HOGYOKU_INACTIF_NAME("bleachuhc.items.hogyokuInactifName", "Hogyoku inatif"),
+    BUHC_ITEM_HOGYOKU_INACTIF_LORE("bleachuhc.items.hogyokuInactifLore", "Se réactive au bout d'une minute");
+
+
 
     private String path;
     private String def;

@@ -20,7 +20,7 @@ public class EntityDamageByEntity implements Listener {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             //PVP
             if(TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1){
-                if(TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getEntity().getName()).equals(TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(event.getDamager().getName()))){
+                if(TomoNova.getPlugin().teamUtils.arePlayersOnSameTeam(event.getEntity().getName(),event.getDamager().getName())){
                     event.setCancelled(true);
                 }
             }

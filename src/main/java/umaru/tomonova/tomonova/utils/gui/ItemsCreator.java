@@ -25,7 +25,6 @@ public class ItemsCreator {
         this.lores = lores;
         this.amount = 1;
     }
-
     public static ItemStack create(ItemsCreator ic) {
         ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
         ItemMeta itemMeta = itemStack.getItemMeta();
@@ -34,7 +33,16 @@ public class ItemsCreator {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
-
+    //Avec customModelData
+    public static ItemStack create(ItemsCreator ic, int customModelData) {
+        ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ic.getName());
+        itemMeta.setLore(ic.getLores());
+        itemMeta.setCustomModelData(customModelData);
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
+    }
     //Version potion
     public static ItemStack create(ItemsCreator ic, PotionType potionType) {
         ItemStack itemStack = new ItemStack(ic.getMaterial(), ic.getAmount());
