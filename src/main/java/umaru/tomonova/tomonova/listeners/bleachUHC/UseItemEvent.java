@@ -1,5 +1,7 @@
 package umaru.tomonova.tomonova.listeners.bleachUHC;
 
+import io.lumine.mythic.bukkit.MythicBukkit;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -96,28 +98,50 @@ public class UseItemEvent {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
 
             }
+            //Brazo
+            //Art du Hakuda
+            if((event.getAction() == Action.RIGHT_CLICK_AIR
+                    || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                    && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                    && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 4012602
+                    && tomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")) {
+                    TomoNova.getPlugin().classesUtils.playerHakudaUpgrade(player.getName());
+                    player.getInventory().remove(player.getInventory().getItemInMainHand());
+            }
             //Toute classe
-            //Fragment inactif du Hogyoku
+            //Activation fragment inactif du Hogyoku
             if ((event.getAction() == Action.RIGHT_CLICK_AIR
                     || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                    && !player.hasCooldown(Material.NETHER_WART)
+                    && !player.hasCooldown(Material.GLOWSTONE_DUST)
                     && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5149601) {
                 event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
                 GiveItem.giveHogyokuActifFragment(event.getPlayer().getName());
                 event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 10);
             }
-            // Hogyoku
-//            if((event.getAction() == Action.RIGHT_CLICK_AIR
-//                    || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-//                    && !player.hasCooldown(Material.NETHERITE_SCRAP)
-//                    && !HogyokuInactifTask.isHogyokuActivated()
-//                    && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5149604){
-//                HogyokuFirstLevelTask.setPlayerName(player.getName());
-//                HogyokuFirstLevelTask.setTimeActive(12000);
-//                HogyokuInactifTask.setHogyokuActivated(true);
-//                BukkitTask hogyokuFirstLevel = new HogyokuFirstLevelTask(BleachUHC.getPlugin()).runTaskTimer(BleachUHC.getPlugin(), 0, 20);
-//            }
-//        }
+            //Aveux de Gin
+            if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                    || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                    && !player.hasCooldown(Material.GLOWSTONE_DUST)
+                    && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5032602) {
+                event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
+
+                for(ActiveMob boss : MythicBukkit.inst().getMobManager().getActiveMobs()){
+                    //Aizen est le seul à avoir la faction traitre
+                    if(boss.getFaction().equals("traitre")){
+                        //Creation d'une loc normale
+                        Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),
+                                                        boss.getLocation().clone().getX(),
+                                                        boss.getLocation().clone().getY(),
+                                                        boss.getLocation().clone().getZ());
+                        //Activer si Aizen est proche
+                        if(player.getLocation().distance(bossLoc) <= 30.0){
+                            boss.getEntity().setHealth(boss.getEntity().getHealth() - boss.getEntity().getMaxHealth()*0.5);
+                            player.getInventory().remove(player.getInventory().getItemInMainHand());
+                        }
+                    }
+                }
+            }
+            //Operator
             // Wand combat zone
             if (event.getAction() == Action.RIGHT_CLICK_BLOCK
                     && player.getInventory().getItemInMainHand().getType() == Material.STONE_AXE

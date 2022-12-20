@@ -176,7 +176,7 @@ public enum Lang {
     GUIS_CLASSES_QUINCY_NAME("guis.bleachuhc.classes.quincName", "Quincy"),
     GUIS_CLASSES_SSR_NAME("guis.bleachuhc.classes.ssrName", "Shun shun rika"),
     GUIS_BRAZO_NAME("guis.bleachuhc.classes.brazoName", "Brazo Derecha de Gigante"),
-    GUIS_GM_BLEACHUHC_NAME("guis.gamemode.bleachUhcName", "Bleach UHC"),
+    GUIS_GM_BLEACH_NAME("guis.gamemode.bleachUhcName", "Bleach UHC"),
     GUIS_GM_BLEACH_LORE("guis.gamemode.bleachUhcLore", "On aurait dû faire un event snk"),
     GUIS_CLASSES_SHINIGAMI_LORE("guis.bleachuhc.classes.shinigamiLore", "Pour ceux qui aiment les grosses épées"),
     GUIS_CLASSES_QUINCY_LORE("guis.bleachuhc.classes.quincyLore", "Aka les livreurs Amazon Prime de Bleach"),
@@ -193,7 +193,10 @@ public enum Lang {
     BUHC_ITEM_HOGYOKU_ACTIF_LORE("bleachuhc.items.hogyokuActifLore", "Donne : Resistance 1, Force 1, Saturation et Surbrillance"),
     BUHC_ITEM_HOGYOKU_ACTIF_LORE_TWO("bleachuhc.items.hogyokuActifLoreTwo", "Régénère un coeur toutes les minutes"),
     BUHC_ITEM_HOGYOKU_INACTIF_NAME("bleachuhc.items.hogyokuInactifName", "Hogyoku inatif"),
-    BUHC_ITEM_HOGYOKU_INACTIF_LORE("bleachuhc.items.hogyokuInactifLore", "Se réactive au bout d'une minute");
+    BUHC_ITEM_HOGYOKU_INACTIF_LORE("bleachuhc.items.hogyokuInactifLore", "Se réactive au bout d'une minute"),
+    GUIS_BOSS_NAME("guis.bleachuhc.boss.name", "Liste des boss"),
+    BUHC_ITEM_RYUJIN_JAKKA_NAME("bleachuhc.items.ryujinJakkaName","Ryujin Jakka"),
+    BUHC_ITEM_RYUJIN_JAKKA_LORE("bleachuhc.items.ryujinJakkaLore","Plongez la dans l'eau et hop vous avez un sauna");
 
 
 

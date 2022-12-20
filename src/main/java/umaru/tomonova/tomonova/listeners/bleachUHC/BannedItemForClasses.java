@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.HogyokuInactifTask;
 
 public class BannedItemForClasses implements Listener {
     //Item Interdit par classes

@@ -103,7 +103,7 @@ public class AbilitiesEvents {
             }
         }
     }
-    //Stack des dégâts/effets
+    //Stack des dégâts/effets+attaque/réduction du brazo
     @EventHandler(priority = EventPriority.HIGHEST)
     public void EntityHitByEntity(EntityDamageByEntityEvent event){
 
@@ -161,9 +161,10 @@ public class AbilitiesEvents {
                         }
                     }
                     if(!isCooldown){
+                        int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
                         event.setDamage(0);
-                        damaged.setHealth(damaged.getHealth() - 4);
-                        damaged.setVelocity(damaged.getLocation().add(0.0,1.0,0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10));
+                        damaged.setHealth((damaged.getHealth() - 4)*hakudaModifier);
+                        damaged.setVelocity(damaged.getLocation().add(0.0,1.0,0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10*hakudaModifier));
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
                     }
                 }
@@ -177,7 +178,7 @@ public class AbilitiesEvents {
                     && !event.getDamager().getType().equals(EntityType.PLAYER)
                     && event.getDamage() >= 1.0){
                 if(MythicBukkit.inst().getAPIHelper().isMythicMob(event.getDamager())) {
-                    event.setDamage(event.getDamage()*0.43);
+                    event.setDamage(event.getDamage()*0.43); //0.43 = 0.65/1.5
                     event.setCancelled(true);
                     player.damage(event.getDamage(), event.getEntity());
                 } else {

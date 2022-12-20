@@ -58,7 +58,6 @@ public class ScoreboardUtils {
         locSpawn.setY(0.0);
         return (int)locPlayer.distance(locSpawn);
     }
-
     public HashMap<String, Scoreboard> getScoreboardMap() {
         return scoreboardMap;
     }

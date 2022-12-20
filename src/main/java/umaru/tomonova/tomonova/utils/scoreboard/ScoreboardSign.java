@@ -109,8 +109,11 @@ public class ScoreboardSign {
 
     public static String[] setLines(String playerName, int count) {
         final String[] lines = new String[12];
-        lines[0] = "UHC classique"; //Gamemode?
+        lines[0] = gamemodeLine();
         lines[1] = "";
+        if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+            lines[1] = bossLineBleachUhc(playerName);
+        }
         lines[2] = " ";
         //Flèche vers le spawn
         StringBuilder builder = new StringBuilder();
@@ -142,5 +145,38 @@ public class ScoreboardSign {
         }
         lines[11] = Lang.SB_BORDER.toString() + (int) -TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize() / 2 + "/" + (int) TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getSize() / 2;
         return lines;
+    }
+    public static String gamemodeLine(){
+        if(TomoNova.getPlugin().gameManager.isUhc()){
+           return Lang.GUIS_GM_UHC_NAME.toString();
+        }
+        if(TomoNova.getPlugin().gameManager.isSwitch()){
+            return Lang.GUIS_GM_SWITCH_NAME.toString();
+        }
+        if(TomoNova.getPlugin().gameManager.isTaupe()){
+            return Lang.GUIS_GM_TAUPE_NAME.toString();
+        }
+        if(TomoNova.getPlugin().gameManager.isScarletMansion()){
+            return Lang.GUIS_GM_FSM_NAME.toString();
+        }
+        if(TomoNova.getPlugin().gameManager.isTomoLostVillage()){
+            return Lang.GUIS_GM_TLV_NAME.toString();
+        }
+        if(TomoNova.getPlugin().gameManager.isUhc()){
+            return Lang.GUIS_GM_BLEACH_NAME.toString();
+        }
+        return "Nouveau gamemode";
+    }
+    public static String bossLineBleachUhc(String playerName){
+        if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+            if(TomoNova.getPlugin().bleachUHC.playersBossTarget.containsKey(playerName)){
+                StringBuilder builder = new StringBuilder();
+                if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()) {
+                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName)));
+                    return TomoNova.getPlugin().bleachUHC.playersBossTargetName.get(playerName) + builder + " §7(" + (int)TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName).distance(Bukkit.getPlayer(playerName).getLocation()) + ")   ";
+                }
+            }
+        }
+        return "";
     }
 }

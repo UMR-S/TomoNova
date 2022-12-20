@@ -46,7 +46,7 @@ public class GamemodeGui extends Gui {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }
         this.inventory.setItem(4, ItemsCreator.create(ic));
-        ic = new ItemsCreator(Material.HEART_OF_THE_SEA, ChatColor.RED + Lang.GUIS_GM_BLEACHUHC_NAME.toString(), Arrays.asList(Lang.GUIS_GM_BLEACH_LORE.toString()));
+        ic = new ItemsCreator(Material.HEART_OF_THE_SEA, ChatColor.RED + Lang.GUIS_GM_BLEACH_NAME.toString(), Arrays.asList(Lang.GUIS_GM_BLEACH_LORE.toString()));
         if (TomoNova.getPlugin().gameManager.isBleachUhc()) {
             this.inventory.setItem(7, ItemsCreator.create(ic));
         }

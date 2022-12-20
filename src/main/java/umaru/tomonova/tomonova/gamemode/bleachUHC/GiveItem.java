@@ -3,16 +3,19 @@ package umaru.tomonova.tomonova.gamemode.bleachUHC;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GiveItem {
     //Hogyoku
-    public static void giveHogyokuInactifFragment(String playerName){
+    public static void spawnHogyokuInactifFragment(String playerName){
         ItemStack hogyokuInactifFragment = CustomItems.createCustomItem(
                 Material.NETHER_WART,
                 ChatColor.AQUA,
@@ -31,7 +34,7 @@ public class GiveItem {
         player.getInventory().remove(player.getInventory().getItemInMainHand());
         player.getInventory().addItem(hogyokuActifFragment);
     }
-    public static void giveHogyokuCoeur(String playerName){
+    public static void spawnHogyokuCoeur(String playerName){
         ItemStack hogyokuCoeur = CustomItems.createCustomItem(
                 Material.NETHERITE_SCRAP,
                 ChatColor.AQUA,
@@ -61,5 +64,26 @@ public class GiveItem {
                 5149613);
         removeHogyokuInactif(playerName);
         Bukkit.getPlayer(playerName).getInventory().addItem(hogyokuActif);
+    }
+    public static void spawnRyujinJakka(){
+        ItemStack ryujinJakka = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_RYUJIN_JAKKA_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_RYUJIN_JAKKA_LORE.toString()),
+                1011104);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.DAMAGE_ALL, 2);
+            put(Enchantment.FIRE_ASPECT, 2);
+        }};
+        ryujinJakka = CustomItems.addEnchants(ryujinJakka,enchantMap);
+    }
+    public static void spawnArtDuHakuda(){
+        ItemStack ryujinJakka = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_RYUJIN_JAKKA_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_RYUJIN_JAKKA_LORE.toString()),
+                4012602);
     }
 }
