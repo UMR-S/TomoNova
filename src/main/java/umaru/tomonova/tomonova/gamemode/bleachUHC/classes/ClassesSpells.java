@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
+import umaru.tomonova.tomonova.core.TomoNova;
 
 import java.util.Arrays;
 import java.util.List;
@@ -146,5 +147,12 @@ public class ClassesSpells {
         }
     }
 
-
+    public void sogyoNoKotowari(String playerName){
+        LivingEntity entity = getEntityInSight(Bukkit.getPlayer(playerName), 50);
+        if(entity != null){
+            if(entity instanceof Player){
+                TomoNova.getPlugin().bleachUHC.affectPotionKotowari(entity.getName());
+            }
+        }
+    }
 }

@@ -45,6 +45,12 @@ public class UseItemEvent {
                 Shinso.Shinso(player.getName());
 
             }
+            // Attaque de l'arme d'Ukitake
+            if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                    || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                    && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116) {
+                    TomoNova.getPlugin().classesSpells.sogyoNoKotowari(player.getName());
+            }
             //Quincy
             //Dash quincy
             if ((event.getAction() == Action.RIGHT_CLICK_AIR

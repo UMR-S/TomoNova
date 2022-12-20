@@ -102,6 +102,17 @@ public class AbilitiesEvents {
                 }
             }
         }
+
+        if(event.getEntity() instanceof Player){
+            if(event.getNewEffect() != null){
+                Player player = (Player) event.getEntity();
+                if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116){
+                        TomoNova.getPlugin().bleachUHC.addPotionKotowari(event.getNewEffect());
+                    }
+                }
+            }
+        }
     }
     //Stack des dégâts/effets+attaque/réduction du brazo
     @EventHandler(priority = EventPriority.HIGHEST)
