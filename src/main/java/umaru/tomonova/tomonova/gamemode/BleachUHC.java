@@ -28,10 +28,40 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(4);
     }
     public void initializePlayersBossTarget(){
-        Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),null));
+        Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
     }
     public void initializeBleachUhcMobs() {
 
+    }
+    public void initializeBleachUhcBossLoc(){
+        Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),166,30,488);
+        bossLocation.put("ukitake",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),251,42,286);
+        bossLocation.put("mayuri",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),559,31,-308);
+        bossLocation.put("kenpachi",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),164,31,-497);
+        bossLocation.put("toshiro",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-158,31,53);
+        bossLocation.put("tosen",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-222,36,367);
+        bossLocation.put("kyoraku",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-68,31,-351);
+        bossLocation.put("komamura",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-64,31,-562);
+        bossLocation.put("byakuya",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-119,12,-93);
+        bossLocation.put("aizenv2",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-254,31,203);
+        bossLocation.put("aizenv1",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-73,31,283);
+        bossLocation.put("unohana",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),392,31,145);
+        bossLocation.put("gin",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),248,57,20);
+        bossLocation.put("soifon",bossLoc.clone());
+        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),109,74,-34);
+        bossLocation.put("yamamoto",bossLoc.clone());
     }
     public void createBoss(String bossName){
         MythicMob boss = MythicBukkit.inst().getMobManager().getMythicMob("AizenV2").get();
