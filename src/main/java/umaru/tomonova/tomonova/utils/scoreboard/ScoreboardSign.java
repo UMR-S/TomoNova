@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.utils.scoreboard;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -31,14 +32,20 @@ public class ScoreboardSign {
         Objective objective = scoreboard.registerNewObjective(subname + "sidebar", "dummy", ChatColor.LIGHT_PURPLE + Lang.SB_PREFIX.toString());
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] lines = setLines(playerName, count);
-        //Lignes à update : 2,3,4,5,8,10,11
+        //Lignes à update : 1(en bleach UHC),2,3,4,5,8,10,11
 
         Score gamemode = objective.getScore(lines[0]);
         gamemode.setScore(-1);
 
-        Score espace1 = objective.getScore(lines[1]);
-        espace1.setScore(-2);
-
+        if(!TomoNova.getPlugin().gameManager.isBleachUhc()) {
+            Score espace1 = objective.getScore(lines[1]);
+            espace1.setScore(-2);
+        } else {
+            Team flecheSpawn = scoreboard.registerNewTeam(playerName + "flecheBoss");
+            flecheSpawn.addEntry(ChatColor.RED + ""  + ChatColor.WHITE);
+            flecheSpawn.setPrefix(lines[1]);
+            objective.getScore(ChatColor.RED + ""  + ChatColor.WHITE).setScore(-2);
+        }
         Team flecheSpawn = scoreboard.registerNewTeam(playerName + "flecheSpawn");
         flecheSpawn.addEntry(ChatColor.RED + ""  + ChatColor.WHITE);
         flecheSpawn.setPrefix(lines[2]);
@@ -60,10 +67,10 @@ public class ScoreboardSign {
         objective.getScore(ChatColor.DARK_GREEN + ""  + ChatColor.WHITE).setScore(-6);
 
         Score espace2 = objective.getScore(lines[6]);
-        espace1.setScore(-7);
+        espace2.setScore(-7);
 
         Score espace3 = objective.getScore(lines[7]);
-        espace1.setScore(-8);
+        espace3.setScore(-8);
 
         Team time = scoreboard.registerNewTeam(playerName + "time");
         time.addEntry(ChatColor.LIGHT_PURPLE + ""  + ChatColor.WHITE);
@@ -71,7 +78,7 @@ public class ScoreboardSign {
         objective.getScore(ChatColor.LIGHT_PURPLE + ""  + ChatColor.WHITE).setScore(-9);
 
         Score espace4 = objective.getScore(lines[9]);
-        espace1.setScore(-10);
+        espace4.setScore(-10);
 
         Team borderTime = scoreboard.registerNewTeam(playerName + "borderTime");
         borderTime.addEntry(ChatColor.DARK_PURPLE + ""  + ChatColor.WHITE);
@@ -172,8 +179,14 @@ public class ScoreboardSign {
             if(TomoNova.getPlugin().bleachUHC.playersBossTarget.containsKey(playerName)){
                 StringBuilder builder = new StringBuilder();
                 if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()) {
-                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName)));
-                    return TomoNova.getPlugin().bleachUHC.playersBossTargetName.get(playerName) + builder + " §7(" + (int)TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName).distance(Bukkit.getPlayer(playerName).getLocation()) + ")   ";
+
+                    String bossName = TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(playerName);
+                    Location bossLoc = TomoNova.getPlugin().bleachUHC.returnBossLoc(bossName);
+
+                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), bossLoc));
+                    return TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName)
+                            + builder + " §7("
+                            + (int)bossLoc.distance(Bukkit.getPlayer(playerName).getLocation()) + ")   ";
                 }
             }
         }

@@ -15,8 +15,7 @@ import java.util.List;
 public class BleachUHC {
     public List<MythicMob> bossesList = new ArrayList<MythicMob>();
     public HashMap<String,Location> bossLocation = new HashMap<String,Location>();
-    public HashMap<String, Location> playersBossTarget = new HashMap<String, Location>();
-    public HashMap<String, String> playersBossTargetName = new HashMap<String, String>();
+    public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
     public List<PotionEffect> sogyoNoKotowari = new ArrayList<PotionEffect>();
 
     public void bleachUhcSettings() {
@@ -56,5 +55,17 @@ public class BleachUHC {
             player.addPotionEffect(potionKotowari);
         }
         sogyoNoKotowari = new ArrayList<PotionEffect>();
+    }
+    public String returnPlayerTargetName(String playerName){
+        if(playersBossTarget.containsKey(playerName)){
+            return playersBossTarget.get(playerName);
+        }
+        return "None";
+    }
+    public Location returnBossLoc(String bossName){
+        if(bossLocation.containsKey(bossName)){
+            return bossLocation.get(bossName).clone();
+        }
+        return TomoNova.getPlugin().worldUtils.getWorld().getSpawnLocation().clone();
     }
 }
