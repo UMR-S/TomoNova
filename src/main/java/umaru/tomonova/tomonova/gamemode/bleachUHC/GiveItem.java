@@ -172,7 +172,7 @@ public class GiveItem {
                 ChatColor.AQUA,
                 Lang.BUHC_ITEM_SUZUMEBACHI_NAME.toString().toString(),
                 Arrays.asList(Lang.BUHC_ITEM_SUZUMEBACHI_LORE.toString()),
-                1071110);
+                1021105);
         Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
             put(Enchantment.DAMAGE_ALL, 1);
         }};
