@@ -151,6 +151,13 @@ public class ClassesSpells {
             Bukkit.getPlayer(playerName).setCooldown(Material.PHANTOM_MEMBRANE, 60);
         }
     }
+    //Bave de minazuki
+    public void baveDeMinazuki(String playerName, int absorption){
+        LivingEntity entity = getEntityInSight(Bukkit.getPlayer(playerName), 50);
+        if (entity != null) {
+            entity.setAbsorptionAmount(absorption);
+        }
+    }
     //Shinigami
     public void sogyoNoKotowari(String playerName){
         LivingEntity entity = getEntityInSight(Bukkit.getPlayer(playerName), 50);

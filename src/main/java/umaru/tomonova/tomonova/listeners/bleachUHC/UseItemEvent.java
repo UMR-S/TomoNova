@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.BaveMinazukiTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Shinso;
@@ -118,6 +119,19 @@ public class UseItemEvent implements Listener {
                         && tomoNova.classesUtils.isPlayerClasse(player.getName(), "ssr")) {
 
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
+
+                }
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.HEART_OF_THE_SEA)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 3042605
+                        && tomoNova.classesUtils.isPlayerClasse(player.getName(), "ssr")
+                        && !BaveMinazukiTask.isBaveActive()
+                        && BaveMinazukiTask.getUtilisationsBave() > 0){
+                    BaveMinazukiTask.setBaveActive(true);
+                    BaveMinazukiTask.setUtilisationsBave(BaveMinazukiTask.getUtilisationsBave()-1);
+                    BukkitTask baveMinazuki = new BaveMinazukiTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,20);
+
 
                 }
                 //Brazo
