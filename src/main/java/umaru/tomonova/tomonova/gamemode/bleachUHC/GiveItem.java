@@ -166,4 +166,17 @@ public class GiveItem {
 
         location.getWorld().dropItemNaturally(location, medicament);
     }
+    public static void spawnSuzumebachi(Location location){
+        ItemStack suzumebachi = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_SUZUMEBACHI_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_SUZUMEBACHI_LORE.toString()),
+                1071110);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.DAMAGE_ALL, 1);
+        }};
+        CustomItems.addEnchants(suzumebachi,enchantMap);
+        location.getWorld().dropItemNaturally(location, suzumebachi);
+    }
 }

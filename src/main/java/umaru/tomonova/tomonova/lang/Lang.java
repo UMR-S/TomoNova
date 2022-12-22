@@ -243,7 +243,9 @@ public enum Lang {
     BUHC_ITEM_TENGEN_LORE_TWO("bleachuhc.items.tengenLoreTwo","Cooldown : 1 minute"),
     BUHC_ITEM_MEDICAMENT_NAME("bleachuhc.items.medicamentName","Médicaments de Ukitake"),
     BUHC_ITEM_MEDICAMENT_LORE("bleachuhc.items.medicamentLore","Purge tous les effets pendant 6 secondes"),
-    BUHC_ITEM_MEDICAMENT_LORE_TWO("bleachuhc.items.medicamentLoreTwo","Cooldown : 30 secondes");
+    BUHC_ITEM_MEDICAMENT_LORE_TWO("bleachuhc.items.medicamentLoreTwo","Cooldown : 30 secondes"),
+    BUHC_ITEM_SUZUMEBACHI_NAME("bleachuhc.items.suzumebachiName","Suzumebachi"),
+    BUHC_ITEM_SUZUMEBACHI_LORE("bleachuhc.items.suzumebachiLore","Vous rend invisible quand tenue en main (principale)");
 
 
 
