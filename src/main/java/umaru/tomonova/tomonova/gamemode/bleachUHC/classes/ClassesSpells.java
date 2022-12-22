@@ -1,5 +1,8 @@
 package umaru.tomonova.tomonova.gamemode.bleachUHC.classes;
 
+import io.lumine.mythic.api.mobs.MythicMob;
+import io.lumine.mythic.bukkit.BukkitAdapter;
+import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -7,6 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,6 +24,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ClassesSpells {
+    //Shinigami & Quincy
     public void Dash(double power, String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         Vector playerFacing = player.getLocation().getDirection();
@@ -27,7 +32,7 @@ public class ClassesSpells {
         playerFacing.multiply(power);
         player.setVelocity(playerFacing);
     }
-
+    //Quincy
     public void Carquois(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
 
@@ -146,7 +151,7 @@ public class ClassesSpells {
             Bukkit.getPlayer(playerName).setCooldown(Material.PHANTOM_MEMBRANE, 60);
         }
     }
-
+    //Shinigami
     public void sogyoNoKotowari(String playerName){
         LivingEntity entity = getEntityInSight(Bukkit.getPlayer(playerName), 50);
         if(entity != null){
@@ -155,6 +160,18 @@ public class ClassesSpells {
             }
         }
     }
+    //Spawn du samourai
+    public void tengen(String playerName){
+        Player player = Bukkit.getPlayer(playerName);
+        MythicMob samourai = TomoNova.bleachUHC.getBossMM("PlayerSamourai");
+        if(samourai != null){
+            ActiveMob samouraiActive = samourai.spawn(BukkitAdapter.adapt(player.getLocation()),1);
+            Wolf samouraiEntity = (Wolf) samouraiActive.getEntity().getBukkitEntity();
+            samouraiEntity.setOwner(player);
+
+        }
+    }
+    //Toute classe
     public void sakeTeleport(String firstPlayerName, String secondPlayerName){
         Player firstPlayer = Bukkit.getPlayer(firstPlayerName);
         Player secondPlayer = Bukkit.getPlayer(secondPlayerName);

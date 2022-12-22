@@ -61,7 +61,7 @@ public class AbilitiesEvents {
         }
 
         //Fusion poison Mayuri
-
+        //Ajouter une condition : mayuriVivant (sinon problème avec Ashisogi Jizo) ou avec la cause
         if(event.getEntity() instanceof Player){
 
             if(event.getNewEffect() != null){
@@ -118,10 +118,9 @@ public class AbilitiesEvents {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void EntityHitByEntity(EntityDamageByEntityEvent event){
 
-        //Stack des dégâts/effets
 
         if(event.getDamager() instanceof Player){
-
+            //Stack des dégâts/effets
             //Pour Ukitake
 
             if(event.getEntity() instanceof LivingEntity){
@@ -158,11 +157,11 @@ public class AbilitiesEvents {
                 }
 
             }
-            //Brazo
-            //Attaque du Brazo
             if(event.getEntity() instanceof LivingEntity){
                 Player player = (Player) event.getDamager();
                 LivingEntity damaged = (LivingEntity) event.getEntity();
+                //Brazo
+                //Attaque du Brazo
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.SHIELD)
                         && TomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")){
                     boolean isCooldown = false;
@@ -179,12 +178,30 @@ public class AbilitiesEvents {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
                     }
                 }
+                //Shinigami
+                //Minazuki
+                if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
+                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                        if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1041107){
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60,0));
+                        }
+                    }
+                }
+                if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
+                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                        if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1121115){
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100 ,0));
+                        }
+                    }
+                }
             }
         }
 
-        // Dégats mobs au Brazo
         if(event.getEntity() instanceof Player){
             Player player = ((Player) event.getEntity()).getPlayer();
+            // Dégats mobs au Brazo
             if(TomoNova.classesUtils.isPlayerClasse(player.getName(),"brazo")
                     && !event.getDamager().getType().equals(EntityType.PLAYER)
                     && event.getDamage() >= 1.0){

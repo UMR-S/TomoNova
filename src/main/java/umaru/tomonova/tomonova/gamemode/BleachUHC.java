@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BleachUHC {
-    public List<MythicMob> bossesList = new ArrayList<MythicMob>();
+    public HashMap<String,MythicMob> bossesList = new HashMap<String,MythicMob>();
     public HashMap<String,Location> bossLocation = new HashMap<String,Location>();
     public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
     public List<PotionEffect> sogyoNoKotowari = new ArrayList<PotionEffect>();
@@ -31,7 +31,7 @@ public class BleachUHC {
         Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
     }
     public void initializeBleachUhcMobs() {
-
+        bossesList.put("PlayerSamourai",createBoss("PlayerSamourai"));
     }
     public void initializeBleachUhcBossLoc(){
         Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),166,30,488);
@@ -63,8 +63,9 @@ public class BleachUHC {
         bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),109,74,-34);
         bossLocation.put("yamamoto",bossLoc.clone());
     }
-    public void createBoss(String bossName){
-        MythicMob boss = MythicBukkit.inst().getMobManager().getMythicMob("AizenV2").get();
+    public MythicMob createBoss(String bossName){
+        MythicMob boss = MythicBukkit.inst().getMobManager().getMythicMob(bossName).get();
+        return boss;
     }
 
     public void addPotionKotowari(PotionEffect potionEffect){
@@ -97,5 +98,12 @@ public class BleachUHC {
             return bossLocation.get(bossName).clone();
         }
         return TomoNova.getPlugin().worldUtils.getWorld().getSpawnLocation().clone();
+    }
+
+    public MythicMob getBossMM(String bossName) {
+        if(bossesList.containsKey(bossName)) {
+            return bossesList.get(bossName);
+        }
+        return null;
     }
 }

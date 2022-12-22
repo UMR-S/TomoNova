@@ -224,7 +224,25 @@ public enum Lang {
     GUIS_BOSS_MAYURI_NAME("guis.bleachuhc.boss.mayuriName","Mayuri"),
     GUIS_BOSS_MAYURI_LORE("guis.bleachuhc.boss.mayuriLore","Tuturu~"),
     GUIS_BOSS_UKITAKE_NAME("guis.bleachuhc.boss.ukitakeName","Ukitake"),
-    GUIS_BOSS_UKITAKE_LORE("guis.bleachuhc.boss.yamamotoLore","Encore un qui va casser mauvais"),;
+    GUIS_BOSS_UKITAKE_LORE("guis.bleachuhc.boss.yamamotoLore","Encore un qui va casser mauvais"),
+    BUHC_ITEM_ART_DU_HAKUDA_NAME("bleachuhc.items.artDuHakudaName","Art du Hakuda"),
+    BUHC_ITEM_ART_DU_HAKUDA_LORE("bleachuhc.items.artDuHakudaLore","Brazo uniquement"),
+    BUHC_ITEM_ART_DU_HAKUDA_LORE_TWO("bleachuhc.items.artDuHakudaLoreTwo","Double les dégâts et le knockback de base"),
+    BUHC_ITEM_MINAZUKI_NAME("bleachuhc.items.minazukiName","Minazuki"),
+    BUHC_ITEM_MINAZUKI_LORE("bleachuhc.items.minazukiLore","Inflige Wither 1 pendant 3 seconde à chaque coup"),
+    BUHC_ITEM_SENBONZAKURA_NAME("bleachuhc.items.senbonzakuraName","Senbonzakura"),
+    BUHC_ITEM_SENBONZAKURA_LORE("bleachuhc.items.senbonzakuraLore","Chaque seconde pendant 6 seconde, les joueurs"),
+    BUHC_ITEM_SENBONZAKURA_LORE_TWO("bleachuhc.items.senbonzakuraLoreTwo","situé entre 3 et 6 blocks de vous subissent 6 points de dégâts"),
+    BUHC_ITEM_SENBONZAKURA_LORE_THREE("bleachuhc.items.senbonzakuraLoreThree","Cooldown : 12 secondes"),
+    BUHC_ITEM_ASHISOGI_JIZO_NAME("bleachuhc.items.ashisogiJizoName","Ashisogi Jizo"),
+    BUHC_ITEM_ASHISOGI_JIZO_LORE("bleachuhc.items.ashisogiJizoLore","Inflige Poison 1 pendant 5 seconde à chaque coup"),
+    BUHC_ITEM_KENPACHI_SWORD_NAME("bleachuhc.items.kenpachiSwordName","Epee de Kenpachi"),
+    BUHC_ITEM_KENPACHI_SWORD_LORE("bleachuhc.items.kenpachiSwordLore","Aka chara design recyclé"),
+    BUHC_ITEM_TENGEN_NAME("bleachuhc.items.tengenName","Tengen"),
+    BUHC_ITEM_TENGEN_LORE("bleachuhc.items.tengenLore","Invoque un samourai géant pendant 1 minute"),
+    BUHC_ITEM_TENGEN_LORE_TWO("bleachuhc.items.tengenLoreTwo","Cooldown : 1 minute");
+
+
 
 
 

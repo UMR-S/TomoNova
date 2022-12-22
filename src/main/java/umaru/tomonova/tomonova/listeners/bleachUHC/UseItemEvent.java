@@ -61,7 +61,12 @@ public class UseItemEvent implements Listener {
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116) {
                     BukkitTask senbonzakuraActive = new SenbonzakuraTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,20);
                 }
-
+                // Tengen (invocation samourai)
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1071110) {
+                    TomoNova.classesSpells.tengen(player.getName());
+                }
                 //Quincy
                 //Dash quincy
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
