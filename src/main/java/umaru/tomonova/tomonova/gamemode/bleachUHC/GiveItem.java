@@ -156,4 +156,14 @@ public class GiveItem {
         CustomItems.addEnchants(tengen,enchantMap);
         location.getWorld().dropItemNaturally(location, tengen);
     }
+    public static void spawnMedicament(Location location){
+        ItemStack medicament = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_MEDICAMENT_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_MEDICAMENT_LORE.toString(), Lang.BUHC_ITEM_MEDICAMENT_LORE_TWO.toString()),
+                5132208);
+
+        location.getWorld().dropItemNaturally(location, medicament);
+    }
 }

@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.BaveMinazukiTask;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.MedicamentUkitakeTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Shinso;
@@ -176,6 +177,13 @@ public class UseItemEvent implements Listener {
                             }
                         }
                     }
+                }
+                //Medicament de Ukitake
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5132208) {
+                    BukkitTask medicamentUkitake = new MedicamentUkitakeTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,10);
                 }
                 //Operator
                 // Wand combat zone

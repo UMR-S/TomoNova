@@ -240,7 +240,10 @@ public enum Lang {
     BUHC_ITEM_KENPACHI_SWORD_LORE("bleachuhc.items.kenpachiSwordLore","Aka chara design recyclé"),
     BUHC_ITEM_TENGEN_NAME("bleachuhc.items.tengenName","Tengen"),
     BUHC_ITEM_TENGEN_LORE("bleachuhc.items.tengenLore","Invoque un samourai géant pendant 1 minute"),
-    BUHC_ITEM_TENGEN_LORE_TWO("bleachuhc.items.tengenLoreTwo","Cooldown : 1 minute");
+    BUHC_ITEM_TENGEN_LORE_TWO("bleachuhc.items.tengenLoreTwo","Cooldown : 1 minute"),
+    BUHC_ITEM_MEDICAMENT_NAME("bleachuhc.items.medicamentName","Médicaments de Ukitake"),
+    BUHC_ITEM_MEDICAMENT_LORE("bleachuhc.items.medicamentLore","Purge tous les effets pendant 6 secondes"),
+    BUHC_ITEM_MEDICAMENT_LORE_TWO("bleachuhc.items.medicamentLoreTwo","Cooldown : 30 secondes");
 
 
 
