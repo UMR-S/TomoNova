@@ -250,11 +250,10 @@ public enum Lang {
     BUHC_ITEM_SUZUMICHI_LORE("bleachuhc.items.suzumichiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup"),
     BUHC_ITEM_PHOTO_YORUICHI_NAME("bleachuhc.items.photoYoruichiName","Photo de Yoruichi"),
     BUHC_ITEM_PHOTO_YORUICHI_LORE("bleachuhc.items.photoYoruichiLore","Pourquoi la photo est un bazooka?"),
-    BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO("bleachuhc.items.photoYoruichiLoreTwo","Parce que Yoruichi c'est un missile");
-
-
-
-
+    BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO("bleachuhc.items.photoYoruichiLoreTwo","Parce que Yoruichi c'est un missile"),
+    BUHC_ITEM_LYS_DES_NEIGES_NAME("bleachuhc.items.lysDesNeigesName","Lys des neiges"),
+    BUHC_ITEM_LYS_DES_NEIGES_LORE("bleachuhc.items.lysDesNeigesLore","Emmure le joueur dans votre ligne de mire"),
+    BUHC_ITEM_LYS_DES_NEIGES_LORE_TWO("bleachuhc.items.lysDesNeigesLoreTwo","Cooldown : 20 minutes (une si vous ratez)");
 
     private String path;
     private String def;

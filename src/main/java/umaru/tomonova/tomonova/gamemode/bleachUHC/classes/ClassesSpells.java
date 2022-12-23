@@ -1,8 +1,5 @@
 package umaru.tomonova.tomonova.gamemode.bleachUHC.classes;
 
-import io.lumine.mythic.api.mobs.MythicMob;
-import io.lumine.mythic.bukkit.BukkitAdapter;
-import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -10,7 +7,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.Wolf;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -115,8 +111,8 @@ public class ClassesSpells {
         }
 
 
-        if (target != null)
-            player.sendMessage("You are looking at " + target.getName() + " (" + target.getUniqueId() + ") BI");
+        //if (target != null)
+            //player.sendMessage("You are looking at " + target.getName() + " (" + target.getUniqueId() + ") BI");
         return target;
     }
 
