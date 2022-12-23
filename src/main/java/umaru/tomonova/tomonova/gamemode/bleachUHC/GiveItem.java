@@ -192,4 +192,13 @@ public class GiveItem {
         CustomItems.addEnchants(suzumichi,enchantMap);
         location.getWorld().dropItemNaturally(location, suzumichi);
     }
+    public static void spawnPhotoYoruichi(Location location){
+        ItemStack photoYoruichi = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_PHOTO_YORUICHI_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_PHOTO_YORUICHI_LORE.toString(), Lang.BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO.toString()),
+                5022601);
+        location.getWorld().dropItemNaturally(location, photoYoruichi);
+    }
 }

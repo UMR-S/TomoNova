@@ -247,7 +247,10 @@ public enum Lang {
     BUHC_ITEM_SUZUMEBACHI_NAME("bleachuhc.items.suzumebachiName","Suzumebachi"),
     BUHC_ITEM_SUZUMEBACHI_LORE("bleachuhc.items.suzumebachiLore","Vous rend invisible quand tenue en main (principale)"),
     BUHC_ITEM_SUZUMICHI_NAME("bleachuhc.items.suzumichiName","Suzumichi"),
-    BUHC_ITEM_SUZUMICHI_LORE("bleachuhc.items.suzumichiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup");
+    BUHC_ITEM_SUZUMICHI_LORE("bleachuhc.items.suzumichiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup"),
+    BUHC_ITEM_PHOTO_YORUICHI_NAME("bleachuhc.items.photoYoruichiName","Photo de Yoruichi"),
+    BUHC_ITEM_PHOTO_YORUICHI_LORE("bleachuhc.items.photoYoruichiLore","Pourquoi la photo est un bazooka?"),
+    BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO("bleachuhc.items.photoYoruichiLoreTwo","Parce que Yoruichi c'est un missile");
 
 
 
