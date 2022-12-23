@@ -210,4 +210,13 @@ public class GiveItem {
                 5022601);
         location.getWorld().dropItemNaturally(location, lysDesNeiges);
     }
+    public static void spawnHyorinmaru(Location location){
+        ItemStack hyorinmaru = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_HYORINMARU_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_HYORINMARU_LORE.toString(), Lang.BUHC_ITEM_HYORINMARU_LORE_TWO.toString()),
+                1101113);
+        location.getWorld().dropItemNaturally(location, hyorinmaru);
+    }
 }

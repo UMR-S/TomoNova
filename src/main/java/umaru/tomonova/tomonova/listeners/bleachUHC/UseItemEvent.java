@@ -18,10 +18,7 @@ import umaru.tomonova.tomonova.core.task.bleachUHCTask.BaveMinazukiTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.MedicamentUkitakeTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
-import umaru.tomonova.tomonova.gamemode.bleachUHC.items.LysDesNeiges;
-import umaru.tomonova.tomonova.gamemode.bleachUHC.items.PhotoDeYoruichi;
-import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Shinso;
-import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Tengen;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.items.*;
 
 public class UseItemEvent implements Listener {
 
@@ -201,6 +198,13 @@ public class UseItemEvent implements Listener {
                         && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5102605) {
                     LysDesNeiges.lysDesNeiges(player.getName());
+                }
+                //Hyorinmaru
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.IRON_SWORD)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1101113) {
+                    Hyorinmaru.hyorinmaru(player.getName());
                 }
                 //Operator
                 // Wand combat zone
