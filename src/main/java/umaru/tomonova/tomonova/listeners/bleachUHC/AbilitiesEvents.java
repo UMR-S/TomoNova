@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -208,6 +209,7 @@ public class AbilitiesEvents {
                 }
                 //Toute classe
                 //Lunettes de Tosen (rajouter la condition de mort de Tosen)
+                //Photo de yoruichi résistance explosion
             }
         }
 

@@ -19,6 +19,7 @@ import umaru.tomonova.tomonova.core.task.bleachUHCTask.MedicamentUkitakeTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Shinso;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.items.Tengen;
 
 public class UseItemEvent implements Listener {
 
@@ -67,7 +68,7 @@ public class UseItemEvent implements Listener {
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1071110) {
-                    TomoNova.classesSpells.tengen(player.getName());
+                    Tengen.tengen(player.getName());
                 }
                 //Quincy
                 //Dash quincy
@@ -179,6 +180,13 @@ public class UseItemEvent implements Listener {
                     }
                 }
                 //Medicament de Ukitake
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5132208) {
+                    BukkitTask medicamentUkitake = new MedicamentUkitakeTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,10);
+                }
+                //Photo de Yoruichi
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                         && !player.hasCooldown(Material.CARROT_ON_A_STICK)
