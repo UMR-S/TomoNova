@@ -44,9 +44,9 @@ public class SenbonzakuraTask extends BukkitRunnable {
                 player.getWorld().spawnParticle(Particle.REDSTONE,player.getLocation().clone().add(particleVector),5, dustOptions);
             }
         }
-        breakTime--;
         if (breakTime == 0) {
             this.cancel();
         }
+        breakTime--;
     }
 }

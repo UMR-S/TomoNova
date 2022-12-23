@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BleachUHC {
+    public HashMap<String,Boolean> lunettesBoolean = new HashMap<String,Boolean>();
     public HashMap<String,MythicMob> bossesList = new HashMap<String,MythicMob>();
     public HashMap<String,Location> bossLocation = new HashMap<String,Location>();
     public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
@@ -25,7 +26,12 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setScarletMansion(false);
         TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
         TomoNova.getPlugin().gameManager.setBleachUhc(true);
-        TomoNova.getPlugin().gameManager.setPlayersPerTeam(4);
+        TomoNova.getPlugin().gameManager.setPlayersPerTeam(3);
+    }
+    public void initializeLunettesBoolean(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            lunettesBoolean.put(player.getName(),false);
+        }
     }
     public void initializePlayersBossTarget(){
         Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
@@ -105,5 +111,16 @@ public class BleachUHC {
             return bossesList.get(bossName);
         }
         return null;
+    }
+
+    public Boolean getLunettesBooleanPlayer(String playerName) {
+        if(lunettesBoolean.containsKey(playerName)){
+            return lunettesBoolean.get(playerName);
+        }
+        return false;
+    }
+
+    public void setLunettesBooleanTruePlayer(String playerName) {
+        this.lunettesBoolean.put(playerName,true);
     }
 }

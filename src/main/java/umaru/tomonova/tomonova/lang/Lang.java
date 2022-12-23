@@ -256,7 +256,10 @@ public enum Lang {
     BUHC_ITEM_LYS_DES_NEIGES_LORE_TWO("bleachuhc.items.lysDesNeigesLoreTwo","Cooldown : 20 minutes (une si vous ratez)"),
     BUHC_ITEM_HYORINMARU_NAME("bleachuhc.items.hyorinmaruName","Hyorinmaru"),
     BUHC_ITEM_HYORINMARU_LORE("bleachuhc.items.hyorinmaruLore","Crée un cône de glace qui inflige l'effet gel"),
-    BUHC_ITEM_HYORINMARU_LORE_TWO("bleachuhc.items.hyorinmaruLoreTwo","Cooldown : 10 minutes");
+    BUHC_ITEM_HYORINMARU_LORE_TWO("bleachuhc.items.hyorinmaruLoreTwo","Cooldown : 10 minutes"),
+    BUHC_ITEM_LUNETTES_TOSEN_NAME("bleachuhc.items.lunettesTosenName","Lunettes de Tosen"),
+    BUHC_ITEM_LUNETTES_TOSEN_LORE("bleachuhc.items.lunettesTosenLore","Crée une boule de 50 blocks de rayon donnant cécité pendant 1min"),
+    BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO("bleachuhc.items.lunettesTosenLoreTwo","Cooldown : 30 minutes");
 
     private String path;
     private String def;

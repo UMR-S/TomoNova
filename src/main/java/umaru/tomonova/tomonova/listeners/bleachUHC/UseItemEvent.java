@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.BaveMinazukiTask;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.LunetteDeTosenTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.MedicamentUkitakeTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
@@ -68,6 +69,13 @@ public class UseItemEvent implements Listener {
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1071110) {
                     Tengen.tengen(player.getName());
+                }
+                //Hyorinmaru
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.IRON_SWORD)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1101113) {
+                    Hyorinmaru.hyorinmaru(player.getName());
                 }
                 //Quincy
                 //Dash quincy
@@ -199,12 +207,13 @@ public class UseItemEvent implements Listener {
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5102605) {
                     LysDesNeiges.lysDesNeiges(player.getName());
                 }
-                //Hyorinmaru
+                //Lunettes de Tosen
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && !player.hasCooldown(Material.IRON_SWORD)
-                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1101113) {
-                    Hyorinmaru.hyorinmaru(player.getName());
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5092605) {
+                    TomoNova.getPlugin().bleachUHC.initializeLunettesBoolean();
+                    BukkitTask lunettesDeTosen = new LunetteDeTosenTask(TomoNova.getPlugin(), player.getName()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
                 }
                 //Operator
                 // Wand combat zone

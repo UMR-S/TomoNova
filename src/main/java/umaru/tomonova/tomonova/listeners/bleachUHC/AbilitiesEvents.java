@@ -15,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.LunetteDeTosenTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.ReturnDamageTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.IceCage;
 
@@ -226,6 +227,29 @@ public class AbilitiesEvents {
                 } else {
                     event.setDamage(event.getDamage()*0.65);
                 }
+            }
+        }
+    }
+    @EventHandler
+    public void entityDamage(EntityDamageEvent event){
+
+        if(event.getEntity() instanceof Player){
+            Player player = ((Player) event.getEntity()).getPlayer();
+            //Dégâts de chute
+            if(event.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
+                event.setCancelled(true);
+            }
+            //Lunettes de Tosen
+            boolean isBlind = false;
+            for(PotionEffect potionEffect : player.getActivePotionEffects()){
+                if(potionEffect.getType().equals(PotionEffectType.BLINDNESS)
+                    && potionEffect.getDuration() > 21){
+                    isBlind = true;
+                }
+            }
+            if(isBlind){
+                player.removePotionEffect(PotionEffectType.BLINDNESS);
+                TomoNova.getPlugin().bleachUHC.setLunettesBooleanTruePlayer(player.getName());
             }
         }
     }

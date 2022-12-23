@@ -219,4 +219,13 @@ public class GiveItem {
                 1101113);
         location.getWorld().dropItemNaturally(location, hyorinmaru);
     }
+    public static void spawnLunettesTosen(Location location){
+        ItemStack lunettesTosen = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_LUNETTES_TOSEN_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE.toString(), Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO.toString()),
+                1101113);
+        location.getWorld().dropItemNaturally(location, lunettesTosen);
+    }
 }
