@@ -188,6 +188,7 @@ public class AbilitiesEvents {
                         }
                     }
                 }
+                //Ashisogi Jizo
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
                         && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
                     if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
@@ -196,6 +197,17 @@ public class AbilitiesEvents {
                         }
                     }
                 }
+                //Suzumichi
+                if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
+                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                        if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1091112){
+                            damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 ,0));
+                        }
+                    }
+                }
+                //Toute classe
+                //Lunettes de Tosen (rajouter la condition de mort de Tosen)
             }
         }
 

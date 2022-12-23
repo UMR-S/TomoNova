@@ -179,4 +179,17 @@ public class GiveItem {
         CustomItems.addEnchants(suzumebachi,enchantMap);
         location.getWorld().dropItemNaturally(location, suzumebachi);
     }
+    public static void spawnSuzumichi(Location location){
+        ItemStack suzumichi = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_SUZUMICHI_NAME.toString().toString(),
+                Arrays.asList(Lang.BUHC_ITEM_SUZUMICHI_LORE.toString()),
+                1091112);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.DAMAGE_ALL, 1);
+        }};
+        CustomItems.addEnchants(suzumichi,enchantMap);
+        location.getWorld().dropItemNaturally(location, suzumichi);
+    }
 }

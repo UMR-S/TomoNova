@@ -229,13 +229,13 @@ public enum Lang {
     BUHC_ITEM_ART_DU_HAKUDA_LORE("bleachuhc.items.artDuHakudaLore","Brazo uniquement"),
     BUHC_ITEM_ART_DU_HAKUDA_LORE_TWO("bleachuhc.items.artDuHakudaLoreTwo","Double les dégâts et le knockback de base"),
     BUHC_ITEM_MINAZUKI_NAME("bleachuhc.items.minazukiName","Minazuki"),
-    BUHC_ITEM_MINAZUKI_LORE("bleachuhc.items.minazukiLore","Inflige Wither 1 pendant 3 seconde à chaque coup"),
+    BUHC_ITEM_MINAZUKI_LORE("bleachuhc.items.minazukiLore","Inflige Wither 1 pendant 3 secondes à chaque coup"),
     BUHC_ITEM_SENBONZAKURA_NAME("bleachuhc.items.senbonzakuraName","Senbonzakura"),
-    BUHC_ITEM_SENBONZAKURA_LORE("bleachuhc.items.senbonzakuraLore","Chaque seconde pendant 6 seconde, les joueurs"),
+    BUHC_ITEM_SENBONZAKURA_LORE("bleachuhc.items.senbonzakuraLore","Chaque seconde pendant 6 secondes, les joueurs"),
     BUHC_ITEM_SENBONZAKURA_LORE_TWO("bleachuhc.items.senbonzakuraLoreTwo","situé entre 3 et 6 blocks de vous subissent 6 points de dégâts"),
     BUHC_ITEM_SENBONZAKURA_LORE_THREE("bleachuhc.items.senbonzakuraLoreThree","Cooldown : 12 secondes"),
     BUHC_ITEM_ASHISOGI_JIZO_NAME("bleachuhc.items.ashisogiJizoName","Ashisogi Jizo"),
-    BUHC_ITEM_ASHISOGI_JIZO_LORE("bleachuhc.items.ashisogiJizoLore","Inflige Poison 1 pendant 5 seconde à chaque coup"),
+    BUHC_ITEM_ASHISOGI_JIZO_LORE("bleachuhc.items.ashisogiJizoLore","Inflige Poison 1 pendant 5 secondes à chaque coup"),
     BUHC_ITEM_KENPACHI_SWORD_NAME("bleachuhc.items.kenpachiSwordName","Epee de Kenpachi"),
     BUHC_ITEM_KENPACHI_SWORD_LORE("bleachuhc.items.kenpachiSwordLore","Aka chara design recyclé"),
     BUHC_ITEM_TENGEN_NAME("bleachuhc.items.tengenName","Tengen"),
@@ -245,7 +245,9 @@ public enum Lang {
     BUHC_ITEM_MEDICAMENT_LORE("bleachuhc.items.medicamentLore","Purge tous les effets pendant 6 secondes"),
     BUHC_ITEM_MEDICAMENT_LORE_TWO("bleachuhc.items.medicamentLoreTwo","Cooldown : 30 secondes"),
     BUHC_ITEM_SUZUMEBACHI_NAME("bleachuhc.items.suzumebachiName","Suzumebachi"),
-    BUHC_ITEM_SUZUMEBACHI_LORE("bleachuhc.items.suzumebachiLore","Vous rend invisible quand tenue en main (principale)");
+    BUHC_ITEM_SUZUMEBACHI_LORE("bleachuhc.items.suzumebachiLore","Vous rend invisible quand tenue en main (principale)"),
+    BUHC_ITEM_SUZUMICHI_NAME("bleachuhc.items.suzumichiName","Suzumichi"),
+    BUHC_ITEM_SUZUMICHI_LORE("bleachuhc.items.suzumichiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup");
 
 
 

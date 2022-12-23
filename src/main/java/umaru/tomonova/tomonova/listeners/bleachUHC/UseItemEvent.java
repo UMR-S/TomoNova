@@ -158,7 +158,7 @@ public class UseItemEvent implements Listener {
                 //Aveux de Gin
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && !player.hasCooldown(Material.GLOWSTONE_DUST)
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5032602) {
                     event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
 
