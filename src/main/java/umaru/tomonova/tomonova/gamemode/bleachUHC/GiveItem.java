@@ -15,7 +15,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GiveItem {
-    //Hogyoku
+    //Items de base des classes
+    public static void giveCarquois(String playerName){
+        ItemStack carquois = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_CARQUOIS_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_CARQUOIS_LORE.toString()),
+                2000602);
+        Bukkit.getPlayer(playerName).getInventory().addItem(carquois);
+
+    }
+    public static void giveBow(String playerName){
+        ItemStack quincyBow = CustomItems.createCustomItem(
+                Material.BOW,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_QUINCY_BOW_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_QUINCY_BOW_LORE.toString()),
+                2000201);
+        Bukkit.getPlayer(playerName).getInventory().addItem(quincyBow);
+
+    }
+    public static void giveBowPowerFive(String playerName){
+        ItemStack quincyBowPowerFive = CustomItems.createCustomItem(
+                Material.BOW,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_QUINCY_BOW_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_QUINCY_BOW_LORE.toString()),
+                2000201);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.ARROW_DAMAGE, 5);
+        }};
+        quincyBowPowerFive = CustomItems.addEnchants(quincyBowPowerFive,enchantMap);
+        Bukkit.getPlayer(playerName).getInventory().addItem(quincyBowPowerFive);
+
+    }
+    public static ItemStack getQuincyArrow(){
+        ItemStack quincyArrow = CustomItems.createCustomItem(
+                Material.ARROW,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_QUINCY_ARROW_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_QUINCY_ARROW_LORE.toString()),
+                2000501);
+        return quincyArrow;
+    }
+    //Items des boss/zanpakuto
     public static void spawnHogyokuInactifFragment(Location location){
         ItemStack hogyokuInactifFragment = CustomItems.createCustomItem(
                 Material.NETHER_WART,
@@ -240,5 +284,14 @@ public class GiveItem {
         }};
         CustomItems.addEnchants(katenKyokotsu,enchantMap);
         location.getWorld().dropItemNaturally(location, katenKyokotsu);
+    }
+    public static void spawnGantDeSanrei(Location location){
+        ItemStack gantDeSanrei = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_GANT_SANREI_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_GANT_SANREI_LORE.toString(), Lang.BUHC_ITEM_GANT_SANREI_LORE_TWO.toString()),
+                2122605);
+        location.getWorld().dropItemNaturally(location, gantDeSanrei);
     }
 }

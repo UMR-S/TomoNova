@@ -9,14 +9,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.BlockIterator;
 import org.bukkit.util.Vector;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class ClassesSpells {
@@ -32,12 +31,7 @@ public class ClassesSpells {
     public void Carquois(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
 
-        ItemStack quincyArrow = new ItemStack(Material.ARROW);
-        ItemMeta quincyArrowMeta = quincyArrow.getItemMeta();
-        quincyArrowMeta.setDisplayName("Quincy Arrow");
-        quincyArrowMeta.setLore(Arrays.asList("Bleues comme mes ... steaks"));
-        quincyArrowMeta.setCustomModelData(2000501);
-        quincyArrow.setItemMeta(quincyArrowMeta);
+        ItemStack quincyArrow = GiveItem.getQuincyArrow();
         quincyArrow.setAmount(0);
 
         int arrowAmount = 0;
@@ -121,7 +115,6 @@ public class ClassesSpells {
         if (entity != null) {
             entity.damage(5);
             entity.setVelocity(entity.getLocation().add(0.0, 1.0, 0.0).clone().toVector().subtract(Bukkit.getPlayer(playerName).getLocation().clone().toVector()).normalize().multiply(5));
-            Bukkit.getPlayer(playerName).setCooldown(Material.CARROT_ON_A_STICK, 500);
         }
 
     }
@@ -131,7 +124,6 @@ public class ClassesSpells {
         if (entity != null) {
             entity.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 60, 2));
             entity.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 144000, 0));
-            Bukkit.getPlayer(playerName).setCooldown(Material.NAUTILUS_SHELL, 9600);
         }
     }
 
@@ -144,7 +136,6 @@ public class ClassesSpells {
                 }
             }
             entity.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20, 0));
-            Bukkit.getPlayer(playerName).setCooldown(Material.PHANTOM_MEMBRANE, 60);
         }
     }
     //Bave de minazuki

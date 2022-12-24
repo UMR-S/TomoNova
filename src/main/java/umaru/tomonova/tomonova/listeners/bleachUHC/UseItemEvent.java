@@ -36,12 +36,11 @@ public class UseItemEvent implements Listener {
 
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && !player.hasCooldown(Material.IRON_SWORD)
-                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1000101
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1000603
                         && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
 
                     tomoNova.classesSpells.Dash(3, player.getName());
-                    player.setCooldown(Material.IRON_SWORD, 300);
 
                 }
                 // Attaque arme de Gin
@@ -86,9 +85,16 @@ public class UseItemEvent implements Listener {
                         && tomoNova.classesUtils.isPlayerClasse(player.getName(), "quincy")) {
 
                     tomoNova.classesSpells.Dash(5, player.getName());
-                    player.setCooldown(Material.CARROT_ON_A_STICK, 300);
                 }
-                //
+                //Gant de Sanrei
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 2000301
+                        && tomoNova.classesUtils.isPlayerClasse(player.getName(), "quincy")) {
+
+                    GantDeSanrei.gantDeSanrei(player.getName());
+                }
                 //SSR
                 // Ciel Unique
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
@@ -138,6 +144,7 @@ public class UseItemEvent implements Listener {
                         && !BaveMinazukiTask.isBaveActive()
                         && BaveMinazukiTask.getUtilisationsBave() > 0){
                     BaveMinazukiTask.setBaveActive(true);
+                    //Mettre le compteur dans "classes spell" plutôt
                     BaveMinazukiTask.setUtilisationsBave(BaveMinazukiTask.getUtilisationsBave()-1);
                     BukkitTask baveMinazuki = new BaveMinazukiTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,20);
 

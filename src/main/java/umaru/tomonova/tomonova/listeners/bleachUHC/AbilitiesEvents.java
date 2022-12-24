@@ -15,7 +15,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.LunetteDeTosenTask;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.ReturnDamageTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.IceCage;
 

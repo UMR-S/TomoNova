@@ -262,7 +262,17 @@ public enum Lang {
     BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO("bleachuhc.items.lunettesTosenLoreTwo","Cooldown : 30 minutes"),
     BUHC_ITEM_KATEN_KYOKOTSU_NAME("bleachuhc.items.katenKyokotsuName","Katen Kyokotsu"),
     BUHC_ITEM_KATEN_KYOKOTSU_LORE("bleachuhc.items.katenKyokotsuLore","Vos dégâts sont augmentés/diminués de 40% par bloc"),
-    BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO("bleachuhc.items.katenKyokotsuLoreTwo","de différence de hauteur entre vous et votre cible");
+    BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO("bleachuhc.items.katenKyokotsuLoreTwo","de différence de hauteur entre vous et votre cible"),
+    BUHC_ITEM_QUINCY_ARROW_NAME("bleachuhc.items.quincyArrowName","Quincy Arrow"),
+    BUHC_ITEM_QUINCY_ARROW_LORE("bleachuhc.items.quincyArrowLore","Bleues comme mes ... steaks"),
+    BUHC_ITEM_GANT_SANREI_NAME("bleachuhc.items.gantSanreiName","Gant de sanrei"),
+    BUHC_ITEM_GANT_SANREI_LORE("bleachuhc.items.gantSanreiLore","Votre arc devient power 5, vous perdez votre carquois"),
+    BUHC_ITEM_GANT_SANREI_LORE_TWO("bleachuhc.items.gantSanreiLoreTwo","et confère speed 2 pendant 2 minutes."),
+    BUHC_ITEM_QUINCY_BOW_NAME("bleachuhc.items.quincyBowName","Quincy bow"),
+    BUHC_ITEM_QUINCY_BOW_LORE("bleachuhc.items.quincyBowLore","Aoi aoi ano ojigi"),
+    BUHC_ITEM_CARQUOIS_NAME("bleachuhc.items.carquoisName","Carquois"),
+    BUHC_ITEM_CARQUOIS_LORE("bleachuhc.items.carquoisLore","Vous donne 17 flèches (maximum 28)"),
+    BUHC_ITEM_CARQUOIS_LORE_TWO("bleachuhc.items.carquoisLoreTwo","Cooldown : 30 secondes");
 
     private String path;
     private String def;
