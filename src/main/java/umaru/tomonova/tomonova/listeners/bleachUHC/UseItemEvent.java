@@ -171,8 +171,7 @@ public class UseItemEvent implements Listener {
                     event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
 
                     for (ActiveMob boss : MythicBukkit.inst().getMobManager().getActiveMobs()) {
-                        //Aizen est le seul à avoir la faction traitre
-                        if (boss.getFaction().equals("traitre")) {
+                        if (boss.getName().equals("aizenv2")) {
                             //Creation d'une loc normale
                             Location bossLoc = new Location(tomoNova.worldUtils.getWorld(),
                                     boss.getLocation().clone().getX(),

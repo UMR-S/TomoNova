@@ -208,9 +208,20 @@ public class AbilitiesEvents {
                         }
                     }
                 }
+                //Katen Kyokotsu
+                if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
+                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                        if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1081111){
+                            double heightDifference = player.getLocation().getY() - damaged.getLocation().getY();
+                            if(heightDifference < -2.5){
+                                heightDifference = -2.5;
+                            }
+                            event.setDamage(event.getDamage()*(1+0.4*heightDifference));
+                        }
+                    }
+                }
                 //Toute classe
-                //Lunettes de Tosen (rajouter la condition de mort de Tosen)
-                //Photo de yoruichi résistance explosion
             }
         }
 

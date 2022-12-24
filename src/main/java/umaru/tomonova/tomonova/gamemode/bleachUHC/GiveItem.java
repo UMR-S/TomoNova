@@ -228,4 +228,17 @@ public class GiveItem {
                 1101113);
         location.getWorld().dropItemNaturally(location, lunettesTosen);
     }
+    public static void spawnKatenKyokotsu(Location location){
+        ItemStack katenKyokotsu = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_KATEN_KYOKOTSU_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE.toString(), Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO.toString()),
+                1081111);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.DAMAGE_ALL, 1);
+        }};
+        CustomItems.addEnchants(katenKyokotsu,enchantMap);
+        location.getWorld().dropItemNaturally(location, katenKyokotsu);
+    }
 }

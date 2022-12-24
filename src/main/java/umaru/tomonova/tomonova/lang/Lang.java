@@ -259,7 +259,10 @@ public enum Lang {
     BUHC_ITEM_HYORINMARU_LORE_TWO("bleachuhc.items.hyorinmaruLoreTwo","Cooldown : 10 minutes"),
     BUHC_ITEM_LUNETTES_TOSEN_NAME("bleachuhc.items.lunettesTosenName","Lunettes de Tosen"),
     BUHC_ITEM_LUNETTES_TOSEN_LORE("bleachuhc.items.lunettesTosenLore","Crée une boule de 50 blocks de rayon donnant cécité pendant 1min"),
-    BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO("bleachuhc.items.lunettesTosenLoreTwo","Cooldown : 30 minutes");
+    BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO("bleachuhc.items.lunettesTosenLoreTwo","Cooldown : 30 minutes"),
+    BUHC_ITEM_KATEN_KYOKOTSU_NAME("bleachuhc.items.katenKyokotsuName","Katen Kyokotsu"),
+    BUHC_ITEM_KATEN_KYOKOTSU_LORE("bleachuhc.items.katenKyokotsuLore","Vos dégâts sont augmentés/diminués de 40% par bloc"),
+    BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO("bleachuhc.items.katenKyokotsuLoreTwo","de différence de hauteur entre vous et votre cible");
 
     private String path;
     private String def;
