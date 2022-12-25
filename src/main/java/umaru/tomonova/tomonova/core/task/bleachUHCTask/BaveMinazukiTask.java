@@ -25,7 +25,7 @@ public class BaveMinazukiTask extends BukkitRunnable {
         }
         else{
             this.cancel();
-            TomoNova.classesSpells.baveDeMinazuki(player.getName(), duree);
+            tomoNova.classesSpells.baveDeMinazuki(player.getName(), duree);
             setBaveActive(false);
         }
     }

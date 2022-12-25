@@ -4,9 +4,11 @@ package umaru.tomonova.tomonova.core;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.CooldownTask;
 import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
@@ -72,6 +74,7 @@ public final class TomoNova extends JavaPlugin {
         SettingRulesUtils.setGamerules();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        BukkitTask cooldowns = new CooldownTask(this).runTaskTimer(this,0,1);
     }
 
     @Override
@@ -104,6 +107,8 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
+
+        //Listener du bleachUHC
 
     }
 
