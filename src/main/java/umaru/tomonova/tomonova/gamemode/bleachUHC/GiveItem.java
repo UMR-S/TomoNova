@@ -100,7 +100,15 @@ public class GiveItem {
         Bukkit.getPlayer(playerName).setCooldown(Material.NETHERITE_SCRAP, 6000);
     }
     public static void removeHogyokuInactif(String playerName){
-        Bukkit.getPlayer(playerName).getInventory().remove(Material.NETHERITE_SCRAP);
+        for(ItemStack itemStack : Bukkit.getPlayer(playerName).getInventory()){
+            if(!(itemStack == null || itemStack.getType().equals(Material.AIR))){
+                if(itemStack.getItemMeta().hasCustomModelData()){
+                    if(itemStack.getItemMeta().getCustomModelData() == 5149612){
+                        Bukkit.getPlayer(playerName).getInventory().remove(itemStack);
+                    }
+                }
+            }
+        }
     }
     public static void giveHogyokuActif(String playerName){
         ItemStack hogyokuActif = CustomItems.createCustomItem(

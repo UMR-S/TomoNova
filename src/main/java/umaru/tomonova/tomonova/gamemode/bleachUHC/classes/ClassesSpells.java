@@ -20,6 +20,8 @@ import java.util.List;
 
 public class ClassesSpells {
     //Shinigami & Quincy
+    public int minazukiLeftUses = 3;
+    public boolean minazukiActive = false;
     public void Dash(double power, String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         Vector playerFacing = player.getLocation().getDirection();
@@ -153,5 +155,21 @@ public class ClassesSpells {
                 TomoNova.getPlugin().bleachUHC.affectPotionKotowari(entity.getName());
             }
         }
+    }
+
+    public int getMinazukiLeftUses() {
+        return minazukiLeftUses;
+    }
+
+    public void setMinazukiLeftUses(int minazukiLeftUses) {
+        this.minazukiLeftUses = minazukiLeftUses;
+    }
+
+    public boolean isMinazukiActive() {
+        return minazukiActive;
+    }
+
+    public void setMinazukiActive(boolean minazukiActive) {
+        this.minazukiActive = minazukiActive;
     }
 }

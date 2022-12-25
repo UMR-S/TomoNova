@@ -13,6 +13,7 @@ import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
 import umaru.tomonova.tomonova.lang.Lang;
+import umaru.tomonova.tomonova.listeners.bleachUHC.*;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamageByEntity;
 import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
@@ -70,11 +71,12 @@ public final class TomoNova extends JavaPlugin {
         loadLang();
         setupUtils();
         listenersRegister();
-        LobbyUtils.spawnLobby();
+        //Désactiver pour la version test
+        //LobbyUtils.spawnLobby();
         SettingRulesUtils.setGamerules();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        BukkitTask cooldowns = new CooldownTask(this).runTaskTimer(this,0,1);
+        BukkitTask cooldowns = new CooldownTask(this).runTaskTimer(this, 0, 1);
     }
 
     @Override
@@ -108,8 +110,14 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
         getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
 
-        //Listener du bleachUHC
-
+        //Listeners du bleachUHC
+        getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
+        getServer().getPluginManager().registerEvents(new BannedItemForClasses(),plugin);
+        getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
     }
 
     public void setupUtils() {
@@ -120,8 +128,9 @@ public final class TomoNova extends JavaPlugin {
         worldBorderUtils = new WorldBorderUtils();
         taskManager = new TaskManager(this);
         tomoLostVillage = new TomoLostVillage();
+        //BleachUHC
         bleachUHC = new BleachUHC();
-        classesSpells =new ClassesSpells();
+        classesSpells = new ClassesSpells();
         combatzoneUtils = new CombatZoneUtils();
         combatZoneComfigManager = new CombatZoneConfigManager(this);
         classesUtils = new ClassesUtils();

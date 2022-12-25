@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
@@ -16,12 +17,13 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.ReturnDamageTask;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.cooldowns.Cooldown;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.IceCage;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class AbilitiesEvents {
+public class AbilitiesEvents implements Listener {
 
     //Compteurs
     @EventHandler
@@ -163,26 +165,25 @@ public class AbilitiesEvents {
                 LivingEntity damaged = (LivingEntity) event.getEntity();
                 //Brazo
                 //Attaque du Brazo
-                if(player.getInventory().getItemInMainHand().getType().equals(Material.SHIELD)
-                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")){
-                    boolean isCooldown = false;
-                    for(PotionEffect potionEffect : player.getActivePotionEffects()){
-                        if(potionEffect.getType().equals(PotionEffectType.HERO_OF_THE_VILLAGE) && potionEffect.getAmplifier() == 0){
-                            isCooldown = true;
+                if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
+                    if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 0
+                            && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")){
+                        if(Cooldown.isCooling(player.getName(),"attaqueBrazo")){
+                            Cooldown.coolDurMessage(player.getName(),"attaqueBrazo");
                         }
-                    }
-                    if(!isCooldown){
-                        int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
-                        event.setDamage(0);
-                        damaged.setHealth((damaged.getHealth() - 4)*hakudaModifier);
-                        damaged.setVelocity(damaged.getLocation().add(0.0,1.0,0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10*hakudaModifier));
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
+                        else {
+                            event.setDamage(0);
+                            int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
+                            damaged.setHealth(damaged.getHealth() - 4*hakudaModifier);
+                            damaged.setVelocity(damaged.getLocation().add(0.0,1.0,0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10*hakudaModifier));
+                            Cooldown.add(player.getName(), "attaqueBrazo", 10, System.currentTimeMillis());
+                        }
                     }
                 }
                 //Shinigami
                 //Minazuki
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
-                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")){
                     if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
                         if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1041107){
                             damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60,0));
@@ -191,7 +192,7 @@ public class AbilitiesEvents {
                 }
                 //Ashisogi Jizo
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
-                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                        && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")){
                     if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
                         if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1121115){
                             damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100 ,0));
@@ -200,7 +201,7 @@ public class AbilitiesEvents {
                 }
                 //Suzumichi
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
-                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                        && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")){
                     if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
                         if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1091112){
                             damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20 ,0));
@@ -209,7 +210,7 @@ public class AbilitiesEvents {
                 }
                 //Katen Kyokotsu
                 if(player.getInventory().getItemInMainHand().getType().equals(Material.IRON_SWORD)
-                        && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+                        && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")){
                     if(player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()){
                         if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1081111){
                             double heightDifference = player.getLocation().getY() - damaged.getLocation().getY();
@@ -227,7 +228,7 @@ public class AbilitiesEvents {
         if(event.getEntity() instanceof Player){
             Player player = ((Player) event.getEntity()).getPlayer();
             // Dégats mobs au Brazo
-            if(TomoNova.classesUtils.isPlayerClasse(player.getName(),"brazo")
+            if(TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(),"brazo")
                     && !event.getDamager().getType().equals(EntityType.PLAYER)
                     && event.getDamage() >= 1.0){
                 if(MythicBukkit.inst().getAPIHelper().isMythicMob(event.getDamager())) {
