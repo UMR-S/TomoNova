@@ -13,9 +13,8 @@ public class SuzumebachiHeldEvent implements Listener {
     @EventHandler
     public void playerHeldEventBleachUHC(PlayerItemHeldEvent event){
         ItemStack newItemInHand = event.getPlayer().getInventory().getItem(event.getNewSlot());
-        if(newItemInHand != null){
-            if(newItemInHand.hasItemMeta()
-                && newItemInHand.getType().equals(Material.IRON_SWORD)){
+        if(!(newItemInHand == null || newItemInHand.getType().equals(Material.AIR))){
+            if(newItemInHand.hasItemMeta()){
                 if(newItemInHand.getItemMeta().getCustomModelData() == 1021105){
                     BukkitTask suzumebachiInvisibility = new SuzumebachiTask(TomoNova.getPlugin(),event.getPlayer().getName()).runTaskTimer(TomoNova.getPlugin(),0,20);
                 }

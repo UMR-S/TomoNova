@@ -169,7 +169,7 @@ public class ScoreboardSign {
         if(TomoNova.getPlugin().gameManager.isTomoLostVillage()){
             return Lang.GUIS_GM_TLV_NAME.toString();
         }
-        if(TomoNova.getPlugin().gameManager.isUhc()){
+        if(TomoNova.getPlugin().gameManager.isBleachUhc()){
             return Lang.GUIS_GM_BLEACH_NAME.toString();
         }
         return "Nouveau gamemode";

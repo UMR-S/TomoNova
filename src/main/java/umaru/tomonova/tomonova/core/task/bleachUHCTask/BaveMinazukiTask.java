@@ -25,24 +25,8 @@ public class BaveMinazukiTask extends BukkitRunnable {
         }
         else{
             this.cancel();
-            TomoNova.classesSpells.baveDeMinazuki(player.getName(), duree);
-            setBaveActive(false);
+            tomoNova.classesSpells.baveDeMinazuki(player.getName(), duree);
+            tomoNova.classesSpells.setMinazukiActive(false);
         }
-    }
-
-    public static boolean isBaveActive() {
-        return baveActive;
-    }
-
-    public static void setBaveActive(boolean baveActive) {
-        BaveMinazukiTask.baveActive = baveActive;
-    }
-
-    public static int getUtilisationsBave() {
-        return utilisationsBave;
-    }
-
-    public static void setUtilisationsBave(int utilisationsBave) {
-        BaveMinazukiTask.utilisationsBave = utilisationsBave;
     }
 }

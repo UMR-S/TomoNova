@@ -25,14 +25,23 @@ public class InteractEvent implements Listener {
         Player player = event.getPlayer();
 
         //Lobby
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.BLACK_BANNER && GameStates.isState(GameStates.LOBBY)) {
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.BLACK_BANNER
+                && (GameStates.isState(GameStates.LOBBY) || TomoNova.test)) {
             if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
                 new TeamsGui(player).show();
             } else {
                 event.getPlayer().sendMessage(Lang.SOLO_MESSAGE.toString());
             }
         }
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.PAPER && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END))) {
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.PAPER
+                && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END) || TomoNova.test)) {
+            new MainGui(player).show();
+        }
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.NETHERITE_SCRAP
+                && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END) || TomoNova.test)) {
             new MainGui(player).show();
         }
         if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {

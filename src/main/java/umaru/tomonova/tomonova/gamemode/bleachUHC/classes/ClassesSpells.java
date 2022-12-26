@@ -19,6 +19,8 @@ import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import java.util.List;
 
 public class ClassesSpells {
+    public boolean minazukiActive = false;
+    public int minazukiCharges = 3;
     //Shinigami & Quincy
     public void Dash(double power, String playerName) {
         Player player = Bukkit.getPlayer(playerName);
@@ -153,5 +155,21 @@ public class ClassesSpells {
                 TomoNova.getPlugin().bleachUHC.affectPotionKotowari(entity.getName());
             }
         }
+    }
+
+    public boolean isMinazukiActive() {
+        return minazukiActive;
+    }
+
+    public void setMinazukiActive(boolean minazukiActive) {
+        this.minazukiActive = minazukiActive;
+    }
+
+    public int getMinazukiCharges() {
+        return minazukiCharges;
+    }
+
+    public void setMinazukiCharges(int minazukiCharges) {
+        this.minazukiCharges = minazukiCharges;
     }
 }

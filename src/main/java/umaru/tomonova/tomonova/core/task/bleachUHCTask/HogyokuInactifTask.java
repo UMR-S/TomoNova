@@ -6,30 +6,23 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 
 public class HogyokuInactifTask extends BukkitRunnable {
-    private static int timeInactive;
-    private static String playerName;
+    private int timeInactive;
+    private String playerName;
     private TomoNova tomoNova;
 
-    public HogyokuInactifTask(TomoNova tomoNova) {
+    public HogyokuInactifTask(TomoNova tomoNova, String playerName) {
         this.tomoNova = tomoNova;
+        this.playerName = playerName;
+        this.timeInactive = 6000;
     }
     @Override
     public void run() {
         if(timeInactive==0){
             GiveItem.giveHogyokuActif(playerName);
-            HogyokuActifTask.setPlayerName(playerName);
-            HogyokuActifTask.setTimeActive(0);
-            BukkitTask hogyokuActif = new HogyokuActifTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+
+            BukkitTask hogyokuActif = new HogyokuActifTask(tomoNova, playerName).runTaskTimer(tomoNova, 0, 20);
             this.cancel();
         }
         timeInactive--;
-    }
-
-    public static void setTimeInactive(int timeInactive) {
-        HogyokuInactifTask.timeInactive = timeInactive;
-    }
-
-    public static void setPlayerName(String playerName) {
-        HogyokuInactifTask.playerName = playerName;
     }
 }

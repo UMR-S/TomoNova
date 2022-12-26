@@ -11,6 +11,7 @@ import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
 import umaru.tomonova.tomonova.lang.Lang;
+import umaru.tomonova.tomonova.listeners.bleachUHC.*;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamageByEntity;
 import umaru.tomonova.tomonova.listeners.entities.EntitySpawn;
@@ -33,7 +34,7 @@ import java.util.logging.Logger;
 
 
 public final class TomoNova extends JavaPlugin {
-
+    public static boolean test;
     private Logger log;
     private static TomoNova plugin;
     public static GameManager gameManager;
@@ -72,6 +73,9 @@ public final class TomoNova extends JavaPlugin {
         SettingRulesUtils.setGamerules();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+        if(test){
+            gameManager.start();
+        }
     }
 
     @Override
@@ -81,17 +85,30 @@ public final class TomoNova extends JavaPlugin {
 
     public void listenersRegister() {
 
-
+        //Commun
         getServer().getPluginManager().registerEvents(new InteractEvent(), plugin);
         getServer().getPluginManager().registerEvents(new Join(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerMove(), plugin);
         getServer().getPluginManager().registerEvents(new Quit(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerChangeWorld(), plugin);
-
         getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);
+        getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
+        if(!test){
+            getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
+            getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
+            getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
+            getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
+        }
+        else{
+            getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
+            getServer().getPluginManager().registerEvents(new BannedItemForClasses(), plugin);
+            getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
+        }
 //        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
 //        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
 //        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
@@ -101,10 +118,6 @@ public final class TomoNova extends JavaPlugin {
 //        getServer().getPluginManager().registerEvents(new Regen(), plugin);
 //        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
 //        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
-        getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
-        getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
-        getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
-
     }
 
     public void setupUtils() {
