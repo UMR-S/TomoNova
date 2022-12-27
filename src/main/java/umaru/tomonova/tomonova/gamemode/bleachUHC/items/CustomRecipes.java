@@ -14,7 +14,7 @@ import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 import java.util.Arrays;
 
 public class CustomRecipes {
-    public void addHogyokuRecipe(){
+    public static void addHogyokuRecipe(){
         ItemStack hogyokuActif = CustomItems.createCustomItem(
                 Material.TOTEM_OF_UNDYING,
                 ChatColor.AQUA,

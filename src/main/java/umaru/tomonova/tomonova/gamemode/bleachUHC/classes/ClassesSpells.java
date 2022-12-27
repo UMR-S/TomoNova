@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ClassesSpells {
     public boolean minazukiActive = false;
-    public int minazukiCharges = 3;
+    public int minazukiCharges = Integer.MAX_VALUE;
     //Shinigami & Quincy
     public void Dash(double power, String playerName) {
         Player player = Bukkit.getPlayer(playerName);

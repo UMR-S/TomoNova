@@ -28,7 +28,7 @@ public class UseItemEvent implements Listener {
     @EventHandler
     public void onClickBleachUHC(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
+        if (!(player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR))) {
             if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
 
                 //Shinigami
@@ -47,7 +47,7 @@ public class UseItemEvent implements Listener {
                 // Attaque arme de Gin
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1010101) {
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1031106) {
 
                     Shinso.Shinso(player.getName());
                     player.sendMessage("Shinso");
@@ -63,7 +63,7 @@ public class UseItemEvent implements Listener {
                 // Attaque de l'arme de Byakuya (senbonzakura)
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116) {
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1061109) {
                     BukkitTask senbonzakuraActive = new SenbonzakuraTask(tomoNova, player.getName()).runTaskTimer(tomoNova,0,20);
                     player.sendMessage("Senbonzakura");
                 }
@@ -97,7 +97,7 @@ public class UseItemEvent implements Listener {
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                         && !player.hasCooldown(Material.CARROT_ON_A_STICK)
-                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 2000301
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 2122605
                         && tomoNova.classesUtils.isPlayerClasse(player.getName(), "quincy")) {
 
                     GantDeSanrei.gantDeSanrei(player.getName());
@@ -147,9 +147,9 @@ public class UseItemEvent implements Listener {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
                     player.sendMessage("Quatre cieux");
                 }
+                //Bave de minazuki
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                        && !player.hasCooldown(Material.HEART_OF_THE_SEA)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 3042605
                         && tomoNova.classesUtils.isPlayerClasse(player.getName(), "ssr")
                         && !tomoNova.classesSpells.isMinazukiActive()
@@ -205,6 +205,14 @@ public class UseItemEvent implements Listener {
                     }
                     player.sendMessage("Aveux de Gin");
                 }
+               //Sake
+                if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                        || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                        && !player.hasCooldown(Material.CARROT_ON_A_STICK)
+                        && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5082604) {
+                    SakeKyoraku.sakeTeleport(player.getName(),tomoNova.classesSpells.getEntityInSight(player,100).getName());
+                    player.sendMessage("Sake");
+                }
                 //Medicament de Ukitake
                 if ((event.getAction() == Action.RIGHT_CLICK_AIR
                         || event.getAction() == Action.RIGHT_CLICK_BLOCK)
@@ -219,6 +227,7 @@ public class UseItemEvent implements Listener {
                         && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                         && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5022601) {
                     PhotoDeYoruichi.PhotoDeYoruichi(player.getName());
+                    player.getInventory().remove(player.getInventory().getItemInMainHand());
                     player.sendMessage("Photo de Yoruichi");
                 }
                 //Lys des neiges

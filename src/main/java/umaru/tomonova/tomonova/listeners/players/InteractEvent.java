@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.MainGui;
+import umaru.tomonova.tomonova.gui.classesgui.ClassesGui;
 import umaru.tomonova.tomonova.gui.teamsgui.TeamsGui;
 import umaru.tomonova.tomonova.lang.Lang;
 
@@ -42,7 +43,7 @@ public class InteractEvent implements Listener {
         if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                 && player.getInventory().getItemInMainHand().getType() == Material.NETHERITE_SCRAP
                 && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END) || TomoNova.test)) {
-            new MainGui(player).show();
+            new ClassesGui(player).show();
         }
         if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
             if ((event.getAction() == Action.LEFT_CLICK_AIR

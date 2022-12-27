@@ -3,12 +3,14 @@ package umaru.tomonova.tomonova.gamemode.bleachUHC.items;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
+import umaru.tomonova.tomonova.utils.particles.ParticlesShape;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class PhotoDeYoruichi {
     public static void PhotoDeYoruichi(String playerName) {
@@ -29,6 +31,12 @@ public class PhotoDeYoruichi {
             }
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,10,4));
         }
-        caster.getWorld().createExplosion(casterLoc,50,false,true, caster);
+        Collection<Vector> locExplosionList = new ArrayList<>();
+        for(int i = 50; i < 50; i = + 5){
+            ParticlesShape.collectionVectSphere(i,i*100).forEach(v -> locExplosionList.add(v));
+        }
+        for(Vector explosionVector : locExplosionList){
+            caster.getWorld().createExplosion(casterLoc.clone().add(explosionVector),40,false,true,caster);
+        }
     }
 }

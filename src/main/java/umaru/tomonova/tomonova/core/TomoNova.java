@@ -10,6 +10,7 @@ import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.items.CustomRecipes;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.bleachUHC.*;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
@@ -34,7 +35,7 @@ import java.util.logging.Logger;
 
 
 public final class TomoNova extends JavaPlugin {
-    public static boolean test;
+    public static boolean test = true;
     private Logger log;
     private static TomoNova plugin;
     public static GameManager gameManager;
@@ -73,9 +74,7 @@ public final class TomoNova extends JavaPlugin {
         SettingRulesUtils.setGamerules();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        if(test){
-            gameManager.start();
-        }
+        CustomRecipes.addHogyokuRecipe();
     }
 
     @Override

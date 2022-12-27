@@ -9,8 +9,6 @@ public class BaveMinazukiTask extends BukkitRunnable {
     private TomoNova tomoNova;
     private Player player;
     private int duree;
-    public static boolean baveActive = false;
-    public static int utilisationsBave = 3;
     public BaveMinazukiTask(TomoNova tomoNova, String playerName) {
         this.tomoNova = tomoNova;
         this.duree = 0;
@@ -19,9 +17,11 @@ public class BaveMinazukiTask extends BukkitRunnable {
 
     @Override
     public void run() {
+        System.out.println(duree);
         if(player.isBlocking()){
             player.setHealth(player.getHealth() - 1);
             duree++;
+            System.out.println("hap");
         }
         else{
             this.cancel();

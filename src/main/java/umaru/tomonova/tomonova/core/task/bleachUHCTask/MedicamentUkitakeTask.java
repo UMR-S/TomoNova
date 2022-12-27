@@ -21,7 +21,7 @@ public class MedicamentUkitakeTask extends BukkitRunnable {
         if(duree ==0){
             this.cancel();
         }
-        player.getActivePotionEffects().clear();
+        player.getActivePotionEffects().forEach(p -> player.removePotionEffect(p.getType()));
         duree--;
     }
 }

@@ -38,7 +38,7 @@ public class ClassesGui extends Gui {
         if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")) {
             this.inventory.setItem(7, ItemsCreator.create(ic,4000401));
         }
-        this.inventory.setItem(4, ItemsCreator.create(ic,4000401));
+        this.inventory.setItem(3, ItemsCreator.create(ic,4000401));
         ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), null);
         this.inventory.setItem(8, ItemsCreator.create(ic));
     }

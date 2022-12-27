@@ -22,7 +22,7 @@ public class SenbonzakuraTask extends BukkitRunnable {
     private Player player;
     public SenbonzakuraTask(TomoNova tomoNova, String playerName) {
         this.tomoNova = tomoNova;
-        this.normalizeLayerParticle = ParticlesShape.collectionVectSphere(1,50);
+        this.normalizeLayerParticle = ParticlesShape.collectionVectSphere(1,25);
         this.dustOptions = new Particle.DustOptions(Color.fromRGB(255, 192, 203), 1.0F);
         this.player = Bukkit.getPlayer(playerName);
         this.breakTime = 6;
@@ -34,14 +34,14 @@ public class SenbonzakuraTask extends BukkitRunnable {
             if(entity instanceof LivingEntity){
                 if(3 <= player.getLocation().distance(entity.getLocation())
                         && player.getLocation().distance(entity.getLocation()) <= 6){
-                    ((LivingEntity) entity).damage(6);
+                    ((LivingEntity) entity).damage(6,player);
                 }
             }
         }
-        for(int radius = 3; radius<=6;radius++){
-            for(Vector particleVector : normalizeLayerParticle){
-                particleVector.clone().multiply(radius);
-                player.getWorld().spawnParticle(Particle.REDSTONE,player.getLocation().clone().add(particleVector),5, dustOptions);
+        for(int radius = 3; radius<=6;radius = radius +3){
+            for(Vector particleVectorNormalize : normalizeLayerParticle){
+                Vector particleVector = particleVectorNormalize.clone().multiply(radius);
+                player.getWorld().spawnParticle(Particle.REDSTONE,player.getLocation().clone().add(particleVector),1, dustOptions);
             }
         }
         if (breakTime == 0) {

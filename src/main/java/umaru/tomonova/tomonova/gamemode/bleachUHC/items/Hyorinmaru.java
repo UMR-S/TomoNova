@@ -21,7 +21,7 @@ public class Hyorinmaru {
     public static void hyorinmaru(String playerName){
         damageToPlayers(playerName);
         Player player = Bukkit.getPlayer(playerName);
-        getCone(player.getLocation().clone().add(0,-1,0),player.getEyeLocation().getDirection().clone().normalize());
+        getCone(player.getLocation().clone(),player.getEyeLocation().getDirection().clone().normalize());
     }
     //Dégâts aux joueurs
     public static void damageToPlayers(String playerName){
@@ -38,7 +38,7 @@ public class Hyorinmaru {
                 playerToEntityVector = new Vector(  entityLoc.getX() - player.getEyeLocation().getX(),
                         entityLoc.getY() - player.getEyeLocation().getY(),
                         entityLoc.getZ() - player.getEyeLocation().getZ());
-                cosAngle = playerVisionVector.dot(playerToEntityVector)/(playerVisionVector.length()*playerToEntityVector.length());
+                cosAngle = playerVisionVector.clone().dot(playerToEntityVector)/(playerVisionVector.length()*playerToEntityVector.length());
                 if(cosAngle > 0
                         && cosAngle < cosThetaMax){
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,200,1));
@@ -48,34 +48,28 @@ public class Hyorinmaru {
         }
     }
     //Transformation des blocs
-    public static List<Location> getCone(Location startingPoint, Vector directionNormalize){
+    public static void getCone(Location startingPoint, Vector directionNormalize){
         double angleRadian = Math.PI/6;
-        int height = 8;
-        List<Location> locations = new ArrayList<>();
+        int maxHeight = 8;
+        int height = 1;
         World world = startingPoint.getWorld();
-        for(int d=0;d<=height;d++){
-            for(int r = 0; r <= (int)d*Math.tan(angleRadian);r++){
-                locations = getCircle(startingPoint,r,8*r^2);
-                for(Location loc : locations){
+        Vector vectorBase = new Vector(1,0,0);
+        Vector perpendicularVector = vectorBase.crossProduct(directionNormalize.clone()).normalize();
+        while(height <= maxHeight){
+            double radius = 0;
+            while (radius < height*Math.tan(angleRadian)){
+                double angleCircle = 0;
+                while(angleCircle < 2*Math.PI){
+                    angleCircle = angleCircle + Math.PI/10;
+                    Location loc = startingPoint.clone().add(directionNormalize.clone().multiply(height));
+                    loc.add(perpendicularVector.clone().multiply(radius).rotateAroundAxis(directionNormalize,angleCircle));
                     if(!loc.getBlock().isEmpty()){
                         loc.getBlock().setType(Material.PACKED_ICE);
                     }
                 }
+                radius = radius + 0.5;
             }
-            startingPoint.add(directionNormalize);
+            height++;
         }
-        return locations;
-    }
-    public static List<Location> getCircle(Location center, double radius, int amount) {
-        List<Location> locations = new ArrayList<>();
-        World world = center.getWorld();
-        double increment = (2 * Math.PI) / amount;
-        for (int i = 0; i < amount; i++) {
-            double angle = i * increment;
-            double x = center.getX() + (radius * Math.cos(angle));
-            double z = center.getZ() + (radius * Math.sin(angle));
-            locations.add(new Location(world, x, center.getY(), z));
-        }
-        return locations;
     }
 }

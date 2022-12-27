@@ -122,7 +122,7 @@ public class AbilitiesEvents implements Listener {
     @EventHandler(priority = EventPriority.HIGHEST)
     public void EntityHitByEntity(EntityDamageByEntityEvent event) {
 
-
+        System.out.println("0");
         if (event.getDamager() instanceof Player) {
             //Stack des dégâts/effets
             //Pour Ukitake
@@ -180,7 +180,6 @@ public class AbilitiesEvents implements Listener {
                         //Minazuki
                         if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1041107
                                 && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
-
                             damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 0));
                         }
                         //Ashisogi Jizo
@@ -191,14 +190,12 @@ public class AbilitiesEvents implements Listener {
                         //Suzumichi
                         if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1091112
                                 && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
-
                             damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
 
                         }
                         //Katen Kyokotsu
                         if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1081111
                                 && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
-
                             double heightDifference = player.getLocation().getY() - damaged.getLocation().getY();
                             if (heightDifference < -2.5) {
                                 heightDifference = -2.5;

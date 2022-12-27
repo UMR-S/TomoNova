@@ -16,12 +16,15 @@ public class ParticlesShape {
         double theta = 0; //Appartient à [0,Pi]
         double phi = 0; //Appartient à [0,2 Pi[
         double pas = Math.PI/ nbPoints;
-        while (theta <= Math.PI && phi < 2*Math.PI){
-             Vector vecteurPoint= new Vector(radius*Math.sin(theta)*Math.cos(phi), radius*Math.sin(theta)*Math.sin(phi),radius*Math.cos(theta));
-             collectionVectSphere.add(vecteurPoint);
+        while (theta <= Math.PI) {
+            while (phi < 2*Math.PI){
+                Vector vecteurPoint= new Vector(radius*Math.sin(theta)*Math.cos(phi), radius*Math.sin(theta)*Math.sin(phi),radius*Math.cos(theta));
+                collectionVectSphere.add(vecteurPoint);
 
-             theta = theta + pas;
-             phi = phi + 2*pas;
+                phi = phi + 2*pas;
+            }
+            theta = theta + pas;
+            phi = 0;
         }
         return collectionVectSphere;
     }
