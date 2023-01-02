@@ -28,6 +28,7 @@ public class UseItemEvent implements Listener {
     @EventHandler
     public void onClickBleachUHC(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+        boolean removeItem = false;
         if (!(player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR))) {
             if (player.getInventory().getItemInMainHand().hasItemMeta()) {
                 if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
@@ -169,7 +170,7 @@ public class UseItemEvent implements Listener {
                             && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 4012602
                             && tomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")) {
                         tomoNova.classesUtils.playerHakudaUpgrade(player.getName());
-                        player.getInventory().remove(player.getInventory().getItemInMainHand());
+                        removeItem = true;
                         player.sendMessage("Art Du Hakuda");
                     }
                     //Toute classe
@@ -178,7 +179,7 @@ public class UseItemEvent implements Listener {
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                             && !player.hasCooldown(Material.GLOWSTONE_DUST)
                             && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5149609) {
-                        event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
+                        removeItem = true;
                         GiveItem.giveHogyokuActifFragment(event.getPlayer().getName());
                         event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(event.getPlayer().getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 10);
                         player.sendMessage("Hogyoku Inactif");
@@ -188,8 +189,6 @@ public class UseItemEvent implements Listener {
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                             && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                             && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5032602) {
-                        event.getPlayer().getInventory().remove(event.getPlayer().getInventory().getItemInMainHand());
-
                         for (ActiveMob boss : MythicBukkit.inst().getMobManager().getActiveMobs()) {
                             if (boss.getName().equals("aizenv2")) {
                                 //Creation d'une loc normale
@@ -200,7 +199,7 @@ public class UseItemEvent implements Listener {
                                 //Activer si Aizen est proche
                                 if (player.getLocation().distance(bossLoc) <= 30.0) {
                                     boss.getEntity().setHealth(boss.getEntity().getHealth() - boss.getEntity().getMaxHealth() * 0.5);
-                                    player.getInventory().remove(player.getInventory().getItemInMainHand());
+                                    removeItem = true;
                                 }
                             }
                         }
@@ -228,7 +227,7 @@ public class UseItemEvent implements Listener {
                             && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                             && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5022601) {
                         PhotoDeYoruichi.PhotoDeYoruichi(player.getName());
-                        player.getInventory().remove(player.getInventory().getItemInMainHand());
+                        removeItem = true;
                         player.sendMessage("Photo de Yoruichi");
                     }
                     //Lys des neiges
@@ -272,6 +271,9 @@ public class UseItemEvent implements Listener {
                     }
                 }
             }
+        }
+        if(removeItem){
+            player.getInventory().remove(player.getInventory().getItemInMainHand());
         }
     }
 }

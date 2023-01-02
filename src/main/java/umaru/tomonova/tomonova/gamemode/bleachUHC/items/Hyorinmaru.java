@@ -38,9 +38,9 @@ public class Hyorinmaru {
                 playerToEntityVector = new Vector(  entityLoc.getX() - player.getEyeLocation().getX(),
                         entityLoc.getY() - player.getEyeLocation().getY(),
                         entityLoc.getZ() - player.getEyeLocation().getZ());
-                cosAngle = playerVisionVector.clone().dot(playerToEntityVector)/(playerVisionVector.length()*playerToEntityVector.length());
-                if(cosAngle > 0
-                        && cosAngle < cosThetaMax){
+                cosAngle = playerVisionVector.dot(playerToEntityVector)/(playerVisionVector.length()*playerToEntityVector.length());
+                if(cosAngle < 1
+                        && cosAngle > cosThetaMax){
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,200,1));
                     ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,200,1));
                 }

@@ -75,15 +75,6 @@ public class BleachUHC {
     }
 
     public void addPotionKotowari(PotionEffect potionEffect){
-        for(PotionEffect potionKotowari : sogyoNoKotowari){
-            if(potionKotowari.getType().equals(potionEffect.getType())
-                && potionKotowari.getAmplifier() == potionEffect.getAmplifier()){
-                PotionEffect newPotionEffect = new PotionEffect(potionKotowari.getType(), potionKotowari.getAmplifier(),potionKotowari.getDuration() + potionEffect.getDuration());
-                sogyoNoKotowari.remove(potionKotowari);
-                sogyoNoKotowari.add(newPotionEffect);
-                return;
-            }
-        }
         sogyoNoKotowari.add(potionEffect);
     }
     public void affectPotionKotowari(String playerName){
