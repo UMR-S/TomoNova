@@ -1,6 +1,11 @@
 package umaru.tomonova.tomonova.core.task.bleachUHCTask;
 
 import org.bukkit.Bukkit;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -17,11 +22,10 @@ public class BaveMinazukiTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        System.out.println(duree);
-        if(player.isBlocking()){
+        System.out.println(player.isHandRaised());
+        if(player.isHandRaised()){
             player.setHealth(player.getHealth() - 1);
             duree++;
-            System.out.println("hap");
         }
         else{
             this.cancel();

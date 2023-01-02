@@ -69,10 +69,12 @@ public class BannedItemForClasses implements Listener {
     @EventHandler
     public void PlayerDropEvent(PlayerDropItemEvent event) {
 
-        if(event.getItemDrop().getItemStack().getItemMeta().hasCustomModelData()){
-            if(event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149612
-                    || event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149613){
-                event.setCancelled(true);
+        if(event.getItemDrop().getItemStack().hasItemMeta()) {
+            if (event.getItemDrop().getItemStack().getItemMeta().hasCustomModelData()) {
+                if (event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149612
+                        || event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149613) {
+                    event.setCancelled(true);
+                }
             }
         }
     }

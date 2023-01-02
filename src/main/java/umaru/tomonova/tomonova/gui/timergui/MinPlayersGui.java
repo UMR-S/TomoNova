@@ -33,7 +33,6 @@ public class MinPlayersGui extends TimerGui {
             if (is == null || is.getType() == Material.AIR) {
                 return;
             }
-            System.out.println(is.getType());
             event.setCancelled(true);
             switch (is.getType()) {
                 case OAK_BOAT: {

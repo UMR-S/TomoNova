@@ -14,10 +14,12 @@ public class SuzumebachiHeldEvent implements Listener {
     public void playerHeldEventBleachUHC(PlayerItemHeldEvent event){
         ItemStack newItemInHand = event.getPlayer().getInventory().getItem(event.getNewSlot());
         if(!(newItemInHand == null || newItemInHand.getType().equals(Material.AIR))){
-            if(newItemInHand.getItemMeta().hasCustomModelData()){
-                if(newItemInHand.getItemMeta().getCustomModelData() == 1021105){
-                    BukkitTask suzumebachiInvisibility = new SuzumebachiTask(TomoNova.getPlugin(),event.getPlayer().getName()).runTaskTimer(TomoNova.getPlugin(),0,5);
-                    event.getPlayer().sendMessage("Suzumebachi");
+            if(newItemInHand.hasItemMeta()) {
+                if (newItemInHand.getItemMeta().hasCustomModelData()) {
+                    if (newItemInHand.getItemMeta().getCustomModelData() == 1021105) {
+                        BukkitTask suzumebachiInvisibility = new SuzumebachiTask(TomoNova.getPlugin(), event.getPlayer().getName()).runTaskTimer(TomoNova.getPlugin(), 0, 5);
+                        event.getPlayer().sendMessage("Suzumebachi");
+                    }
                 }
             }
         }

@@ -22,9 +22,11 @@ public class GantDeSanrei {
                     player.getInventory().remove(itemStack);
                     GiveItem.giveBowPowerFive(playerName);
                 }
-                if (itemStack.getItemMeta().hasCustomModelData()) {
-                    if (itemStack.getItemMeta().getCustomModelData() == 2000602) {
-                        player.getInventory().remove(itemStack);
+                if (itemStack.hasItemMeta()) {
+                    if (itemStack.getItemMeta().hasCustomModelData()) {
+                        if (itemStack.getItemMeta().getCustomModelData() == 2000602) {
+                            player.getInventory().remove(itemStack);
+                        }
                     }
                 }
             }

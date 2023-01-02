@@ -20,10 +20,12 @@ public class SuzumebachiTask extends BukkitRunnable {
     @Override
     public void run() {
         if (!(player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR))) {
-            if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
-                if(player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1021105){
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY,6,0,false,false,false));
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,6,0,false,false,false));
+            if(player.getInventory().getItemInMainHand().hasItemMeta()) {
+                if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
+                    if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1021105) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 6, 0, false, false, false));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 6, 0, false, false, false));
+                    }
                 }
             }
         }
