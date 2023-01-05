@@ -24,7 +24,7 @@ public class GantDeSanrei {
                 }
                 if (itemStack.hasItemMeta()) {
                     if (itemStack.getItemMeta().hasCustomModelData()) {
-                        if (itemStack.getItemMeta().getCustomModelData() == 2000602) {
+                        if (itemStack.getItemMeta().getCustomModelData() == 2000201) {
                             player.getInventory().remove(itemStack);
                         }
                     }

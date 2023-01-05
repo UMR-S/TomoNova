@@ -2,6 +2,8 @@ package umaru.tomonova.tomonova.gamemode.bleachUHC.items;
 
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -27,9 +29,16 @@ public class PhotoDeYoruichi {
         for(Player players : Bukkit.getOnlinePlayers()){
             locExplosion.getWorld().playSound(players.getLocation(), Sound.ENTITY_GENERIC_EXPLODE,5.0F,0.5F);
         }
-        for(Location locBlock : generateSphere(locExplosion.clone(),25,false)){
-            locBlock.getBlock().setType(Material.AIR);
-            locExplosion.getWorld().spawnParticle(Particle.EXPLOSION_HUGE,locBlock,1);
+        for(Location locBlock : generateSphere(locExplosion.clone(),50,false)){
+            if(!locBlock.getBlock().getType().equals(Material.BEDROCK)){
+                locBlock.getBlock().setType(Material.AIR);
+            }
+            //locExplosion.getWorld().spawnParticle(Particle.EXPLOSION_HUGE,locBlock,1);
+        }
+        for(Entity entityExplosion : locExplosion.getWorld().getNearbyEntities(locExplosion,50,50,50)){
+            if(entityExplosion instanceof LivingEntity){
+                ((LivingEntity) entityExplosion).setHealth(((LivingEntity) entityExplosion).getHealth() - 10);
+            }
         }
     }
     public static List<Location> generateSphere(Location centerBlock, int radius, boolean hollow) {

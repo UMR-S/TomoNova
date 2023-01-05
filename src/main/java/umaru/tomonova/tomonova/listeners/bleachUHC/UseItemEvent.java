@@ -14,10 +14,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.BaveMinazukiTask;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.LunetteDeTosenTask;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.MedicamentUkitakeTask;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.SenbonzakuraTask;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.*;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.*;
 
@@ -49,7 +46,8 @@ public class UseItemEvent implements Listener {
                     // Attaque arme de Gin
                     if ((event.getAction() == Action.RIGHT_CLICK_AIR
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1031106) {
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1031106
+                            && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
 
                         Shinso.Shinso(player.getName());
                         player.sendMessage("Shinso");
@@ -58,21 +56,24 @@ public class UseItemEvent implements Listener {
                     // Attaque de l'arme d'Ukitake
                     if ((event.getAction() == Action.RIGHT_CLICK_AIR
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116) {
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116
+                            && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                         tomoNova.classesSpells.sogyoNoKotowari(player.getName());
                         player.sendMessage("Sogyo no kotawari");
                     }
                     // Attaque de l'arme de Byakuya (senbonzakura)
                     if ((event.getAction() == Action.RIGHT_CLICK_AIR
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1061109) {
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1061109
+                            && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                         BukkitTask senbonzakuraActive = new SenbonzakuraTask(tomoNova, player.getName()).runTaskTimer(tomoNova, 0, 20);
                         player.sendMessage("Senbonzakura");
                     }
                     // Tengen (invocation samourai)
                     if ((event.getAction() == Action.RIGHT_CLICK_AIR
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
-                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1071110) {
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1071110
+                            && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                         Tengen.tengen(player.getName());
                         player.sendMessage("Tengen");
                     }
@@ -80,7 +81,8 @@ public class UseItemEvent implements Listener {
                     if ((event.getAction() == Action.RIGHT_CLICK_AIR
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                             && !player.hasCooldown(Material.IRON_SWORD)
-                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1101113) {
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1101113
+                            && tomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                         Hyorinmaru.hyorinmaru(player.getName());
                         player.sendMessage("Hyorinmaru");
                     }
@@ -210,7 +212,7 @@ public class UseItemEvent implements Listener {
                             || event.getAction() == Action.RIGHT_CLICK_BLOCK)
                             && !player.hasCooldown(Material.CARROT_ON_A_STICK)
                             && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5082604) {
-                        SakeKyoraku.sakeTeleport(player.getName(), tomoNova.classesSpells.getEntityInSight(player, 100).getName());
+                        SakeKyoraku.sakeTeleport(player.getName(), tomoNova.classesSpells.getEntityInSight(player, 50).getName());
                         player.sendMessage("Sake");
                     }
                     //Medicament de Ukitake
@@ -247,6 +249,14 @@ public class UseItemEvent implements Listener {
                         BukkitTask lunettesDeTosen = new LunetteDeTosenTask(TomoNova.getPlugin(), player.getName()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
                         player.sendMessage("Lunettes de Tosen");
                     }
+                    if ((event.getAction() == Action.RIGHT_CLICK_AIR
+                            || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                            && !player.hasCooldown(Material.TOTEM_OF_UNDYING)
+                            && player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 5149613) {
+                        BukkitTask hogyokuActif = new HogyokuActifTask(tomoNova, player.getName()).runTaskTimer(tomoNova, 0, 20);
+                        player.sendMessage("Hogyoku");
+                    }
+                    //Activer Hogyoku
                     //Operator
                     // Wand combat zone
                     if (event.getAction() == Action.RIGHT_CLICK_BLOCK
