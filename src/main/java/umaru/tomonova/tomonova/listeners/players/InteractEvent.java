@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.MainGui;
+import umaru.tomonova.tomonova.gui.classesgui.ClassesGui;
 import umaru.tomonova.tomonova.gui.teamsgui.TeamsGui;
 import umaru.tomonova.tomonova.lang.Lang;
 
@@ -25,15 +26,24 @@ public class InteractEvent implements Listener {
         Player player = event.getPlayer();
 
         //Lobby
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.BLACK_BANNER && GameStates.isState(GameStates.LOBBY)) {
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.BLACK_BANNER
+                && (GameStates.isState(GameStates.LOBBY) || TomoNova.test)) {
             if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1) {
                 new TeamsGui(player).show();
             } else {
                 event.getPlayer().sendMessage(Lang.SOLO_MESSAGE.toString());
             }
         }
-        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK) && player.getInventory().getItemInMainHand().getType() == Material.PAPER && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END))) {
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.PAPER
+                && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END) || TomoNova.test)) {
             new MainGui(player).show();
+        }
+        if ((event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)
+                && player.getInventory().getItemInMainHand().getType() == Material.NETHERITE_SCRAP
+                && (GameStates.isState(GameStates.LOBBY) || GameStates.isState(GameStates.LOBBY_END) || TomoNova.test)) {
+            new ClassesGui(player).show();
         }
         if (GameStates.isState(GameStates.GAME) && TomoNova.getPlugin().gameManager.isTomoLostVillage()) {
             if ((event.getAction() == Action.LEFT_CLICK_AIR

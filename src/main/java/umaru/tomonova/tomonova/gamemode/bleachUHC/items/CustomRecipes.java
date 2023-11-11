@@ -14,7 +14,7 @@ import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 import java.util.Arrays;
 
 public class CustomRecipes {
-    public void addHogyokuRecipe(){
+    public static void addHogyokuRecipe(){
         ItemStack hogyokuActif = CustomItems.createCustomItem(
                 Material.TOTEM_OF_UNDYING,
                 ChatColor.AQUA,
@@ -23,7 +23,7 @@ public class CustomRecipes {
                 5149613);
 
         ShapedRecipe hogyokuRecipe = new ShapedRecipe(new NamespacedKey(TomoNova.getPlugin(),"hogyoku"),hogyokuActif);
-        hogyokuRecipe.shape("X","Y","X");
+        hogyokuRecipe.shape("XYX");
         hogyokuRecipe.setIngredient('X', Material.NETHER_WART);
         hogyokuRecipe.setIngredient('Y', Material.NETHERITE_SCRAP);
         Bukkit.addRecipe(hogyokuRecipe);

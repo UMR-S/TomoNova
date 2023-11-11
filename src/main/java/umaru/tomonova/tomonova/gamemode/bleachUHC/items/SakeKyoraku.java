@@ -12,16 +12,16 @@ public class SakeKyoraku {
         Location firstPlayerLoc = firstPlayer.getLocation().clone();
         Location secondPlayerLoc = secondPlayer.getLocation().clone();
         //Vecteur allant du premier joueur au second joueur
-        Vector playersVector = secondPlayerLoc.toVector().subtract(firstPlayerLoc.toVector()).normalize().multiply(50);
+        Vector playersVector = secondPlayerLoc.toVector().subtract(firstPlayerLoc.toVector()).normalize().multiply(100);
         secondPlayerLoc.add(playersVector);
         firstPlayerLoc.add(playersVector.clone().multiply(-1));
         //Rechercher les blocs d'air les plus proches (en hauteur uniquement)
-        while(firstPlayerLoc.getBlock().isEmpty()
-                && firstPlayerLoc.clone().add(0,1,0).getBlock().isEmpty()){
+        while(!firstPlayerLoc.getBlock().isEmpty()
+                || !firstPlayerLoc.add(0,1,0).getBlock().isEmpty()){
             firstPlayerLoc.add(0,1,0);
         }
-        while(secondPlayerLoc.getBlock().isEmpty()
-                && secondPlayerLoc.clone().add(0,1,0).getBlock().isEmpty()){
+        while(!secondPlayerLoc.getBlock().isEmpty()
+                || !secondPlayerLoc.add(0,1,0).getBlock().isEmpty()){
             secondPlayerLoc.add(0,1,0);
         }
         firstPlayer.teleport(firstPlayerLoc);

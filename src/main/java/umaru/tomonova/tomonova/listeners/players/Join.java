@@ -22,26 +22,25 @@ public class Join implements Listener {
         if (GameStates.isState(GameStates.LOBBY)) {
             Player player = event.getPlayer();
             TomoNova.getPlugin().gameManager.addPlayer(player.getName());
-
-            player.setGameMode(GameMode.ADVENTURE);
-            player.getInventory().clear();
-            player.getInventory().setArmorContents(new ItemStack[]{new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR)});
-            player.setExp(0.0f);
-            player.setLevel(0);
-            player.setHealth(20.0);
-            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
-            player.setFoodLevel(20);
-            player.getActivePotionEffects().forEach(p -> player.removePotionEffect(p.getType()));
+            if(!TomoNova.test){
+                player.setGameMode(GameMode.ADVENTURE);
+                player.getInventory().clear();
+                player.getInventory().setArmorContents(new ItemStack[]{new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR), new ItemStack(Material.AIR)});
+                player.setExp(0.0f);
+                player.setLevel(0);
+                player.setHealth(20.0);
+                player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20.0);
+                player.setFoodLevel(20);
+                player.getActivePotionEffects().forEach(p -> player.removePotionEffect(p.getType()));
+                player.teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 202.0, 0.0, 0, 0));
+            }
             player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-            player.teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 202.0, 0.0, 0, 0));
             player.setCollidable(false);
-
             List<String> loreBanner = new ArrayList<>();
             loreBanner.add("(sauf toi Shanto)");
             ItemStack banner;
             banner = CustomItems.createCustomItem(Material.BLACK_BANNER, ChatColor.AQUA, "Choissisez votre équipe", loreBanner);
             player.getInventory().setItem(0, banner);
-            player.setFoodLevel(20);
 
             //Rajoute l'item pour la config
             if (player.isOp()) {

@@ -146,56 +146,59 @@ public class GameManager {
                 HandlerList.unregisterAll((Listener) littleRule.getLittleRule());
             }
         }
-        //Tp les joueurs
-        //En équipe
-        if (playersPerTeam > 1) {
-            for (Teams team : locationTeams.keySet()) {
-                spawnPreGameLobby(locationTeams.get(team));
-                if (team.getNumberPlayers() != 0) {
-                    for (String playerName : team.getTeamPlayers()) {
-                        Player player = Bukkit.getPlayer(playerName);
-                        Location locPlateform = locationTeams.get(team);
-                        Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
-                        try {
-                            loc.setY(201.0);
-                            loc.setX(loc.getX() + 0.5);
-                            loc.setZ(loc.getZ() + 0.5);
-                            player.teleport(loc);
-                        } catch (NullPointerException nullPointerException) {
-                            break;
+        if(!TomoNova.test){
+            //Tp les joueurs
+            //En équipe
+            if (playersPerTeam > 1) {
+                for (Teams team : locationTeams.keySet()) {
+                    spawnPreGameLobby(locationTeams.get(team));
+                    if (team.getNumberPlayers() != 0) {
+                        for (String playerName : team.getTeamPlayers()) {
+                            Player player = Bukkit.getPlayer(playerName);
+                            Location locPlateform = locationTeams.get(team);
+                            Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
+                            try {
+                                loc.setY(201.0);
+                                loc.setX(loc.getX() + 0.5);
+                                loc.setZ(loc.getZ() + 0.5);
+                                player.teleport(loc);
+                            } catch (NullPointerException nullPointerException) {
+                                break;
+                            }
                         }
                     }
                 }
             }
-        }
-        //En solo
-        if (playersPerTeam == 1) {
-            for (String playerName : locationSolo.keySet()) {
-                spawnPreGameLobby(locationSolo.get(playerName));
-                Location locPlateform = locationSolo.get(playerName);
-                Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
-                try {
-                    loc.setY(201.0);
-                    loc.setX(loc.getX() + 0.5);
-                    loc.setZ(loc.getZ() + 0.5);
-                    Bukkit.getPlayer(playerName).teleport(loc);
-                } catch (NullPointerException nullPointerException) {
-                    break;
+            //En solo
+            if (playersPerTeam == 1) {
+                for (String playerName : locationSolo.keySet()) {
+                    spawnPreGameLobby(locationSolo.get(playerName));
+                    Location locPlateform = locationSolo.get(playerName);
+                    Location loc = new Location(locPlateform.getWorld(), locPlateform.getX(), locPlateform.getY(), locPlateform.getZ());
+                    try {
+                        loc.setY(201.0);
+                        loc.setX(loc.getX() + 0.5);
+                        loc.setZ(loc.getZ() + 0.5);
+                        Bukkit.getPlayer(playerName).teleport(loc);
+                    } catch (NullPointerException nullPointerException) {
+                        break;
+                    }
                 }
             }
+            //Dégâts et countdown
+            setDamage(false);
+            TaskFinalCountdown.setPreStartTime(10);
+            Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().clear());
+            if (isTomoLostVillage()) {
+                Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
+                tomoNova.tomoLostVillage.nightVisionOn(getPlayers());
+                tomoNova.tomoLostVillage.bonusHearthOn(getPlayers());
+                getPlayers().forEach(p -> Bukkit.getPlayer(p).setHealth(24.0));
+            }
+            getPlayers().forEach(p -> Bukkit.getPlayer(p).setGameMode(GameMode.SURVIVAL));
+            BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
         }
-        //Dégâts et countdown
-        setDamage(false);
-        TaskFinalCountdown.setPreStartTime(10);
-        Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().clear());
-        if (isTomoLostVillage()) {
-            Bukkit.getScoreboardManager().getMainScoreboard().getTeams().forEach(t -> t.unregister());
-            tomoNova.tomoLostVillage.nightVisionOn(getPlayers());
-            tomoNova.tomoLostVillage.bonusHearthOn(getPlayers());
-            getPlayers().forEach(p -> Bukkit.getPlayer(p).setHealth(24.0));
-        }
-        getPlayers().forEach(p -> Bukkit.getPlayer(p).setGameMode(GameMode.SURVIVAL));
-        BukkitTask countdown = new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+
         BukkitTask TaskManager = new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
 
     }

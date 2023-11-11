@@ -42,7 +42,7 @@ public class LunetteDeTosenTask extends BukkitRunnable {
                         }
                     }
                     if(!isBlind){
-                        ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,1200,0));
+                        ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,1210,0));
                     }
                 }
             }

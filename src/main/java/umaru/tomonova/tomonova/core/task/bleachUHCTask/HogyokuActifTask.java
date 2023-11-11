@@ -9,14 +9,16 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 
 public class HogyokuActifTask extends BukkitRunnable {
-    private static int timeActive;
-    private static String playerName;
+    private int timeActive;
+    private String playerName;
 
     private static boolean cancel = false;
     private TomoNova tomoNova;
 
-    public HogyokuActifTask(TomoNova tomoNova) {
+    public HogyokuActifTask(TomoNova tomoNova,String playerName) {
         this.tomoNova = tomoNova;
+        this.playerName = playerName;
+        this.timeActive =0;
     }
     @Override
     public void run() {
@@ -32,9 +34,7 @@ public class HogyokuActifTask extends BukkitRunnable {
         }
         if(cancel){
             this.cancel();
-            HogyokuInactifTask.setTimeInactive(6000);
-            HogyokuInactifTask.setPlayerName(playerName);
-            BukkitTask hogyokuInactif = new HogyokuInactifTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(),0,20);
+            BukkitTask hogyokuInactif = new HogyokuInactifTask(tomoNova, playerName).runTaskTimer(tomoNova,0,20);
             GiveItem.giveHogyokuInactif(playerName);
             Bukkit.getPlayer(playerName).removePotionEffect(PotionEffectType.DAMAGE_RESISTANCE);
             Bukkit.getPlayer(playerName).removePotionEffect(PotionEffectType.SATURATION);
@@ -43,14 +43,6 @@ public class HogyokuActifTask extends BukkitRunnable {
             Bukkit.getPlayer(playerName).removePotionEffect(PotionEffectType.GLOWING);
         }
         timeActive++;
-    }
-
-    public static void setTimeActive(int timeActive) {
-        HogyokuActifTask.timeActive = timeActive;
-    }
-
-    public static void setPlayerName(String playerName) {
-        HogyokuActifTask.playerName = playerName;
     }
 
     public static void setCancel(boolean cancel) {

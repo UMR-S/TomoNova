@@ -66,7 +66,6 @@ public class CombatZoneConfigManager {
 
         getCombatZoneConfig().set("combatZone." + zoneName + ".ymin", ymin);
         getCombatZoneConfig().set("combatZone." + zoneName + ".ymax", ymax);
-        System.out.println(finalZone.size());
         for (Integer x : finalZone.keySet()) {
 
             getCombatZoneConfig().set("combatZone." + zoneName + ".contours." + x, finalZone.get(x));

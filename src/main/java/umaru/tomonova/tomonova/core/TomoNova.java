@@ -4,14 +4,13 @@ package umaru.tomonova.tomonova.core;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.game.GameManager;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.core.task.TaskManager;
-import umaru.tomonova.tomonova.core.task.bleachUHCTask.CooldownTask;
 import umaru.tomonova.tomonova.gamemode.BleachUHC;
 import umaru.tomonova.tomonova.gamemode.TomoLostVillage;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.classes.ClassesSpells;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.items.CustomRecipes;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.listeners.bleachUHC.*;
 import umaru.tomonova.tomonova.listeners.entities.EntityDamage;
@@ -36,7 +35,7 @@ import java.util.logging.Logger;
 
 
 public final class TomoNova extends JavaPlugin {
-
+    public static boolean test = true;
     private Logger log;
     private static TomoNova plugin;
     public static GameManager gameManager;
@@ -71,12 +70,11 @@ public final class TomoNova extends JavaPlugin {
         loadLang();
         setupUtils();
         listenersRegister();
-        //Désactiver pour la version test
-        //LobbyUtils.spawnLobby();
+        LobbyUtils.spawnLobby();
         SettingRulesUtils.setGamerules();
         getConfig().options().copyDefaults();
         saveDefaultConfig();
-        BukkitTask cooldowns = new CooldownTask(this).runTaskTimer(this, 0, 1);
+        CustomRecipes.addHogyokuRecipe();
     }
 
     @Override
@@ -86,17 +84,30 @@ public final class TomoNova extends JavaPlugin {
 
     public void listenersRegister() {
 
-
+        //Commun
         getServer().getPluginManager().registerEvents(new InteractEvent(), plugin);
         getServer().getPluginManager().registerEvents(new Join(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
-        getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerMove(), plugin);
         getServer().getPluginManager().registerEvents(new Quit(), plugin);
         getServer().getPluginManager().registerEvents(new PlayerChangeWorld(), plugin);
-
         getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);
+        getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
+        if(!test){
+            getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
+            getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
+            getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
+            getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
+        }
+        else{
+            getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
+            getServer().getPluginManager().registerEvents(new BannedItemForClasses(), plugin);
+            getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
+        }
 //        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
 //        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
 //        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
@@ -106,18 +117,6 @@ public final class TomoNova extends JavaPlugin {
 //        getServer().getPluginManager().registerEvents(new Regen(), plugin);
 //        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
 //        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
-        getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
-        getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
-        getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
-
-        //Listeners du bleachUHC
-        getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
-        getServer().getPluginManager().registerEvents(new BannedItemForClasses(),plugin);
-        getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
-        getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
-        getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
-        getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
-        getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
     }
 
     public void setupUtils() {
@@ -128,9 +127,8 @@ public final class TomoNova extends JavaPlugin {
         worldBorderUtils = new WorldBorderUtils();
         taskManager = new TaskManager(this);
         tomoLostVillage = new TomoLostVillage();
-        //BleachUHC
         bleachUHC = new BleachUHC();
-        classesSpells = new ClassesSpells();
+        classesSpells =new ClassesSpells();
         combatzoneUtils = new CombatZoneUtils();
         combatZoneComfigManager = new CombatZoneConfigManager(this);
         classesUtils = new ClassesUtils();

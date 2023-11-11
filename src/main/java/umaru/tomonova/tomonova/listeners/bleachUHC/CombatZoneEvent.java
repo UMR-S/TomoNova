@@ -1,5 +1,6 @@
 package umaru.tomonova.tomonova.listeners.bleachUHC;
 
+import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -34,8 +35,8 @@ public class CombatZoneEvent implements Listener {
     public void PlayerHitBossOutsideZone(EntityDamageByEntityEvent event){
 
         if(event.getDamager() instanceof Player){
-            // A changer pour Mythic mob
-            if(event.getEntity() instanceof LivingEntity){
+            if(MythicBukkit.inst().getAPIHelper().isMythicMob(event.getEntity())
+                && !TomoNova.test){
                 if(!TomoNova.combatzoneUtils.isPlayerInZone(event.getDamager().getName())){
                     event.setCancelled(true);
                 }
