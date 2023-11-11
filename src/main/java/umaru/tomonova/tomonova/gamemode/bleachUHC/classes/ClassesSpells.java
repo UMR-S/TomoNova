@@ -32,11 +32,8 @@ public class ClassesSpells {
     //Quincy
     public void Carquois(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
-
-        ItemStack quincyArrow = GiveItem.getQuincyArrow();
-        quincyArrow.setAmount(0);
-
         int arrowAmount = 0;
+        assert player != null;
         PlayerInventory inv = player.getInventory();
         for (ItemStack is : inv.all(Material.ARROW).values()) {
             if (is != null && is.getType() == Material.ARROW) {
@@ -44,13 +41,12 @@ public class ClassesSpells {
             }
         }
         if (arrowAmount <= 11) {
-            quincyArrow.setAmount(17);
+            GiveItem.giveQuincyArrow(playerName,17);
             player.setCooldown(Material.CARROT_ON_A_STICK, 600);
-        } else if (12 <= arrowAmount && arrowAmount <= 28) {
-            quincyArrow.setAmount(28 - arrowAmount);
+        } else if (arrowAmount <= 28) {
+            GiveItem.giveQuincyArrow(playerName,28 - arrowAmount);
             player.setCooldown(Material.CARROT_ON_A_STICK, 600);
         }
-        player.getInventory().addItem(quincyArrow);
     }
 
     //SSR

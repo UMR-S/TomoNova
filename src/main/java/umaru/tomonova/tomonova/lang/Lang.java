@@ -225,6 +225,7 @@ public enum Lang {
     GUIS_BOSS_MAYURI_LORE("guis.bleachuhc.boss.mayuriLore","Tuturu~"),
     GUIS_BOSS_UKITAKE_NAME("guis.bleachuhc.boss.ukitakeName","Ukitake"),
     GUIS_BOSS_UKITAKE_LORE("guis.bleachuhc.boss.yamamotoLore","Encore un qui va casser mauvais"),
+    GUIS_YACHIRU_NAME("guis.bleachuhc.yachiruName","Boutique de Yachiru"),
     BUHC_ITEM_ART_DU_HAKUDA_NAME("bleachuhc.items.artDuHakudaName","Art du Hakuda"),
     BUHC_ITEM_ART_DU_HAKUDA_LORE("bleachuhc.items.artDuHakudaLore","Brazo uniquement"),
     BUHC_ITEM_ART_DU_HAKUDA_LORE_TWO("bleachuhc.items.artDuHakudaLoreTwo","Double les dégâts et le knockback de base"),
@@ -272,7 +273,26 @@ public enum Lang {
     BUHC_ITEM_QUINCY_BOW_LORE("bleachuhc.items.quincyBowLore","Aoi aoi ano ojigi"),
     BUHC_ITEM_CARQUOIS_NAME("bleachuhc.items.carquoisName","Carquois"),
     BUHC_ITEM_CARQUOIS_LORE("bleachuhc.items.carquoisLore","Vous donne 17 flèches (maximum 28)"),
-    BUHC_ITEM_CARQUOIS_LORE_TWO("bleachuhc.items.carquoisLoreTwo","Cooldown : 30 secondes");
+    BUHC_ITEM_CARQUOIS_LORE_TWO("bleachuhc.items.carquoisLoreTwo","Cooldown : 30 secondes"),
+    BUHC_ITEM_SHIELD_NAME("bleachuhc.items.shieldName","Bouclier Brazo"),
+    BUHC_ITEM_SHIELD_LORE("bleachuhc.items.shieldLore","En vrai c'est celui de Captain America acheté en promo"),
+    BUHC_ITEM_ZANPAKUTO_NAME("bleachuhc.items.zanpakutoName","Zanpakuto"),
+    BUHC_ITEM_ZANPAKUTO_LORE("bleachuhc.items.zanpakutoLore","On aurait dû l'appeler daikatana ..."),
+    BUHC_ITEM_1CIEUX_NAME("bleachuhc.items.1cieuxName","Ciel unique"),
+    BUHC_ITEM_1CIEUX_LORE("bleachuhc.items.1cieuxLore","Inflige 5 points de dégâts à l'ennemi et le fait reculer"),
+    BUHC_ITEM_1CIEUX_LORE_TWO("bleachuhc.items.1cieuxLoreTwo","Cooldown : 25 secondes"),
+    BUHC_ITEM_2CIEUX_NAME("bleachuhc.items.2cieuxName","2 Cieux"),
+    BUHC_ITEM_2CIEUX_LORE("bleachuhc.items.2cieuxLore","Soigne un allié de 2.5 coeurs et donne +2 coeurs d'absorption"),
+    BUHC_ITEM_2CIEUX_LORE_TWO("bleachuhc.items.1cieuxLoreTwo","Cooldown : 3 minutes"),
+    BUHC_ITEM_3CIEUX_NAME("bleachuhc.items.3cieuxName","3 Cieux"),
+    BUHC_ITEM_3CIEUX_LORE("bleachuhc.items.3cieuxLore","Purge tous les effets de potions et donne résistance 1 pour une seconde"),
+    BUHC_ITEM_3CIEUX_LORE_TWO("bleachuhc.items.3cieuxLoreTwo","Cooldown : 3 secondes"),
+    BUHC_ITEM_4CIEUX_NAME("bleachuhc.items.4cieuxName","3 Cieux"),
+    BUHC_ITEM_4CIEUX_LORE("bleachuhc.items.4cieuxLore","Vous rend invulnérable 5 secondes. Renvoie tous les dégâts reçus à la fin."),
+    BUHC_ITEM_4CIEUX_LORE_TWO("bleachuhc.items.4cieuxLoreTwo","Cooldown : 3 minutes"),
+    BUHC_ITEM_DASH_NAME("bleachuhc.items.dashName","Dash"),
+    BUHC_ITEM_DASH_LORE("bleachuhc.items.dashLore","Cooldown : 15 secondes"),
+    ;
 
     private String path;
     private String def;

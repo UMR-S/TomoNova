@@ -18,7 +18,7 @@ public class CombatZoneEvent implements Listener {
 
         Block block = event.getBlock();
 
-        if(TomoNova.combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
+        if(TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
             event.setCancelled(true);
         }
     }
@@ -27,7 +27,7 @@ public class CombatZoneEvent implements Listener {
 
         Block block = event.getBlock();
 
-        if(TomoNova.combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
+        if(TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
             event.setCancelled(true);
         }
     }
@@ -37,7 +37,7 @@ public class CombatZoneEvent implements Listener {
         if(event.getDamager() instanceof Player){
             if(MythicBukkit.inst().getAPIHelper().isMythicMob(event.getEntity())
                 && !TomoNova.test){
-                if(!TomoNova.combatzoneUtils.isPlayerInZone(event.getDamager().getName())){
+                if(!TomoNova.getPlugin().combatzoneUtils.isPlayerInZone(event.getDamager().getName())){
                     event.setCancelled(true);
                 }
             }
