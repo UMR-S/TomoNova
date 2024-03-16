@@ -5,18 +5,16 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
-import umaru.tomonova.tomonova.utils.particles.ParticlesShape;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 public class PhotoDeYoruichi {
-    public static void PhotoDeYoruichi(String playerName) {
+    public static void PhotoDeYoruichiUse(String playerName) {
         Player caster = Bukkit.getPlayer(playerName);
+        assert caster != null;
         Location casterLoc = caster.getLocation().clone();
         Block nearestBlock = caster.getTargetBlockExact(50);
         Vector vectorCasterToBlock;
@@ -27,7 +25,7 @@ public class PhotoDeYoruichi {
         }
         Location locExplosion = casterLoc.clone().add(vectorCasterToBlock);
         for(Player players : Bukkit.getOnlinePlayers()){
-            locExplosion.getWorld().playSound(players.getLocation(), Sound.ENTITY_GENERIC_EXPLODE,5.0F,0.5F);
+            Objects.requireNonNull(locExplosion.getWorld()).playSound(players.getLocation(), Sound.ENTITY_GENERIC_EXPLODE,5.0F,0.5F);
         }
         for(Location locBlock : generateSphere(locExplosion.clone(),50,false)){
             if(!locBlock.getBlock().getType().equals(Material.BEDROCK)){
@@ -35,7 +33,7 @@ public class PhotoDeYoruichi {
             }
             //locExplosion.getWorld().spawnParticle(Particle.EXPLOSION_HUGE,locBlock,1);
         }
-        for(Entity entityExplosion : locExplosion.getWorld().getNearbyEntities(locExplosion,50,50,50)){
+        for(Entity entityExplosion : Objects.requireNonNull(locExplosion.getWorld()).getNearbyEntities(locExplosion,50,50,50)){
             if(entityExplosion instanceof LivingEntity){
                 ((LivingEntity) entityExplosion).setHealth(((LivingEntity) entityExplosion).getHealth() - 10);
             }

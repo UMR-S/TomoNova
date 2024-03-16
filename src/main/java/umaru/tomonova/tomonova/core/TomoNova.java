@@ -38,18 +38,18 @@ public final class TomoNova extends JavaPlugin {
     public static boolean test = true;
     private Logger log;
     private static TomoNova plugin;
-    public static GameManager gameManager;
-    public static ScoreboardUtils scoreboardUtils;
-    public static TeamUtils teamUtils;
-    public static WorldUtils worldUtils;
-    public static WorldBorderUtils worldBorderUtils;
-    public static TaskManager taskManager;
-    public static TomoLostVillage tomoLostVillage;
-    public static BleachUHC bleachUHC;
-    public static ClassesSpells classesSpells;
-    public static CombatZoneUtils combatzoneUtils;
-    public static CombatZoneConfigManager combatZoneComfigManager;
-    public static ClassesUtils classesUtils;
+    public GameManager gameManager;
+    public ScoreboardUtils scoreboardUtils;
+    public TeamUtils teamUtils;
+    public WorldUtils worldUtils;
+    public WorldBorderUtils worldBorderUtils;
+    public TaskManager taskManager;
+    public TomoLostVillage tomoLostVillage;
+    public BleachUHC bleachUHC;
+    public ClassesSpells classesSpells;
+    public CombatZoneUtils combatzoneUtils;
+    public CombatZoneConfigManager combatZoneComfigManager;
+    public ClassesUtils classesUtils;
 
     @Override
     public void onLoad() {
@@ -107,6 +107,7 @@ public final class TomoNova extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
             getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
             getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
         }
 //        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
 //        getServer().getPluginManager().registerEvents(new Collisions(), plugin);

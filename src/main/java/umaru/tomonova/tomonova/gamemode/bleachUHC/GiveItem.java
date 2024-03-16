@@ -262,9 +262,9 @@ public class GiveItem {
         ItemStack ashisogiJizo = CustomItems.createCustomItem(
                 Material.IRON_SWORD,
                 ChatColor.AQUA,
-                Lang.BUHC_ITEM_MINAZUKI_NAME.toString(),
-                Arrays.asList(Lang.BUHC_ITEM_MINAZUKI_LORE.toString()),
-                1041107);
+                Lang.BUHC_ITEM_ASHISOGI_JIZO_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_ASHISOGI_JIZO_LORE.toString()),
+                1121115);
         Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
             put(Enchantment.DAMAGE_ALL, 1);
         }};
@@ -320,18 +320,51 @@ public class GiveItem {
         CustomItems.addEnchants(suzumebachi,enchantMap);
         Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, suzumebachi);
     }
-    public static void spawnSuzumichi(Location location){
-        ItemStack suzumichi = CustomItems.createCustomItem(
+    public static void spawnShinso(Location location){
+        ItemStack shinso = CustomItems.createCustomItem(
                 Material.IRON_SWORD,
                 ChatColor.AQUA,
-                Lang.BUHC_ITEM_SUZUMICHI_NAME.toString(),
-                Collections.singletonList(Lang.BUHC_ITEM_SUZUMICHI_LORE.toString()),
+                Lang.BUHC_ITEM_SHINSO_NAME.toString(),
+                Arrays.asList(Lang.BUHC_ITEM_SHINSO_LORE.toString(),Lang.BUHC_ITEM_SHINSO_LORE_TWO.toString()),
+                1031106);
+        Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
+            put(Enchantment.DAMAGE_ALL, 1);
+        }};
+        CustomItems.addEnchants(shinso,enchantMap);
+        Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, shinso);
+    }
+    public static void spawnAveuxDeGin(Location location){
+        ItemStack aveux = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_AVEUX_NAME.toString(),
+                Collections.singletonList(Lang.BUHC_ITEM_AVEUX_LORE.toString()),
+                5032602);
+
+        Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, aveux);
+    }
+    public static void spawnBaveMinazuki(Location location){
+        ItemStack aveux = CustomItems.createCustomItem(
+                Material.SHIELD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_BAVE_NAME.toString(),
+                Collections.singletonList(Lang.BUHC_ITEM_BAVE_LORE.toString()),
+                5032602);
+
+        Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, aveux);
+    }
+    public static void spawnSuzumuchi(Location location){
+        ItemStack suzumuchi = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                Lang.BUHC_ITEM_SUZUMUCHI_NAME.toString(),
+                Collections.singletonList(Lang.BUHC_ITEM_SUZUMUCHI_LORE.toString()),
                 1091112);
         Map<Enchantment, Integer> enchantMap = new HashMap<Enchantment, Integer>() {{
             put(Enchantment.DAMAGE_ALL, 1);
         }};
-        CustomItems.addEnchants(suzumichi,enchantMap);
-        Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, suzumichi);
+        CustomItems.addEnchants(suzumuchi,enchantMap);
+        Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, suzumuchi);
     }
     public static void spawnPhotoYoruichi(Location location){
         ItemStack photoYoruichi = CustomItems.createCustomItem(
@@ -348,7 +381,7 @@ public class GiveItem {
                 ChatColor.AQUA,
                 Lang.BUHC_ITEM_LYS_DES_NEIGES_NAME.toString(),
                 Arrays.asList(Lang.BUHC_ITEM_LYS_DES_NEIGES_LORE.toString(), Lang.BUHC_ITEM_LYS_DES_NEIGES_LORE_TWO.toString()),
-                5022601);
+                5102605);
         Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, lysDesNeiges);
     }
     public static void spawnHyorinmaru(Location location){
@@ -366,7 +399,7 @@ public class GiveItem {
                 ChatColor.AQUA,
                 Lang.BUHC_ITEM_LUNETTES_TOSEN_NAME.toString(),
                 Arrays.asList(Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE.toString(), Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO.toString()),
-                1101113);
+                5092605);
         Objects.requireNonNull(location.getWorld()).dropItemNaturally(location, lunettesTosen);
     }
     public static void spawnKatenKyokotsu(Location location){

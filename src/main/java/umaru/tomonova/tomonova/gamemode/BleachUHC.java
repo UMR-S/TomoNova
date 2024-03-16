@@ -18,6 +18,8 @@ public class BleachUHC {
     public HashMap<String,Location> bossLocation = new HashMap<String,Location>();
     public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
     public List<PotionEffect> sogyoNoKotowari = new ArrayList<PotionEffect>();
+    public HashMap<String,Integer> pointJoueurs = new HashMap<String,Integer>();
+
 
     public void bleachUhcSettings() {
         TomoNova.getPlugin().gameManager.setUhc(false);
@@ -27,7 +29,28 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
         TomoNova.getPlugin().gameManager.setBleachUhc(true);
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(3);
+        initializePointsJoueurs();
     }
+
+    public void initializePointsJoueurs(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            pointJoueurs.put(player.getName(),0);
+        }
+    }
+
+    public void addPoints(String playerName,int nbPoints){
+        if(pointJoueurs.containsKey(playerName)){
+            pointJoueurs.put(playerName, pointJoueurs.get(playerName) + nbPoints);
+        }
+    }
+
+    public int getPlayerPoints(String playerName){
+        if(pointJoueurs.containsKey(playerName)){
+            return pointJoueurs.get(playerName);
+        }
+        return -1;
+    }
+
     public void initializeLunettesBoolean(){
         for(Player player : Bukkit.getOnlinePlayers()){
             lunettesBoolean.put(player.getName(),false);

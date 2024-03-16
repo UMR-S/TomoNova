@@ -14,12 +14,12 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityPotionEffectEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.ReturnDamageTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.IceCage;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.UUID;
 
 public class AbilitiesEvents implements Listener {
@@ -37,6 +37,7 @@ public class AbilitiesEvents implements Listener {
 
                 if (event.getNewEffect().getType().equals(PotionEffectType.SLOW) && event.getNewEffect().getAmplifier() == 3) {
 
+                    assert player != null;
                     IceCage.iceCage(player.getLocation().getBlock().getLocation().clone());
 
                 }
@@ -57,7 +58,7 @@ public class AbilitiesEvents implements Listener {
                     HashMap<UUID, Double> playerHashMap = new HashMap<UUID, Double>();
                     event.getEntity().getWorld().getLivingEntities().forEach(e -> playerHashMap.put(e.getUniqueId(), 0.0));
                     ReturnDamageTask.setHashMapReturnDamage(playerHashMap);
-                    BukkitTask playerReturnsDamage = new ReturnDamageTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                    new ReturnDamageTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
                 }
             }
         }
@@ -75,6 +76,7 @@ public class AbilitiesEvents implements Listener {
                         Player player = ((Player) event.getEntity()).getPlayer();
                         int duration = event.getNewEffect().getDuration() + event.getOldEffect().getDuration();
                         int amplifier = event.getNewEffect().getAmplifier() + event.getOldEffect().getAmplifier() + 1;
+                        assert player != null;
                         player.removePotionEffect(PotionEffectType.POISON);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, duration, amplifier));
 
@@ -100,7 +102,7 @@ public class AbilitiesEvents implements Listener {
                     HashMap<UUID, Double> playerHashMapUkitake = new HashMap<UUID, Double>();
                     Bukkit.getOnlinePlayers().forEach(p -> playerHashMapUkitake.put(p.getUniqueId(), 0.0));
                     ReturnDamageTask.setHashMapReturnDamage(playerHashMapUkitake);
-                    BukkitTask ukitakeReturnsDamage = new ReturnDamageTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                    new ReturnDamageTask(TomoNova.getPlugin()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
 
                 }
             }
@@ -110,7 +112,7 @@ public class AbilitiesEvents implements Listener {
             if (event.getNewEffect() != null) {
                 Player player = (Player) event.getEntity();
                 if(player.getInventory().getItemInMainHand().hasItemMeta()) {
-                    if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
+                    if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).hasCustomModelData()) {
                         if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1131116) {
                             TomoNova.getPlugin().bleachUHC.addPotionKotowari(event.getNewEffect());
                         }
@@ -132,7 +134,7 @@ public class AbilitiesEvents implements Listener {
 
                 Player player = (Player) event.getDamager();
                 LivingEntity entity = (LivingEntity) event.getEntity();
-                Boolean isUkitakeThors = false;
+                boolean isUkitakeThors = false;
                 for (PotionEffect potionEffect : entity.getActivePotionEffects()) {
                     if (potionEffect.getType().equals(PotionEffectType.NIGHT_VISION) && potionEffect.getAmplifier() == 10) {
                         isUkitakeThors = true;
@@ -150,7 +152,8 @@ public class AbilitiesEvents implements Listener {
 
                 Player damager = (Player) event.getDamager();
                 Player player = ((Player) event.getEntity()).getPlayer();
-                Boolean isPlayerThors = false;
+                boolean isPlayerThors = false;
+                assert player != null;
                 for (PotionEffect potionEffect : player.getActivePotionEffects()) {
                     if (potionEffect.getType().equals(PotionEffectType.HERO_OF_THE_VILLAGE) && potionEffect.getAmplifier() == 0) {
                         isPlayerThors = true;
@@ -165,13 +168,13 @@ public class AbilitiesEvents implements Listener {
             if (event.getEntity() instanceof LivingEntity) {
                 Player player = (Player) event.getDamager();
                 LivingEntity damaged = (LivingEntity) event.getEntity();
-                if (!(player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR))) {
+                if (!player.getInventory().getItemInMainHand().getType().equals(Material.AIR)) {
                     if (player.getInventory().getItemInMainHand().hasItemMeta()) {
-                        if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
+                        if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).hasCustomModelData()) {
                             //Brazo
                             //Attaque du Brazo
                             if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 4000401
-                                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")) {
+                                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")) {
 
                                 int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
                                 event.setDamage(0);
@@ -181,23 +184,23 @@ public class AbilitiesEvents implements Listener {
                             //Shinigami
                             //Minazuki
                             if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1041107
-                                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
+                                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                                 damaged.addPotionEffect(new PotionEffect(PotionEffectType.WITHER, 60, 0));
                             }
                             //Ashisogi Jizo
                             if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1121115
-                                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
+                                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                                 damaged.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 0));
                             }
                             //Suzumichi
                             if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1091112
-                                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
+                                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                                 damaged.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 0));
 
                             }
                             //Katen Kyokotsu
                             if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1081111
-                                    && TomoNova.classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
+                                    && TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
                                 double heightDifference = player.getLocation().getY() - damaged.getLocation().getY();
                                 if (heightDifference < -2.5) {
                                     heightDifference = -2.5;
@@ -215,7 +218,8 @@ public class AbilitiesEvents implements Listener {
         if (event.getEntity() instanceof Player) {
             Player player = ((Player) event.getEntity()).getPlayer();
             // Dégats mobs au Brazo
-            if (TomoNova.classesUtils.isPlayerClasse(player.getName(), "brazo")
+            assert player != null;
+            if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")
                     && !event.getDamager().getType().equals(EntityType.PLAYER)
                     && event.getDamage() >= 1.0) {
                 if (MythicBukkit.inst().getAPIHelper().isMythicMob(event.getDamager())) {
@@ -240,6 +244,7 @@ public class AbilitiesEvents implements Listener {
             }
             //Lunettes de Tosen
             boolean isBlind = false;
+            assert player != null;
             for (PotionEffect potionEffect : player.getActivePotionEffects()) {
                 if (potionEffect.getType().equals(PotionEffectType.BLINDNESS)
                         && potionEffect.getDuration() > 21) {

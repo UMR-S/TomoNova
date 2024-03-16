@@ -35,7 +35,6 @@ public class Join implements Listener {
                 player.teleport(new Location(TomoNova.getPlugin().worldUtils.getWorld(), 0.0, 202.0, 0.0, 0, 0));
             }
             player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-            player.setCollidable(false);
             List<String> loreBanner = new ArrayList<>();
             loreBanner.add("(sauf toi Shanto)");
             ItemStack banner;

@@ -247,8 +247,8 @@ public enum Lang {
     BUHC_ITEM_MEDICAMENT_LORE_TWO("bleachuhc.items.medicamentLoreTwo","Cooldown : 30 secondes"),
     BUHC_ITEM_SUZUMEBACHI_NAME("bleachuhc.items.suzumebachiName","Suzumebachi"),
     BUHC_ITEM_SUZUMEBACHI_LORE("bleachuhc.items.suzumebachiLore","Vous rend invisible quand tenue en main (principale)"),
-    BUHC_ITEM_SUZUMICHI_NAME("bleachuhc.items.suzumichiName","Suzumichi"),
-    BUHC_ITEM_SUZUMICHI_LORE("bleachuhc.items.suzumichiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup"),
+    BUHC_ITEM_SUZUMUCHI_NAME("bleachuhc.items.suzumuchiName","Suzumuchi"),
+    BUHC_ITEM_SUZUMUCHI_LORE("bleachuhc.items.suzumuchiLore","Inflige Cécité 1 pendant 1 seconde à chaque coup"),
     BUHC_ITEM_PHOTO_YORUICHI_NAME("bleachuhc.items.photoYoruichiName","Photo de Yoruichi"),
     BUHC_ITEM_PHOTO_YORUICHI_LORE("bleachuhc.items.photoYoruichiLore","Pourquoi la photo est un bazooka?"),
     BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO("bleachuhc.items.photoYoruichiLoreTwo","Parce que Yoruichi c'est un missile"),
@@ -292,7 +292,15 @@ public enum Lang {
     BUHC_ITEM_4CIEUX_LORE_TWO("bleachuhc.items.4cieuxLoreTwo","Cooldown : 3 minutes"),
     BUHC_ITEM_DASH_NAME("bleachuhc.items.dashName","Dash"),
     BUHC_ITEM_DASH_LORE("bleachuhc.items.dashLore","Cooldown : 15 secondes"),
-    ;
+    BUHC_ITEM_SHINSO_NAME("bleachuhc.items.shinsoName","Shinso"),
+    BUHC_ITEM_SHINSO_LORE("bleachuhc.items.shinsoLore", "Frappe tous les adversaires dans votre ligne de mire"),
+    BUHC_ITEM_SHINSO_LORE_TWO("bleachuhc.items.shinsoLoreTwo","Cooldown : 7 secondes"),
+    BUHC_ITEM_AVEUX_NAME("bleachuhc.items.aveuxName","Aveux de Gin"),
+    BUHC_ITEM_AVEUX_LORE("bleachuhc.items.aveuxLore","Reduit de moitié les pv d'Aizen. Vous devez être à moins de 30m de lui"),
+    BUHC_ITEM_BAVE_NAME("bleachuhc.items.baveName","Bave de Minazuki"),
+    BUHC_ITEM_BAVE_LORE("bleachuhc.items.baveLore","Chaque seconde d'activation, vous perdez 0.5 coeurs. Chaque coeur perdu est "),
+    BUHC_ITEM_BAVE_LORE_TWO("bleachuhc.items.baveLoreTwo","transféré à la cible en coeurs d'absorbtion. 3 charges.");
+
 
     private String path;
     private String def;

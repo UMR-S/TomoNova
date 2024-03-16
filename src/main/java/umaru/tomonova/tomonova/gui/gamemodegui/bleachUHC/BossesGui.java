@@ -1,4 +1,4 @@
-package umaru.tomonova.tomonova.gui.bossesgui;
+package umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

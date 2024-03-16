@@ -1,9 +1,7 @@
 package umaru.tomonova.tomonova.listeners.players;
 
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,7 +12,8 @@ import org.bukkit.inventory.ItemStack;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.game.GameStates;
 import umaru.tomonova.tomonova.gui.MainGui;
-import umaru.tomonova.tomonova.gui.classesgui.ClassesGui;
+
+import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.ClassesGui;
 import umaru.tomonova.tomonova.gui.teamsgui.TeamsGui;
 import umaru.tomonova.tomonova.lang.Lang;
 
