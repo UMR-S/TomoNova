@@ -28,7 +28,7 @@ public class PhotoDeYoruichi {
             Objects.requireNonNull(locExplosion.getWorld()).playSound(players.getLocation(), Sound.ENTITY_GENERIC_EXPLODE,5.0F,0.5F);
         }
         for(Location locBlock : generateSphere(locExplosion.clone(),50,false)){
-            if(!locBlock.getBlock().getType().equals(Material.BEDROCK)){
+            if(!locBlock.getBlock().getType().equals(Material.BEDROCK) && !locBlock.getBlock().getType().equals(Material.AIR)){
                 locBlock.getBlock().setType(Material.AIR);
             }
             //locExplosion.getWorld().spawnParticle(Particle.EXPLOSION_HUGE,locBlock,1);

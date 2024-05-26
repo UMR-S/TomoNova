@@ -1,4 +1,4 @@
-package umaru.tomonova.tomonova.utils.classes;
+package umaru.tomonova.tomonova.utils.bleachUHC.classes;
 
 import java.util.HashMap;
 

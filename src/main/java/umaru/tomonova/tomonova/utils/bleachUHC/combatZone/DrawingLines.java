@@ -1,4 +1,4 @@
-package umaru.tomonova.tomonova.utils.combatZone;
+package umaru.tomonova.tomonova.utils.bleachUHC.combatZone;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
