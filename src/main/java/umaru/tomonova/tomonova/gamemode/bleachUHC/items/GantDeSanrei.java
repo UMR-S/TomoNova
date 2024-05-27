@@ -8,29 +8,57 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 public class GantDeSanrei {
-    public static void gantDeSanrei(String playerName){
-        Player player = Bukkit.getPlayer(playerName);
-        //Remplir de flèches
-        TomoNova.getPlugin().classesSpells.Carquois(playerName);
-        TomoNova.getPlugin().classesSpells.Carquois(playerName);
-        //Remplacer l'arc par un power 5 et enlever le carquois
-        for(ItemStack itemStack : player.getInventory()){
-            if(!(itemStack == null || itemStack.getType().equals(Material.AIR))) {
-                if (itemStack.getType().equals(Material.BOW)) {
-                    player.getInventory().remove(itemStack);
-                    GiveItem.giveBowPowerFive(playerName);
-                }
-                if (itemStack.hasItemMeta()) {
-                    if (itemStack.getItemMeta().hasCustomModelData()) {
-                        if (itemStack.getItemMeta().getCustomModelData() == 2000201) {
-                            player.getInventory().remove(itemStack);
-                        }
-                    }
-                }
+
+    public static void gantDeSanrei(String playerName) {
+        Player player = getPlayer(playerName);
+        if (player == null) return;
+
+        fillArrows(playerName);
+        replaceBowWithPowerFive(player);
+        removeQuincyBow(player);
+        applySpeedEffect(player);
+    }
+
+    private static Player getPlayer(String playerName) {
+        return Bukkit.getPlayer(playerName);
+    }
+
+    private static void fillArrows(String playerName) {
+        TomoNova.getPlugin().classesSpells.carquois(playerName);
+        TomoNova.getPlugin().classesSpells.carquois(playerName);
+    }
+
+    private static void replaceBowWithPowerFive(Player player) {
+        for (ItemStack itemStack : player.getInventory()) {
+            if (isBow(itemStack)) {
+                player.getInventory().remove(itemStack);
+                GiveItem.giveBowPowerFive(player.getName());
+                break;
             }
         }
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,2400,1));
+    }
+
+    private static boolean isBow(ItemStack itemStack) {
+        return itemStack != null && itemStack.getType().equals(Material.BOW);
+    }
+
+    private static void removeQuincyBow(Player player) {
+        for (ItemStack itemStack : player.getInventory()) {
+            if (isQuincyBow(itemStack)) {
+                player.getInventory().remove(itemStack);
+            }
+        }
+    }
+
+    private static boolean isQuincyBow(ItemStack itemStack) {
+        return itemStack != null && itemStack.hasItemMeta() && itemStack.getItemMeta().hasCustomModelData() &&
+                itemStack.getItemMeta().getCustomModelData() == BleachUHCConstants.ARC_QUINCY;
+    }
+
+    private static void applySpeedEffect(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2400, 1));
     }
 }

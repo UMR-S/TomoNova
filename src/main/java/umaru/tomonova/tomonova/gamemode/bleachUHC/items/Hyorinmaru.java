@@ -12,64 +12,85 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Hyorinmaru {
-    //range = 8
-    //angle = pi/6
-    public static void hyorinmaru(String playerName){
-        damageToPlayers(playerName);
-        Player player = Bukkit.getPlayer(playerName);
-        getCone(player.getLocation().clone(),player.getEyeLocation().getDirection().clone().normalize());
+
+    private static final int RANGE = 8;
+    private static final double ANGLE_RADIAN = Math.PI / 6;
+    private static final double COS_THETA_MAX = Math.sqrt(3) / 2; // cos(pi/6)
+    private static final int MAX_HEIGHT = 8;
+    private static final double RADIUS_INCREMENT = 0.5;
+    private static final double ANGLE_INCREMENT = Math.PI / 10;
+
+    public static void hyorinmaru(String playerName) {
+        Player player = getPlayer(playerName);
+        if (player == null) return;
+
+        damageNearbyEntities(player);
+        transformBlocksInCone(player.getLocation(), player.getEyeLocation().getDirection().normalize());
     }
-    //Dégâts aux joueurs
-    public static void damageToPlayers(String playerName){
-        int range = 8;
-        double cosThetaMax = Math.sqrt(3)/2; //cos pi/6
-        Player player = Bukkit.getPlayer(playerName);
+
+    private static Player getPlayer(String playerName) {
+        return Bukkit.getPlayer(playerName);
+    }
+
+    private static void damageNearbyEntities(Player player) {
         Vector playerVisionVector = player.getEyeLocation().getDirection().clone();
-        Vector playerToEntityVector;
-        Location entityLoc;
-        double cosAngle;
-        for(Entity entity : player.getNearbyEntities(range, range, range)){
-            if(entity instanceof LivingEntity){
-                entityLoc = entity.getLocation().clone();
-                playerToEntityVector = new Vector(  entityLoc.getX() - player.getEyeLocation().getX(),
-                        entityLoc.getY() - player.getEyeLocation().getY(),
-                        entityLoc.getZ() - player.getEyeLocation().getZ());
-                cosAngle = playerVisionVector.dot(playerToEntityVector)/(playerVisionVector.length()*playerToEntityVector.length());
-                if(cosAngle < 1
-                        && cosAngle > cosThetaMax){
-                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.SLOW,200,1));
-                    ((LivingEntity) entity).addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS,200,1));
+
+        for (Entity entity : player.getNearbyEntities(RANGE, RANGE, RANGE)) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity) entity;
+                if (isInVisionCone(player, playerVisionVector, livingEntity)) {
+                    applyEffects(livingEntity);
                 }
             }
         }
     }
-    //Transformation des blocs
-    public static void getCone(Location startingPoint, Vector directionNormalize){
-        double angleRadian = Math.PI/6;
-        int maxHeight = 8;
-        int height = 1;
+
+    private static boolean isInVisionCone(Player player, Vector playerVisionVector, LivingEntity entity) {
+        Vector playerToEntityVector = entity.getLocation().toVector().subtract(player.getEyeLocation().toVector());
+        double cosAngle = playerVisionVector.dot(playerToEntityVector) / (playerVisionVector.length() * playerToEntityVector.length());
+        return cosAngle < 1 && cosAngle > COS_THETA_MAX;
+    }
+
+    private static void applyEffects(LivingEntity entity) {
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 1));
+        entity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 200, 1));
+    }
+
+    private static void transformBlocksInCone(Location startingPoint, Vector directionNormalize) {
         World world = startingPoint.getWorld();
-        Vector vectorBase = new Vector(1,0,0);
-        Vector perpendicularVector = vectorBase.crossProduct(directionNormalize.clone()).normalize();
-        while(height <= maxHeight){
+        Vector perpendicularVector = new Vector(1, 0, 0).crossProduct(directionNormalize).normalize();
+
+        for (int height = 1; height <= MAX_HEIGHT; height++) {
             double radius = 0;
-            while (radius < height*Math.tan(angleRadian)){
-                double angleCircle = 0;
-                while(angleCircle < 2*Math.PI){
-                    angleCircle = angleCircle + Math.PI/10;
-                    Location loc = startingPoint.clone().add(directionNormalize.clone().multiply(height));
-                    loc.add(perpendicularVector.clone().multiply(radius).rotateAroundAxis(directionNormalize,angleCircle));
-                    if(!loc.getBlock().isEmpty()){
-                        loc.getBlock().setType(Material.PACKED_ICE);
-                    }
-                }
-                radius = radius + 0.5;
+            while (radius < height * Math.tan(ANGLE_RADIAN)) {
+                transformCircleBlocks(world, startingPoint, directionNormalize, perpendicularVector, height, radius);
+                radius += RADIUS_INCREMENT;
             }
-            height++;
+        }
+    }
+
+    private static void transformCircleBlocks(World world, Location startingPoint, Vector directionNormalize, Vector perpendicularVector, int height, double radius) {
+        double angleCircle = 0;
+        while (angleCircle < 2 * Math.PI) {
+            angleCircle += ANGLE_INCREMENT;
+            Location loc = calculateLocation(startingPoint, directionNormalize, perpendicularVector, height, radius, angleCircle);
+            transformBlock(loc);
+        }
+    }
+
+    private static Location calculateLocation(Location startingPoint, Vector directionNormalize, Vector perpendicularVector, int height, double radius, double angleCircle) {
+        Location loc = startingPoint.clone().add(directionNormalize.clone().multiply(height));
+        loc.add(perpendicularVector.clone().multiply(radius).rotateAroundAxis(directionNormalize, angleCircle));
+        return loc;
+    }
+
+    private static void transformBlock(Location loc) {
+        Block block = loc.getBlock();
+        if (!block.isEmpty()) {
+            block.setType(Material.PACKED_ICE);
         }
     }
 }

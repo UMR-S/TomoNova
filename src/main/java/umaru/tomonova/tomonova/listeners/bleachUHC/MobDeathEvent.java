@@ -8,6 +8,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 
 public class MobDeathEvent implements Listener {
@@ -27,60 +28,60 @@ public class MobDeathEvent implements Listener {
     public void BossDeathEvent(MythicMobDeathEvent event){
         String name = event.getMob().getDisplayName();
         switch(name){
-            case "Soi Fon":
+            case BleachUHCConstants.SOI_FON_NAME:
                 GiveItem.spawnSuzumebachi(event.getEntity().getLocation());
                 GiveItem.spawnPhotoYoruichi(event.getEntity().getLocation());
                 break;
-            case "Yamamoto":
+            case BleachUHCConstants.YAMAMOTO_NAME:
                 GiveItem.spawnRyujinJakka(event.getEntity().getLocation());
                 GiveItem.spawnArtDuHakuda(event.getEntity().getLocation());
                 break;
-            case "Gin":
+            case BleachUHCConstants.GIN_NAME:
                 GiveItem.spawnShinso(event.getEntity().getLocation());
                 GiveItem.spawnAveuxDeGin(event.getEntity().getLocation());
                 GiveItem.spawnHogyokuInactifFragment(event.getEntity().getLocation());
                 break;
-            case "Unohana":
+            case BleachUHCConstants.UNOHANA_NAME:
                 GiveItem.spawnMinazuki(event.getEntity().getLocation());
                 GiveItem.spawnBaveMinazuki(event.getEntity().getLocation());
                 break;
-            case "Illusion d'Aizen":
+            case BleachUHCConstants.AIZEN_V1_NAME:
                 System.out.println("A ajouter");
                 break;
-            case "Aizen":
+            case BleachUHCConstants.AIZEN_V2_NAME:
                 //System.out.println("Arme");
                 GiveItem.spawnHogyokuCoeur(event.getEntity().getLocation());
                 break;
-            case "Byakuya":
+            case BleachUHCConstants.BYAKUYA_NAME:
                 GiveItem.spawnSenbonzakura(event.getEntity().getLocation());
                 break;
                 //Rajouter dash
-            case "Komamura":
+            case BleachUHCConstants.KOMAMURA_NAME:
                 GiveItem.spawnTengen(event.getEntity().getLocation());
                 break;
                 //Casque
-            case "Kyoraku":
+            case BleachUHCConstants.KYORAKU_NAME:
                 GiveItem.spawnKatenKyokotsu(event.getEntity().getLocation());
                 break;
                 //Sake
-            case "Tosen":
+            case BleachUHCConstants.TOSEN_NAME:
                 GiveItem.spawnSuzumuchi(event.getEntity().getLocation());
                 GiveItem.spawnLunettesTosen(event.getEntity().getLocation());
                 GiveItem.spawnHogyokuInactifFragment(event.getEntity().getLocation());
                 break;
-            case "Toshiro":
+            case BleachUHCConstants.TOSHIRO_NAME:
                 GiveItem.spawnHyorinmaru(event.getEntity().getLocation());
                 GiveItem.spawnLysDesNeiges(event.getEntity().getLocation());
                 break;
-            case "Kenpachi":
+            case BleachUHCConstants.KENPACHI_NAME:
                 GiveItem.spawnKenpachiSword(event.getEntity().getLocation());
                 break;
                 //CacheOeil
-            case "Mayuri":
+            case BleachUHCConstants.MAYURI_NAME:
                 GiveItem.spawnAshisogiJizo(event.getEntity().getLocation());
                 GiveItem.spawnGantDeSanrei(event.getEntity().getLocation());
                 break;
-            case "Ukitake":
+            case BleachUHCConstants.UKITAKE_NAME:
                 GiveItem.spawnMedicament(event.getEntity().getLocation());
                 break;
         }

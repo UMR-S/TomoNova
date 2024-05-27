@@ -2,8 +2,9 @@ package umaru.tomonova.tomonova.listeners.bleachUHC;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.block.Block;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -14,34 +15,39 @@ import umaru.tomonova.tomonova.core.TomoNova;
 public class CombatZoneEvent implements Listener {
 
     @EventHandler
-    public void BreakBlockInCombatZone(BlockBreakEvent event){
+    public void onBlockBreak(BlockBreakEvent event) {
+        handleBlockEvent(event.getBlock(), event);
+    }
 
-        Block block = event.getBlock();
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        handleBlockEvent(event.getBlock(), event);
+    }
 
-        if(TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
+    @EventHandler
+    public void onPlayerHitBoss(EntityDamageByEntityEvent event) {
+        if (event.getDamager() instanceof Player && isMythicMob(event.getEntity())) {
+            handleEntityDamageEvent(event);
+        }
+    }
+
+    private void handleBlockEvent(Block block, Cancellable event) {
+        if (TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())) {
             event.setCancelled(true);
         }
     }
-    @EventHandler
-    public void PlaceBlockInCombatZone(BlockPlaceEvent event){
 
-        Block block = event.getBlock();
+    private boolean isMythicMob(Entity entity) {
+        return MythicBukkit.inst().getAPIHelper().isMythicMob(entity);
+    }
 
-        if(TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())){
+    private void handleEntityDamageEvent(EntityDamageByEntityEvent event) {
+        if (!TomoNova.test && !isPlayerInCombatZone(event.getDamager().getName())) {
             event.setCancelled(true);
         }
     }
-    @EventHandler
-    public void PlayerHitBossOutsideZone(EntityDamageByEntityEvent event){
 
-        if(event.getDamager() instanceof Player){
-            if(MythicBukkit.inst().getAPIHelper().isMythicMob(event.getEntity())
-                && !TomoNova.test){
-                if(!TomoNova.getPlugin().combatzoneUtils.isPlayerInZone(event.getDamager().getName())){
-                    event.setCancelled(true);
-                }
-            }
-        }
+    private boolean isPlayerInCombatZone(String playerName) {
+        return TomoNova.getPlugin().combatzoneUtils.isPlayerInZone(playerName);
     }
-
 }

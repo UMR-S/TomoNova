@@ -7,6 +7,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,16 +40,11 @@ public class BleachUHC {
     }
 
     public void addPoints(String playerName,int nbPoints){
-        if(pointJoueurs.containsKey(playerName)){
-            pointJoueurs.put(playerName, pointJoueurs.get(playerName) + nbPoints);
-        }
+        pointJoueurs.merge(playerName, nbPoints, Integer::sum);
     }
 
     public int getPlayerPoints(String playerName){
-        if(pointJoueurs.containsKey(playerName)){
-            return pointJoueurs.get(playerName);
-        }
-        return -1;
+        return pointJoueurs.getOrDefault(playerName, -1);
     }
 
     public void initializeLunettesBoolean(){
@@ -60,41 +56,33 @@ public class BleachUHC {
         Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
     }
     public void initializeBleachUhcMobs() {
-        bossesList.put("PlayerSamourai",createBoss("PlayerSamourai"));
+        bossesList.put(BleachUHCConstants.SAMOURAI_NAME, createBoss(BleachUHCConstants.SAMOURAI_NAME));
     }
-    public void initializeBleachUhcBossLoc(){
-        Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),166,30,488);
-        bossLocation.put("ukitake",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),251,42,286);
-        bossLocation.put("mayuri",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),559,31,-308);
-        bossLocation.put("kenpachi",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),164,31,-497);
-        bossLocation.put("toshiro",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-158,31,53);
-        bossLocation.put("tosen",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-222,36,367);
-        bossLocation.put("kyoraku",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-68,31,-351);
-        bossLocation.put("komamura",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-64,31,-562);
-        bossLocation.put("byakuya",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-119,12,-93);
-        bossLocation.put("aizenv2",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-254,31,203);
-        bossLocation.put("aizenv1",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),-73,31,283);
-        bossLocation.put("unohana",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),392,31,145);
-        bossLocation.put("gin",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),248,57,20);
-        bossLocation.put("soifon",bossLoc.clone());
-        bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),109,74,-34);
-        bossLocation.put("yamamoto",bossLoc.clone());
+
+    public void initializeBleachUhcBossLoc() {
+        addBossLocation(BleachUHCConstants.UKITAKE_NAME, 166, 30, 488);
+        addBossLocation(BleachUHCConstants.MAYURI_NAME, 251, 42, 286);
+        addBossLocation(BleachUHCConstants.KENPACHI_NAME, 559, 31, -308);
+        addBossLocation(BleachUHCConstants.TOSHIRO_NAME, 164, 31, -497);
+        addBossLocation(BleachUHCConstants.TOSEN_NAME, -158, 31, 53);
+        addBossLocation(BleachUHCConstants.KYORAKU_NAME, -222, 36, 367);
+        addBossLocation(BleachUHCConstants.KOMAMURA_NAME, -68, 31, -351);
+        addBossLocation(BleachUHCConstants.BYAKUYA_NAME, -64, 31, -562);
+        addBossLocation(BleachUHCConstants.AIZEN_V2_NAME, -119, 12, -93);
+        addBossLocation(BleachUHCConstants.AIZEN_V1_NAME, -254, 31, 203);
+        addBossLocation(BleachUHCConstants.UNOHANA_NAME, -73, 31, 283);
+        addBossLocation(BleachUHCConstants.GIN_NAME, 392, 31, 145);
+        addBossLocation(BleachUHCConstants.SOI_FON_NAME, 248, 57, 20);
+        addBossLocation(BleachUHCConstants.YAMAMOTO_NAME, 109, 74, -34);
     }
-    public MythicMob createBoss(String bossName){
-        MythicMob boss = MythicBukkit.inst().getMobManager().getMythicMob(bossName).get();
-        return boss;
+
+    private void addBossLocation(String bossName, int x, int y, int z) {
+        Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(), x, y, z);
+        bossLocation.put(bossName, bossLoc);
+    }
+
+    public MythicMob createBoss(String bossName) {
+        return MythicBukkit.inst().getMobManager().getMythicMob(bossName).orElse(null);
     }
 
     public void addPotionKotowari(PotionEffect potionEffect){
@@ -107,34 +95,22 @@ public class BleachUHC {
         }
         sogyoNoKotowari = new ArrayList<PotionEffect>();
     }
-    public String returnPlayerTargetName(String playerName){
-        if(playersBossTarget.containsKey(playerName)){
-            return playersBossTarget.get(playerName);
-        }
-        return "None";
+    public String returnPlayerTargetName(String playerName) {
+        return playersBossTarget.getOrDefault(playerName, "None");
     }
-    public Location returnBossLoc(String bossName){
-        if(bossLocation.containsKey(bossName)){
-            return bossLocation.get(bossName).clone();
-        }
-        return TomoNova.getPlugin().worldUtils.getWorld().getSpawnLocation().clone();
+    public Location returnBossLoc(String bossName) {
+        return bossLocation.getOrDefault(bossName, TomoNova.getPlugin().worldUtils.getWorld().getSpawnLocation()).clone();
     }
 
     public MythicMob getBossMM(String bossName) {
-        if(bossesList.containsKey(bossName)) {
-            return bossesList.get(bossName);
-        }
-        return null;
+        return bossesList.get(bossName);
     }
 
     public Boolean getLunettesBooleanPlayer(String playerName) {
-        if(lunettesBoolean.containsKey(playerName)){
-            return lunettesBoolean.get(playerName);
-        }
-        return false;
+        return lunettesBoolean.getOrDefault(playerName, false);
     }
 
     public void setLunettesBooleanTruePlayer(String playerName) {
-        this.lunettesBoolean.put(playerName,true);
+        lunettesBoolean.put(playerName, true);
     }
 }

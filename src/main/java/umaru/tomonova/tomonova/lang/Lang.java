@@ -43,6 +43,7 @@ public enum Lang {
     DRAG_ITEMS("dragItems", "Place les items dans ton inventaire"),
     VALID_ITEMS("validItems", "Valider"),
     TEAM_FULL("teamFull", "La team est pleine comme le cul de mon trap"),
+    TEAM_NOT_FOUND("teamNotFound", "Team non trouvée"),
     JOIN_TEAM("joinTeam", "Tu as rejoint l'équipe {0}"),
     VALID("valid", "Valider"),
     TEAMS("teams", "Equipes"),

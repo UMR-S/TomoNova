@@ -7,15 +7,19 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 public class BannedItemForClasses implements Listener {
     //Item Interdit par classes
+
+    private final TomoNova tomoNova = TomoNova.getPlugin();
+
     @EventHandler
     public void PlayerPickEvent(EntityPickupItemEvent event){
         if(event.getEntity() instanceof Player){
             Player player = ((Player) event.getEntity()).getPlayer();
             //Shinigami
-            if(TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")){
+            if(tomoNova.classesUtils.isPlayerShinigami(player.getName())){
                 if(event.getItem().getItemStack().getType().equals(Material.BOW)
                         || event.getItem().getItemStack().getType().equals(Material.CROSSBOW)
                         || event.getItem().getItemStack().getType().equals(Material.SHIELD)){
@@ -23,7 +27,7 @@ public class BannedItemForClasses implements Listener {
                 }
             }
             //Quincy
-            if(TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "quincy")){
+            if(tomoNova.classesUtils.isPlayerQuincy(player.getName())){
                 if(event.getItem().getItemStack().getType().equals(Material.WOODEN_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.STONE_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.IRON_SWORD)
@@ -36,7 +40,7 @@ public class BannedItemForClasses implements Listener {
                 }
             }
             //Shun shun rika
-            if(TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "ssr")){
+            if(tomoNova.classesUtils.isPlayerSSR(player.getName())){
                 if(event.getItem().getItemStack().getType().equals(Material.WOODEN_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.STONE_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.IRON_SWORD)
@@ -50,7 +54,7 @@ public class BannedItemForClasses implements Listener {
                 }
             }
             //Brazo
-            if(TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")){
+            if(TomoNova.getPlugin().classesUtils.isPlayerBrazo(player.getName())){
                 if(event.getItem().getItemStack().getType().equals(Material.WOODEN_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.STONE_SWORD)
                         || event.getItem().getItemStack().getType().equals(Material.IRON_SWORD)
@@ -71,8 +75,8 @@ public class BannedItemForClasses implements Listener {
 
         if(event.getItemDrop().getItemStack().hasItemMeta()) {
             if (event.getItemDrop().getItemStack().getItemMeta().hasCustomModelData()) {
-                if (event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149612
-                        || event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == 5149613) {
+                if (event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == BleachUHCConstants.HOGYOKU_INACTIF
+                        || event.getItemDrop().getItemStack().getItemMeta().getCustomModelData() == BleachUHCConstants.HOGYOKU_ACTIF) {
                     event.setCancelled(true);
                 }
             }

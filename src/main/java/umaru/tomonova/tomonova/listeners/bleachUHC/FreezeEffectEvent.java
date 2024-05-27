@@ -8,36 +8,35 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class FreezeEffectEvent implements Listener {
+
     @EventHandler
-    public void PlayerOnFireEvent(EntityCombustEvent event) {
-
+    public void onPlayerCombust(EntityCombustEvent event) {
         if (event.getEntity() instanceof Player) {
-
-            Player player = ((Player) event.getEntity()).getPlayer();
-            Boolean isSlow = false;
-            Boolean isWeak = false;
-            for (PotionEffect potionEffect : player.getActivePotionEffects()) {
-
-                if (potionEffect.getType().equals(PotionEffectType.SLOW) && potionEffect.getAmplifier() == 1) {
-
-                    isSlow = true;
-
-                }
-                if (potionEffect.getType().equals(PotionEffectType.WEAKNESS) && potionEffect.getAmplifier() == 1){
-
-                    isWeak = true;
-
-                }
-
+            Player player = (Player) event.getEntity();
+            if (hasFreezeEffects(player)) {
+                removeFreezeEffects(player);
             }
+        }
+    }
 
-            if (isSlow && isWeak) {
+    private boolean hasFreezeEffects(Player player) {
+        boolean isSlow = false;
+        boolean isWeak = false;
 
-                player.removePotionEffect(PotionEffectType.SLOW);
-                player.removePotionEffect(PotionEffectType.WEAKNESS);
+        for (PotionEffect potionEffect : player.getActivePotionEffects()) {
+            if (potionEffect.getType().equals(PotionEffectType.SLOW) && potionEffect.getAmplifier() == 1) {
+                isSlow = true;
             }
-
+            if (potionEffect.getType().equals(PotionEffectType.WEAKNESS) && potionEffect.getAmplifier() == 1) {
+                isWeak = true;
+            }
         }
 
+        return isSlow && isWeak;
+    }
+
+    private void removeFreezeEffects(Player player) {
+        player.removePotionEffect(PotionEffectType.SLOW);
+        player.removePotionEffect(PotionEffectType.WEAKNESS);
     }
 }

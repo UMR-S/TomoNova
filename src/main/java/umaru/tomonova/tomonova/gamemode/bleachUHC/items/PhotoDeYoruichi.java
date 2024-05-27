@@ -12,62 +12,77 @@ import java.util.List;
 import java.util.Objects;
 
 public class PhotoDeYoruichi {
-    public static void PhotoDeYoruichiUse(String playerName) {
-        Player caster = Bukkit.getPlayer(playerName);
-        assert caster != null;
+
+    private static final int EXPLOSION_RADIUS = 50;
+    private static final float EXPLOSION_SOUND_VOLUME = 5.0F;
+    private static final float EXPLOSION_SOUND_PITCH = 0.5F;
+    private static final double DAMAGE_AMOUNT = 10.0;
+
+    public static void use(String playerName) {
+        Player caster = getPlayer(playerName);
+        if (caster == null) return;
+
+        Location explosionLocation = calculateExplosionLocation(caster);
+        playExplosionSound(explosionLocation);
+        clearBlocksInSphere(explosionLocation);
+        damageEntitiesInSphere(explosionLocation);
+    }
+
+    private static Player getPlayer(String playerName) {
+        return Bukkit.getPlayer(playerName);
+    }
+
+    private static Location calculateExplosionLocation(Player caster) {
         Location casterLoc = caster.getLocation().clone();
-        Block nearestBlock = caster.getTargetBlockExact(50);
-        Vector vectorCasterToBlock;
-        if (nearestBlock != null) {
-            vectorCasterToBlock = new Vector(nearestBlock.getX() - casterLoc.getX(), nearestBlock.getY() - casterLoc.getY(), nearestBlock.getZ() - casterLoc.getZ());
-        } else {
-            vectorCasterToBlock = casterLoc.getDirection().clone().normalize().multiply(50);
+        Block nearestBlock = caster.getTargetBlockExact(EXPLOSION_RADIUS);
+        Vector vectorCasterToBlock = nearestBlock != null ?
+                new Vector(nearestBlock.getX() - casterLoc.getX(), nearestBlock.getY() - casterLoc.getY(), nearestBlock.getZ() - casterLoc.getZ()) :
+                casterLoc.getDirection().clone().normalize().multiply(EXPLOSION_RADIUS);
+        return casterLoc.clone().add(vectorCasterToBlock);
+    }
+
+    private static void playExplosionSound(Location explosionLocation) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            Objects.requireNonNull(explosionLocation.getWorld()).playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, EXPLOSION_SOUND_VOLUME, EXPLOSION_SOUND_PITCH);
         }
-        Location locExplosion = casterLoc.clone().add(vectorCasterToBlock);
-        for(Player players : Bukkit.getOnlinePlayers()){
-            Objects.requireNonNull(locExplosion.getWorld()).playSound(players.getLocation(), Sound.ENTITY_GENERIC_EXPLODE,5.0F,0.5F);
-        }
-        for(Location locBlock : generateSphere(locExplosion.clone(),50,false)){
-            if(!locBlock.getBlock().getType().equals(Material.BEDROCK) && !locBlock.getBlock().getType().equals(Material.AIR)){
-                locBlock.getBlock().setType(Material.AIR);
-            }
-            //locExplosion.getWorld().spawnParticle(Particle.EXPLOSION_HUGE,locBlock,1);
-        }
-        for(Entity entityExplosion : Objects.requireNonNull(locExplosion.getWorld()).getNearbyEntities(locExplosion,50,50,50)){
-            if(entityExplosion instanceof LivingEntity){
-                ((LivingEntity) entityExplosion).setHealth(((LivingEntity) entityExplosion).getHealth() - 10);
+    }
+
+    private static void clearBlocksInSphere(Location center) {
+        for (Location loc : generateSphere(center, EXPLOSION_RADIUS, false)) {
+            Block block = loc.getBlock();
+            if (block.getType() != Material.BEDROCK && block.getType() != Material.AIR) {
+                block.setType(Material.AIR);
             }
         }
     }
-    public static List<Location> generateSphere(Location centerBlock, int radius, boolean hollow) {
-        if (centerBlock == null) {
-            return new ArrayList<>();
+
+    private static void damageEntitiesInSphere(Location center) {
+        for (Entity entity : Objects.requireNonNull(center.getWorld()).getNearbyEntities(center, EXPLOSION_RADIUS, EXPLOSION_RADIUS, EXPLOSION_RADIUS)) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity) entity;
+                livingEntity.setHealth(Math.max(0, livingEntity.getHealth() - DAMAGE_AMOUNT));
+            }
         }
+    }
 
-        List<Location> circleBlocks = new ArrayList<Location>();
+    public static List<Location> generateSphere(Location center, int radius, boolean hollow) {
+        List<Location> sphere = new ArrayList<>();
+        if (center == null) return sphere;
 
-        int bx = centerBlock.getBlockX();
-        int by = centerBlock.getBlockY();
-        int bz = centerBlock.getBlockZ();
+        int bx = center.getBlockX();
+        int by = center.getBlockY();
+        int bz = center.getBlockZ();
 
-        for(int x = bx - radius; x <= bx + radius; x++) {
-            for(int y = by - radius; y <= by + radius; y++) {
-                for(int z = bz - radius; z <= bz + radius; z++) {
-
-                    double distance = ((bx-x) * (bx-x) + ((bz-z) * (bz-z)) + ((by-y) * (by-y)));
-
-                    if(distance < radius * radius && !(hollow && distance < ((radius - 1) * (radius - 1)))) {
-
-                        Location l = new Location(centerBlock.getWorld(), x, y, z);
-
-                        circleBlocks.add(l);
-
+        for (int x = bx - radius; x <= bx + radius; x++) {
+            for (int y = by - radius; y <= by + radius; y++) {
+                for (int z = bz - radius; z <= bz + radius; z++) {
+                    double distance = (bx - x) * (bx - x) + (by - y) * (by - y) + (bz - z) * (bz - z);
+                    if (distance < radius * radius && !(hollow && distance < (radius - 1) * (radius - 1))) {
+                        sphere.add(new Location(center.getWorld(), x, y, z));
                     }
-
                 }
             }
         }
-
-        return circleBlocks;
+        return sphere;
     }
 }

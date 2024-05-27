@@ -7,11 +7,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Wolf;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 public class Tengen {
     public static void tengen(String playerName){
         Player player = Bukkit.getPlayer(playerName);
-        MythicMob samourai = TomoNova.getPlugin().bleachUHC.getBossMM("PlayerSamourai");
+        MythicMob samourai = TomoNova.getPlugin().bleachUHC.getBossMM(BleachUHCConstants.SAMOURAI_NAME);
         if(samourai != null){
             ActiveMob samouraiActive = samourai.spawn(BukkitAdapter.adapt(player.getLocation()),1);
             Wolf samouraiEntity = (Wolf) samouraiActive.getEntity().getBukkitEntity();
