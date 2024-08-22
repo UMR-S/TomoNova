@@ -20,22 +20,22 @@ public class ClassesGui extends Gui {
     public ClassesGui(Player player) {
         super(player, 9, ChatColor.RED + Lang.GUIS_CLASSES_NAME.toString());
         ItemsCreator ic = new ItemsCreator(Material.IRON_SWORD, ChatColor.RED + Lang.GUIS_CLASSES_SHINIGAMI_NAME.toString(), Arrays.asList(Lang.GUIS_CLASSES_SHINIGAMI_LORE.toString()));
-        if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "shinigami")) {
+        if (TomoNova.getPlugin().classesUtils.isPlayerShinigami(player.getName())) {
             this.inventory.setItem(7, ItemsCreator.create(ic,1000101));
         }
         this.inventory.setItem(0, ItemsCreator.create(ic,1000101));
         ic = new ItemsCreator(Material.BOW, ChatColor.RED + Lang.GUIS_CLASSES_QUINCY_NAME.toString(), Arrays.asList(Lang.GUIS_CLASSES_QUINCY_LORE.toString(), Lang.GUIS_CLASSES_QUINCY_LORE_TWO.toString()));
-        if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "quincy")) {
+        if (TomoNova.getPlugin().classesUtils.isPlayerQuincy(player.getName())) {
             this.inventory.setItem(7, ItemsCreator.create(ic,2000201));
         }
         this.inventory.setItem(1, ItemsCreator.create(ic,2000201));
         ic = new ItemsCreator(Material.CARROT_ON_A_STICK, ChatColor.RED + Lang.GUIS_CLASSES_SSR_NAME.toString(), Arrays.asList(Lang.GUIS_CLASSES_SSR_LORE.toString()));
-        if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "ssr")) {
+        if (TomoNova.getPlugin().classesUtils.isPlayerSSR(player.getName())) {
             this.inventory.setItem(7, ItemsCreator.create(ic,3000301));
         }
         this.inventory.setItem(2, ItemsCreator.create(ic,3000301));
         ic = new ItemsCreator(Material.SHIELD, ChatColor.RED + Lang.GUIS_BRAZO_NAME.toString(), Arrays.asList(Lang.GUIS_CLASSES_BRAZO_LORE.toString()));
-        if (TomoNova.getPlugin().classesUtils.isPlayerClasse(player.getName(), "brazo")) {
+        if (TomoNova.getPlugin().classesUtils.isPlayerBrazo(player.getName())) {
             this.inventory.setItem(7, ItemsCreator.create(ic,4000401));
         }
         this.inventory.setItem(3, ItemsCreator.create(ic,4000401));

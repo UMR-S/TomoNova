@@ -18,7 +18,7 @@ public class Shinso {
     private static final float DUST_SIZE = 1.0f;
     private static final Color DUST_COLOR = Color.WHITE;
 
-    public static void use(String playerName) {
+    public static void Shinso(String playerName) {
         Player caster = getPlayer(playerName);
         if (caster == null) return;
 

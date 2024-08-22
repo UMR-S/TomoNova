@@ -4,14 +4,19 @@ import io.lumine.mythic.api.mobs.MythicMob;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
 import org.bukkit.potion.PotionEffect;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.SpawnBossesTask;
+import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
+import umaru.tomonova.tomonova.utils.players.ArmorPlayer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class BleachUHC {
     public HashMap<String,Boolean> lunettesBoolean = new HashMap<String,Boolean>();
@@ -20,6 +25,35 @@ public class BleachUHC {
     public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
     public List<PotionEffect> sogyoNoKotowari = new ArrayList<PotionEffect>();
     public HashMap<String,Integer> pointJoueurs = new HashMap<String,Integer>();
+
+    private List<Material> materialsToRemove = Arrays.asList(
+            // Axes
+            Material.WOODEN_AXE,
+            Material.STONE_AXE,
+            Material.IRON_AXE,
+            Material.GOLDEN_AXE,
+            Material.DIAMOND_AXE,
+            Material.NETHERITE_AXE,
+
+            // Diamond armor and tools
+            Material.DIAMOND_HELMET,
+            Material.DIAMOND_CHESTPLATE,
+            Material.DIAMOND_LEGGINGS,
+            Material.DIAMOND_BOOTS,
+            Material.DIAMOND_SWORD,
+            Material.DIAMOND_PICKAXE,
+            Material.DIAMOND_AXE,
+            Material.DIAMOND_SHOVEL,
+            Material.DIAMOND_HOE,
+
+            // Anvils
+            Material.ANVIL,
+            Material.CHIPPED_ANVIL,
+            Material.DAMAGED_ANVIL,
+
+            // Enchantment table
+            Material.ENCHANTING_TABLE
+    );
 
 
     public void bleachUhcSettings() {
@@ -31,6 +65,44 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setBleachUhc(true);
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(3);
         initializePointsJoueurs();
+    }
+
+    public void initializeStuffJoueurs(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(TomoNova.getPlugin().classesUtils.isPlayerShinigami(player.getName())){
+                GiveItem.giveZanpakuto(player.getName());
+                GiveItem.dashShinigami(player.getName());
+                ArmorPlayer.equipIronArmor(player);
+            }
+            if(TomoNova.getPlugin().classesUtils.isPlayerQuincy(player.getName())){
+                GiveItem.giveBow(player.getName());
+                GiveItem.dashQuincy(player.getName());
+                ArmorPlayer.equipGoldArmor(player);
+            }
+            if(TomoNova.getPlugin().classesUtils.isPlayerSSR(player.getName())){
+                GiveItem.give1Cieux(player.getName());
+                GiveItem.give2Cieux(player.getName());
+                GiveItem.give3Cieux(player.getName());
+                GiveItem.give4Cieux(player.getName());
+                ArmorPlayer.equipChainmailArmor(player);
+            }
+            if(TomoNova.getPlugin().classesUtils.isPlayerBrazo(player.getName())){
+                GiveItem.giveShield(player.getName());
+                ArmorPlayer.equipChainmailArmor(player);
+            }
+        }
+    }
+
+    public void removeCraft(){
+        Iterator<Recipe> it = Bukkit.recipeIterator();
+        while (it.hasNext()) {
+            Recipe recipe = it.next();
+            ItemStack result = recipe.getResult();
+
+            if (materialsToRemove.contains(result.getType())) {
+                it.remove();
+            }
+        }
     }
 
     public void initializePointsJoueurs(){
@@ -55,8 +127,13 @@ public class BleachUHC {
     public void initializePlayersBossTarget(){
         Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
     }
-    public void initializeBleachUhcMobs() {
-        bossesList.put(BleachUHCConstants.SAMOURAI_NAME, createBoss(BleachUHCConstants.SAMOURAI_NAME));
+
+    public void spawnBosses(){
+        initializeBleachUhcBossLoc();
+        for(String boss : bossLocation.keySet()){
+            bossesList.put(boss, getBoss(boss));
+        }
+        new SpawnBossesTask(TomoNova.getPlugin(),bossLocation).runTaskTimer(TomoNova.getPlugin(),0,20);
     }
 
     public void initializeBleachUhcBossLoc() {
@@ -81,7 +158,7 @@ public class BleachUHC {
         bossLocation.put(bossName, bossLoc);
     }
 
-    public MythicMob createBoss(String bossName) {
+    public MythicMob getBoss(String bossName) {
         return MythicBukkit.inst().getMobManager().getMythicMob(bossName).orElse(null);
     }
 

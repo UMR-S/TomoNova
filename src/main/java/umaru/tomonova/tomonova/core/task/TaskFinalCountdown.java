@@ -33,6 +33,9 @@ public class TaskFinalCountdown extends BukkitRunnable {
             LobbyUtils.deleteLobby();
             GameStates.setCurrentState(GameStates.GAME);
             TomoNova.getPlugin().gameManager.getPlayers().forEach(p-> ScoreboardSign.create(p));
+            if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+                TomoNova.getPlugin().bleachUHC.initializeStuffJoueurs();
+            }
             this.cancel();
         }
         preStartTime--;

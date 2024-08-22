@@ -1,12 +1,20 @@
 package umaru.tomonova.tomonova.gamemode.bleachUHC;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
-import umaru.tomonova.tomonova.utils.constants.BleachUHCItemConstants;
+import umaru.tomonova.tomonova.utils.customItems.CustomItems;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Objects;
 
 public class GiveItem {
 
@@ -17,28 +25,57 @@ public class GiveItem {
     public static void giveCarquois(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.CARQUOIS);
+            ItemStack carquois = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.CARQUOIS_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_CARQUOIS_LORE.toString()),
+                    BleachUHCConstants.CARQUOIS
+            );
+            giveItem(player, carquois);
         }
     }
 
     public static void giveBow(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.QUINCY_BOW);
+            ItemStack quincyBow = CustomItems.createCustomItem(
+                    Material.BOW,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.ARC_QUINCY_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_QUINCY_BOW_LORE.toString()),
+                    BleachUHCConstants.ARC_QUINCY
+            );
+            giveItem(player, quincyBow);
         }
     }
 
     public static void giveBowPowerFive(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.QUINCY_BOW_POWER_FIVE);
+            ItemStack bow = CustomItems.createCustomItem(
+                    Material.BOW,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.ARC_QUINCY_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_QUINCY_BOW_LORE.toString()),
+                    BleachUHCConstants.ARC_QUINCY
+            );
+            Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.ARROW_DAMAGE, 5);
+            ItemStack quincyPowerFive = CustomItems.addEnchants(bow, enchantMap);
+            giveItem(player, quincyPowerFive);
         }
     }
 
     public static void giveQuincyArrow(String playerName, int amount) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            ItemStack arrow = BleachUHCItemConstants.QUINCY_ARROW.clone();
+            ItemStack arrow = CustomItems.createCustomItem(
+                    Material.ARROW,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.ARC_QUINCY_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_QUINCY_ARROW_LORE.toString()),
+                    BleachUHCConstants.ARC_QUINCY
+            );
             arrow.setAmount(amount);
             giveItem(player, arrow);
         }
@@ -47,84 +84,164 @@ public class GiveItem {
     public static void giveShield(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.SHIELD);
+            ItemStack shield = CustomItems.createCustomItem(
+                    Material.SHIELD,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.BOUCLIER_BRAZO_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_SHIELD_LORE.toString()),
+                    BleachUHCConstants.BOUCLIER_BRAZO
+            );
+            giveItem(player, shield);
         }
     }
 
     public static void giveZanpakuto(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.ZANPAKUTO);
+            ItemStack zanpakuto = CustomItems.createCustomItem(
+                    Material.IRON_SWORD,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.ZANPAKUTO_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_ZANPAKUTO_LORE.toString()),
+                    BleachUHCConstants.ZANPAKUTO
+            );
+            giveItem(player, zanpakuto);
         }
     }
 
     public static void give1Cieux(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            removeHogyokuInactif(player);
-            giveItem(player, BleachUHCItemConstants.CIEL_UNIQUE);
+            ItemStack cielUnique = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.CIEL_UNIQUE_NAME,
+                    Arrays.asList(Lang.BUHC_ITEM_1CIEUX_LORE.toString(), Lang.BUHC_ITEM_1CIEUX_LORE_TWO.toString()),
+                    BleachUHCConstants.CIEL_UNIQUE
+            );
+            giveItem(player, cielUnique);
         }
     }
 
     public static void give2Cieux(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            removeHogyokuInactif(player);
-            giveItem(player, BleachUHCItemConstants.DEUX_CIEUX);
+            ItemStack deuxCieux = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.DEUX_CIEUX_NAME,
+                    Arrays.asList(Lang.BUHC_ITEM_2CIEUX_LORE.toString(), Lang.BUHC_ITEM_2CIEUX_LORE_TWO.toString()),
+                    BleachUHCConstants.DEUX_CIEUX
+            );
+            giveItem(player, deuxCieux);
         }
     }
 
     public static void give3Cieux(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            removeHogyokuInactif(player);
-            giveItem(player, BleachUHCItemConstants.TROIS_CIEUX);
+            ItemStack troisCieux = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.TROIS_CIEUX_NAME,
+                    Arrays.asList(Lang.BUHC_ITEM_3CIEUX_LORE.toString(), Lang.BUHC_ITEM_3CIEUX_LORE_TWO.toString()),
+                    BleachUHCConstants.TROIS_CIEUX
+            );
+            giveItem(player, troisCieux);
         }
     }
 
     public static void give4Cieux(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            removeHogyokuInactif(player);
-            giveItem(player, BleachUHCItemConstants.QUATRE_CIEUX);
+            ItemStack quatreCieux = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.QUATRE_CIEUX_NAME,
+                    Arrays.asList(Lang.BUHC_ITEM_4CIEUX_LORE.toString(), Lang.BUHC_ITEM_4CIEUX_LORE_TWO.toString()),
+                    BleachUHCConstants.QUATRE_CIEUX
+            );
+            giveItem(player, quatreCieux);
         }
     }
 
     public static void dashShinigami(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.DASH_SHINIGAMI);
+            ItemStack dashShinigami = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.DASH_SHINIGAMI_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_DASH_LORE.toString()),
+                    BleachUHCConstants.DASH_SHINIGAMI
+            );
+            giveItem(player, dashShinigami);
         }
     }
 
     public static void dashQuincy(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.DASH_QUINCY);
+            ItemStack dashQuincy = CustomItems.createCustomItem(
+                    Material.CARROT_ON_A_STICK,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.DASH_QUINCY_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_DASH_LORE.toString()),
+                    BleachUHCConstants.DASH_QUINCY
+            );
+            giveItem(player, dashQuincy);
         }
     }
 
     public static void spawnHogyokuInactifFragment(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.FRAGMENT_HOGYOKU_INACTIF);
+        ItemStack fragmentHogyokuInactif = CustomItems.createCustomItem(
+                Material.NETHER_WART,
+                ChatColor.AQUA,
+                BleachUHCConstants.FRAGMENT_HOGYOKU_INACTIF_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_INACTIF_LORE.toString()),
+                BleachUHCConstants.FRAGMENT_HOGYOKU_INACTIF
+        );
+        location.getWorld().dropItemNaturally(location, fragmentHogyokuInactif);
     }
 
     public static void giveHogyokuActifFragment(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
+            ItemStack fragmentHogyokuActif = CustomItems.createCustomItem(
+                    Material.NETHER_WART,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_ACTIF_LORE.toString()),
+                    BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF
+            );
             player.getInventory().remove(player.getInventory().getItemInMainHand());
-            giveItem(player, BleachUHCItemConstants.FRAGMENT_HOGYOKU_ACTIF);
+            giveItem(player, fragmentHogyokuActif);
         }
     }
 
     public static void spawnHogyokuCoeur(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.COEUR_HOGYOKU);
+        ItemStack coeurHogyoku = CustomItems.createCustomItem(
+                Material.NETHERITE_SCRAP,
+                ChatColor.AQUA,
+                BleachUHCConstants.COEUR_HOGYOKU_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_COEUR_LORE.toString()),
+                BleachUHCConstants.COEUR_HOGYOKU
+        );
+        location.getWorld().dropItemNaturally(location, coeurHogyoku);
     }
 
     public static void giveHogyokuInactif(String playerName) {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
-            giveItem(player, BleachUHCItemConstants.HOGYOKU_INACTIF);
-            player.setCooldown(BleachUHCItemConstants.HOGYOKU_INACTIF.getType(), 6000);
+            ItemStack hogyokuInactif = CustomItems.createCustomItem(
+                    Material.NETHERITE_SCRAP,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.HOGYOKU_INACTIF_NAME,
+                    Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_INACTIF_LORE.toString()),
+                    BleachUHCConstants.HOGYOKU_INACTIF
+            );
+            removeHogyokuActif(player);
+            giveItem(player, hogyokuInactif);
         }
     }
 
@@ -142,83 +259,256 @@ public class GiveItem {
         Player player = Bukkit.getPlayer(playerName);
         if (player != null) {
             removeHogyokuInactif(player);
-            giveItem(player, BleachUHCItemConstants.HOGYOKU_ACTIF);
+            ItemStack hogyokuActif = CustomItems.createCustomItem(
+                    Material.TOTEM_OF_UNDYING,
+                    ChatColor.AQUA,
+                    BleachUHCConstants.HOGYOKU_ACTIF_NAME,
+                    Arrays.asList(Lang.BUHC_ITEM_HOGYOKU_ACTIF_LORE.toString(), Lang.BUHC_ITEM_HOGYOKU_ACTIF_LORE_TWO.toString()),
+                    BleachUHCConstants.HOGYOKU_ACTIF
+            );
+            giveItem(player, hogyokuActif);
         }
     }
 
+    public static void removeHogyokuActif(Player player) {
+        player.getInventory().forEach(itemStack -> {
+            if (itemStack != null && itemStack.getType() != Material.AIR) {
+                if (itemStack.getItemMeta().hasCustomModelData() && itemStack.getItemMeta().getCustomModelData() == BleachUHCConstants.HOGYOKU_ACTIF) {
+                    player.getInventory().remove(itemStack);
+                }
+            }
+        });
+    }
     public static void spawnRyujinJakka(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.RYUJIN_JAKKA);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.RYUJIN_JAKKA_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_RYUJIN_JAKKA_LORE.toString()),
+                BleachUHCConstants.RYUJIN_JAKKA
+        );
+        Map<Enchantment, Integer> enchantMap = Map.of(
+                Enchantment.DAMAGE_ALL, 2,
+                Enchantment.FIRE_ASPECT, 2
+        );
+        ItemStack ryujinJakka = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, ryujinJakka);
     }
 
     public static void spawnArtDuHakuda(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.ART_DU_HAKUDA);
+        ItemStack artDuHakuda = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.ART_DU_HAKUDA_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_ART_DU_HAKUDA_LORE.toString(), Lang.BUHC_ITEM_ART_DU_HAKUDA_LORE_TWO.toString()),
+                BleachUHCConstants.ART_DU_HAKUDA
+        );
+        location.getWorld().dropItemNaturally(location, artDuHakuda);
     }
 
     public static void spawnMinazuki(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.MINAZUKI);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.MINAZUKI_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_MINAZUKI_LORE.toString()),
+                BleachUHCConstants.MINAZUKI
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack minazuki = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, minazuki);
     }
 
     public static void spawnSenbonzakura(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.SENBONZAKURA);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.SENBONZAKURA_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_SENBONZAKURA_LORE.toString(), Lang.BUHC_ITEM_SENBONZAKURA_LORE_TWO.toString(), Lang.BUHC_ITEM_SENBONZAKURA_LORE_THREE.toString()),
+                BleachUHCConstants.SENBONZAKURA
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack senbonzakura = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, senbonzakura);
     }
 
     public static void spawnAshisogiJizo(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.ASHISOGI_JIZO);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.ASHISOGI_JIZO_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_ASHISOGI_JIZO_LORE.toString()),
+                BleachUHCConstants.ASHISOGI_JIZO
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack ashisogiJizo = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, ashisogiJizo);
     }
 
     public static void spawnKenpachiSword(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.KENPACHI_SWORD);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.EPEE_DE_KENPACHI_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_KENPACHI_SWORD_LORE.toString()),
+                BleachUHCConstants.EPEE_DE_KENPACHI
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 3);
+        ItemStack kenpachiSword = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, kenpachiSword);
     }
 
     public static void spawnTengen(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.TENGEN);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.TENGEN_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_TENGEN_LORE.toString(), Lang.BUHC_ITEM_TENGEN_LORE_TWO.toString()),
+                BleachUHCConstants.TENGEN
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack tengen = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, tengen);
     }
 
     public static void spawnMedicament(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.MEDICAMENT);
+        ItemStack medicament = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.MEDICAMENTS_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_MEDICAMENT_LORE.toString(), Lang.BUHC_ITEM_MEDICAMENT_LORE_TWO.toString()),
+                BleachUHCConstants.MEDICAMENTS
+        );
+
+        location.getWorld().dropItemNaturally(location, medicament);
     }
 
     public static void spawnSuzumebachi(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.SUZUMEBACHI);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.SUZUMEBACHI_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_SUZUMEBACHI_LORE.toString()),
+                BleachUHCConstants.SUZUMEBACHI
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack suzumebachi = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, suzumebachi);
     }
 
     public static void spawnShinso(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.SHINSO);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.SHINSO_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_SHINSO_LORE.toString(), Lang.BUHC_ITEM_SHINSO_LORE_TWO.toString()),
+                BleachUHCConstants.SHINSO
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack shinso = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, shinso);
     }
 
     public static void spawnAveuxDeGin(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.AVEUX);
+        ItemStack aveux = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.AVEUX_DE_GIN_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_AVEUX_LORE.toString()),
+                BleachUHCConstants.AVEUX_DE_GIN
+        );
+        location.getWorld().dropItemNaturally(location, aveux);
     }
 
     public static void spawnBaveMinazuki(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.BAVE_DE_MINAZUKI);
+        ItemStack baveDeMinazuki = CustomItems.createCustomItem(
+                Material.SHIELD,
+                ChatColor.AQUA,
+                BleachUHCConstants.BAVE_DE_MINAZUKI_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_BAVE_LORE.toString()),
+                BleachUHCConstants.BAVE_DE_MINAZUKI
+        );
+        location.getWorld().dropItemNaturally(location, baveDeMinazuki);
     }
 
     public static void spawnSuzumuchi(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.SUZUMUCHI);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.SUZUMUSHI_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_SUZUMUCHI_LORE.toString()),
+                BleachUHCConstants.SUZUMUSHI
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack suzumichi = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, suzumichi);
     }
 
     public static void spawnPhotoYoruichi(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.PHOTO_YORUICHI);
+        ItemStack photoYoruichi = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.PHOTO_DE_YORUICHI_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_PHOTO_YORUICHI_LORE.toString(), Lang.BUHC_ITEM_PHOTO_YORUICHI_LORE_TWO.toString()),
+                BleachUHCConstants.PHOTO_DE_YORUICHI
+        );
+        location.getWorld().dropItemNaturally(location, photoYoruichi);
     }
 
     public static void spawnLysDesNeiges(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.LYS_DES_NEIGES);
+        ItemStack lysDesNeiges = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.LYS_DES_NEIGES_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_LYS_DES_NEIGES_LORE.toString(), Lang.BUHC_ITEM_LYS_DES_NEIGES_LORE_TWO.toString()),
+                BleachUHCConstants.LYS_DES_NEIGES
+        );
+        location.getWorld().dropItemNaturally(location, lysDesNeiges);
     }
 
     public static void spawnHyorinmaru(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.HYORINMARU);
+        ItemStack hyorinmaru = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.HYORINMARU_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_HYORINMARU_LORE.toString(), Lang.BUHC_ITEM_HYORINMARU_LORE_TWO.toString()),
+                BleachUHCConstants.HYORINMARU
+        );
+        location.getWorld().dropItemNaturally(location, hyorinmaru);
     }
 
     public static void spawnLunettesTosen(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.LUNETTES_TOSEN);
+        ItemStack lunettesTosen = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.LUNETTES_DE_TOSEN_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE.toString(), Lang.BUHC_ITEM_LUNETTES_TOSEN_LORE_TWO.toString()),
+                BleachUHCConstants.LUNETTES_DE_TOSEN
+        );
+        location.getWorld().dropItemNaturally(location, lunettesTosen);
     }
 
     public static void spawnKatenKyokotsu(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.KATEN_KYOKOTSU);
+        ItemStack item = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.KATEN_KYOKOTSU_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE.toString(), Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO.toString()),
+                BleachUHCConstants.KATEN_KYOKOTSU
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack katenKyokotsu = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, katenKyokotsu);
     }
 
     public static void spawnGantDeSanrei(Location location) {
-        location.getWorld().dropItemNaturally(location, BleachUHCItemConstants.GANT_DE_SANREI);
+        ItemStack gantDeSeirei = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.GANT_DE_SANREI_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_GANT_SANREI_LORE.toString(), Lang.BUHC_ITEM_GANT_SANREI_LORE_TWO.toString()),
+                BleachUHCConstants.GANT_DE_SANREI
+        );
+        location.getWorld().dropItemNaturally(location, gantDeSeirei);
     }
 }

@@ -225,7 +225,7 @@ public enum Lang {
     GUIS_BOSS_MAYURI_NAME("guis.bleachuhc.boss.mayuriName","Mayuri"),
     GUIS_BOSS_MAYURI_LORE("guis.bleachuhc.boss.mayuriLore","Tuturu~"),
     GUIS_BOSS_UKITAKE_NAME("guis.bleachuhc.boss.ukitakeName","Ukitake"),
-    GUIS_BOSS_UKITAKE_LORE("guis.bleachuhc.boss.yamamotoLore","Encore un qui va casser mauvais"),
+    GUIS_BOSS_UKITAKE_LORE("guis.bleachuhc.boss.ukitakeLore","Encore un qui va casser mauvais"),
     GUIS_YACHIRU_NAME("guis.bleachuhc.yachiruName","Boutique de Yachiru"),
     BUHC_ITEM_ART_DU_HAKUDA_NAME("bleachuhc.items.artDuHakudaName","Art du Hakuda"),
     BUHC_ITEM_ART_DU_HAKUDA_LORE("bleachuhc.items.artDuHakudaLore","Brazo uniquement"),

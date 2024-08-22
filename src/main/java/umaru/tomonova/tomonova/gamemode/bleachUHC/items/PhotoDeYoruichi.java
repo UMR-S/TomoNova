@@ -18,7 +18,7 @@ public class PhotoDeYoruichi {
     private static final float EXPLOSION_SOUND_PITCH = 0.5F;
     private static final double DAMAGE_AMOUNT = 10.0;
 
-    public static void use(String playerName) {
+    public static void PhotoDeYoruichi(String playerName) {
         Player caster = getPlayer(playerName);
         if (caster == null) return;
 

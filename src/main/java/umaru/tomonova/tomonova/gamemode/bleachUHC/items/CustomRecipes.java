@@ -9,14 +9,20 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
-import umaru.tomonova.tomonova.utils.constants.BleachUHCItemConstants;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 public class CustomRecipes {
     public static void addHogyokuRecipe(){
-        ItemStack hogyokuActif = BleachUHCItemConstants.HOGYOKU_ACTIF;
+        ItemStack hogyokuActif = CustomItems.createCustomItem(
+                Material.NETHER_WART,
+                ChatColor.AQUA,
+                BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_ACTIF_LORE.toString()),
+                BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF
+        );
         ShapedRecipe hogyokuRecipe = new ShapedRecipe(new NamespacedKey(TomoNova.getPlugin(),"hogyoku"),hogyokuActif);
         hogyokuRecipe.shape("XYX");
         hogyokuRecipe.setIngredient('X', Material.NETHER_WART);

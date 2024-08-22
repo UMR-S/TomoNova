@@ -108,6 +108,8 @@ public final class TomoNova extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
             getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
             getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new EndermanSpawnEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new ItemDurabilityEvent(), plugin);
         }
 //        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
 //        getServer().getPluginManager().registerEvents(new Collisions(), plugin);

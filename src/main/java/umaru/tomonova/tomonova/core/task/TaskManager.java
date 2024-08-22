@@ -47,6 +47,9 @@ public class TaskManager extends BukkitRunnable {
         if (count == 60) {
             Bukkit.broadcastMessage(Lang.DAMAGE_ACTIVATED.toString());
             tomoNova.gameManager.setDamage(true);
+            if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
+                tomoNova.bleachUHC.spawnBosses();
+            }
         }
         if (count == netherEndTime + BetweenNetherDamage * NetherDamage) {
             if (NetherDamage == 0) {

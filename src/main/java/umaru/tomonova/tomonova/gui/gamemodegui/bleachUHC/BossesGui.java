@@ -28,7 +28,7 @@ public class BossesGui extends Gui {
         if (TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(player.getName()).equals("soi_fon")) {
             this.inventory.setItem(40, ItemsCreator.create(ic, 6000002));
         }
-        this.inventory.setItem(12, ItemsCreator.create(ic, 6000002));
+        this.inventory.setItem(29, ItemsCreator.create(ic, 6000002));
         ic = new ItemsCreator(Material.ZOMBIE_HEAD, ChatColor.RED + Lang.GUIS_BOSS_GIN_NAME.toString(), Arrays.asList(Lang.GUIS_BOSS_GIN_LORE.toString()));
         if (TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(player.getName()).equals("gin")) {
             this.inventory.setItem(40, ItemsCreator.create(ic, 6000003));
@@ -73,7 +73,7 @@ public class BossesGui extends Gui {
         if (TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(player.getName()).equals("toshiro")) {
             this.inventory.setItem(40, ItemsCreator.create(ic, 6000011));
         }
-        this.inventory.setItem(29, ItemsCreator.create(ic, 6000011));
+        this.inventory.setItem(12, ItemsCreator.create(ic, 6000011));
         ic = new ItemsCreator(Material.ZOMBIE_HEAD, ChatColor.RED + Lang.GUIS_BOSS_KENPACHI_NAME.toString(), Arrays.asList(Lang.GUIS_BOSS_KENPACHI_LORE.toString()));
         if (TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(player.getName()).equals("kenpachi")) {
             this.inventory.setItem(40, ItemsCreator.create(ic, 6000012));
@@ -105,7 +105,7 @@ public class BossesGui extends Gui {
                 return;
             }
             event.setCancelled(true);
-            if (is.hasItemMeta()) {
+            if (is.getItemMeta().hasCustomModelData()) {
                 switch (is.getItemMeta().getCustomModelData()) {
                     case 6000001: {
                         TomoNova.getPlugin().bleachUHC.playersBossTarget.put(event.getWhoClicked().getName(),"yamamoto");

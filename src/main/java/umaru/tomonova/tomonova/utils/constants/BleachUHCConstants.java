@@ -1,5 +1,8 @@
 package umaru.tomonova.tomonova.utils.constants;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class BleachUHCConstants {
     // Custom Model Data Constants
     public static final int ZANPAKUTO = 1000101;
@@ -47,6 +50,32 @@ public class BleachUHCConstants {
     public static final int CASQUE_DE_KOMAMURA = 5072603;
     public static final int BOUTIQUE_YACHIRU = 5000001;
     public static final int COEUR_HOGYOKU = 5149613;
+
+    // HashMap for Cooldown Times (1 second = 20 ticks)
+    public static final Map<Integer, Integer> ITEM_COOLDOWNS = new HashMap<>();
+
+    static {
+        ITEM_COOLDOWNS.put(SHINSO, 7);
+        ITEM_COOLDOWNS.put(SENBONZAKURA, 30);
+        ITEM_COOLDOWNS.put(TENGEN, 60);
+        ITEM_COOLDOWNS.put(HYORINMARU, 4*60);
+        ITEM_COOLDOWNS.put(SOGYO_NO_KOTOWARI, 45);
+        ITEM_COOLDOWNS.put(CARQUOIS, 30);
+        ITEM_COOLDOWNS.put(DASH_SHINIGAMI, 15);
+        ITEM_COOLDOWNS.put(DASH_QUINCY, 15);
+        ITEM_COOLDOWNS.put(CIEL_UNIQUE, 25);
+        ITEM_COOLDOWNS.put(DEUX_CIEUX, 3*60);
+        ITEM_COOLDOWNS.put(TROIS_CIEUX, 3);
+        ITEM_COOLDOWNS.put(QUATRE_CIEUX, 3*60);
+        ITEM_COOLDOWNS.put(BOUCLIER_BRAZO, 10);
+        ITEM_COOLDOWNS.put(SAKE_DE_KYORAKU, 15*60);
+        ITEM_COOLDOWNS.put(KENSEIKAN, 15);
+        ITEM_COOLDOWNS.put(LUNETTES_DE_TOSEN, 30*60);
+        ITEM_COOLDOWNS.put(LYS_DES_NEIGES, 20*60);
+        ITEM_COOLDOWNS.put(CACHE_OEIL, 20);
+        ITEM_COOLDOWNS.put(KYOKA_SUIGETSU, 60);
+        ITEM_COOLDOWNS.put(MEDICAMENTS, 30);
+    }
 
     // Boss Custom Model Data Constants
     public static final int YAMAMOTO = 6000001;

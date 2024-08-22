@@ -73,7 +73,7 @@ public class GameManager {
     public void preStart() {
         GameStates.setCurrentState(GameStates.LOBBY_END);
         if (playersPerTeam > 1) {
-            autoFillTeams();
+            assignTeamLocation();
         } else if (playersPerTeam == 1) {
             assignSoloLocations();
         }
@@ -82,10 +82,9 @@ public class GameManager {
         preGame = new TaskCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
     }
 
-    private void autoFillTeams() {
+    private void assignTeamLocation() {
         Map<String, Teams> teams = tomoNova.teamUtils.getTeamHashMap();
         double r = 0.5 * tomoNova.worldBorderUtils.getStartSize() / sqrt(teams.size());
-
         for (String teamName : teams.keySet()) {
             Teams team = teams.get(teamName);
             Location teamLoc = getValidLocation(locationTeams, r);
@@ -132,9 +131,9 @@ public class GameManager {
         unregisterUnusedLittleRules();
         if (!TomoNova.test) {
             teleportPlayers();
-            initializeGameSettings();
-            startGameTasks();
         }
+        initializeGameSettings();
+        startGameTasks();
     }
 
     private void unregisterUnusedLittleRules() {
@@ -157,7 +156,7 @@ public class GameManager {
         for (Teams team : locationTeams.keySet()) {
             spawnPreGameLobby(locationTeams.get(team));
             for (String playerName : team.getTeamPlayers()) {
-                teleportPlayer(locationTeams.get(team), playerName);
+                teleportPlayer(locationTeams.get(team).add(0.5,0,0.5), playerName);
             }
         }
     }
@@ -165,7 +164,7 @@ public class GameManager {
     private void teleportSoloPlayers() {
         for (String playerName : locationSolo.keySet()) {
             spawnPreGameLobby(locationSolo.get(playerName));
-            teleportPlayer(locationSolo.get(playerName), playerName);
+            teleportPlayer(locationSolo.get(playerName).add(0.5,0,0.5), playerName);
         }
     }
 
@@ -186,6 +185,9 @@ public class GameManager {
         });
         if (tomoLostVillage) {
             initializeTomoLostVillage();
+        }
+        if(bleachUhc){
+            tomoNova.bleachUHC.removeCraft();
         }
     }
 
