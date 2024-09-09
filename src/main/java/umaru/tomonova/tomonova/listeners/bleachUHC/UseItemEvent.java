@@ -1,7 +1,6 @@
 package umaru.tomonova.tomonova.listeners.bleachUHC;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
-import io.lumine.mythic.bukkit.utils.lib.jooq.True;
 import io.lumine.mythic.core.mobs.ActiveMob;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -19,9 +18,7 @@ import umaru.tomonova.tomonova.core.task.bleachUHCTask.*;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.*;
 import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.BossesGui;
-import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.ClassesGui;
 import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.YachiruGui;
-import umaru.tomonova.tomonova.utils.bleachUHC.classes.ClassesUtils;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.cooldowns.CooldownManager;
 
@@ -242,6 +239,14 @@ public class UseItemEvent implements Listener {
                     player.sendMessage(BleachUHCConstants.HOGYOKU_ACTIF_NAME);
                 }
                 break;
+            case BleachUHCConstants.CACHE_OEIL:
+                if(isRightClick(action)) {
+                    String playerWithMostKillsName = tomoNova.killCounter.getTopKiller(player.getName());
+                    player.sendMessage(BleachUHCConstants.CACHE_OEIL_NAME);
+                    tomoNova.bleachUHC.setCacheOeilBoolen(player.getName());
+                    tomoNova.bleachUHC.setTrackedBoolen(playerWithMostKillsName);
+                    removeItem = true;
+                }
             case 1000:
                 handleCombatZone(event, player);
                 break;

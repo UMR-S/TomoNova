@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.core.task.bleachUHCTask;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
 

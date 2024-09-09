@@ -2,7 +2,6 @@ package umaru.tomonova.tomonova.utils.teams;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.scoreboard.Team;
 
 import java.util.List;
 

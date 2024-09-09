@@ -5,7 +5,6 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
@@ -25,6 +24,8 @@ public class BleachUHC {
     public HashMap<String, String> playersBossTarget = new HashMap<String, String>();
     public List<PotionEffect> sogyoNoKotowari = new ArrayList<PotionEffect>();
     public HashMap<String,Integer> pointJoueurs = new HashMap<String,Integer>();
+    public HashMap<String, Boolean> playerUsedCacheOeil = new HashMap<String,Boolean>();
+    public HashMap<String,Boolean> playerTracked = new HashMap<String,Boolean>();
 
     private List<Material> materialsToRemove = Arrays.asList(
             // Axes
@@ -64,7 +65,16 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setTomoLostVillage(false);
         TomoNova.getPlugin().gameManager.setBleachUhc(true);
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(3);
+        if(TomoNova.test){
+            initializeBleachUHC();
+        }
+    }
+
+    public void initializeBleachUHC (){
         initializePointsJoueurs();
+        initializePlayersBossTarget();
+        initializeCacheOeilBoolean();
+        initializeTargetBoolean();
     }
 
     public void initializeStuffJoueurs(){
@@ -124,6 +134,57 @@ public class BleachUHC {
             lunettesBoolean.put(player.getName(),false);
         }
     }
+
+    public void initializeCacheOeilBoolean(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            playerUsedCacheOeil.put(player.getName(),false);
+        }
+    }
+
+    public void setCacheOeilBoolen(String playerName){
+        if(playerUsedCacheOeil.containsKey(playerName)){
+            playerUsedCacheOeil.put(playerName,true);
+        }
+    }
+
+    public boolean getCacheOeilBoolean(String playerName){
+        return playerUsedCacheOeil.getOrDefault(playerName, false);
+    }
+
+    public String getCacheOeilName(){
+        for(String playerName : playerUsedCacheOeil.keySet()){
+            if(playerUsedCacheOeil.get(playerName)){
+                return playerName;
+            }
+        }
+        return "None";
+    }
+
+    public void initializeTargetBoolean(){
+        for(Player player : Bukkit.getOnlinePlayers()){
+            playerTracked.put(player.getName(),false);
+        }
+    }
+
+    public void setTrackedBoolen(String playerName){
+        if(playerTracked.containsKey(playerName)){
+            playerTracked.put(playerName,true);
+        }
+    }
+
+    public boolean getTrackedBoolean(String playerName){
+        return playerTracked.getOrDefault(playerName, false);
+    }
+
+    public String getTrackedName(){
+        for(String playerName : playerTracked.keySet()){
+            if(playerTracked.get(playerName)){
+                return playerName;
+            }
+        }
+        return "None";
+    }
+
     public void initializePlayersBossTarget(){
         Bukkit.getOnlinePlayers().forEach(p -> playersBossTarget.put(p.getName(),"None"));
     }

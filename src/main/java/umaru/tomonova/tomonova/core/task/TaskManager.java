@@ -37,6 +37,9 @@ public class TaskManager extends BukkitRunnable {
         this.BetweenNetherDamage = 30;
         this.listSubborderTime.addAll(tomoNova.gameManager.getListSubborderTime());
         this.listSubborderFinalSize.addAll(tomoNova.gameManager.getListSubborderFinalSize());
+        if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
+            tomoNova.bleachUHC.spawnBosses();
+        }
     }
 
     @Override
@@ -47,9 +50,6 @@ public class TaskManager extends BukkitRunnable {
         if (count == 60) {
             Bukkit.broadcastMessage(Lang.DAMAGE_ACTIVATED.toString());
             tomoNova.gameManager.setDamage(true);
-            if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
-                tomoNova.bleachUHC.spawnBosses();
-            }
         }
         if (count == netherEndTime + BetweenNetherDamage * NetherDamage) {
             if (NetherDamage == 0) {

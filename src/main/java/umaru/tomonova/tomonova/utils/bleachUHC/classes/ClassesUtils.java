@@ -1,6 +1,5 @@
 package umaru.tomonova.tomonova.utils.bleachUHC.classes;
 
-import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 import java.util.HashMap;

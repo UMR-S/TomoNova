@@ -9,6 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,16 +20,18 @@ public class SpawnBossesTask extends BukkitRunnable {
 
     public SpawnBossesTask(TomoNova tomoNova, HashMap<String, Location> bossesLoc) {
         this.tomoNova = tomoNova;
-        this.bossesLoc = bossesLoc;
+        this.bossesLoc = new HashMap<String, Location>(bossesLoc);
     }
 
     @Override
     public void run() {
-        for (String boss : bossesLoc.keySet()) {
+        Iterator<String> iterator = bossesLoc.keySet().iterator();
+        while (iterator.hasNext()) {
+            String boss = iterator.next();
             List<Player> players = getPlayersAroundLocation(bossesLoc.get(boss), 100);
             if (players != null && !players.isEmpty()) {
-                MythicBukkit.inst().getMobManager().spawnMob(boss,bossesLoc.get(boss));
-                bossesLoc.remove(boss);
+                MythicBukkit.inst().getMobManager().spawnMob(boss, bossesLoc.get(boss));
+                iterator.remove();
             }
         }
         if(bossesLoc.isEmpty()){

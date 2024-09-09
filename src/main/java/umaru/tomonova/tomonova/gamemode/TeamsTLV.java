@@ -1,7 +1,6 @@
 package umaru.tomonova.tomonova.gamemode;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 
 import java.util.List;
 

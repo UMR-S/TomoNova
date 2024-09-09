@@ -3,8 +3,7 @@ package umaru.tomonova.tomonova.utils.scoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.scoreboard.*;
+import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.Vector;
 import umaru.tomonova.tomonova.core.TomoNova;
 

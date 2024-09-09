@@ -12,8 +12,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import java.util.List;
-
 public class Hyorinmaru {
 
     private static final int RANGE = 8;

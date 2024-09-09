@@ -1,13 +1,9 @@
 package umaru.tomonova.tomonova.utils.cooldowns;
 
-import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
-import  umaru.tomonova.tomonova.utils.cooldowns.CooldownManager;
 public class CooldownTask extends BukkitRunnable {
     private CooldownManager cooldownManager;
     private Player player;

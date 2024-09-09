@@ -41,10 +41,10 @@ public class ScoreboardSign {
             Score espace1 = objective.getScore(lines[1]);
             espace1.setScore(-2);
         } else {
-            Team flecheSpawn = scoreboard.registerNewTeam(playerName + "flecheBoss");
-            flecheSpawn.addEntry(ChatColor.RED + ""  + ChatColor.WHITE);
-            flecheSpawn.setPrefix(lines[1]);
-            objective.getScore(ChatColor.RED + ""  + ChatColor.WHITE).setScore(-2);
+            Team flecheBoss = scoreboard.registerNewTeam(playerName + "flecheBoss");
+            flecheBoss.addEntry(ChatColor.BLUE + ""  + ChatColor.WHITE);
+            flecheBoss.setPrefix(lines[1]);
+            objective.getScore(ChatColor.BLUE + ""  + ChatColor.WHITE).setScore(-2);
         }
         Team flecheSpawn = scoreboard.registerNewTeam(playerName + "flecheSpawn");
         flecheSpawn.addEntry(ChatColor.RED + ""  + ChatColor.WHITE);
@@ -66,11 +66,19 @@ public class ScoreboardSign {
         teamName.setPrefix(lines[5]);
         objective.getScore(ChatColor.DARK_GREEN + ""  + ChatColor.WHITE).setScore(-6);
 
-        Score espace2 = objective.getScore(lines[6]);
-        espace2.setScore(-7);
+        if(!TomoNova.getPlugin().gameManager.isBleachUhc()){
+            Score espace2 = objective.getScore(lines[6]);
+            espace2.setScore(-7);
+        } else {
+            Team flecheOeil = scoreboard.registerNewTeam(playerName + "flecheOeil");
+            flecheOeil.addEntry(ChatColor.DARK_BLUE + ""  + ChatColor.WHITE);
+            flecheOeil.setPrefix(lines[6]);
+            objective.getScore(ChatColor.DARK_BLUE + ""  + ChatColor.WHITE).setScore(-7);
+        }
 
         Score espace3 = objective.getScore(lines[7]);
         espace3.setScore(-8);
+
 
         Team time = scoreboard.registerNewTeam(playerName + "time");
         time.addEntry(ChatColor.LIGHT_PURPLE + ""  + ChatColor.WHITE);
@@ -105,9 +113,13 @@ public class ScoreboardSign {
         Scoreboard scoreboard = player.getScoreboard();
         String[] lines = setLines(playerName, count);
 
+        if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+            scoreboard.getTeam(playerName + "flecheBoss").setPrefix(lines[1]);
+            scoreboard.getTeam(playerName + "flecheOeil").setPrefix(lines[6]);
+        }
         scoreboard.getTeam(playerName + "flecheSpawn").setPrefix(lines[2]);
         scoreboard.getTeam(playerName + "kills").setPrefix(lines[3]);
-        scoreboard.getTeam(playerName +"nbJoueurs").setPrefix(lines[4]);
+        scoreboard.getTeam(playerName + "nbJoueurs").setPrefix(lines[4]);
         scoreboard.getTeam(playerName + "teamName").setPrefix(lines[5]);
         scoreboard.getTeam(playerName + "time").setPrefix(lines[8]);
         scoreboard.getTeam(playerName + "borderTime").setPrefix(lines[10]);
@@ -116,23 +128,34 @@ public class ScoreboardSign {
 
     public static String[] setLines(String playerName, int count) {
         final String[] lines = new String[12];
+        //Gamemode ligne 0
         try {
             lines[0] = gamemodeLine();
         } catch (Exception e) {
             System.out.println("Error in line 0: " + e.getMessage());
         }
+        //Boss flèche pour BleachUHC, vide sinon
         lines[1] = "";
         try {
-
-            if (TomoNova.getPlugin().gameManager.isBleachUhc()) {
-                lines[1] = bossLineBleachUhc(playerName);
+            if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+                StringBuilder builder = new StringBuilder();
+                String bossName = TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(playerName);
+                if(!bossName.equals("None")){
+                    Location playerLoc = Bukkit.getPlayer(playerName).getLocation();
+                    playerLoc.setY(0.0);
+                    Location bossLoc = TomoNova.getPlugin().bleachUHC.returnBossLoc(bossName);
+                    bossLoc.setY(0.0);
+                    int distance = (int) playerLoc.distance(bossLoc);
+                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), bossLoc));
+                    lines[1] = bossName +  " : " + builder  + " §7(" + distance + ")   ";
+                }
             }
         } catch (Exception e) {
             System.out.println("Error in line 1: " + e.getMessage());
         }
+        // Flèche vers le spawn
         lines[2] = " ";
         try {
-            // Flèche vers le spawn
             StringBuilder builder = new StringBuilder();
             if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()) {
                 builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), TomoNova.getPlugin().worldUtils.getWorld().getWorldBorder().getCenter()));
@@ -145,21 +168,23 @@ public class ScoreboardSign {
         } catch (Exception e) {
             System.out.println("Error in line 2: " + e.getMessage());
         }
+        //Nombre de kills
         lines[3] = "   ";
         try {
-            lines[3] = Lang.SB_KILLS.toString(); // Nb kills (à faire)
+            lines[3] = Lang.SB_KILLS.toString() + TomoNova.getPlugin().killCounter.getKillCount(playerName);
         } catch (Exception e) {
             System.out.println("Error in line 3: " + e.getMessage());
         }
+        //Nombre de joueurs encore en vie
         lines[4] = "    ";
         try {
-            lines[4] = Lang.SB_PLAYERS.toString() + TomoNova.getPlugin().gameManager.getNumberPlayer(); // Nombre de joueurs encore en vie
+            lines[4] = Lang.SB_PLAYERS.toString() + TomoNova.getPlugin().gameManager.getNumberPlayer();
         } catch (Exception e) {
             System.out.println("Error in line 4: " + e.getMessage());
         }
+        //Nom de la team
         lines[5] = "     ";
         try {
-
             if (TomoNova.getPlugin().gameManager.getPlayersPerTeam() > 1 && !TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(playerName).equals("None")) {
                 String teamName = TomoNova.getPlugin().teamUtils.getTeamNameFromPlayer(playerName);
                 lines[5] = Lang.SB_TEAM.toString() + TomoNova.getPlugin().teamUtils.getTeamHashMap().get(teamName).getBaseColor() + teamName;
@@ -167,15 +192,44 @@ public class ScoreboardSign {
         } catch (Exception e) {
             System.out.println("Error in line 5: " + e.getMessage());
         }
+        //BleachUHC Cache Oeil, sinon rien
         lines[6] = "      ";
         try {
-            lines[6] = "      ";
+            if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+                if(TomoNova.getPlugin().bleachUHC.getCacheOeilBoolean(playerName)){
+                    String playerTracked = TomoNova.getPlugin().bleachUHC.getTrackedName();
+                    StringBuilder builder = new StringBuilder();
+                    if (Bukkit.getPlayer(playerName).getWorld() == Bukkit.getPlayer(playerTracked).getWorld()) {
+                        builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), Bukkit.getPlayer(playerTracked).getLocation()));
+                        Location playerCacheOeilLoc = Bukkit.getPlayer(playerName).getLocation();
+                        playerCacheOeilLoc.setY(0.0);
+                        Location playerTraqueLoc = Bukkit.getPlayer(playerTracked).getLocation();
+                        int distance = (int) playerCacheOeilLoc.distance(playerTraqueLoc);
+                        lines[6] = playerTracked + builder + " §7(" + distance + ")   ";
+                    }
+                }
+                if(TomoNova.getPlugin().bleachUHC.getTrackedBoolean(playerName)){
+                    String playerCacheOeil = TomoNova.getPlugin().bleachUHC.getCacheOeilName();
+                    StringBuilder builder = new StringBuilder();
+                    if (Bukkit.getPlayer(playerName).getWorld() == Bukkit.getPlayer(playerCacheOeil).getWorld()) {
+                        Location playerTraqueLoc = Bukkit.getPlayer(playerName).getLocation();
+                        playerTraqueLoc.setY(0.0);
+                        Location playerCacheOeilLoc = Bukkit.getPlayer(playerCacheOeil).getLocation();
+                        int distance = (int) playerCacheOeilLoc.distance(playerTraqueLoc);
+                        if(distance <= 80) {
+                            builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), Bukkit.getPlayer(playerCacheOeil).getLocation()));
+                            lines[6] = playerCacheOeil + builder + " §7(" + distance + ")   ";
+                        }
+                    }
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error in line 6: " + e.getMessage());
         }
+        // Vide
         lines[7] = "       ";
         try {
-            lines[7] = "       ";
+
         } catch (Exception e) {
             System.out.println("Error in line 7: " + e.getMessage());
         }
@@ -232,23 +286,5 @@ public class ScoreboardSign {
             return Lang.GUIS_GM_BLEACH_NAME.toString();
         }
         return "Nouveau gamemode";
-    }
-    public static String bossLineBleachUhc(String playerName){
-        if(TomoNova.getPlugin().gameManager.isBleachUhc()){
-            if(TomoNova.getPlugin().bleachUHC.playersBossTarget.containsKey(playerName)){
-                StringBuilder builder = new StringBuilder();
-                if (Bukkit.getPlayer(playerName).getWorld() == TomoNova.getPlugin().worldUtils.getWorld()) {
-
-                    String bossName = TomoNova.getPlugin().bleachUHC.returnPlayerTargetName(playerName);
-                    Location bossLoc = TomoNova.getPlugin().bleachUHC.returnBossLoc(bossName);
-
-                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName), bossLoc));
-                    return TomoNova.getPlugin().bleachUHC.playersBossTarget.get(playerName)
-                            + builder + " §7("
-                            + (int)bossLoc.distance(Bukkit.getPlayer(playerName).getLocation()) + ")   ";
-                }
-            }
-        }
-        return "";
     }
 }

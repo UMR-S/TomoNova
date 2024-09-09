@@ -14,6 +14,8 @@ import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRules;
 import umaru.tomonova.tomonova.utils.customItems.CustomItems;
+import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
+import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardSign;
 import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.*;
@@ -78,8 +80,12 @@ public class GameManager {
             assignSoloLocations();
         }
         tomoNova.worldBorderUtils.change(tomoNova.worldBorderUtils.getStartSize());
-        TaskCountdown.setPreStartTime(10);
-        preGame = new TaskCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+        if(!TomoNova.test) {
+            TaskCountdown.setPreStartTime(10);
+            preGame = new TaskCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+        } else {
+            start();
+        }
     }
 
     private void assignTeamLocation() {
@@ -199,8 +205,22 @@ public class GameManager {
     }
 
     private void startGameTasks() {
-        new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
-        new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
+        if(isBleachUhc()){
+            tomoNova.bleachUHC.initializeBleachUHC();
+        }
+        if (!TomoNova.test) {
+            new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);
+            new TaskManager(tomoNova).runTaskTimer(tomoNova, 200, 20);
+        } else {
+            LobbyUtils.deleteLobby();
+            GameStates.setCurrentState(GameStates.GAME);
+            tomoNova.gameManager.getPlayers().forEach(ScoreboardSign::create);
+            if(isBleachUhc()){
+                tomoNova.bleachUHC.initializeStuffJoueurs();
+            }
+            new TaskManager(tomoNova).runTaskTimer(tomoNova, 0, 20);
+        }
+
     }
 
     public void stop() {
