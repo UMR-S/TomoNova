@@ -20,6 +20,7 @@ import umaru.tomonova.tomonova.listeners.others.FoodLevelChange;
 import umaru.tomonova.tomonova.listeners.others.PortalCreate;
 import umaru.tomonova.tomonova.listeners.players.*;
 import umaru.tomonova.tomonova.utils.bleachUHC.classes.ClassesUtils;
+import umaru.tomonova.tomonova.utils.bleachUHC.combatZone.CombatZoneCreationUtils;
 import umaru.tomonova.tomonova.utils.bleachUHC.combatZone.CombatZoneUtils;
 import umaru.tomonova.tomonova.utils.config.CombatZoneConfigManager;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
@@ -48,8 +49,8 @@ public final class TomoNova extends JavaPlugin {
     public TomoLostVillage tomoLostVillage;
     public BleachUHC bleachUHC;
     public ClassesSpells classesSpells;
-    public CombatZoneUtils combatzoneUtils;
-    public CombatZoneConfigManager combatZoneComfigManager;
+    public CombatZoneCreationUtils combatZoneCreationUtils;
+    public CombatZoneUtils combatZoneUtils;
     public ClassesUtils classesUtils;
     public KillCounter killCounter;
 
@@ -107,7 +108,7 @@ public final class TomoNova extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
             getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
             getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new SuzumebachiHeldEvent(), plugin);
+            getServer().getPluginManager().registerEvents(new HeldEvent(), plugin);
             getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
             getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
             getServer().getPluginManager().registerEvents(new EndermanSpawnEvent(), plugin);
@@ -134,8 +135,8 @@ public final class TomoNova extends JavaPlugin {
         tomoLostVillage = new TomoLostVillage();
         bleachUHC = new BleachUHC();
         classesSpells =new ClassesSpells();
-        combatzoneUtils = new CombatZoneUtils();
-        combatZoneComfigManager = new CombatZoneConfigManager(this);
+        combatZoneCreationUtils = new CombatZoneCreationUtils();
+        combatZoneUtils = new CombatZoneUtils(new CombatZoneConfigManager(this));
         classesUtils = new ClassesUtils();
         killCounter = new KillCounter();
     }

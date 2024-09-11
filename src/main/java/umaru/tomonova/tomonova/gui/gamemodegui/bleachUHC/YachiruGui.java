@@ -13,21 +13,52 @@ import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.gui.Gui;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.gui.ItemsCreator;
+import java.util.Arrays;
 
 public class YachiruGui extends Gui {
+
     public YachiruGui(Player player) {
-        super(player, 54, "Boutique de Yachiru : " + Integer.toString(TomoNova.getPlugin().bleachUHC.getPlayerPoints(player.getName())));
-            int i = 0;
-            for(YachiruPrices enchantBook : YachiruPrices.values()){
-                ItemStack book = enchantBook.getEnchantement();
-                ItemMeta bookMeta = book.getItemMeta();
-                bookMeta.setDisplayName(enchantBook.getName() + " : " + Integer.toString(enchantBook.getPrice()));
-                book.setItemMeta(bookMeta);
-                this.inventory.setItem(i,book);
-                i++;
-            }
+        super(player, 54, "Boutique de Yachiru : " + TomoNova.getPlugin().bleachUHC.getPlayerPoints(player.getName()));
+
+        // Sharpness Books
+        int[] sharpnessSlots = {0, 1, 2, 3, 4}; // Row 1
+        populateEnchantments(sharpnessSlots, "Sharpness", YachiruPrices.values());
+
+        // Protection Books
+        int[] protectionSlots = {9, 10, 11, 12}; // Row 2
+        populateEnchantments(protectionSlots, "Protection", YachiruPrices.values());
+
+        // Power Books
+        int[] powerSlots = {18, 19, 20, 21, 22}; // Row 3
+        populateEnchantments(powerSlots, "Power", YachiruPrices.values());
+
+        // Fire Aspect Books
+        int[] fireAspectSlots = {27, 28}; // Row 4
+        populateEnchantments(fireAspectSlots, "Fire Aspect", YachiruPrices.values());
+
+        // Thorns Books
+        int[] thornsSlots = {36, 37, 38}; // Row 5
+        populateEnchantments(thornsSlots, "Thorns", YachiruPrices.values());
+
+        // Back button at the bottom right
         ItemsCreator ic = new ItemsCreator(Material.BARRIER, Lang.GUIS_BACK.toString(), null);
         this.inventory.setItem(53, ItemsCreator.create(ic));
+    }
+
+    // Helper method to populate books for a specific enchantment group
+    private void populateEnchantments(int[] slots, String enchantmentType, YachiruPrices[] books) {
+        int index = 0;
+        for (YachiruPrices enchantBook : books) {
+            if (enchantBook.getName().contains(enchantmentType) && index < slots.length) {
+                ItemStack book = enchantBook.getEnchantement();
+                ItemMeta bookMeta = book.getItemMeta();
+                bookMeta.setDisplayName(enchantBook.getName() + " : " + enchantBook.getPrice());
+                bookMeta.setLore(Arrays.asList("§7Prix: §6" + enchantBook.getPrice() + " points"));
+                book.setItemMeta(bookMeta);
+                this.inventory.setItem(slots[index], book);
+                index++;
+            }
+        }
     }
 
     @EventHandler
@@ -41,17 +72,17 @@ public class YachiruGui extends Gui {
                 return;
             }
             event.setCancelled(true);
-            if(is.getType() == Material.BARRIER){
+            if (is.getType() == Material.BARRIER) {
                 event.getWhoClicked().closeInventory();
             } else {
                 String[] split = is.getItemMeta().getDisplayName().split(":");
-                String price = split[1].replace(" ","");
+                String price = split[1].replace(" ", "");
                 int priceInt = Integer.parseInt(price);
-                if(TomoNova.getPlugin().bleachUHC.getPlayerPoints(player.getName()) >= priceInt){
+                if (TomoNova.getPlugin().bleachUHC.getPlayerPoints(player.getName()) >= priceInt) {
                     this.player.getInventory().addItem(event.getCurrentItem());
                     TomoNova.getPlugin().bleachUHC.addPoints(player.getName(), -priceInt);
+                    new YachiruGui(this.player).show();
                 }
-
             }
         }
     }

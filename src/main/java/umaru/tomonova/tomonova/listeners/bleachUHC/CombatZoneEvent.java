@@ -32,7 +32,8 @@ public class CombatZoneEvent implements Listener {
     }
 
     private void handleBlockEvent(Block block, Cancellable event) {
-        if (TomoNova.getPlugin().combatzoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())) {
+        if (TomoNova.getPlugin().gameManager.isBleachUhc()
+                && TomoNova.getPlugin().combatZoneUtils.isBlockInZone(block.getX(), block.getY(), block.getZ())) {
             event.setCancelled(true);
         }
     }
@@ -42,12 +43,13 @@ public class CombatZoneEvent implements Listener {
     }
 
     private void handleEntityDamageEvent(EntityDamageByEntityEvent event) {
-        if (!TomoNova.test && !isPlayerInCombatZone(event.getDamager().getName())) {
+        if (TomoNova.getPlugin().gameManager.isBleachUhc()
+                && !isPlayerInCombatZone(event.getDamager().getName())) {
             event.setCancelled(true);
         }
     }
 
     private boolean isPlayerInCombatZone(String playerName) {
-        return TomoNova.getPlugin().combatzoneUtils.isPlayerInZone(playerName);
+        return TomoNova.getPlugin().combatZoneUtils.isPlayerInZone(playerName);
     }
 }

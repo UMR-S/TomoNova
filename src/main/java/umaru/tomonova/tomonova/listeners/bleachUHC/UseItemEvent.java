@@ -272,17 +272,17 @@ public class UseItemEvent implements Listener {
         Action action = event.getAction();
         Location blockLoc = event.getClickedBlock().getLocation();
 
-        if (action == Action.RIGHT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getType() == Material.STONE_AXE && !tomoNova.combatzoneUtils.isFirstPoint()) {
+        if (action == Action.RIGHT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getType() == Material.STONE_AXE && !tomoNova.combatZoneCreationUtils.isFirstPoint()) {
             event.setCancelled(true);
-            tomoNova.combatzoneUtils.setFirstPoint(blockLoc.getBlockX(), blockLoc.getBlockZ());
-            tomoNova.combatzoneUtils.setActualPoint(blockLoc.getBlockX(), blockLoc.getBlockZ());
+            tomoNova.combatZoneCreationUtils.setFirstPoint(blockLoc.getBlockX(), blockLoc.getBlockZ());
+            tomoNova.combatZoneCreationUtils.setActualPoint(blockLoc.getBlockX(), blockLoc.getBlockZ());
         }
 
-        if (action == Action.LEFT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getType() == Material.STONE_AXE && tomoNova.combatzoneUtils.isFirstPoint()) {
+        if (action == Action.LEFT_CLICK_BLOCK && player.getInventory().getItemInMainHand().getType() == Material.STONE_AXE && tomoNova.combatZoneCreationUtils.isFirstPoint()) {
             event.setCancelled(true);
-            tomoNova.combatzoneUtils.addLine(blockLoc.getBlockX(), blockLoc.getBlockZ());
-            if (tomoNova.combatzoneUtils.isClosedShape()) {
-                tomoNova.combatzoneUtils.sortingContours();
+            tomoNova.combatZoneCreationUtils.addLine(blockLoc.getBlockX(), blockLoc.getBlockZ());
+            if (tomoNova.combatZoneCreationUtils.isClosedShape()) {
+                tomoNova.combatZoneCreationUtils.sortingContours();
             }
         }
     }
