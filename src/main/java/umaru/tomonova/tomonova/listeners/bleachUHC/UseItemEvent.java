@@ -131,6 +131,7 @@ public class UseItemEvent implements Listener {
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerQuincy(player.getName())) {
                     tomoNova.classesSpells.dash(5, player.getName());
                     player.sendMessage(BleachUHCConstants.DASH_QUINCY_NAME);
+                    cooldownManager.startCooldown(player, item);
                 }
                 break;
             case BleachUHCConstants.GANT_DE_SANREI:
@@ -246,6 +247,12 @@ public class UseItemEvent implements Listener {
                     tomoNova.bleachUHC.setCacheOeilBoolen(player.getName());
                     tomoNova.bleachUHC.setTrackedBoolen(playerWithMostKillsName);
                     removeItem = true;
+                }
+            case BleachUHCConstants.KYOKA_SUIGETSU:
+                if(isRightClick(action)) {
+                    KyokaSuigetsu.applyNauseaToEnemies(player.getName());
+                    player.sendMessage(BleachUHCConstants.KYOKA_SUIGETSU_NAME);
+                    cooldownManager.startCooldown(player, item);
                 }
             case 1000:
                 handleCombatZone(event, player);

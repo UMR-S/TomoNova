@@ -13,6 +13,7 @@ import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SuzumebachiTask;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
+import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.List;
 
@@ -61,16 +62,19 @@ public class HeldEvent implements Listener {
 
     private void checkAndApplySharpnessUpgrade(Player player) {
 
-        List<Player> onlinePlayers = (List<Player>) Bukkit.getOnlinePlayers();
-
-        for (Player otherPlayer : onlinePlayers) {
-            if (!otherPlayer.equals(player) && TomoNova.getPlugin().teamUtils.arePlayersOnSameTeam(player.getName(), otherPlayer.getName())) {
-                ItemStack otherPlayerItem = otherPlayer.getInventory().getItemInMainHand();
+        List<String> playersTeam = TomoNova.getPlugin().teamUtils.getTeamPlayersNames(player.getName());
+        if (playersTeam.isEmpty()) {
+            return;
+        }
+        for (String teammateName : playersTeam) {
+            Player teammate = Bukkit.getPlayer(teammateName);
+            if (!teammate.equals(player)) {
+                ItemStack otherPlayerItem = teammate.getInventory().getItemInMainHand();
 
                 if (otherPlayerItem != null && isSogyoOrKaten(otherPlayerItem)) {
                     applySharpnessUpgrade(player.getInventory().getItemInMainHand(), otherPlayerItem);
                     player.sendMessage("Sharpness II!");
-                    otherPlayer.sendMessage("Sharpness II!");
+                    teammate.sendMessage("Sharpness II!");
                 }
             }
         }

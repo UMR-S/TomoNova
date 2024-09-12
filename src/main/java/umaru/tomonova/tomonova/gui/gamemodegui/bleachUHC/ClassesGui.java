@@ -119,17 +119,21 @@ public class ClassesGui extends Gui {
     }
 
     private boolean isClassAvailableForTeam(Player player, String className) {
-        List<Player> onlinePlayers = (List<Player>) TomoNova.getPlugin().getServer().getOnlinePlayers();
 
-        for (Player teammate : onlinePlayers) {
-            if (TomoNova.getPlugin().teamUtils.arePlayersOnSameTeam(player.getName(), teammate.getName())) {
-                if (className.equals(BleachUHCConstants.QUINCY) && TomoNova.getPlugin().classesUtils.isPlayerQuincy(teammate.getName())) {
+        List<String> playersTeam = TomoNova.getPlugin().teamUtils.getTeamPlayersNames(player.getName());
+        if (playersTeam.isEmpty()) {
+            return false;
+        }
+
+        for (String teammateName : playersTeam) {
+            if (TomoNova.getPlugin().teamUtils.arePlayersOnSameTeam(player.getName(), teammateName)) {
+                if (className.equals(BleachUHCConstants.QUINCY) && TomoNova.getPlugin().classesUtils.isPlayerQuincy(teammateName)) {
                     return false;
                 }
-                if (className.equals(BleachUHCConstants.SHUN_SHUN_RIKA) && TomoNova.getPlugin().classesUtils.isPlayerSSR(teammate.getName())) {
+                if (className.equals(BleachUHCConstants.SHUN_SHUN_RIKA) && TomoNova.getPlugin().classesUtils.isPlayerSSR(teammateName)) {
                     return false;
                 }
-                if (className.equals(BleachUHCConstants.BRAZO) && TomoNova.getPlugin().classesUtils.isPlayerBrazo(teammate.getName())) {
+                if (className.equals(BleachUHCConstants.BRAZO) && TomoNova.getPlugin().classesUtils.isPlayerBrazo(teammateName)) {
                     return false;
                 }
             }

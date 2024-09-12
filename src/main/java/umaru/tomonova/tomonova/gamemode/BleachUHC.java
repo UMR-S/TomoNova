@@ -14,6 +14,7 @@ import umaru.tomonova.tomonova.core.task.bleachUHCTask.SpawnBossesTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.players.ArmorPlayer;
+import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.*;
 
@@ -87,6 +88,7 @@ public class BleachUHC {
             if(TomoNova.getPlugin().classesUtils.isPlayerQuincy(player.getName())){
                 GiveItem.giveBow(player.getName());
                 GiveItem.dashQuincy(player.getName());
+                GiveItem.giveCarquois(player.getName());
                 ArmorPlayer.equipGoldArmor(player);
             }
             if(TomoNova.getPlugin().classesUtils.isPlayerSSR(player.getName())){
@@ -120,6 +122,85 @@ public class BleachUHC {
             pointJoueurs.put(player.getName(),0);
         }
     }
+
+    public void teleportSereitei() {
+        // Get the center of the teleportation circle (could be any arbitrary location)
+        Location center = TomoNova.getPlugin().worldUtils.getWorld().getSpawnLocation();
+        double radius = 550.0; // Circle radius
+        Map<String, Teams> teams = TomoNova.getPlugin().teamUtils.getTeamHashMap();
+
+        List<Location> assignedLocations = new ArrayList<>();
+        Random random = new Random();
+
+        // Base minimum distance for separation between teams
+        double baseMinDistance = 100.0;
+
+        for (String teamName : teams.keySet()) {
+            Location teleportLocation;
+            double minDistance = baseMinDistance;
+            int attempts = 0;
+
+            // Attempt to find a valid location, retrying with decreasing minDistance after 10 attempts
+            do {
+                teleportLocation = getRandomLocationInCircle(center, radius, random);
+                attempts++;
+
+                // If after 10 attempts, reduce the minDistance by 10, but not lower than 10
+                if (attempts >= 10) {
+                    minDistance = Math.max(10, minDistance - 10);
+                    attempts = 0; // Reset attempts after reducing the distance
+                }
+
+                // If the minDistance has reached 10 and we're on the 10th retry, auto-validate the location
+                if (minDistance == 10 && attempts == 9) {
+                    break;
+                }
+
+            } while (!isLocationFarEnough(teleportLocation, assignedLocations, minDistance));
+
+            // Add the valid location to the list of assigned locations
+            assignedLocations.add(teleportLocation);
+
+            // Teleport all players in the team to the location
+            teleportTeamPlayers(teams.get(teamName), teleportLocation);
+        }
+    }
+
+    // Helper method to generate a random location within a circle
+    private Location getRandomLocationInCircle(Location center, double radius, Random random) {
+        // Generate a random angle and distance from the center
+        double angle = random.nextDouble() * 2 * Math.PI;
+        double distance = Math.sqrt(random.nextDouble()) * radius; // Using sqrt to distribute points more evenly within the circle
+
+        // Calculate x and z coordinates based on the angle and distance
+        double x = center.getX() + distance * Math.cos(angle);
+        double z = center.getZ() + distance * Math.sin(angle);
+
+        // Return the new random location at the same Y level as the center
+        return new Location(center.getWorld(), x, center.getY(), z);
+    }
+
+    // Helper method to check if a new location is far enough from previously assigned locations
+    private boolean isLocationFarEnough(Location newLocation, List<Location> existingLocations, double minDistance) {
+        for (Location loc : existingLocations) {
+            if (newLocation.distance(loc) < minDistance) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Helper method to teleport all players in a team to the given location
+    private void teleportTeamPlayers(Teams team, Location location) {
+        for (String playerName : team.getTeamPlayers()) {
+            Player player = Bukkit.getPlayer(playerName);
+            if (player != null) {
+                player.teleport(location);
+            }
+        }
+    }
+
+
 
     public void addPoints(String playerName,int nbPoints){
         pointJoueurs.merge(playerName, nbPoints, Integer::sum);

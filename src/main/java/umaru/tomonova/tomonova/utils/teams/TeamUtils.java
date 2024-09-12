@@ -85,6 +85,21 @@ public class TeamUtils {
                 .orElse("None");
     }
 
+    public Teams getTeamFromPlayer(String playerName){
+        String teamName = getTeamNameFromPlayer(playerName);
+        return listTeams.get(teamName);
+    }
+
+    public List<String> getTeamPlayersNames(String playerName) {
+        String team = getTeamNameFromPlayer(playerName);
+        if (team.equals("None")) {
+            return Collections.emptyList(); // Return an empty list instead of null to avoid potential issues
+        }
+        Teams playerTeam = getTeamFromPlayer(playerName);
+        return playerTeam.getTeamPlayers();
+    }
+
+
     public boolean arePlayersOnSameTeam(String firstPlayer, String secondPlayer) {
         return getTeamNameFromPlayer(firstPlayer).equals(getTeamNameFromPlayer(secondPlayer));
     }
