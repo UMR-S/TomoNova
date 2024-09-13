@@ -23,11 +23,11 @@ public class HogyokuActifTask extends BukkitRunnable {
     @Override
     public void run() {
         if(timeActive == 0){
-            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 2160000, 0, false, true, true));
-            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 2160000, 10, false, true, true));
-            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 2160000, 0, false, true, true));
-            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2160000, 0, false, true, true));
-            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 2160000, 0, false, false, false));
+            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, Integer.MAX_VALUE, 0, false, true, true));
+            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, Integer.MAX_VALUE, 10, false, true, true));
+            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, Integer.MAX_VALUE, 0, false, true, true));
+            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 0, false, true, true));
+            Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0, false, false, false));
         }
         if(timeActive%60 == 0){
             Bukkit.getPlayer(playerName).addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 24, 2, false, true, true));;

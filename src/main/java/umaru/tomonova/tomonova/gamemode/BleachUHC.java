@@ -49,9 +49,21 @@ public class BleachUHC {
             Material.DIAMOND_HOE,
 
             // Anvils
-            Material.ANVIL,
-            Material.CHIPPED_ANVIL,
-            Material.DAMAGED_ANVIL,
+            //Material.ANVIL,
+            //Material.CHIPPED_ANVIL,
+            //Material.DAMAGED_ANVIL,
+
+            // Bouclier et arc
+            Material.BOW,
+            Material.CROSSBOW,
+            Material.SHIELD,
+
+            // Epées
+            Material.WOODEN_SWORD,
+            Material.STONE_SWORD,
+            Material.GOLDEN_SWORD,
+            Material.IRON_SWORD,
+            Material.NETHERITE_SWORD,
 
             // Enchantment table
             Material.ENCHANTING_TABLE
@@ -68,6 +80,7 @@ public class BleachUHC {
         TomoNova.getPlugin().gameManager.setPlayersPerTeam(3);
         if(TomoNova.test){
             initializeBleachUHC();
+            TomoNova.getPlugin().listenerBleachUHCRegister();
         }
     }
 

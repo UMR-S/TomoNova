@@ -73,6 +73,14 @@ public class GameManager {
 
     // Start game
     public void preStart() {
+
+        if(isBleachUhc()) {
+            if (!tomoNova.classesUtils.doAllOnlinePlayersHaveClass()) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Not everybody have a class"));
+                return;
+            }
+        }
+
         GameStates.setCurrentState(GameStates.LOBBY_END);
         if (playersPerTeam > 1) {
             assignTeamLocation();
@@ -207,6 +215,9 @@ public class GameManager {
     private void startGameTasks() {
         if(isBleachUhc()){
             tomoNova.bleachUHC.initializeBleachUHC();
+            if(!TomoNova.test){
+                tomoNova.listenerBleachUHCRegister();
+            }
         }
         if (!TomoNova.test) {
             new TaskFinalCountdown(tomoNova).runTaskTimer(tomoNova, 0, 20);

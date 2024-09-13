@@ -17,11 +17,11 @@ import java.util.Collections;
 public class CustomRecipes {
     public static void addHogyokuRecipe(){
         ItemStack hogyokuActif = CustomItems.createCustomItem(
-                Material.NETHER_WART,
+                Material.TOTEM_OF_UNDYING,
                 ChatColor.AQUA,
-                BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF_NAME,
-                Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_ACTIF_LORE.toString()),
-                BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF
+                BleachUHCConstants.HOGYOKU_ACTIF_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_ACTIF_LORE.toString()),
+                BleachUHCConstants.HOGYOKU_ACTIF
         );
         ShapedRecipe hogyokuRecipe = new ShapedRecipe(new NamespacedKey(TomoNova.getPlugin(),"hogyoku"),hogyokuActif);
         hogyokuRecipe.shape("XYX");

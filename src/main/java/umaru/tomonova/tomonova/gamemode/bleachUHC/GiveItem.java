@@ -194,7 +194,7 @@ public class GiveItem {
 
     public static void spawnHogyokuInactifFragment(Location location) {
         ItemStack fragmentHogyokuInactif = CustomItems.createCustomItem(
-                Material.NETHER_WART,
+                Material.HEART_OF_THE_SEA,
                 ChatColor.AQUA,
                 BleachUHCConstants.FRAGMENT_HOGYOKU_INACTIF_NAME,
                 Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_INACTIF_LORE.toString()),
@@ -213,7 +213,6 @@ public class GiveItem {
                     Collections.singletonList(Lang.BUHC_ITEM_HOGYOKU_FRAG_ACTIF_LORE.toString()),
                     BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF
             );
-            player.getInventory().remove(player.getInventory().getItemInMainHand());
             giveItem(player, fragmentHogyokuActif);
         }
     }

@@ -96,24 +96,6 @@ public final class TomoNova extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PortalCreate(), plugin);
         getServer().getPluginManager().registerEvents(new FoodLevelChange(), plugin);
         getServer().getPluginManager().registerEvents(new EntitySpawn(), plugin);
-        if(!test){
-            getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
-            getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
-            getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
-            getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
-        }
-        else{
-            getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
-            getServer().getPluginManager().registerEvents(new BannedItemForClasses(), plugin);
-            getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new HeldEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new EndermanSpawnEvent(), plugin);
-            getServer().getPluginManager().registerEvents(new ItemDurabilityEvent(), plugin);
-        }
 //        getServer().getPluginManager().registerEvents(new Autosmell(), plugin);
 //        getServer().getPluginManager().registerEvents(new Collisions(), plugin);
 //        getServer().getPluginManager().registerEvents(new EternalDay(), plugin);
@@ -123,6 +105,23 @@ public final class TomoNova extends JavaPlugin {
 //        getServer().getPluginManager().registerEvents(new Regen(), plugin);
 //        getServer().getPluginManager().registerEvents(new Rodless(), plugin);
 //        getServer().getPluginManager().registerEvents(new WoodCutter(), plugin);
+    }
+
+    public void listenerBleachUHCRegister(){
+        getServer().getPluginManager().registerEvents(new PlayerDeath(), plugin);
+        getServer().getPluginManager().registerEvents(new PlayerDropItem(), plugin);
+        getServer().getPluginManager().registerEvents(new EntityDamage(), plugin);
+        getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), plugin);
+        getServer().getPluginManager().registerEvents(new AbilitiesEvents(), plugin);
+        getServer().getPluginManager().registerEvents(new BannedItemForClasses(), plugin);
+        getServer().getPluginManager().registerEvents(new CombatZoneEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new FreezeEffectEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new HogyokuTriggerEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new HeldEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new UseItemEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new MobDeathEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new EndermanSpawnEvent(), plugin);
+        getServer().getPluginManager().registerEvents(new ItemDurabilityEvent(), plugin);
     }
 
     public void setupUtils() {

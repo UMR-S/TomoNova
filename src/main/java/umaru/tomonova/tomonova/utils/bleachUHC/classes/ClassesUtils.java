@@ -1,5 +1,7 @@
 package umaru.tomonova.tomonova.utils.bleachUHC.classes;
 
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 import java.util.HashMap;
@@ -19,6 +21,18 @@ public class ClassesUtils {
         if(classe.equals(BleachUHCConstants.BRAZO)){
             brazoHakudaUpgrade.put(playerName, 1);
         }
+    }
+    public boolean doAllOnlinePlayersHaveClass() {
+        for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+            String playerName = onlinePlayer.getName();
+            String playerClass = getPlayerClasse(playerName);
+
+            // If any player has no class assigned, return false
+            if (playerClass == null || playerClass.equals("None")) {
+                return false;
+            }
+        }
+        return true; // All players have a class assigned
     }
     public int getPlayerHakudaUpgrade(String playerName){
         if(brazoHakudaUpgrade.containsKey(playerName)){

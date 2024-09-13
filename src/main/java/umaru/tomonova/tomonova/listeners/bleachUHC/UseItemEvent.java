@@ -122,6 +122,7 @@ public class UseItemEvent implements Listener {
             case BleachUHCConstants.CARQUOIS:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerQuincy(player.getName())) {
                     tomoNova.classesSpells.carquois(player.getName());
+                    tomoNova.classesSpells.carquois(player.getName());
                     player.sendMessage(BleachUHCConstants.CARQUOIS_NAME);
                     cooldownManager.startCooldown(player, item);
                 }
@@ -188,7 +189,7 @@ public class UseItemEvent implements Listener {
                 if (isRightClick(action)) {
                     removeItem = true;
                     GiveItem.giveHogyokuActifFragment(player.getName());
-                    Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 10);
+                    //Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() - 10);
                     player.sendMessage(BleachUHCConstants.FRAGMENT_HOGYOKU_INACTIF_NAME);
                 }
                 break;
