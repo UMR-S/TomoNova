@@ -31,7 +31,7 @@ public class BleachUHCConstants {
     public static final int CACHE_OEIL = 5112606;
     public static final int FRAGMENT_HOGYOKU_INACTIF = 5149609;
     public static final int FRAGMENT_HOGYOKU_ACTIF = 5149610;
-    public static final int COEUR_HOGYOKU_RUKIA = 5149611;
+    //public static final int COEUR_HOGYOKU_RUKIA = 5149611;
     public static final int HOGYOKU_INACTIF = 5149612;
     public static final int HOGYOKU_ACTIF = 5149613;
     public static final int BOUSSOLE = 5149614;
@@ -46,13 +46,14 @@ public class BleachUHCConstants {
     public static final int FLECHES = 2000503;
     public static final int PHOTO_DE_YORUICHI = 5022601;
     public static final int MEDICAMENTS = 5132208;
-    public static final int CELLULE_DE_RUKIA = 5052614;
+    public static final int INSIGNE_CENTRAL = 5052614;
     public static final int CASQUE_DE_KOMAMURA = 5072603;
     public static final int BOUTIQUE_YACHIRU = 5000001;
-    public static final int COEUR_HOGYOKU = 5149613;
+    public static final int COEUR_HOGYOKU = 5149611;
 
     // HashMap for Cooldown Times (1 second = 20 ticks)
     public static final Map<Integer, Integer> ITEM_COOLDOWNS = new HashMap<>();
+
 
     static {
         ITEM_COOLDOWNS.put(SHINSO, 7);
@@ -120,7 +121,7 @@ public class BleachUHCConstants {
     public static final String CACHE_OEIL_NAME = "Cache-oeil";
     public static final String FRAGMENT_HOGYOKU_INACTIF_NAME = "Fragment du Hōgyoku inactif";
     public static final String FRAGMENT_HOGYOKU_ACTIF_NAME = "Fragment du Hōgyoku actif";
-    public static final String COEUR_HOGYOKU_RUKIA_NAME = "Coeur du Hōgyoku(+Rukia)";
+    //public static final String COEUR_HOGYOKU_RUKIA_NAME = "Coeur du Hōgyoku(+Rukia)";
     public static final String HOGYOKU_INACTIF_NAME = "Hōgyoku inactif";
     public static final String HOGYOKU_ACTIF_NAME = "Hōgyoku actif";
     public static final String BOUSSOLE_NAME = "Boussole";
@@ -135,7 +136,7 @@ public class BleachUHCConstants {
     public static final String FLECHES_NAME = "Fléches";
     public static final String PHOTO_DE_YORUICHI_NAME = "Photo de Yoruichi";
     public static final String MEDICAMENTS_NAME = "Médicaments";
-    public static final String CELLULE_DE_RUKIA_NAME = "Cellule de Rukia";
+    public static final String INSIGNE_CENTRAL_NAME = "Insigne central 46";
     public static final String CASQUE_DE_KOMAMURA_NAME = "Casque de Komamura";
     public static final String BOUTIQUE_YACHIRU_NAME = "Boutique Yachiru";
     public static final String COEUR_HOGYOKU_NAME = "Coeur hogyoku";

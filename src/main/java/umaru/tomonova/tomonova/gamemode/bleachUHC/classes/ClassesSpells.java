@@ -39,7 +39,6 @@ public class ClassesSpells {
         int arrowAmount = calculateArrowAmount(player.getInventory());
         if (arrowAmount <= 11) {
             GiveItem.giveQuincyArrow(playerName, 17);
-            player.setCooldown(Material.CARROT_ON_A_STICK, 600);
         } else if (arrowAmount <= 28) {
             GiveItem.giveQuincyArrow(playerName, 28 - arrowAmount);
         }

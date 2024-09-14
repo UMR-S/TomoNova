@@ -71,9 +71,9 @@ public class GiveItem {
             ItemStack arrow = CustomItems.createCustomItem(
                     Material.ARROW,
                     ChatColor.AQUA,
-                    BleachUHCConstants.ARC_QUINCY_NAME,
+                    BleachUHCConstants.FLECHES_NAME,
                     Collections.singletonList(Lang.BUHC_ITEM_QUINCY_ARROW_LORE.toString()),
-                    BleachUHCConstants.ARC_QUINCY
+                    BleachUHCConstants.FLECHES
             );
             arrow.setAmount(amount);
             giveItem(player, arrow);
@@ -277,6 +277,7 @@ public class GiveItem {
             }
         });
     }
+
     public static void spawnRyujinJakka(Location location) {
         ItemStack item = CustomItems.createCustomItem(
                 Material.IRON_SWORD,
@@ -488,7 +489,7 @@ public class GiveItem {
 
     public static void spawnKatenKyokotsu(Location location) {
         ItemStack item = CustomItems.createCustomItem(
-                Material.CARROT_ON_A_STICK,
+                Material.IRON_SWORD,
                 ChatColor.AQUA,
                 BleachUHCConstants.KATEN_KYOKOTSU_NAME,
                 Arrays.asList(Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE.toString(), Lang.BUHC_ITEM_KATEN_KYOKOTSU_LORE_TWO.toString()),
@@ -508,5 +509,86 @@ public class GiveItem {
                 BleachUHCConstants.GANT_DE_SANREI
         );
         location.getWorld().dropItemNaturally(location, gantDeSeirei);
+    }
+
+    public static void spawnInsigne(Location location) {
+        ItemStack gantDeSeirei = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.INSIGNE_CENTRAL_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_INSIGNE_CENTRAL_LORE.toString()),
+                BleachUHCConstants.INSIGNE_CENTRAL
+        );
+        location.getWorld().dropItemNaturally(location, gantDeSeirei);
+    }
+
+    public static void spawnKyokaSuigetsu(Location location) {
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.KYOKA_SUIGETSU_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_KYOKA_SUIGETSU_LORE.toString(), Lang.BUHC_ITEM_KYOKA_SUIGETSU_LORE_TWO.toString()),
+                BleachUHCConstants.KYOKA_SUIGETSU
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack kyokaSuigetsu = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, kyokaSuigetsu);
+    }
+
+    public static void spawnKenseikan(Location location) {
+        ItemStack kenseikan = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.KENSEIKAN_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_DASH_LORE.toString()),
+                BleachUHCConstants.DASH_SHINIGAMI
+        );
+        location.getWorld().dropItemNaturally(location, kenseikan);
+    }
+
+    public static void spawnCasqueKomamura(Location location) {
+        ItemStack casqueKomamura = CustomItems.createCustomItem(
+                Material.DIAMOND_HELMET,
+                ChatColor.AQUA,
+                BleachUHCConstants.CASQUE_DE_KOMAMURA_NAME,
+                Collections.singletonList(Lang.BUHC_ITEM_CASQUE_KOMAMURA_LORE.toString()),
+                BleachUHCConstants.CASQUE_DE_KOMAMURA
+        );
+        location.getWorld().dropItemNaturally(location, casqueKomamura);
+    }
+
+    public static void spawnSakeKyoraku(Location location) {
+        ItemStack kenseikan = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.SAKE_DE_KYORAKU_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_SAKE_LORE.toString(), Lang.BUHC_ITEM_SAKE_LORE_TWO.toString()),
+                BleachUHCConstants.SAKE_DE_KYORAKU
+        );
+        location.getWorld().dropItemNaturally(location, kenseikan);
+    }
+
+    public static void spawnCacheOeilKenpachi(Location location) {
+        ItemStack cacheOeil = CustomItems.createCustomItem(
+                Material.CARROT_ON_A_STICK,
+                ChatColor.AQUA,
+                BleachUHCConstants.CACHE_OEIL_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_CACHE_OEIL_LORE.toString(), Lang.BUHC_ITEM_CACHE_OEIL_LORE_TWO.toString()),
+                BleachUHCConstants.CACHE_OEIL
+        );
+        location.getWorld().dropItemNaturally(location, cacheOeil);
+    }
+
+    public static void spawnSogyoNoKotowari(Location location) {
+        ItemStack item = CustomItems.createCustomItem(
+                Material.IRON_SWORD,
+                ChatColor.AQUA,
+                BleachUHCConstants.SOGYO_NO_KOTOWARI_NAME,
+                Arrays.asList(Lang.BUHC_ITEM_SOGYO_NO_KOTOWARI_LORE.toString(), Lang.BUHC_ITEM_SOGYO_NO_KOTOWARI_LORE_TWO.toString()),
+                BleachUHCConstants.SOGYO_NO_KOTOWARI
+        );
+        Map<Enchantment, Integer> enchantMap = Collections.singletonMap(Enchantment.DAMAGE_ALL, 1);
+        ItemStack sogyoNoKotowari = CustomItems.addEnchants(item, enchantMap);
+        location.getWorld().dropItemNaturally(location, sogyoNoKotowari);
     }
 }

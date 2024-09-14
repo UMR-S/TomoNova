@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.listeners.bleachUHC;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -11,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -19,6 +21,8 @@ import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.*;
 import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.BossesGui;
 import umaru.tomonova.tomonova.gui.gamemodegui.bleachUHC.YachiruGui;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsConstants;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsUtils;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.cooldowns.CooldownManager;
 
@@ -27,7 +31,7 @@ import java.util.Objects;
 public class UseItemEvent implements Listener {
 
     private final TomoNova tomoNova = TomoNova.getPlugin();
-    private final CooldownManager cooldownManager = new CooldownManager(); // Initialize CooldownManager
+    private final CooldownManager cooldownManager = tomoNova.cooldownManager; // Initialize CooldownManager
 
     @EventHandler
     public void onClickBleachUHC(PlayerInteractEvent event) {
@@ -80,6 +84,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.dash(3, player.getName());
                     player.sendMessage(BleachUHCConstants.DASH_SHINIGAMI_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.PLAYER_SHINIGAMI_SHUNPO,10);
                 }
                 break;
             case BleachUHCConstants.SHINSO:
@@ -125,6 +130,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.carquois(player.getName());
                     player.sendMessage(BleachUHCConstants.CARQUOIS_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.PLAYER_QUINCY_CARQUOIS,10);
                 }
 
                 break;
@@ -133,6 +139,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.dash(5, player.getName());
                     player.sendMessage(BleachUHCConstants.DASH_QUINCY_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.PLAYER_QUINCY_DASH,10);
                 }
                 break;
             case BleachUHCConstants.GANT_DE_SANREI:
@@ -147,6 +154,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.cielUnique(player.getName());
                     player.sendMessage(BleachUHCConstants.CIEL_UNIQUE_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.SSR_CIEL1,15);
                 }
                 break;
             case BleachUHCConstants.DEUX_CIEUX:
@@ -154,6 +162,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.deuxCieux(player.getName());
                     player.sendMessage(BleachUHCConstants.DEUX_CIEUX_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.SSR_CIEL2,15);
                 }
                 break;
             case BleachUHCConstants.TROIS_CIEUX:
@@ -161,6 +170,7 @@ public class UseItemEvent implements Listener {
                     tomoNova.classesSpells.troisCieux(player.getName());
                     player.sendMessage(BleachUHCConstants.TROIS_CIEUX_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.SSR_CIEL3,15);
                 }
                 break;
             case BleachUHCConstants.QUATRE_CIEUX:
@@ -168,6 +178,7 @@ public class UseItemEvent implements Listener {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.HERO_OF_THE_VILLAGE, 100, 0, false, false, false));
                     player.sendMessage(BleachUHCConstants.QUATRE_CIEUX_NAME);
                     cooldownManager.startCooldown(player, item);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.SSR_CIEL4,15);
                 }
                 break;
             case BleachUHCConstants.BAVE_DE_MINAZUKI:
@@ -255,6 +266,11 @@ public class UseItemEvent implements Listener {
                     player.sendMessage(BleachUHCConstants.KYOKA_SUIGETSU_NAME);
                     cooldownManager.startCooldown(player, item);
                 }
+            case BleachUHCConstants.COEUR_HOGYOKU:
+                if(isRightClick(action)){
+                    handleCoeurHogyoku(player);
+                }
+                break;
             case 1000:
                 handleCombatZone(event, player);
                 break;
@@ -266,6 +282,33 @@ public class UseItemEvent implements Listener {
 
     private boolean isRightClick(Action action) {
         return action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK;
+    }
+
+    private void handleCoeurHogyoku(Player player){
+        Player nearestPlayer = player;
+        int distanceMin = Integer.MAX_VALUE;
+        for(Player players : Bukkit.getOnlinePlayers()){
+            for (ItemStack items : player.getInventory().getContents()) {
+                if (items != null && items.hasItemMeta()) {
+                    ItemMeta meta = items.getItemMeta();
+                    if (meta.hasCustomModelData() &&
+                            (meta.getCustomModelData() == BleachUHCConstants.FRAGMENT_HOGYOKU_INACTIF
+                                    || meta.getCustomModelData() == BleachUHCConstants.FRAGMENT_HOGYOKU_ACTIF)) {
+                        if(player.getLocation().distance(players.getLocation()) < distanceMin){
+                            nearestPlayer = players;
+                            distanceMin = (int) player.getLocation().distance(players.getLocation());
+                        }
+                    }
+                }
+            }
+        }
+        if(!player.equals(nearestPlayer)){
+            tomoNova.bleachUHC.setPlayerWithHogyokuHeart(player.getName());
+            tomoNova.bleachUHC.setNearestPlayerWithHogyokuFragment(nearestPlayer.getName());
+        } else {
+            tomoNova.bleachUHC.setPlayerWithHogyokuHeart("None");
+            tomoNova.bleachUHC.setNearestPlayerWithHogyokuFragment("None");
+        }
     }
 
     private void handleAizenProximity(Player player) {

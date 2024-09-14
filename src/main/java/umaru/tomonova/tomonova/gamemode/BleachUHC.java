@@ -27,6 +27,8 @@ public class BleachUHC {
     public HashMap<String,Integer> pointJoueurs = new HashMap<String,Integer>();
     public HashMap<String, Boolean> playerUsedCacheOeil = new HashMap<String,Boolean>();
     public HashMap<String,Boolean> playerTracked = new HashMap<String,Boolean>();
+    public String nearestPlayerWithHogyokuFragment = "None";
+    public String playerWithHogyokuHeart = "None";
 
     private List<Material> materialsToRemove = Arrays.asList(
             // Axes
@@ -344,5 +346,21 @@ public class BleachUHC {
 
     public void setLunettesBooleanTruePlayer(String playerName) {
         lunettesBoolean.put(playerName, true);
+    }
+
+    public String getNearestPlayerWithHogyokuFragment() {
+        return nearestPlayerWithHogyokuFragment;
+    }
+
+    public void setNearestPlayerWithHogyokuFragment(String nearestPlayerWithHogyokuFragment) {
+        this.nearestPlayerWithHogyokuFragment = nearestPlayerWithHogyokuFragment;
+    }
+
+    public String getPlayerWithHogyokuHeart() {
+        return playerWithHogyokuHeart;
+    }
+
+    public void setPlayerWithHogyokuHeart(String playerWithHogyokuHeart) {
+        this.playerWithHogyokuHeart = playerWithHogyokuHeart;
     }
 }

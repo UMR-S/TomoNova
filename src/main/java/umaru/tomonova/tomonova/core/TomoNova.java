@@ -23,6 +23,7 @@ import umaru.tomonova.tomonova.utils.bleachUHC.classes.ClassesUtils;
 import umaru.tomonova.tomonova.utils.bleachUHC.combatZone.CombatZoneCreationUtils;
 import umaru.tomonova.tomonova.utils.bleachUHC.combatZone.CombatZoneUtils;
 import umaru.tomonova.tomonova.utils.config.CombatZoneConfigManager;
+import umaru.tomonova.tomonova.utils.cooldowns.CooldownManager;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 import umaru.tomonova.tomonova.utils.players.KillCounter;
 import umaru.tomonova.tomonova.utils.rules.SettingRulesUtils;
@@ -53,6 +54,7 @@ public final class TomoNova extends JavaPlugin {
     public CombatZoneUtils combatZoneUtils;
     public ClassesUtils classesUtils;
     public KillCounter killCounter;
+    public CooldownManager cooldownManager;
 
     @Override
     public void onLoad() {
@@ -138,6 +140,7 @@ public final class TomoNova extends JavaPlugin {
         combatZoneUtils = new CombatZoneUtils(new CombatZoneConfigManager(this));
         classesUtils = new ClassesUtils();
         killCounter = new KillCounter();
+        cooldownManager = new CooldownManager();
     }
 
     public static TomoNova getPlugin() {

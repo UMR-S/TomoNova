@@ -17,6 +17,8 @@ import org.bukkit.potion.PotionEffectType;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.ReturnDamageTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.items.IceCage;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsConstants;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsUtils;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 import java.util.HashMap;
@@ -167,10 +169,14 @@ public class AbilitiesEvents implements Listener {
     }
 
     private void handleBrazoAttack(Player player, LivingEntity entity, EntityDamageByEntityEvent event) {
-        int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
-        event.setDamage(0);
-        entity.setHealth((entity.getHealth() - 4) * hakudaModifier);
-        entity.setVelocity(entity.getLocation().add(0.0, 1.0, 0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10 * hakudaModifier));
+        if(!tomoNova.cooldownManager.isCooldown(player,player.getInventory().getItemInMainHand())){
+            int hakudaModifier = TomoNova.getPlugin().classesUtils.getPlayerHakudaUpgrade(player.getName());
+            event.setDamage(0);
+            entity.setHealth((entity.getHealth() - 4) * hakudaModifier);
+            entity.setVelocity(entity.getLocation().add(0.0, 1.0, 0.0).clone().toVector().subtract(player.getLocation().clone().toVector()).normalize().multiply(10 * hakudaModifier));
+            tomoNova.cooldownManager.startCooldown(player, player.getInventory().getItemInMainHand());
+            SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.PLAYER_BRAZO_ATK,15);
+        }
     }
 
     private void handleKatenKyokotsuAttack(Player player, LivingEntity entity, EntityDamageByEntityEvent event) {

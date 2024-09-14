@@ -22,6 +22,7 @@ public enum Lang {
     SB_TEAM("scoreboard.team", "Equipe :"),
     SB_PLAYERS_IN_TEAM("scoreboard.playersInTeam", ""),
     SB_PLAYERS_IN_TEAM_ENDS("scoreboard.playersInTeamEnd", ""),
+    SB_HOGYOKU("scoreboard.hogyoku","Hogyoku" ),
     ONLY_IN_LOBBY("onlyInLobby", "Possible uniquement lors du lobby"),
     PLAYER_NO_EXIST("playerNotExist", "Le joueur {0} n'existe pas"),
     TEAMDEAD("deadTeam", "La team {0} est morte"),
@@ -300,7 +301,17 @@ public enum Lang {
     BUHC_ITEM_AVEUX_LORE("bleachuhc.items.aveuxLore","Reduit de moitié les pv d'Aizen. Vous devez être à moins de 30m de lui"),
     BUHC_ITEM_BAVE_NAME("bleachuhc.items.baveName","Bave de Minazuki"),
     BUHC_ITEM_BAVE_LORE("bleachuhc.items.baveLore","Chaque seconde d'activation, vous perdez 0.5 coeurs. Chaque coeur perdu est "),
-    BUHC_ITEM_BAVE_LORE_TWO("bleachuhc.items.baveLoreTwo","transféré à la cible en coeurs d'absorbtion. 3 charges.");
+    BUHC_ITEM_BAVE_LORE_TWO("bleachuhc.items.baveLoreTwo","transféré à la cible en coeurs d'absorbtion. 3 charges."),
+    BUHC_ITEM_INSIGNE_CENTRAL_LORE("bleachuhc.items.insigneCentralLore","Utilisez le pour localiser Aizen"),
+    BUHC_ITEM_KYOKA_SUIGETSU_LORE("bleachuhc.items.kyokaSuigetsuLore","Donne nausée à tous les joueurs dans un rayon de 20 blocks de vous" ),
+    BUHC_ITEM_KYOKA_SUIGETSU_LORE_TWO("bleachuhc.items.kyokaSuigetsuLoreTwo","Cooldown : 1 minute" ),
+    BUHC_ITEM_CASQUE_KOMAMURA_LORE("bleachuhc.items.casqueKomamura", "Et c'est ainsi que Koma mourra ... lol"),
+    BUHC_ITEM_SAKE_LORE("bleachuhc.items.sakeLore", "Vous et le joueur que vous regardez êtes téléportés à 100 blocks l'un de l'autre"),
+    BUHC_ITEM_SAKE_LORE_TWO("bleachuhc.items.sakeLoreTwo", "Cooldown : 15 minutes"),
+    BUHC_ITEM_CACHE_OEIL_LORE("bleachuhc.items.cacheOeilLore", "Vous donne la position du joueur avec le plus de kills"),
+    BUHC_ITEM_CACHE_OEIL_LORE_TWO("bleachuhc.items.cacheOeilLoreTwo", "Ce joueur reçoit également votre position si vous êtes à 80 blocks de lui"),
+    BUHC_ITEM_SOGYO_NO_KOTOWARI_LORE("bleachuhc.items.sogyoNoKotowariLore", "Tous les effets négatifs que vous avez reçu depuis la dernière utilisation sont envoyés sur l'ennemi que vous regardez"),
+    BUHC_ITEM_SOGYO_NO_KOTOWARI_LORE_TWO("bleachuhc.items.sogyoNoKotowariLoreTwo", "Cooldown : 45 secondes");
 
 
     private String path;

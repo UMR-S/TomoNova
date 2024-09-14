@@ -226,10 +226,18 @@ public class ScoreboardSign {
         } catch (Exception e) {
             System.out.println("Error in line 6: " + e.getMessage());
         }
-        // Vide
+        // BleachUHC fragment Hogyoku sinon vide
         lines[7] = "       ";
         try {
-
+            if(TomoNova.getPlugin().gameManager.isBleachUhc()){
+                if(playerName.equals(TomoNova.getPlugin().bleachUHC.getPlayerWithHogyokuHeart())){
+                    StringBuilder builder = new StringBuilder();
+                    Location hogyokuLoc = Bukkit.getPlayer(TomoNova.getPlugin().bleachUHC.getNearestPlayerWithHogyokuFragment()).getLocation();
+                    builder.append(TomoNova.getPlugin().scoreboardUtils.getColoredDirectionTo(Bukkit.getPlayer(playerName),hogyokuLoc));
+                    int distance = (int) Bukkit.getPlayer(playerName).getLocation().distance(hogyokuLoc);
+                    lines[7] = Lang.SB_HOGYOKU.toString() + builder + " §7(" + TomoNova.getPlugin().scoreboardUtils.getSpawnDistance(playerName) + ")   ";
+                }
+            }
         } catch (Exception e) {
             System.out.println("Error in line 7: " + e.getMessage());
         }
