@@ -186,6 +186,7 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.BAVE_DE_MINAZUKI:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerSSR(player.getName()) && !tomoNova.classesSpells.isMinazukiActive() && tomoNova.classesSpells.getMinazukiCharges() > 0) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(), SoundsConstants.UNOHANA_ITEMUNIQUE,64);
                     tomoNova.classesSpells.setMinazukiActive(true);
                     tomoNova.classesSpells.setMinazukiCharges(tomoNova.classesSpells.getMinazukiCharges() - 1);
                     new BaveMinazukiTask(tomoNova, player.getName()).runTaskTimer(tomoNova, 0, 20);

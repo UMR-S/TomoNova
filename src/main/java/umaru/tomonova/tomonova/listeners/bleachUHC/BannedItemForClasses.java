@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.listeners.bleachUHC;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +14,7 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
@@ -27,25 +29,25 @@ public class BannedItemForClasses implements Listener {
             Player player = ((Player) event.getEntity()).getPlayer();
             //Shinigami
             if (tomoNova.classesUtils.isPlayerShinigami(player.getName())) {
-                if (isItemBannedForShinigami(event.getItem().getItemStack().getType())) {
+                if (isItemBannedForShinigami(event.getItem().getItemStack())) {
                     event.setCancelled(true);
                 }
             }
             //Quincy
             if (tomoNova.classesUtils.isPlayerQuincy(player.getName())) {
-                if (isItemBannedForQuincy(event.getItem().getItemStack().getType())) {
+                if (isItemBannedForQuincy(event.getItem().getItemStack())) {
                     event.setCancelled(true);
                 }
             }
             //Shun shun rika
             if (tomoNova.classesUtils.isPlayerSSR(player.getName())) {
-                if (isItemBannedforSSR(event.getItem().getItemStack().getType())) {
+                if (isItemBannedforSSR(event.getItem().getItemStack())) {
                     event.setCancelled(true);
                 }
             }
             //Brazo
             if (TomoNova.getPlugin().classesUtils.isPlayerBrazo(player.getName())) {
-                if (isItemBannedForBrazo(event.getItem().getItemStack().getType())) {
+                if (isItemBannedForBrazo(event.getItem().getItemStack())) {
                     event.setCancelled(true);
                 }
             }
@@ -75,7 +77,7 @@ public class BannedItemForClasses implements Listener {
         assert currentItem != null;
         // Check if currentItem is banned
         if (currentItem.getType() != Material.AIR) {
-            if (isItemBannedForPlayer(player, currentItem.getType())) {
+            if (isItemBannedForPlayer(player, currentItem)) {
                 event.setCancelled(true);
                 player.sendMessage(ChatColor.RED + "You cannot use this item.");
             }
@@ -96,7 +98,7 @@ public class BannedItemForClasses implements Listener {
         }
         assert cursorItem != null;
         if (cursorItem.getType() != Material.AIR) {
-            if (isItemBannedForPlayer(player, cursorItem.getType())) {
+            if (isItemBannedForPlayer(player, cursorItem)) {
                 event.setCancelled(true);
             }
         }
@@ -119,7 +121,7 @@ public class BannedItemForClasses implements Listener {
 
         for (ItemStack item : event.getNewItems().values()) {
             if (item.getType() != Material.AIR) {
-                if (isItemBannedForPlayer(player, item.getType())) {
+                if (isItemBannedForPlayer(player, item)) {
                     event.setCancelled(true);
                     break;
                 }
@@ -138,7 +140,7 @@ public class BannedItemForClasses implements Listener {
         }
     }
 
-    private boolean isItemBannedForPlayer(Player player, Material item) {
+    private boolean isItemBannedForPlayer(Player player, ItemStack item) {
         // Check for Shinigami class
         if (tomoNova.classesUtils.isPlayerShinigami(player.getName())) {
             return isItemBannedForShinigami(item);
@@ -159,7 +161,8 @@ public class BannedItemForClasses implements Listener {
     }
 
 
-    private boolean isItemBannedForQuincy(Material item) {
+    private boolean isItemBannedForQuincy(ItemStack itemStack) {
+        Material item = itemStack.getType();
         if (item.equals(Material.WOODEN_SWORD)
                 || item.equals(Material.STONE_SWORD)
                 || item.equals(Material.IRON_SWORD)
@@ -173,7 +176,17 @@ public class BannedItemForClasses implements Listener {
         return false;
     }
 
-    private boolean isItemBannedForBrazo(Material item) {
+    private boolean isItemBannedForBrazo(ItemStack itemStack) {
+        if(itemStack.hasItemMeta()){
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            if(itemMeta.hasCustomModelData()){
+                int customModelData = itemMeta.getCustomModelData();
+                if(customModelData == BleachUHCConstants.BAVE_DE_MINAZUKI){
+                    return true;
+                }
+            }
+        }
+        Material item = itemStack.getType();
         if (item.equals(Material.WOODEN_SWORD)
                 || item.equals(Material.STONE_SWORD)
                 || item.equals(Material.IRON_SWORD)
@@ -187,7 +200,17 @@ public class BannedItemForClasses implements Listener {
         return false;
     }
 
-    private boolean isItemBannedforSSR(Material item) {
+    private boolean isItemBannedforSSR(ItemStack itemStack) {
+        if(itemStack.hasItemMeta()){
+            ItemMeta itemMeta = itemStack.getItemMeta();
+            if(itemMeta.hasCustomModelData()){
+                int customModelData = itemMeta.getCustomModelData();
+                if(customModelData == BleachUHCConstants.BAVE_DE_MINAZUKI){
+                    return false;
+                }
+            }
+        }
+        Material item = itemStack.getType();
         if (item.equals(Material.WOODEN_SWORD)
                 || item.equals(Material.STONE_SWORD)
                 || item.equals(Material.IRON_SWORD)
@@ -202,7 +225,8 @@ public class BannedItemForClasses implements Listener {
         return false;
     }
 
-    private boolean isItemBannedForShinigami(Material item) {
+    private boolean isItemBannedForShinigami(ItemStack itemStack) {
+        Material item = itemStack.getType();
         if (item.equals(Material.BOW)
                 || item.equals(Material.CROSSBOW)
                 || item.equals(Material.SHIELD)) {
