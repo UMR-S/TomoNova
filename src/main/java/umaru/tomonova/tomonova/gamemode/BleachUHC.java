@@ -120,6 +120,9 @@ public class BleachUHC {
                 GiveItem.giveShield(player.getName());
                 ArmorPlayer.equipChainmailArmor(player);
             }
+            GiveItem.givePickaxe(player.getName());
+            GiveItem.giveLogs(player.getName());
+            GiveItem.giveSteaks(player.getName());
         }
     }
 

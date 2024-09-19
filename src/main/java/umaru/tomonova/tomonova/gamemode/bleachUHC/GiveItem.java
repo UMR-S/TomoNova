@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.customItems.CustomItems;
@@ -19,6 +20,31 @@ public class GiveItem {
 
     private static void giveItem(Player player, ItemStack item) {
         player.getInventory().addItem(item);
+    }
+
+    public static void giveSteaks(String playerName){
+        Player player = Bukkit.getPlayer(playerName);
+        if (player != null) {
+            ItemStack steaks = new ItemStack(Material.COOKED_BEEF,64);
+            giveItem(player, steaks);
+        }
+    }
+
+    public static void giveLogs(String playerName){
+        Player player = Bukkit.getPlayer(playerName);
+        if (player != null) {
+            ItemStack logs = new ItemStack(Material.OAK_LOG,32);
+            giveItem(player, logs);
+        }
+    }
+
+    public static void givePickaxe(String playerName){
+        Player player = Bukkit.getPlayer(playerName);
+        if (player != null) {
+            ItemStack pickaxe = new ItemStack(Material.DIAMOND_PICKAXE);
+            pickaxe.addEnchantment(Enchantment.DIG_SPEED,3);
+            giveItem(player, pickaxe);
+        }
     }
 
     public static void giveCarquois(String playerName) {
