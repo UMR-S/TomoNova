@@ -35,6 +35,33 @@ public class CooldownManager {
     }
 
     /**
+     * Starts the cooldown for the "Lys des neiges".
+     *
+     * @param player The player using the item.
+     * @param item   The item to apply the cooldown to.
+     * @param lys If the lys hit or miss
+     */
+    public void startCooldown(Player player, ItemStack item, boolean lys) {
+        if(!isCooldown(player,item)){
+            UUID playerUUID = player.getUniqueId();
+            int customModelData = item.getItemMeta().getCustomModelData();
+            int cooldownTime = 60;
+            if(lys){
+                cooldownTime = BleachUHCConstants.ITEM_COOLDOWNS.getOrDefault(customModelData, 20);
+            }
+
+            cooldowns.putIfAbsent(playerUUID, new ArrayList<Integer>());
+            cooldowns.get(playerUUID).add(customModelData);
+
+            // Set item durability to 1 to indicate the cooldown start
+            item.setDurability((short) 1);
+
+            // Start the task to update durability over time
+            new CooldownTask(this, player, item, cooldownTime).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+        }
+    }
+
+    /**
      * Checks if the specified item is currently on cooldown.
      *
      * @param player The player using the item.

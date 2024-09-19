@@ -20,6 +20,9 @@ public class TaskManager extends BukkitRunnable {
     private int netherEndTime;
     private int NetherDamage;
     private int BetweenNetherDamage;
+    private int bossSpawnTime;
+    private int seireiteiTpTime;
+    private int yamamotoTime;
     private List<Integer> listSubborderTime = new ArrayList<Integer>();
     private List<Integer> listSubborderFinalSize = new ArrayList<Integer>();
 
@@ -37,8 +40,12 @@ public class TaskManager extends BukkitRunnable {
         this.BetweenNetherDamage = 30;
         this.listSubborderTime.addAll(tomoNova.gameManager.getListSubborderTime());
         this.listSubborderFinalSize.addAll(tomoNova.gameManager.getListSubborderFinalSize());
+        this.seireiteiTpTime = tomoNova.gameManager.getSeireiteiTime();
+        this.bossSpawnTime = tomoNova.gameManager.getBossTime();
+        this.yamamotoTime = tomoNova.gameManager.getYamamotoTime();
         if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
             tomoNova.bleachUHC.spawnBosses();
+            tomoNova.bleachUHC.spawnYamamoto();
         }
     }
 
@@ -85,6 +92,15 @@ public class TaskManager extends BukkitRunnable {
             tomoNova.worldBorderUtils.change(20, 20);
             Bukkit.getOnlinePlayers().forEach(p -> p.playSound(p.getLocation(), Sound.ENTITY_ENDER_DRAGON_DEATH, 1.0f, 1.0f));
             Bukkit.getOnlinePlayers().forEach(p -> p.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2.0));
+        }
+        if(count == seireiteiTpTime && tomoNova.gameManager.isBleachUhc()){
+            tomoNova.bleachUHC.teleportSereitei();
+        }
+        if(count == bossSpawnTime && tomoNova.gameManager.isBleachUhc()){
+            tomoNova.bleachUHC.spawnBosses();
+        }
+        if(count == bossSpawnTime && tomoNova.gameManager.isBleachUhc() && !tomoNova.bleachUHC.isHasYamamotoSpawn()){
+            tomoNova.bleachUHC.spawnYamamoto();
         }
         for (final String playerName : tomoNova.gameManager.getPlayers()) {
             ScoreboardSign.updateScoreboard(playerName, count);

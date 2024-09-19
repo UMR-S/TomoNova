@@ -12,6 +12,8 @@ import org.bukkit.potion.PotionEffect;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SpawnBossesTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsConstants;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsUtils;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 import umaru.tomonova.tomonova.utils.players.ArmorPlayer;
 import umaru.tomonova.tomonova.utils.teams.Teams;
@@ -29,6 +31,7 @@ public class BleachUHC {
     public HashMap<String,Boolean> playerTracked = new HashMap<String,Boolean>();
     public String nearestPlayerWithHogyokuFragment = "None";
     public String playerWithHogyokuHeart = "None";
+    public boolean hasYamamotoSpawn = false;
 
     private List<Material> materialsToRemove = Arrays.asList(
             // Axes
@@ -288,9 +291,21 @@ public class BleachUHC {
     public void spawnBosses(){
         initializeBleachUhcBossLoc();
         for(String boss : bossLocation.keySet()){
-            bossesList.put(boss, getBoss(boss));
+            if(!boss.equals(BleachUHCConstants.YAMAMOTO_NAME)){
+                bossesList.put(boss, getBoss(boss));
+            }
         }
         new SpawnBossesTask(TomoNova.getPlugin(),bossLocation).runTaskTimer(TomoNova.getPlugin(),0,20);
+    }
+    public void spawnYamamoto(){
+        bossesList.put(BleachUHCConstants.YAMAMOTO_NAME, getBoss(BleachUHCConstants.YAMAMOTO_NAME));
+        HashMap<String,Location> yampamotoLoc = new HashMap<>();
+        Location bossLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(), 109, 74, -34);
+        yampamotoLoc.put(BleachUHCConstants.YAMAMOTO_NAME, bossLoc);
+        SoundsUtils.playSoundForAll(SoundsConstants.YAMAMOTO_SPAWN);
+        setHasYamamotoSpawn(true);
+        new SpawnBossesTask(TomoNova.getPlugin(),yampamotoLoc).runTaskTimer(TomoNova.getPlugin(),0,20);
+
     }
 
     public void initializeBleachUhcBossLoc() {
@@ -307,7 +322,6 @@ public class BleachUHC {
         addBossLocation(BleachUHCConstants.UNOHANA_NAME, -73, 31, 283);
         addBossLocation(BleachUHCConstants.GIN_NAME, 392, 31, 145);
         addBossLocation(BleachUHCConstants.SOI_FON_NAME, 248, 57, 20);
-        addBossLocation(BleachUHCConstants.YAMAMOTO_NAME, 109, 74, -34);
     }
 
     private void addBossLocation(String bossName, int x, int y, int z) {
@@ -362,5 +376,13 @@ public class BleachUHC {
 
     public void setPlayerWithHogyokuHeart(String playerWithHogyokuHeart) {
         this.playerWithHogyokuHeart = playerWithHogyokuHeart;
+    }
+
+    public boolean isHasYamamotoSpawn() {
+        return hasYamamotoSpawn;
+    }
+
+    public void setHasYamamotoSpawn(boolean hasYamamotoSpawn) {
+        this.hasYamamotoSpawn = hasYamamotoSpawn;
     }
 }

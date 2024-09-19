@@ -104,6 +104,7 @@ public class UseItemEvent implements Listener {
             case BleachUHCConstants.SENBONZAKURA:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerShinigami(player.getName())) {
                     new SenbonzakuraTask(tomoNova, player.getName()).runTaskTimer(tomoNova, 0, 20);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.BYAKUYA_ZANPAKUTO,64);
                     player.sendMessage(BleachUHCConstants.SENBONZAKURA_NAME);
                     cooldownManager.startCooldown(player, item);
                 }
@@ -118,6 +119,7 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.HYORINMARU:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerShinigami(player.getName())) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.TOSHIRO_ZANPAKUTO,64);
                     Hyorinmaru.hyorinmaru(player.getName());
                     player.sendMessage(BleachUHCConstants.HYORINMARU_NAME);
                     cooldownManager.startCooldown(player, item);
@@ -144,6 +146,7 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.GANT_DE_SANREI:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerQuincy(player.getName())) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.MAYURI_ITEMUNIQUE,64);
                     GantDeSanrei.gantDeSanrei(player.getName());
                     player.sendMessage(BleachUHCConstants.GANT_DE_SANREI_NAME);
                     removeItem = true;
@@ -191,6 +194,7 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.ART_DU_HAKUDA:
                 if (isRightClick(action) && tomoNova.classesUtils.isPlayerBrazo(player.getName())) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.YAMAMOTO_ITEMUNIQUEATKSPE,64);
                     tomoNova.classesUtils.playerHakudaUpgrade(player.getName());
                     removeItem = true;
                     player.sendMessage(BleachUHCConstants.ART_DU_HAKUDA_NAME);
@@ -207,11 +211,13 @@ public class UseItemEvent implements Listener {
             case BleachUHCConstants.AVEUX_DE_GIN:
                 if (isRightClick(action)) {
                     handleAizenProximity(player);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.AIZEN_AVEUX,64);
                     player.sendMessage(BleachUHCConstants.AVEUX_DE_GIN_NAME);
                 }
                 break;
             case BleachUHCConstants.SAKE_DE_KYORAKU:
                 if (isRightClick(action)) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.KYORAKU_ITEMUNIQUE,64);
                     SakeKyoraku.sakeTeleport(player.getName(), tomoNova.classesSpells.getEntityInSight(player, 50).getName());
                     player.sendMessage(BleachUHCConstants.SAKE_DE_KYORAKU_NAME);
                     cooldownManager.startCooldown(player, item);
@@ -219,6 +225,7 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.MEDICAMENTS:
                 if (isRightClick(action)) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.UKITAKE_ITEMUNIQUE,64);
                     new MedicamentUkitakeTask(tomoNova, player.getName()).runTaskTimer(tomoNova, 0, 10);
                     player.sendMessage(BleachUHCConstants.MEDICAMENTS_NAME);
                     cooldownManager.startCooldown(player, item);
@@ -233,13 +240,15 @@ public class UseItemEvent implements Listener {
                 break;
             case BleachUHCConstants.LYS_DES_NEIGES:
                 if (isRightClick(action)) {
-                    LysDesNeiges.lysDesNeiges(player.getName());
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.TOSHIRO_ITEMUNIQUE,64);
+                    boolean lysSucces = LysDesNeiges.lysDesNeiges(player.getName());
                     player.sendMessage(BleachUHCConstants.LYS_DES_NEIGES_NAME);
-                    cooldownManager.startCooldown(player, item);
+                    cooldownManager.startCooldown(player, item, lysSucces);
                 }
                 break;
             case BleachUHCConstants.LUNETTES_DE_TOSEN:
                 if (isRightClick(action)) {
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.TOSEN_ITEMUNIQUE,64);
                     tomoNova.bleachUHC.initializeLunettesBoolean();
                     new LunetteDeTosenTask(TomoNova.getPlugin(), player.getName()).runTaskTimer(TomoNova.getPlugin(), 0, 20);
                     player.sendMessage(BleachUHCConstants.LUNETTES_DE_TOSEN_NAME);
@@ -258,6 +267,7 @@ public class UseItemEvent implements Listener {
                     player.sendMessage(BleachUHCConstants.CACHE_OEIL_NAME);
                     tomoNova.bleachUHC.setCacheOeilBoolen(player.getName());
                     tomoNova.bleachUHC.setTrackedBoolen(playerWithMostKillsName);
+                    SoundsUtils.playSoundIfInRange(player.getLocation(),SoundsConstants.KENPACHI_CACHEOEIL,64);
                     removeItem = true;
                 }
             case BleachUHCConstants.KYOKA_SUIGETSU:

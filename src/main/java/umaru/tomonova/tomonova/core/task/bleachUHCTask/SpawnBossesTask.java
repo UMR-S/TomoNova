@@ -28,13 +28,16 @@ public class SpawnBossesTask extends BukkitRunnable {
         Iterator<String> iterator = bossesLoc.keySet().iterator();
         while (iterator.hasNext()) {
             String boss = iterator.next();
-            List<Player> players = getPlayersAroundLocation(bossesLoc.get(boss), 100);
+            List<Player> players = getPlayersAroundLocation(bossesLoc.get(boss), 48);
             if (players != null && !players.isEmpty()) {
                 MythicBukkit.inst().getMobManager().spawnMob(boss, bossesLoc.get(boss));
                 iterator.remove();
             }
         }
         if(bossesLoc.isEmpty()){
+            if(!tomoNova.bleachUHC.isHasYamamotoSpawn()){
+                tomoNova.bleachUHC.spawnYamamoto();
+            }
             this.cancel();
         }
     }

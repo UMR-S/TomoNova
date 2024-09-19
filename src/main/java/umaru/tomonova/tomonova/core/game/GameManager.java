@@ -48,6 +48,9 @@ public class GameManager {
     private int numberSwitches = 3;
     private int beforeTaupe = 20;
     private int numberTaupes = 1;
+    private int seireiteiTime = 30;
+    private int bossTime = 60;
+    private int yamamotoTime = 105;
     private BukkitTask preGame;
     public List<LittleRule> littleRulesList;
     private boolean isDamage;
@@ -578,5 +581,29 @@ public class GameManager {
 
     public void setSuddenDeathTime(int suddenDeathTime) {
         this.suddenDeathTime = suddenDeathTime;
+    }
+
+    public int getSeireiteiTime() {
+        return seireiteiTime;
+    }
+
+    public void setSeireiteiTime(int seireiteiTime) {
+        this.seireiteiTime = seireiteiTime;
+    }
+
+    public int getBossTime() {
+        return bossTime;
+    }
+
+    public void setBossTime(int bossTime) {
+        this.bossTime = bossTime;
+    }
+
+    public int getYamamotoTime() {
+        return yamamotoTime;
+    }
+
+    public void setYamamotoTime(int yamamotoTime) {
+        this.yamamotoTime = yamamotoTime;
     }
 }

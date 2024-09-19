@@ -9,6 +9,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsConstants;
+import umaru.tomonova.tomonova.utils.bleachUHC.sounds.SoundsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class PhotoDeYoruichi {
 
     private static void playExplosionSound(Location explosionLocation) {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            Objects.requireNonNull(explosionLocation.getWorld()).playSound(player.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, EXPLOSION_SOUND_VOLUME, EXPLOSION_SOUND_PITCH);
+            SoundsUtils.playSoundIfInRange(explosionLocation, SoundsConstants.SOIFON_ITEMUNIQUE,256);
         }
     }
 
