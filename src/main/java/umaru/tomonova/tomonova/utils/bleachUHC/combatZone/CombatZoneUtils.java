@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.utils.config.CombatZoneConfigManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -68,4 +69,31 @@ public class CombatZoneUtils {
         }
         return false;
     }
+
+    public List<Player> playersInKyorakuZone(){
+        List<Player> playersInGame = new ArrayList<Player>();
+        for(Player player : Bukkit.getOnlinePlayers()){
+            List<Object> kyorakuZone = this.allZones.get(8);
+            int xPlayer = player.getLocation().getBlockX();
+            int yPlayer = player.getLocation().getBlockY();
+            int zPlayer = player.getLocation().getBlockZ();
+            HashMap<Integer, List<Integer>> tempHashMap = (HashMap<Integer, List<Integer>>) kyorakuZone.get(2);
+            int ymin = (int) kyorakuZone.get(0);
+            int ymax = (int) kyorakuZone.get(1);
+            for (Integer x : tempHashMap.keySet()) {
+
+                if (x.intValue() == xPlayer) {
+                    if (zPlayer >= tempHashMap.get(x).get(0) && zPlayer <= tempHashMap.get(x).get(1)) {
+                        if (yPlayer >= ymin && yPlayer <= ymax) {
+                            playersInGame.add(player);
+                        }
+                    }
+                }
+
+            }
+
+        }
+        return playersInGame;
+    }
+
 }

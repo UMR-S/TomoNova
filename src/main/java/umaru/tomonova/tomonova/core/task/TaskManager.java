@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.scheduler.BukkitTask;
 import umaru.tomonova.tomonova.core.TomoNova;
+import umaru.tomonova.tomonova.core.task.bleachUHCTask.kyorakuTasks.NewMinigameTask;
 import umaru.tomonova.tomonova.lang.Lang;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardSign;
 
@@ -46,6 +48,7 @@ public class TaskManager extends BukkitRunnable {
         if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
             tomoNova.bleachUHC.spawnBosses();
             tomoNova.bleachUHC.spawnYamamoto();
+            BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),100,20);
         }
     }
 
@@ -57,9 +60,6 @@ public class TaskManager extends BukkitRunnable {
         if (count == 60) {
             Bukkit.broadcastMessage(Lang.DAMAGE_ACTIVATED.toString());
             tomoNova.gameManager.setDamage(true);
-            if(TomoNova.test && tomoNova.gameManager.isBleachUhc()){
-                tomoNova.bleachUHC.teleportSereitei();
-            }
         }
         if (count == netherEndTime + BetweenNetherDamage * NetherDamage) {
             if (NetherDamage == 0) {
@@ -98,8 +98,9 @@ public class TaskManager extends BukkitRunnable {
         }
         if(count == bossSpawnTime && tomoNova.gameManager.isBleachUhc()){
             tomoNova.bleachUHC.spawnBosses();
+            BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),100,20);
         }
-        if(count == bossSpawnTime && tomoNova.gameManager.isBleachUhc() && !tomoNova.bleachUHC.isHasYamamotoSpawn()){
+        if(count == yamamotoTime && tomoNova.gameManager.isBleachUhc() && !tomoNova.bleachUHC.isHasYamamotoSpawn()){
             tomoNova.bleachUHC.spawnYamamoto();
         }
         for (final String playerName : tomoNova.gameManager.getPlayers()) {
