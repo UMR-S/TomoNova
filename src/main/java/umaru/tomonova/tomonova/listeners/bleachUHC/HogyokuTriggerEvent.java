@@ -9,28 +9,32 @@ import org.bukkit.event.entity.EntityResurrectEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
-import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.inventory.meta.ItemMeta;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.HogyokuActifTask;
 import umaru.tomonova.tomonova.gamemode.bleachUHC.GiveItem;
+import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
 
 public class HogyokuTriggerEvent implements Listener {
 
-    @EventHandler
     public void onCraft(PrepareItemCraftEvent event) {
-        // Check if the result of the crafting is the Hōgyoku
         ItemStack result = event.getInventory().getResult();
-        if (result != null) {
-            CraftingInventory inventory = event.getInventory();
-            HumanEntity player = inventory.getViewers().get(0);
-            if (player instanceof Player) {
-                Player crafter = (Player) player;
-                new HogyokuActifTask(TomoNova.getPlugin(), crafter.getName()).runTaskTimer(TomoNova.getPlugin(), 0, Integer.MAX_VALUE);
-                crafter.sendMessage(ChatColor.GREEN + "You have crafted the Hōgyoku. It is now bound to you.");
-                removeCraftingIngredients(inventory);
-                GiveItem.giveHogyokuActif(crafter.getName());
+        if (result != null && result.hasItemMeta()) {
+            ItemMeta meta = result.getItemMeta();
+            if (meta.hasCustomModelData()) {
+                int customModelData = meta.getCustomModelData();
+                if (customModelData == BleachUHCConstants.HOGYOKU_ACTIF) {
+                    CraftingInventory inventory = event.getInventory();
+                    HumanEntity player = inventory.getViewers().get(0);
+
+                    if (player instanceof Player) {
+                        Player crafter = (Player) player;
+                        new HogyokuActifTask(TomoNova.getPlugin(), crafter.getName()).runTaskTimer(TomoNova.getPlugin(), 0, Integer.MAX_VALUE);
+                        crafter.sendMessage(ChatColor.GREEN + "You have crafted the Hōgyoku. It is now bound to you.");
+                        removeCraftingIngredients(inventory);
+                        GiveItem.giveHogyokuActif(crafter.getName());
+                    }
+                }
             }
         }
     }

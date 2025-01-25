@@ -13,6 +13,7 @@ import umaru.tomonova.tomonova.core.task.TaskFinalCountdown;
 import umaru.tomonova.tomonova.core.task.TaskManager;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRule;
 import umaru.tomonova.tomonova.listeners.littlerules.LittleRules;
+import umaru.tomonova.tomonova.utils.bleachUHC.seireiteiChests.SeireiteiChestUtils;
 import umaru.tomonova.tomonova.utils.customItems.CustomItems;
 import umaru.tomonova.tomonova.utils.lobby.LobbyUtils;
 import umaru.tomonova.tomonova.utils.scoreboard.ScoreboardSign;
@@ -205,6 +206,7 @@ public class GameManager {
         }
         if(bleachUhc){
             tomoNova.bleachUHC.removeCraft();
+            SeireiteiChestUtils.populateChests(tomoNova.worldUtils.getWorld(), 0,128,700);
         }
     }
 

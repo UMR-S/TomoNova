@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.core.task.bleachUHCTask.kyorakuTasks;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -25,12 +26,13 @@ public class IrooniTask extends BukkitRunnable {
     public IrooniTask(Material colorBlock, List<Player> playersInGame) {
         this.colorBlock = colorBlock;
         this.playersInGame = playersInGame;
+        this.uniqueLocations = new HashSet<Location>();
         replaceBlocksWithWools();
     }
 
     @Override
     public void run() {
-        if (seconds == 5) {
+        if (seconds == 15) {
             for (Player player : playersInGame) {
                 Block solidBlock = getSolidBlockAtFeet(player);
                 if (solidBlock != null && !solidBlock.getType().equals(colorBlock)) {
@@ -39,9 +41,11 @@ public class IrooniTask extends BukkitRunnable {
                 }
             }
             if (shouldDamageAll) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu raté"));
                 damageAll();
             }
             if (damageKyoraku) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu réussi"));
                 damageKyoraku();
             }
             replaceWoolWithBlocks();
@@ -72,9 +76,9 @@ public class IrooniTask extends BukkitRunnable {
         if (MythicBukkit.inst().getMobManager() != null) {
             for (ActiveMob mob : MythicBukkit.inst().getMobManager().getActiveMobs()) {
                 if (!mob.isDead() && mob.getEntity().getBukkitEntity() != null) {
-                    String customName = mob.getEntity().getBukkitEntity().getCustomName();
-                    if (customName != null && customName.equalsIgnoreCase(BleachUHCConstants.KYORAKU_NAME)) {
-                        mob.getEntity().damage(50.0f);
+                    String customName = mob.getDisplayName();
+                    if (customName != null && customName.equals(BleachUHCConstants.KYORAKU_NAME)) {
+                        mob.getEntity().damage(50);
                     }
                 }
             }
@@ -98,6 +102,9 @@ public class IrooniTask extends BukkitRunnable {
     }
 
     public void replaceBlocksWithWools() {
+        for(Player player : playersInGame){
+            player.sendMessage("Allez sur le block : " + colorBlock.toString());
+        }
         getUniqueRandomLocationsInRectangleKyoraku( 9);
         Material[] woolColors = {
                 Material.WHITE_WOOL,

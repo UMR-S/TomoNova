@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.core.task.bleachUHCTask.SuzumebachiTask;
 import umaru.tomonova.tomonova.utils.constants.BleachUHCConstants;
-import umaru.tomonova.tomonova.utils.teams.Teams;
 
 import java.util.List;
 
@@ -23,21 +22,21 @@ public class HeldEvent implements Listener {
     public void onPlayerItemHeld(PlayerItemHeldEvent event) {
         Player player = event.getPlayer();
         ItemStack newItem = player.getInventory().getItem(event.getNewSlot());
-
-        // Exit if the new item is null or AIR (empty slot)
+        ItemStack oldItem =  player.getInventory().getItem(event.getPreviousSlot());
         if (newItem == null || newItem.getType() == Material.AIR) {
             return;
         }
-
-        // Check for Suzumebachi item
         if (itemHasSuzumebachiData(newItem)) {
             triggerSuzumebachiEffect(event);
         }
-
-        // Check for the specific weapon in hand (Sogyo no Kotowari or Katen Kyokotsu)
         if (isSogyoOrKaten(newItem)) {
-            player.sendMessage("Detecte");
             checkAndApplySharpnessUpgrade(player);
+        }
+        if (oldItem == null || oldItem.getType() == Material.AIR) {
+            return;
+        }
+        if(isSogyoOrKaten(oldItem) && !isSogyoOrKaten(newItem)){
+            checkAndApplySharpnessDowngrade(player,oldItem);
         }
     }
 
@@ -80,6 +79,26 @@ public class HeldEvent implements Listener {
         }
     }
 
+    private void checkAndApplySharpnessDowngrade(Player player, ItemStack oldItem) {
+
+        List<String> playersTeam = TomoNova.getPlugin().teamUtils.getTeamPlayersNames(player.getName());
+        if (playersTeam.isEmpty()) {
+            return;
+        }
+        for (String teammateName : playersTeam) {
+            Player teammate = Bukkit.getPlayer(teammateName);
+            if (!teammate.equals(player)) {
+                ItemStack otherPlayerItem = teammate.getInventory().getItemInMainHand();
+
+                if (otherPlayerItem != null && isSogyoOrKaten(otherPlayerItem)) {
+                    applySharpnessUpgrade(oldItem, otherPlayerItem);
+                    player.sendMessage("Sharpness I!");
+                    teammate.sendMessage("Sharpness I!");
+                }
+            }
+        }
+    }
+
     private void applySharpnessUpgrade(ItemStack item1, ItemStack item2) {
         // Apply Sharpness II enchantment to both items
         if (item1 != null) {
@@ -87,6 +106,15 @@ public class HeldEvent implements Listener {
         }
         if (item2 != null) {
             item2.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 2);
+        }
+    }
+    private void applySharpnessDowngrade(ItemStack item1, ItemStack item2) {
+        // Apply Sharpness II enchantment to both items
+        if (item1 != null) {
+            item1.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+        }
+        if (item2 != null) {
+            item2.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
         }
     }
 }

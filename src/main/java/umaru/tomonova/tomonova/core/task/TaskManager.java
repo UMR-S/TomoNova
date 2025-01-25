@@ -42,13 +42,16 @@ public class TaskManager extends BukkitRunnable {
         this.BetweenNetherDamage = 30;
         this.listSubborderTime.addAll(tomoNova.gameManager.getListSubborderTime());
         this.listSubborderFinalSize.addAll(tomoNova.gameManager.getListSubborderFinalSize());
-        this.seireiteiTpTime = tomoNova.gameManager.getSeireiteiTime();
-        this.bossSpawnTime = tomoNova.gameManager.getBossTime();
-        this.yamamotoTime = tomoNova.gameManager.getYamamotoTime();
+        this.seireiteiTpTime = tomoNova.gameManager.getSeireiteiTime()*60;
+        this.bossSpawnTime = tomoNova.gameManager.getBossTime()*60;
+        this.yamamotoTime = tomoNova.gameManager.getYamamotoTime()*60;
         if(tomoNova.gameManager.isBleachUhc() && TomoNova.test){
             tomoNova.bleachUHC.spawnBosses();
             tomoNova.bleachUHC.spawnYamamoto();
             BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),100,20);
+            tomoNova.worldUtils.getWorld().setPVP(true);
+            tomoNova.worldUtils.getNether().setPVP(true);
+            tomoNova.worldUtils.getEnd().setPVP(true);
         }
     }
 

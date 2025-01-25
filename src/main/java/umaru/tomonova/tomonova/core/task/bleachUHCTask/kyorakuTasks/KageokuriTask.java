@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.core.task.bleachUHCTask.kyorakuTasks;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitTask;
@@ -20,6 +21,11 @@ public class KageokuriTask extends BukkitRunnable {
     boolean damageKyoraku = true;
     boolean shouldDamageAll = false;
 
+    private final int xKyorkaku = -222;
+    private final int yKyoraku = 34;
+    private final int zKyoraku = 367;
+    private final Location kyorakuLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(), xKyorkaku, yKyoraku, zKyoraku);
+
     public KageokuriTask(List<Player> playersInGame) {
         this.playersInGame = playersInGame;
     }
@@ -28,7 +34,7 @@ public class KageokuriTask extends BukkitRunnable {
     public void run() {
         if(seconds == 2){
             for(Player player : playersInGame){
-                player.sendMessage(ChatColor.MAGIC + "Regardez moi !");
+                player.sendMessage("Regardez moi !");
             }
         }
         if (seconds >= 2) {
@@ -39,6 +45,7 @@ public class KageokuriTask extends BukkitRunnable {
                 }
             }
             if (shouldDamageAll) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu raté"));
                 damageAll();
                 BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),0,20);
                 this.cancel();
@@ -46,6 +53,7 @@ public class KageokuriTask extends BukkitRunnable {
         }
         if(seconds == 10){
             if (damageKyoraku) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu réussi"));
                 damageKyoraku();
             }
             BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),0,20);
@@ -64,9 +72,9 @@ public class KageokuriTask extends BukkitRunnable {
         if (MythicBukkit.inst().getMobManager() != null) {
             for (ActiveMob mob : MythicBukkit.inst().getMobManager().getActiveMobs()) {
                 if (!mob.isDead() && mob.getEntity().getBukkitEntity() != null) {
-                    String customName = mob.getEntity().getBukkitEntity().getCustomName();
+                    String customName = mob.getDisplayName();
                     if (customName != null && customName.equalsIgnoreCase(BleachUHCConstants.KYORAKU_NAME)) {
-                        mob.getEntity().damage(50.0f);
+                        mob.getEntity().damage(50);
                     }
                 }
             }
@@ -77,21 +85,10 @@ public class KageokuriTask extends BukkitRunnable {
         Location eyeLocation = player.getEyeLocation();
 
         Vector playerDirection = eyeLocation.getDirection().normalize();
-
-        if (MythicBukkit.inst().getMobManager() != null) {
-            for (ActiveMob mob : MythicBukkit.inst().getMobManager().getActiveMobs()) {
-                if (!mob.isDead() && mob.getEntity().getBukkitEntity() != null) {
-                    String customName = mob.getEntity().getBukkitEntity().getCustomName();
-                    if (customName != null && customName.equalsIgnoreCase(BleachUHCConstants.KYORAKU_NAME)) {
-                        Location kyorakuLocation = mob.getEntity().getBukkitEntity().getLocation();
-                        Vector toKyoraku = kyorakuLocation.toVector().subtract(eyeLocation.toVector()).normalize();
-                        double dotProduct = playerDirection.dot(toKyoraku);  // Value between -1 and 1
-                        if (dotProduct > 0.95) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        Vector toKyoraku = kyorakuLoc.toVector().subtract(eyeLocation.toVector()).normalize();
+        double dotProduct = Math.abs(playerDirection.dot(toKyoraku));
+        if (dotProduct > 0.95) {
+            return true;
         }
         return false;
     }

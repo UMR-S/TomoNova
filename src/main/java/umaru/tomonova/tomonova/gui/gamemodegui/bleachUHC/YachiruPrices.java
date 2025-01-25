@@ -20,21 +20,40 @@ public enum YachiruPrices {
     PROTECTION_3("Protection 3", getBook(Enchantment.PROTECTION_ENVIRONMENTAL, 3), 600),
     PROTECTION_4("Protection 4", getBook(Enchantment.PROTECTION_ENVIRONMENTAL, 4), 1200),
 
+    //Projectile protecction
+    PROJECTILE_PROTECTION_1("Projectile protection 1",getBook(Enchantment.PROTECTION_PROJECTILE,1),300),
+    PROJECTILE_PROTECTION_2("Projectile protection 2",getBook(Enchantment.PROTECTION_PROJECTILE,2),600),
+    PROJECTILE_PROTECTION_3("Projectile protection 3",getBook(Enchantment.PROTECTION_PROJECTILE,3),1200),
+    PROJECTILE_PROTECTION_4("Projectile protection 4",getBook(Enchantment.PROTECTION_PROJECTILE,4),2400),
+
+    //Blast protecction
+    BLAST_PROTECTION_1("Blast protection 1",getBook(Enchantment.PROTECTION_EXPLOSIONS,1),300),
+    BLAST_PROTECTION_2("Blast protection 2",getBook(Enchantment.PROTECTION_EXPLOSIONS,2),600),
+    BLAST_PROTECTION_3("Blast protection 3",getBook(Enchantment.PROTECTION_EXPLOSIONS,3),1200),
+    BLAST_PROTECTION_4("Blast protection 4",getBook(Enchantment.PROTECTION_EXPLOSIONS,4),2400),
+
+    //Fire protecction
+    FIRE_PROTECTION_1("Blast protection 1",getBook(Enchantment.PROTECTION_FIRE,1),200),
+    FIRE_PROTECTION_2("Blast protection 2",getBook(Enchantment.PROTECTION_FIRE,2),400),
+    FIRE_PROTECTION_3("Blast protection 3",getBook(Enchantment.PROTECTION_FIRE,3),600),
+    FIRE_PROTECTION_4("Blast protection 4",getBook(Enchantment.PROTECTION_FIRE,4),1200),
+
+
     // Power (Bow damage)
-    POWER_1("Power 1", getBook(Enchantment.ARROW_DAMAGE, 1), 100),
-    POWER_2("Power 2", getBook(Enchantment.ARROW_DAMAGE, 2), 200),
-    POWER_3("Power 3", getBook(Enchantment.ARROW_DAMAGE, 3), 400),
-    POWER_4("Power 4", getBook(Enchantment.ARROW_DAMAGE, 4), 800),
-    POWER_5("Power 5", getBook(Enchantment.ARROW_DAMAGE, 5), 1600),
+    POWER_1("Power 1", getBook(Enchantment.ARROW_DAMAGE, 1), 200),
+    POWER_2("Power 2", getBook(Enchantment.ARROW_DAMAGE, 2), 400),
+    POWER_3("Power 3", getBook(Enchantment.ARROW_DAMAGE, 3), 800),
+    POWER_4("Power 4", getBook(Enchantment.ARROW_DAMAGE, 4), 1600),
+    POWER_5("Power 5", getBook(Enchantment.ARROW_DAMAGE, 5), 3200),
 
     // Fire Aspect (Set targets on fire)
-    FIRE_ASPECT_1("Fire Aspect 1", getBook(Enchantment.FIRE_ASPECT, 1), 300),
-    FIRE_ASPECT_2("Fire Aspect 2", getBook(Enchantment.FIRE_ASPECT, 2), 600),
+//    FIRE_ASPECT_1("Fire Aspect 1", getBook(Enchantment.FIRE_ASPECT, 1), 900),
+//    FIRE_ASPECT_2("Fire Aspect 2", getBook(Enchantment.FIRE_ASPECT, 2), 1800),
 
     // Thorns (Damages attackers when hit)
-    THORNS_1("Thorns 1", getBook(Enchantment.THORNS, 1), 500),
-    THORNS_2("Thorns 2", getBook(Enchantment.THORNS, 2), 1000),
-    THORNS_3("Thorns 3", getBook(Enchantment.THORNS, 3), 2000);
+    THORNS_1("Thorns 1", getBook(Enchantment.THORNS, 1), 900),
+    THORNS_2("Thorns 2", getBook(Enchantment.THORNS, 2), 1800),
+    THORNS_3("Thorns 3", getBook(Enchantment.THORNS, 3), 2700);
 
     public String name;
     public ItemStack enchantement;

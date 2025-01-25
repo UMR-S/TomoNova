@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.core.task.bleachUHCTask.kyorakuTasks;
 
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.mobs.ActiveMob;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -35,9 +36,11 @@ public class KageoniTask extends BukkitRunnable {
                 }
             }
             if (shouldDamageAll) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu raté"));
                 damageAll();
             }
             if (damageKyoraku) {
+                Bukkit.getOnlinePlayers().forEach(p -> p.sendMessage("Jeu réussi"));
                 damageKyoraku();
             }
             BukkitTask newMinigameask = new NewMinigameTask().runTaskTimer(TomoNova.getPlugin(),0,20);
@@ -56,9 +59,9 @@ public class KageoniTask extends BukkitRunnable {
         if (MythicBukkit.inst().getMobManager() != null) {
             for (ActiveMob mob : MythicBukkit.inst().getMobManager().getActiveMobs()) {
                 if (!mob.isDead() && mob.getEntity().getBukkitEntity() != null) {
-                    String customName = mob.getEntity().getBukkitEntity().getCustomName();
-                    if (customName != null && customName.equalsIgnoreCase(BleachUHCConstants.KYORAKU_NAME)) {
-                        mob.getEntity().damage(50.0f);
+                    String customName = mob.getDisplayName();
+                    if (customName != null && customName.equals(BleachUHCConstants.KYORAKU_NAME)) {
+                        mob.getEntity().damage(50);
                     }
                 }
             }

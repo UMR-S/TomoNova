@@ -24,20 +24,32 @@ public class YachiruGui extends Gui {
         int[] sharpnessSlots = {0, 1, 2, 3, 4}; // Row 1
         populateEnchantments(sharpnessSlots, "Sharpness", YachiruPrices.values());
 
-        // Protection Books
-        int[] protectionSlots = {9, 10, 11, 12}; // Row 2
-        populateEnchantments(protectionSlots, "Protection", YachiruPrices.values());
-
         // Power Books
-        int[] powerSlots = {18, 19, 20, 21, 22}; // Row 3
+        int[] powerSlots = {9, 10, 11, 12, 13}; // Row 2
         populateEnchantments(powerSlots, "Power", YachiruPrices.values());
 
-        // Fire Aspect Books
-        int[] fireAspectSlots = {27, 28}; // Row 4
-        populateEnchantments(fireAspectSlots, "Fire Aspect", YachiruPrices.values());
+        // Protection Books
+        int[] protectionSlots = {18, 19, 20, 21}; // Row 3
+        populateEnchantments(protectionSlots, "Protection", YachiruPrices.values());
+
+        // Protection Projectile Books
+        int[] protectionProjectileSlots = {27, 28, 29, 30}; // Row 4
+        populateEnchantments(protectionProjectileSlots, "Projectile protection", YachiruPrices.values());
+
+        // Blast protection Books
+        int[] blastProtectionSlots = {36, 37, 38, 39}; // Row 5
+        populateEnchantments(blastProtectionSlots, "Blast protection", YachiruPrices.values());
+
+        // Fire protection Books
+        int[] fireProtectionSlots = {45, 46, 47, 38}; // Row 6
+        populateEnchantments(fireProtectionSlots, "Fire protection", YachiruPrices.values());
+
+//        // Fire Aspect Books
+//        int[] fireAspectSlots = {27, 28}; // Row 4
+//        populateEnchantments(fireAspectSlots, "Fire Aspect", YachiruPrices.values());
 
         // Thorns Books
-        int[] thornsSlots = {36, 37, 38}; // Row 5
+        int[] thornsSlots = {24, 25, 26}; // Row 3
         populateEnchantments(thornsSlots, "Thorns", YachiruPrices.values());
 
         // Back button at the bottom right

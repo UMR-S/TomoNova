@@ -18,7 +18,6 @@ public class GantDeSanrei {
 
         fillArrows(playerName);
         replaceBowWithPowerFive(player);
-        removeQuincyBow(player);
         applySpeedEffect(player);
     }
 
@@ -43,14 +42,6 @@ public class GantDeSanrei {
 
     private static boolean isBow(ItemStack itemStack) {
         return itemStack != null && itemStack.getType().equals(Material.BOW);
-    }
-
-    private static void removeQuincyBow(Player player) {
-        for (ItemStack itemStack : player.getInventory()) {
-            if (isQuincyBow(itemStack)) {
-                player.getInventory().remove(itemStack);
-            }
-        }
     }
 
     private static boolean isQuincyBow(ItemStack itemStack) {

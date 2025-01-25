@@ -13,7 +13,8 @@ public class SuzumebachiTask extends BukkitRunnable {
     TomoNova tomoNova;
     Player player;
     ItemStack[] armor;
-    public SuzumebachiTask(TomoNova tomoNova,String playerName) {
+
+    public SuzumebachiTask(TomoNova tomoNova, String playerName) {
         this.tomoNova = tomoNova;
         this.player = Bukkit.getPlayer(playerName);
         this.armor = player.getInventory().getArmorContents();
@@ -23,7 +24,7 @@ public class SuzumebachiTask extends BukkitRunnable {
     @Override
     public void run() {
         if (!(player.getInventory().getItemInMainHand() == null || player.getInventory().getItemInMainHand().getType().equals(Material.AIR))) {
-            if(player.getInventory().getItemInMainHand().hasItemMeta()) {
+            if (player.getInventory().getItemInMainHand().hasItemMeta()) {
                 if (player.getInventory().getItemInMainHand().getItemMeta().hasCustomModelData()) {
                     if (player.getInventory().getItemInMainHand().getItemMeta().getCustomModelData() == 1021105) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 6, 0, false, false, false));
@@ -31,15 +32,54 @@ public class SuzumebachiTask extends BukkitRunnable {
                     }
                 }
             }
-        }
-        else {
+        } else {
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
             player.removePotionEffect(PotionEffectType.SPEED);
-            player.getInventory().setBoots(armor[0]);
-            player.getInventory().setLeggings(armor[1]);
-            player.getInventory().setChestplate(armor[2]);
-            player.getInventory().setHelmet(armor[3]);
+            for (ItemStack item : armor) {
+                if(isBoots(item.getType())){
+                    player.getInventory().setBoots(item);
+                } else if (isLeggings(item.getType())) {
+                    player.getInventory().setLeggings(item);
+                } else if (isChestplate(item.getType())) {
+                    player.getInventory().setChestplate(item);
+                } else if (isHelmet(item.getType())) {
+                    player.getInventory().setHelmet(item);
+                }
+            }
             this.cancel();
         }
+    }
+
+    public boolean isBoots(Material item) {
+        return item.equals(Material.LEATHER_BOOTS)
+                || item.equals(Material.CHAINMAIL_BOOTS)
+                || item.equals(Material.IRON_BOOTS)
+                || item.equals(Material.GOLDEN_BOOTS)
+                || item.equals(Material.DIAMOND_BOOTS)
+                || item.equals(Material.NETHERITE_BOOTS);
+    }
+    public boolean isLeggings(Material item) {
+        return item.equals(Material.LEATHER_LEGGINGS)
+                || item.equals(Material.CHAINMAIL_LEGGINGS)
+                || item.equals(Material.IRON_LEGGINGS)
+                || item.equals(Material.GOLDEN_LEGGINGS)
+                || item.equals(Material.DIAMOND_LEGGINGS)
+                || item.equals(Material.NETHERITE_LEGGINGS);
+    }
+    public boolean isChestplate(Material item) {
+        return item.equals(Material.LEATHER_CHESTPLATE)
+                || item.equals(Material.CHAINMAIL_CHESTPLATE)
+                || item.equals(Material.IRON_CHESTPLATE)
+                || item.equals(Material.GOLDEN_CHESTPLATE)
+                || item.equals(Material.DIAMOND_CHESTPLATE)
+                || item.equals(Material.NETHERITE_CHESTPLATE);
+    }
+    public boolean isHelmet(Material item) {
+        return item.equals(Material.LEATHER_HELMET)
+                || item.equals(Material.CHAINMAIL_HELMET)
+                || item.equals(Material.IRON_HELMET)
+                || item.equals(Material.GOLDEN_HELMET)
+                || item.equals(Material.DIAMOND_HELMET)
+                || item.equals(Material.NETHERITE_HELMET);
     }
 }

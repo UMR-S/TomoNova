@@ -33,32 +33,34 @@ public class NewMinigameTask extends BukkitRunnable {
                 this.cancel();
             }
         }
-        if (seconds == 5 && checkForKyoraku()) {
+        if (seconds == 5) {
             Random random = new Random();
-            int randomGame = random.nextInt(5);
-            Location kyorakuLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),xKyorkaku,yKyoraku,zKyoraku);
-            switch (randomGame) {
-                case 0:
-                    SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_IRONI,64);
-                    colorBlock = getRandomWoolColor();
-                    BukkitTask irooniTask = new IrooniTask(colorBlock,playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
-                    break;
-                case 1:
-                    SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_KAGEONI,64);
-                    BukkitTask KageoniTask = new KageoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
-                    break;
-                case 2:
-                    SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_TAKAONI,64);
-                    BukkitTask TakaoniTask = new TakaoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
-                    break;
-                case 3:
-                    SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_KAGEOKURI,64);
-                    BukkitTask KageokuriTask = new TakaoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
-                    break;
-                case 4:
-                    SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_DARUMASTART, 64);
-                    BukkitTask darumasangaKorondaTask = new DarumasanGaKorondaTask(playersInGame).runTaskTimer(TomoNova.getPlugin(),0, 20);
-                    break;
+            if(checkForKyoraku()){
+                int randomGame = random.nextInt(5);
+                Location kyorakuLoc = new Location(TomoNova.getPlugin().worldUtils.getWorld(),xKyorkaku,yKyoraku,zKyoraku);
+                switch (randomGame) {
+                    case 0:
+                        SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_IRONI,64);
+                        colorBlock = getRandomWoolColor();
+                        BukkitTask irooniTask = new IrooniTask(colorBlock,playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                        break;
+                    case 1:
+                        SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_KAGEONI,64);
+                        BukkitTask KageoniTask = new KageoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                        break;
+                    case 2:
+                        SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_TAKAONI,64);
+                        BukkitTask TakaoniTask = new TakaoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                        break;
+                    case 3:
+                        SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_KAGEOKURI,64);
+                        BukkitTask KageokuriTask = new TakaoniTask(playersInGame).runTaskTimer(TomoNova.getPlugin(), 0, 20);
+                        break;
+                    case 4:
+                        SoundsUtils.playSoundIfInRange(kyorakuLoc, SoundsConstants.KYORAKU_DARUMASTART, 64);
+                        BukkitTask darumasangaKorondaTask = new DarumasanGaKorondaTask(playersInGame).runTaskTimer(TomoNova.getPlugin(),0, 20);
+                        break;
+                }
             }
             this.cancel();
         }
@@ -69,8 +71,8 @@ public class NewMinigameTask extends BukkitRunnable {
         if (MythicBukkit.inst().getMobManager() != null) {
             for (ActiveMob mob : MythicBukkit.inst().getMobManager().getActiveMobs()) {
                 if (!mob.isDead() && mob.getEntity().getBukkitEntity() != null) {
-                    String customName = mob.getEntity().getBukkitEntity().getCustomName();
-                    if (customName != null && customName.equalsIgnoreCase(BleachUHCConstants.KYORAKU_NAME)) {
+                    String customName = mob.getDisplayName();
+                    if (customName != null && customName.equals(BleachUHCConstants.KYORAKU_NAME)) {
                         return true;
                     }
                 }
