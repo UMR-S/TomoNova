@@ -38,7 +38,7 @@ import java.util.logging.Logger;
 
 
 public final class TomoNova extends JavaPlugin {
-    public static boolean test = true;
+    public static boolean test = false;
     private Logger log;
     private static TomoNova plugin;
     public GameManager gameManager;

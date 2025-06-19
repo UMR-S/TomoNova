@@ -43,7 +43,7 @@ public class Join implements Listener {
         }
 
         if (TomoNova.getPlugin().gameManager.isBleachUhc()) {
-            giveClassChoiceItems();
+            giveClassChoiceItems(player);
         }
     }
 
@@ -74,11 +74,11 @@ public class Join implements Listener {
         player.getInventory().setItem(8, config);
     }
 
-    private void giveClassChoiceItems() {
+    private void giveClassChoiceItems(Player player) {
         List<String> loreClasses = new ArrayList<>();
         loreClasses.add("Sasageyo");
         ItemStack choixClasses = CustomItems.createCustomItem(Material.NETHERITE_SCRAP, ChatColor.AQUA, "Choissisez votre classe", loreClasses);
-        Bukkit.getOnlinePlayers().forEach(p -> p.getInventory().addItem(choixClasses));
+        player.getInventory().addItem(choixClasses);
     }
 
     private void handleNonLobbyJoin(Player player) {

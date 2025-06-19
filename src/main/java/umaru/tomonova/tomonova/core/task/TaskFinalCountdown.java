@@ -2,6 +2,7 @@ package umaru.tomonova.tomonova.core.task;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 import umaru.tomonova.tomonova.core.TomoNova;
@@ -33,6 +34,7 @@ public class TaskFinalCountdown extends BukkitRunnable {
             LobbyUtils.deleteLobby();
             GameStates.setCurrentState(GameStates.GAME);
             TomoNova.getPlugin().gameManager.getPlayers().forEach(ScoreboardSign::create);
+            TomoNova.getPlugin().gameManager.getPlayers().forEach(p-> Bukkit.getPlayer(p).setGameMode(GameMode.SURVIVAL));
             if(TomoNova.getPlugin().gameManager.isBleachUhc()){
                 TomoNova.getPlugin().bleachUHC.initializeStuffJoueurs();
             }

@@ -74,7 +74,9 @@ public class BannedItemForClasses implements Listener {
         ItemStack currentItem = event.getCurrentItem();
         ItemStack cursorItem = event.getCursor();
         Player player = (Player) event.getWhoClicked();
-        assert currentItem != null;
+        if (currentItem == null) {
+            throw new IllegalArgumentException("currentItem cannot be null");
+        }
         // Check if currentItem is banned
         if (currentItem.getType() != Material.AIR) {
             if (isItemBannedForPlayer(player, currentItem)) {
@@ -96,7 +98,9 @@ public class BannedItemForClasses implements Listener {
                 }
             }
         }
-        assert cursorItem != null;
+        if (cursorItem == null) {
+            throw new IllegalArgumentException("currentItem cannot be null");
+        }
         if (cursorItem.getType() != Material.AIR) {
             if (isItemBannedForPlayer(player, cursorItem)) {
                 event.setCancelled(true);

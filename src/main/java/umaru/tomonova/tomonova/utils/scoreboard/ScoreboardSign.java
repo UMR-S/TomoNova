@@ -8,6 +8,8 @@ import org.bukkit.scoreboard.*;
 import umaru.tomonova.tomonova.core.TomoNova;
 import umaru.tomonova.tomonova.lang.Lang;
 
+import java.awt.*;
+
 public class ScoreboardSign {
 
     public static Scoreboard create(String playerName) {
@@ -22,14 +24,14 @@ public class ScoreboardSign {
         else{
             subname = playerName.substring(0,8);
         }
-        Objective health = scoreboard.registerNewObjective( subname + "health", Criterias.HEALTH, "");
+        Objective health = scoreboard.registerNewObjective( subname + "health", Criterias.HEALTH, "hap");
         health.setRenderType(RenderType.HEARTS);
         health.setDisplaySlot(DisplaySlot.PLAYER_LIST);
         //Teams
 
 
         //Création du panneau à droite
-        Objective objective = scoreboard.registerNewObjective(subname + "sidebar", "dummy", ChatColor.LIGHT_PURPLE + Lang.SB_PREFIX.toString());
+        Objective objective = scoreboard.registerNewObjective(subname + "sidebar", "dummy",  ChatColor.LIGHT_PURPLE + Lang.SB_PREFIX.toString());
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
         String[] lines = setLines(playerName, count);
         //Lignes à update : 1(en bleach UHC),2,3,4,5,8,10,11

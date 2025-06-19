@@ -49,9 +49,9 @@ public class GameManager {
     private int numberSwitches = 3;
     private int beforeTaupe = 20;
     private int numberTaupes = 1;
-    private int seireiteiTime = 30;
-    private int bossTime = 60;
-    private int yamamotoTime = 105;
+    private int seireiteiTime = 20;
+    private int bossTime = 20;
+    private int yamamotoTime = 90;
     private BukkitTask preGame;
     public List<LittleRule> littleRulesList;
     private boolean isDamage;
@@ -189,6 +189,7 @@ public class GameManager {
     private void teleportPlayer(Location location, String playerName) {
         Location loc = new Location(location.getWorld(), location.getX(), 201.0, location.getZ());
         Player player = Bukkit.getPlayer(playerName);
+        player.getInventory().clear();
         if (player != null) {
             player.teleport(loc);
         }
@@ -196,17 +197,12 @@ public class GameManager {
 
     private void initializeGameSettings() {
         isDamage = false;
-        TaskFinalCountdown.setPreStartTime(10);
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.getInventory().clear();
-            player.setGameMode(GameMode.SURVIVAL);
-        });
         if (tomoLostVillage) {
             initializeTomoLostVillage();
         }
         if(bleachUhc){
             tomoNova.bleachUHC.removeCraft();
-            SeireiteiChestUtils.populateChests(tomoNova.worldUtils.getWorld(), 0,128,700);
+            //SeireiteiChestUtils.populateChests(tomoNova.worldUtils.getWorld(), 0,128,700);
         }
     }
 
@@ -217,7 +213,7 @@ public class GameManager {
         players.forEach(playerName -> Bukkit.getPlayer(playerName).setHealth(24.0));
     }
 
-    private void startGameTasks() {
+    public void startGameTasks() {
         if(isBleachUhc()){
             tomoNova.bleachUHC.initializeBleachUHC();
             if(!TomoNova.test){

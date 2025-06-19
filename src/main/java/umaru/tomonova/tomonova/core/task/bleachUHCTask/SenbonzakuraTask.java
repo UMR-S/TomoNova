@@ -41,7 +41,7 @@ public class SenbonzakuraTask extends BukkitRunnable {
         for(int radius = 3; radius<=6;radius = radius +3){
             for(Vector particleVectorNormalize : normalizeLayerParticle){
                 Vector particleVector = particleVectorNormalize.clone().multiply(radius);
-                player.getWorld().spawnParticle(Particle.REDSTONE,player.getLocation().clone().add(particleVector),1, dustOptions);
+                player.getWorld().spawnParticle(Particle.DUST, player.getLocation().clone().add(particleVector), 1, dustOptions);
             }
         }
         if (breakTime == 0) {
